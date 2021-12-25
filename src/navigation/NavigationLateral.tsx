@@ -96,7 +96,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
            }}>
              <View style={{flexDirection:'row'}}>
                 <Text>
-                    {/* <Icon name="build-outline" size={30} color={colores.primary} /> */}
+                    {/* <Icon name="build-outline" size={30} color={colores.primary} />    */}
                     icono
                 </Text>
                 <Text style={{...styles.menuTexto, paddingLeft:8}}>Agenda</Text>
