@@ -1,24 +1,22 @@
-import React from 'react';  
-import { Text } from 'react-native';
+import React, { useEffect } from 'react';  
+import { Text, TouchableOpacity, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-// import { StackNavigator } from './StackNavigator';
 import { colores } from '../theme/appTheme';
 import { AgendaScreen } from '../screens/home/AgendaScreen';
 import { ParecerScreen } from '../screens/home/ParecerScreen';
 import { RelatorioScreen } from '../screens/home/RelatorioScreen';
-import { LoginScreen } from '../screens/login/LoginScreen';
 import { HomeScreen } from '../screens/home/HomeScreen';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
 
 const Tab = createBottomTabNavigator();
+interface Props extends DrawerScreenProps<any, any>{};
 
-export const NavigationHome = () => {
+export const NavigationHome = ( { navigation }:Props) => {
+
   return (
-    <Tab.Navigator  sceneContainerStyle={{
-          backgroundColor:'white',
-    }}  
 
+    <Tab.Navigator  sceneContainerStyle={{ backgroundColor:'white' }}  
         screenOptions={({route}) => ({
                 tabBarActiveTintColor:'orange',
                 tabBarInactiveTintColor:'white',
@@ -58,17 +56,32 @@ export const NavigationHome = () => {
                     return <Text > opcion
                        {/* <Icon name={iconName} size={25} color={color} /> */}
                       </Text>
-                }
+                },
+                headerTitle:'VISTA APP',
+                headerLeft: () => {
+
+                  return   <TouchableOpacity onPress={() =>{  navigation.toggleDrawer(); }}>
+                              <Text style={{fontSize:17, marginLeft:15}}>
+                                MENU
+                                {/* <Icon name="reorder-four-outline" size={30} color={colores.primary} /> */}
+                              </Text>
+                          </TouchableOpacity>
+                  },
+                // headerRight: () =>{
+                //     return  <TouchableOpacity onPress={() =>{  navigation.toggleDrawer(); }}>
+                //             <Text>
+                //             otro    
+                //             {/* <Icon name="settings-outline" size={30} color={colores.primary} /> */}
+                //             </Text>
+                //         </TouchableOpacity>
+                // }
         })}
         >
 
-      {/* <Tab.Screen name="Tab1screen" options={{ title:'Tab1', tabBarIcon : (props) =>  <Text style={{color:props.color}}>T1</Text> }} component={ Tab1Screen } /> */}
       <Tab.Screen name="HomeScreen" options={{ title:'home' }} component={ HomeScreen } />
       <Tab.Screen name="AgendaScreen" options={{ title:'Agenda' }} component={ AgendaScreen } />
       <Tab.Screen name="ParecerScreen" options={{ title:'Parecer' }} component={ ParecerScreen } />
       <Tab.Screen name="RelatorioScreen" options={{ title:'Relatorio' }} component={ RelatorioScreen } />
-      {/* <Tab.Screen name="TopTabNavigator" options={{ title:'TopNavigator' }} component={ TopTabNavigator } /> */}
-      {/* <Tab.Screen name="StackNavigator" options={{title:'stack'}} component={ StackNavigator } /> */}
     </Tab.Navigator>
   );
 }
