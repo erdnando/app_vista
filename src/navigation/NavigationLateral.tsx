@@ -8,6 +8,7 @@ import { RelatorioScreen } from '../screens/home/RelatorioScreen';
 import { HomeScreen } from '../screens/home/HomeScreen';
 import { NavigationHome } from './NavigationHome';
 // import Icon from 'react-native-vector-icons/Ionicons';
+import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -42,6 +43,7 @@ export const NavigationLateral = () => {
               <Drawer.Screen name="NavigationHomeagenda" component={ NavigationHome } initialParams={{screen:'AgendaScreen'}}/>
               <Drawer.Screen name="NavigationHomeParecer" component={ NavigationHome } initialParams={{screen:'ParecerScreen'}}/>
               <Drawer.Screen name="NavigationHomeRelatorio" component={ NavigationHome } initialParams={{screen:'RelatorioScreen'}}/>
+              <Drawer.Screen name="ChangePasswordScreen"  component={ ChangePasswordScreen } />
             </Drawer.Navigator>
         );
 }
@@ -109,6 +111,18 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                     icono
                 </Text>
                 <Text style={{...styles.menuTexto, paddingLeft:8}}>Relatorio</Text>
+                </View>
+           </TouchableOpacity>
+
+           <TouchableOpacity style={styles.menuBoton} onPress={() => { 
+             navigation.navigate('ChangePasswordScreen');  
+             }}>
+             <View style={{flexDirection:'row'}}>
+                <Text>
+                    {/* <Icon name="build-outline" size={30} color={colores.primary} />    */}
+                    icono
+                </Text>
+                <Text style={{...styles.menuTexto, paddingLeft:8}}>Cambio contraseña</Text>
                 </View>
            </TouchableOpacity>
 

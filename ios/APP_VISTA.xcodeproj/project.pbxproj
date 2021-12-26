@@ -14,6 +14,7 @@
 		6172F2D35A4C3AA820D92908 /* libPods-APP_VISTA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-APP_VISTA.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-APP_VISTA-APP_VISTATests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-APP_VISTA-APP_VISTATests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		873AA3432778F399002E6519 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 873AA3422778F386002E6519 /* icomoon.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,9 @@
 		6423831EA8574132BED9D8CC /* libPods-APP_VISTA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-APP_VISTA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-APP_VISTA-APP_VISTATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APP_VISTA-APP_VISTATests.debug.xcconfig"; path = "Target Support Files/Pods-APP_VISTA-APP_VISTATests/Pods-APP_VISTA-APP_VISTATests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = APP_VISTA/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		873AA33F2778E910002E6519 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		873AA3402778E925002E6519 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		873AA3422778F386002E6519 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = icomoon.ttf; path = ../../resources/fonts/icomoon.ttf; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-APP_VISTA-APP_VISTATests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-APP_VISTA-APP_VISTATests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A881CF5CF3F2B244570E2A /* Pods-APP_VISTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APP_VISTA.debug.xcconfig"; path = "Target Support Files/Pods-APP_VISTA/Pods-APP_VISTA.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-APP_VISTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APP_VISTA.release.xcconfig"; path = "Target Support Files/Pods-APP_VISTA/Pods-APP_VISTA.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				873AA33D2778E850002E6519 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* APP_VISTA */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* APP_VISTATests */,
@@ -137,6 +142,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		873AA33D2778E850002E6519 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				873AA3422778F386002E6519 /* icomoon.ttf */,
+				873AA3402778E925002E6519 /* FontAwesome.ttf */,
+				873AA33F2778E910002E6519 /* Ionicons.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		E233CBF5F47BEE60B243DCF8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +160,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-APP_VISTA-APP_VISTATests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-APP_VISTA-APP_VISTATests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -241,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				873AA3432778F399002E6519 /* icomoon.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -449,6 +464,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 496ES8NA57;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = APP_VISTA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -475,6 +491,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 496ES8NA57;
 				INFOPLIST_FILE = APP_VISTA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
