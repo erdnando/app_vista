@@ -1,7 +1,7 @@
 import React from 'react';  
 import { Button, Image, Text, TouchableOpacity, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { colores, styles } from '../theme/appTheme';
+import { colores, gstyles } from '../theme/appTheme';
 import { AgendaScreen } from '../screens/home/AgendaScreen';
 import { ParecerScreen } from '../screens/home/ParecerScreen';
 import { RelatorioScreen } from '../screens/home/RelatorioScreen';
@@ -27,11 +27,11 @@ export const NavigationHome = ( { navigation }:Props) => {
     <Tab.Navigator  sceneContainerStyle={{ backgroundColor:'white' }}  
         
         screenOptions={({route}) => ({
-                tabBarActiveTintColor:'orange',
+                tabBarActiveTintColor:colores.primary,
                 tabBarInactiveTintColor:'white',
                 tabBarStyle:{
-                  backgroundColor: colores.primary,
-                    borderTopColor: colores.primary,
+                  backgroundColor: colores.bottomBar,
+                    borderTopColor: colores.bottomBar,
                     borderTopWidth:1,
                     borderBottomWidth:1,
                     elevation:0,
@@ -53,7 +53,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                   }} ></OpcionHeader>
 
                                 <View style={{flex:1, left:24 }}>
-                                   <Image style={{...styles.avatar,height:24*1.35,width:79.89*1.35, top:3}} 
+                                   <Image style={{...gstyles.avatar,height:24*1.35,width:79.89*1.35, top:3}} 
                                    source={require('../assets/horizontal-logo.png')}  >
                                 </Image>
                                 </View>
@@ -81,28 +81,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                           </View>
                   }
                 ,
-              // headerTitle: 'APP VISTA',
-                // headerLeft: () => {
-                //     return  <OpcionHeader iconName='ic_baseline-menu' color='black' 
-                //     onPress={() =>{ 
-                //       navigation.toggleDrawer(); 
-                //     }} ></OpcionHeader>
-                //   },
-                // headerRight: () =>{
-                //     return <View style={{ flexDirection:'row'  }} >  
-                //             <TouchableOpacity onPress={() =>{  navigation.toggleDrawer(); }}>
-                //               <Text>
-                //                   <CustomIcon name='clarity_tasks-solid' size={30} color='black' style={{padding:150}} ></CustomIcon>
-                //               </Text>
-                //             </TouchableOpacity>
-
-                //             <TouchableOpacity style={{ marginRight:10, marginLeft:16, marginEnd:16 }} onPress={() =>{  navigation.toggleDrawer(); }}>
-                //               <Text>
-                //                   <CustomIcon name='gridicons_user' size={30} color='black' style={{padding:150}} ></CustomIcon>
-                //               </Text>
-                //             </TouchableOpacity>
-                //             </View>
-                // }
+ 
         })}
       
         >

@@ -3,12 +3,12 @@ import { ActivityIndicator, Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMovies } from '../../hooks/useMovies';
 import { GeneralContext } from '../../state/GeneralProvider';
-import { styles } from '../../theme/appTheme';
+import { gstyles } from '../../theme/appTheme';
 
 export const HomeScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
-    const { userName } = useContext(GeneralContext);
+    const { email } = useContext(GeneralContext);
     //call service to get data
     const { peliculasEnCine, isLoading } = useMovies();
 
@@ -29,10 +29,10 @@ export const HomeScreen = () => {
 
     //render view after getting data
     return (
-            <View style={ { ...styles.globalMargin, marginTop: top+20, flex:1, alignItems:'center'}}>
+            <View style={ { ...gstyles.globalMargin, marginTop: top+20, flex:1, alignItems:'center'}}>
                 <Text style={{fontSize:60, alignContent:'center',  justifyContent:'center', paddingBottom:250}}>home</Text>
                 <Text>
-                { userName }
+                { email }
                 </Text>
             </View>
     )

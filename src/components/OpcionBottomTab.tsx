@@ -14,7 +14,7 @@ export const OpcionBottomTab = ( { routeName,color }: Props ) => {
     //const {setFavoriteIcon} = useContext( GeneralContext )
     
     let iconName: string = '';
-
+console.log(routeName)
     switch (routeName) {
       case 'HomeScreen':
           iconName= 'fe_home';
@@ -34,7 +34,7 @@ export const OpcionBottomTab = ( { routeName,color }: Props ) => {
   }
     
     return (
-      <Text style={{ right:22,top:4}} > opcion
+      <Text style={{ right:22,top:4}} > 
       <CustomIcon name={iconName} size={30} color={color} ></CustomIcon>
      </Text>
     )

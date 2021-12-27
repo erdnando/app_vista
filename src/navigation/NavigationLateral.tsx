@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
 import { Image, useWindowDimensions, View  } from 'react-native';
-import { styles } from '../theme/appTheme';
+import { gstyles } from '../theme/appTheme';
 import { NavigationHome } from './NavigationHome';
 import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
 import { NavigationLogin } from './NavigationLogin';
 import { OpcionMenuLateral } from '../components/OpcionMenuLateral';
+import { GeneralContext } from '../state/GeneralProvider';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,6 +27,7 @@ const Drawer = createDrawerNavigator();
 export const NavigationLateral = () => {
 
     const { width } = useWindowDimensions();
+   
 
   return (
             <Drawer.Navigator 
@@ -46,25 +48,25 @@ export const NavigationLateral = () => {
 }
 
 const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
-  
+  const { logOut} = useContext( GeneralContext )
   return (
      <DrawerContentScrollView>
 
        {/* Imagen avatar */}
-       <View style={styles.avatarContainer}>
-          <Image style={styles.avatar} 
+       <View style={gstyles.avatarContainer}>
+          <Image style={gstyles.avatar} 
             source={{ uri:'https://www.caribbeangamezone.com/wp-content/uploads/2018/03/avatar-placeholder-300x300.png' }} >
           </Image>
        </View>
 
         {/* Opciones del menu */}
-        <View style={styles.menuContainer}>
+        <View style={gstyles.menuContainer}>
           <OpcionMenuLateral iconName='fe_home' color='black' label='Home' onPress={() =>{ navigation.navigate('NavigationHome'); }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='bi_calendar-week' color='black' label='Agenda' onPress={() =>{ navigation.navigate('AgendaScreen'); }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='icomoon-free_hammer2' color='black' label='Parecer' onPress={() =>{ navigation.navigate('ParecerScreen'); }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='bi_bar-chart-line-fill' color='black' label='Relatorio' onPress={() =>{ navigation.navigate('RelatorioScreen'); }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='ic_outline-lock' color='black' label='Cambio contraseña' onPress={() =>{ navigation.navigate('ChangePasswordScreen'); }}></OpcionMenuLateral>
-          <OpcionMenuLateral iconName='ic_round-close' color='black' label='Cerrar sesion' onPress={() =>{ navigation.navigate('NavigationLogin'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='ic_round-close' color='black' label='Cerrar sesion' onPress={() =>{ logOut(); navigation.navigate('NavigationLogin'); }}></OpcionMenuLateral>
         </View>
 
      </DrawerContentScrollView>

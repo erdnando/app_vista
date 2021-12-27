@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
 
 export const colores = {
-   primary : 'black',
+   primary : '#F9A61A', //naranja
+   bottomBar:'black'
 }
 
-export const styles = StyleSheet.create({
+export const gstyles = StyleSheet.create({
     globalMargin:{
         marginHorizontal:20
     },

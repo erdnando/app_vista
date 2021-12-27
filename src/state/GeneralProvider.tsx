@@ -1,55 +1,85 @@
 import React from 'react'
 import { createContext } from 'react';
 
+enum tipoUsuario{
+    "NONE",
+    "USER_TERCEIRO",
+    "COLABORADOR"
+}
 
 interface GeneralState{
+    //properties
+    tipoUsuario:tipoUsuario,
+    email:string,
+    password:string,
     isLogedIn: boolean,
-    userName: string,
-    favoriteIcon: string,
+    isAlertLoginVisible:boolean
+    //functions/methods
+    setEmail: (email:string)=>void,
+    setPassword: (password:string)=>void,
     setIsLogedIn: (isLogedIn: boolean)=>void,
-    setUserName: (userName:string)=>void,
-    setFavoriteIcon: (favoriteIcon:string | undefined )=>void,
     logOut: ()=>void,
+    setIsAlertLoginVisible: (isAlertLoginVisible:boolean) =>void;
 }
+
+
 const GeneralContext = React.createContext({} as GeneralState);
 
 class GeneralProvider extends React.Component{
     
     state = {
+        tipoUsuario:tipoUsuario.NONE,
+        email:'',
+        password:'',
         isLogedIn: false,
-        userName: '',
-        favoriteIcon: '',
+        isAlertLoginVisible:false,
+    }
+
+    setTipoUsuario = (tipoUsuario: tipoUsuario) =>{
+        this.setState({tipoUsuario});
+    }
+
+    setEmail = (email: string) =>{
+        this.setState({email});
+    }
+
+    setPassword = (password: string) =>{
+        this.setState({password});
     }
 
     setIsLogedIn = (isLogedIn:boolean) =>{
        this.setState({isLogedIn});
     }
 
-    setUserName= (userName:string) =>{
-        this.setState({userName});
+    setIsAlertLoginVisible = (isAlertLoginVisible:boolean) =>{
+        this.setState({isAlertLoginVisible});
      }
 
-     setFavoriteIcon= (favoriteIcon:string | undefined) =>{
-        this.setState({favoriteIcon});
-     }
 
-     logOut = () =>{
+    logOut = () =>{
         this.setIsLogedIn(false);
-        this.setUserName('');
-        this.setFavoriteIcon('');
+        this.setEmail('');
+        this.setPassword('');
+        this.setIsAlertLoginVisible(false);
+    
      }
 
      render(): React.ReactNode {
          return(
            <GeneralContext.Provider
              value={{
+                    //properties
+                    tipoUsuario : this.state.tipoUsuario,
+                    email : this.state.email,
+                    password : this.state.password,
                     isLogedIn: this.state.isLogedIn,
-                    userName: this.state.userName,
-                    favoriteIcon: this.state.favoriteIcon,
+                    isAlertLoginVisible: this.state.isAlertLoginVisible,
+                    //functions/methods
+                    setEmail: this.setEmail,
+                    setPassword: this.setPassword,
                     setIsLogedIn: this.setIsLogedIn,
-                    setUserName: this.setUserName,
-                    setFavoriteIcon: this.setFavoriteIcon,
                     logOut: this.logOut,
+                    setIsAlertLoginVisible: this.setIsAlertLoginVisible
                     }}
                 >
                {this.props.children}
