@@ -15,8 +15,8 @@ export const OpcionHeader = ( { iconName,color, onPress }: Props ) => {
     //invoke global state
     //const {setFavoriteIcon} = useContext( GeneralContext )
     return  <TouchableOpacity onPress={onPress} >
-              <Text style={{fontSize:17, marginLeft:15}}>
-                <CustomIcon name={iconName} size={30} color={color} style={{padding:150}} ></CustomIcon>
+              <Text style={{fontSize:17, marginLeft:16, top:3}}>
+                <CustomIcon name={iconName} size={34} color={color} style={{padding:150}} ></CustomIcon>
               </Text>
             </TouchableOpacity>
           
