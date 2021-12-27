@@ -1,14 +1,11 @@
 import React from 'react';
-import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView, DrawerScreenProps } from '@react-navigation/drawer';
-import { Image, Text, useWindowDimensions, View , TouchableOpacity } from 'react-native';
-import { colores, styles } from '../theme/appTheme';
-import { AgendaScreen } from '../screens/home/AgendaScreen';
-import { ParecerScreen } from '../screens/home/ParecerScreen';
-import { RelatorioScreen } from '../screens/home/RelatorioScreen';
-import { HomeScreen } from '../screens/home/HomeScreen';
+import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
+import { Image, useWindowDimensions, View  } from 'react-native';
+import { styles } from '../theme/appTheme';
 import { NavigationHome } from './NavigationHome';
-// import Icon from 'react-native-vector-icons/Ionicons';
 import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
+import { NavigationLogin } from './NavigationLogin';
+import { OpcionMenuLateral } from '../components/OpcionMenuLateral';
 
 const Drawer = createDrawerNavigator();
 
@@ -39,11 +36,11 @@ export const NavigationLateral = () => {
                               }}  
               drawerContent={ (props) => <MenuInterno { ...props }></MenuInterno> } >
               <Drawer.Screen name="NavigationHome" component={ NavigationHome } initialParams={{screen:'HomeScreen'}}/>              
-              {/* <Drawer.Screen name="HomeScreen"  component={ HomeScreen } /> */}
               <Drawer.Screen name="NavigationHomeagenda" component={ NavigationHome } initialParams={{screen:'AgendaScreen'}}/>
               <Drawer.Screen name="NavigationHomeParecer" component={ NavigationHome } initialParams={{screen:'ParecerScreen'}}/>
               <Drawer.Screen name="NavigationHomeRelatorio" component={ NavigationHome } initialParams={{screen:'RelatorioScreen'}}/>
               <Drawer.Screen name="ChangePasswordScreen"  component={ ChangePasswordScreen } />
+              <Drawer.Screen name="NavigationLogin"  component={ NavigationLogin } />
             </Drawer.Navigator>
         );
 }
@@ -62,72 +59,12 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
         {/* Opciones del menu */}
         <View style={styles.menuContainer}>
-
-            <TouchableOpacity onPress={() =>{ navigation.navigate('NavigationHome');  }} >
-              <View style={{flexDirection:'row'}}>
-                <Text>
-                    {/* <Icon name="analytics-outline" size={30} color={colores.primary} /> */}
-                    icono
-                </Text>
-                <Text style={{...styles.menuTexto, paddingLeft:8}}>Home</Text>
-                </View>
-            </TouchableOpacity>
-
-
-
-           <TouchableOpacity style={styles.menuBoton} onPress={() => { 
-             navigation.navigate('AgendaScreen');  
-             }}>
-             <View style={{flexDirection:'row'}}>
-                <Text>
-                    {/* <Icon name="build-outline" size={30} color={colores.primary} />    */}
-                    icono
-                </Text>
-                <Text style={{...styles.menuTexto, paddingLeft:8}}>Agenda</Text>
-                </View>
-           </TouchableOpacity>
-
-
-           <TouchableOpacity style={styles.menuBoton} onPress={() => { 
-             navigation.navigate('ParecerScreen');  
-             }}>
-             <View style={{flexDirection:'row'}}>
-                <Text>
-                    {/* <Icon name="build-outline" size={30} color={colores.primary} />    */}
-                    icono
-                </Text>
-                <Text style={{...styles.menuTexto, paddingLeft:8}}>Parecer</Text>
-                </View>
-           </TouchableOpacity>
-
-
-
-           <TouchableOpacity style={styles.menuBoton} onPress={() => { 
-             navigation.navigate('RelatorioScreen');  
-             }}>
-             <View style={{flexDirection:'row'}}>
-                <Text>
-                    {/* <Icon name="build-outline" size={30} color={colores.primary} />    */}
-                    icono
-                </Text>
-                <Text style={{...styles.menuTexto, paddingLeft:8}}>Relatorio</Text>
-                </View>
-           </TouchableOpacity>
-
-           <TouchableOpacity style={styles.menuBoton} onPress={() => { 
-             navigation.navigate('ChangePasswordScreen');  
-             }}>
-             <View style={{flexDirection:'row'}}>
-                <Text>
-                    {/* <Icon name="build-outline" size={30} color={colores.primary} />    */}
-                    icono
-                </Text>
-                <Text style={{...styles.menuTexto, paddingLeft:8}}>Cambio contraseña</Text>
-                </View>
-           </TouchableOpacity>
-
-
-
+          <OpcionMenuLateral iconName='fe_home' color='black' label='Home' onPress={() =>{ navigation.navigate('NavigationHome'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='bi_calendar-week' color='black' label='Agenda' onPress={() =>{ navigation.navigate('AgendaScreen'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='icomoon-free_hammer2' color='black' label='Parecer' onPress={() =>{ navigation.navigate('ParecerScreen'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='bi_bar-chart-line-fill' color='black' label='Relatorio' onPress={() =>{ navigation.navigate('RelatorioScreen'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='ic_outline-lock' color='black' label='Cambio contraseña' onPress={() =>{ navigation.navigate('ChangePasswordScreen'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='ic_round-close' color='black' label='Cerrar sesion' onPress={() =>{ navigation.navigate('NavigationLogin'); }}></OpcionMenuLateral>
         </View>
 
      </DrawerContentScrollView>

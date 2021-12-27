@@ -2,16 +2,24 @@ import 'react-native-gesture-handler';
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { NavigationLogin } from './src/navigation/NavigationLogin';
-// import { NavigationLogin } from './src/navigation/navigationLogin';
-// import { NavigationHome } from './src/navigation/NavigationHome';
-import { NavigationLateral } from './src/navigation/NavigationLateral';
+import { GeneralProvider } from './src/state/GeneralProvider';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <NavigationLogin></NavigationLogin>
-      {/* <NavigationLateral></NavigationLateral> */}
-    </NavigationContainer>
+    <AppState>
+      <NavigationContainer>
+        <NavigationLogin></NavigationLogin>
+      </NavigationContainer>
+    </AppState>
+  )
+}
+
+
+const AppState = ({ children }: any) =>{
+  return (
+    <GeneralProvider>
+        { children }
+    </GeneralProvider>
   )
 }
 

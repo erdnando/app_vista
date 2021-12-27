@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';  
+import React from 'react';  
 import { Text, TouchableOpacity, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colores } from '../theme/appTheme';
@@ -7,6 +7,9 @@ import { ParecerScreen } from '../screens/home/ParecerScreen';
 import { RelatorioScreen } from '../screens/home/RelatorioScreen';
 import { HomeScreen } from '../screens/home/HomeScreen';
 import { DrawerScreenProps } from '@react-navigation/drawer';
+import CustomIcon from '../theme/CustomIcon';
+import { OpcionBottomTab } from '../components/OpcionBottomTab';
+import { OpcionHeader } from '../components/OpcionHeader';
 
 
 const Tab = createBottomTabNavigator();
@@ -15,7 +18,6 @@ interface Props extends DrawerScreenProps<any, any>{};
 export const NavigationHome = ( { navigation }:Props) => {
 
   return (
-
     <Tab.Navigator  sceneContainerStyle={{ backgroundColor:'white' }}  
         screenOptions={({route}) => ({
                 tabBarActiveTintColor:'orange',
@@ -29,59 +31,48 @@ export const NavigationHome = ( { navigation }:Props) => {
                 },
                 tabBarLabelStyle:{
                 fontSize:13,
-                
                 },
                 headerShown:true,
                 tabBarIcon: ({color, focused, size }) =>{
-
-                    let iconName: string = '';
-                    switch (route.name) {
-                        case 'Tab1screen':
-                            iconName= 'receipt-outline';
-                            break;
-                        case 'Tab2screen':
-                            iconName= 'build-outline';
-                            break;
-                        case 'StackNavigator':
-                             iconName= 'options-outline';
-                            break;
-                            case 'TopTabNavigator':
-                                iconName= 'rocket-outline';
-                               break;
-                    
-                        default:
-                            break;
-                    }
-                    //console.log(route.name);
-                    return <Text > opcion
-                       {/* <Icon name={iconName} size={25} color={color} /> */}
-                      </Text>
+                    return <OpcionBottomTab routeName={route.name} color={color} ></OpcionBottomTab>
+   
                 },
                 headerTitle:'VISTA APP',
                 headerLeft: () => {
 
-                  return   <TouchableOpacity onPress={() =>{  navigation.toggleDrawer(); }}>
-                              <Text style={{fontSize:17, marginLeft:15}}>
-                                MENU
-                                {/* <Icon name="reorder-four-outline" size={30} color={colores.primary} /> */}
-                              </Text>
-                          </TouchableOpacity>
+                  // return   <TouchableOpacity onPress={() =>{  navigation.toggleDrawer(); }}>
+                  //             <Text style={{fontSize:17, marginLeft:15}}>
+                  //                <CustomIcon name='ic_baseline-menu' size={30} color='black' style={{padding:150}} ></CustomIcon>
+                  //             </Text>
+                  //         </TouchableOpacity>
+                  return <OpcionHeader iconName='ic_baseline-menu' color='black' 
+                  onPress={() =>{ 
+                    console.log('click..');
+                    navigation.toggleDrawer(); 
+                  }} ></OpcionHeader>
                   },
-                // headerRight: () =>{
-                //     return  <TouchableOpacity onPress={() =>{  navigation.toggleDrawer(); }}>
-                //             <Text>
-                //             otro    
-                //             {/* <Icon name="settings-outline" size={30} color={colores.primary} /> */}
-                //             </Text>
-                //         </TouchableOpacity>
-                // }
+                headerRight: () =>{
+                    return <View style={{ flexDirection:'row'  }} >  
+                            <TouchableOpacity onPress={() =>{  navigation.toggleDrawer(); }}>
+                              <Text>
+                                  <CustomIcon name='clarity_tasks-solid' size={30} color='black' style={{padding:150}} ></CustomIcon>
+                              </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ marginRight:10, marginLeft:10 }} onPress={() =>{  navigation.toggleDrawer(); }}>
+                              <Text>
+                                  <CustomIcon name='gridicons_user' size={30} color='black' style={{padding:150}} ></CustomIcon>
+                              </Text>
+                            </TouchableOpacity>
+                            </View>
+                }
         })}
         >
 
-      <Tab.Screen name="HomeScreen" options={{ title:'home' }} component={ HomeScreen } />
-      <Tab.Screen name="AgendaScreen" options={{ title:'Agenda' }} component={ AgendaScreen } />
-      <Tab.Screen name="ParecerScreen" options={{ title:'Parecer' }} component={ ParecerScreen } />
-      <Tab.Screen name="RelatorioScreen" options={{ title:'Relatorio' }} component={ RelatorioScreen } />
+      <Tab.Screen name="HomeScreen" options={{ title:'' }} component={ HomeScreen } />
+      <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } />
+      <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } />
+      <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } />
     </Tab.Navigator>
   );
 }
