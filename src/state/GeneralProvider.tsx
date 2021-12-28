@@ -1,11 +1,8 @@
 import React from 'react'
 import { createContext } from 'react';
+import { tipoUsuario } from '../models/enums';
 
-enum tipoUsuario{
-    "NONE",
-    "USER_TERCEIRO",
-    "COLABORADOR"
-}
+
 
 interface GeneralState{
     //properties
@@ -20,6 +17,7 @@ interface GeneralState{
     setIsLogedIn: (isLogedIn: boolean)=>void,
     logOut: ()=>void,
     setIsAlertLoginVisible: (isAlertLoginVisible:boolean) =>void;
+    setTipoUsuario: (tipoUsuario: tipoUsuario) => void;
 }
 
 
@@ -79,7 +77,8 @@ class GeneralProvider extends React.Component{
                     setPassword: this.setPassword,
                     setIsLogedIn: this.setIsLogedIn,
                     logOut: this.logOut,
-                    setIsAlertLoginVisible: this.setIsAlertLoginVisible
+                    setIsAlertLoginVisible: this.setIsAlertLoginVisible,
+                    setTipoUsuario: this.setTipoUsuario,
                     }}
                 >
                {this.props.children}

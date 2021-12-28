@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useLogin } from '../hooks/useLogin';
-import { GeneralContext } from '../state/GeneralProvider';
-import CustomIcon from '../theme/CustomIcon';
-import { colores } from '../theme/appTheme';
+import { useLogin } from '../../hooks/useLogin';
+import { GeneralContext } from '../../state/GeneralProvider';
+import CustomIcon from '../../theme/CustomIcon';
+import { colores } from '../../theme/appTheme';
 
 
 interface Props{
@@ -31,6 +31,7 @@ export const InputEmail = ( { modo, label, iconLeft ,iconRight}: Props ) => {
      
           <TextInput
               style={{
+                  fontFamily:'Roboto-Regular',
                   height: 40,
                   width:'78%',
                   margin: 12,

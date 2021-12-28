@@ -8,7 +8,7 @@ import { gstyles } from '../../theme/appTheme';
 export const HomeScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
-    const { email } = useContext(GeneralContext);
+    const { email ,tipoUsuario} = useContext(GeneralContext);
     //call service to get data
     const { peliculasEnCine, isLoading } = useMovies();
 
@@ -28,12 +28,23 @@ export const HomeScreen = () => {
     }
 
     //render view after getting data
-    return (
-            <View style={ { ...gstyles.globalMargin, marginTop: top+20, flex:1, alignItems:'center'}}>
-                <Text style={{fontSize:60, alignContent:'center',  justifyContent:'center', paddingBottom:250}}>home</Text>
-                <Text>
-                { email }
-                </Text>
+    if(tipoUsuario === 1){//terciario
+       return ( <View style={ { ...gstyles.globalMargin, marginTop: top+20, flex:1, alignItems:'center'}}>
+             
+                <Text>Terciario</Text>
             </View>
-    )
+            )
+     }else if(tipoUsuario === 2) {//colaborador
+        return (<View style={ { ...gstyles.globalMargin, marginTop: top+20, flex:1, alignItems:'center'}}>
+              <Text>Colaborador</Text>
+              </View>
+             )
+     }else{
+         return (
+             <View>
+                 <Text>Sin permisos</Text>
+             </View>
+         )
+     }
+   
 }

@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 
 export const colores = {
    primary : '#F9A61A', //naranja
-   bottomBar:'black'
+   bottomBar:'#262B33',
+   topBar:'#262B33'
 }
 
 export const gstyles = StyleSheet.create({

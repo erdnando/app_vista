@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useLogin } from '../hooks/useLogin';
-import { GeneralContext } from '../state/GeneralProvider';
-import { colores } from '../theme/appTheme';
-import CustomIcon from '../theme/CustomIcon';
+import { useLogin } from '../../hooks/useLogin';
+import { GeneralContext } from '../../state/GeneralProvider';
+import { colores } from '../../theme/appTheme';
+import CustomIcon from '../../theme/CustomIcon';
 
 
 interface Props{
@@ -33,6 +33,7 @@ export const InputPassword = ( { modo, label, iconLeft ,iconRight, iconSee, Icon
      
           <TextInput
               style={{
+                fontFamily:'Roboto-Regular',
                   height: 40,
                   width:'78%',
                   margin: 12,

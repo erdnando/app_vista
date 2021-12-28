@@ -16,13 +16,17 @@ export const NavigationLogin = () => {
     screenOptions={
         {
           cardStyle:{
-            backgroundColor:'white'
+            backgroundColor:'white',
           },
           headerShown:true,
           headerStyle:{
             elevation:0,
-            shadowColor:'transparent'
+            shadowColor:'transparent' 
+          },
+          headerTitleStyle:{
+            fontFamily:'Roboto-Regular'
           }
+          
         }
       }
     >

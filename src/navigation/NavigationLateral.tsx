@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
 import { Image, useWindowDimensions, View  } from 'react-native';
 import { gstyles } from '../theme/appTheme';
 import { NavigationHome } from './NavigationHome';
 import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
 import { NavigationLogin } from './NavigationLogin';
-import { OpcionMenuLateral } from '../components/OpcionMenuLateral';
+import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
 
 const Drawer = createDrawerNavigator();
@@ -23,11 +23,21 @@ const Drawer = createDrawerNavigator();
 //Run pod install in the ios/ directory.
 
 
-
-export const NavigationLateral = () => {
+export const NavigationLateral = ( { navigation }:Props) => {
 
     const { width } = useWindowDimensions();
    
+    useEffect(() => {
+        
+      navigation.setOptions(
+          {
+              headerShown:false,
+              title:'',
+              
+          },
+          
+          )
+  }, [])
 
   return (
             <Drawer.Navigator 

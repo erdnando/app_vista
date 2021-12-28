@@ -1,7 +1,7 @@
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import CustomIcon from '../theme/CustomIcon';
+import CustomIcon from '../../theme/CustomIcon';
 
 
 interface Props{
@@ -15,7 +15,7 @@ export const OpcionHeader = ( { iconName,color, onPress }: Props ) => {
     //invoke global state
     //const {setFavoriteIcon} = useContext( GeneralContext )
     return  <TouchableOpacity onPress={onPress} >
-              <Text style={{fontSize:17, marginLeft:16, top:3}}>
+              <Text style={{fontSize:20, marginLeft:16, top:16}}>
                 <CustomIcon name={iconName} size={34} color={color} style={{padding:150}} ></CustomIcon>
               </Text>
             </TouchableOpacity>
