@@ -1,13 +1,12 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React, { useContext } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { ButtonForgotPassword } from '../../components/ButtonForgotPassword';
+import React, { useContext, useEffect } from 'react'
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ButtonTextGoTo } from '../../components/ButtonTextGoTo';
 import { ButtonRounded } from '../../components/ButtonRounded';
 import { InputEmail } from '../../components/InputEmail';
 import { InputPassword } from '../../components/InputPassword';
 import { Spacer } from '../../components/Spacer';
 import { useLogin } from '../../hooks/useLogin';
-import CustomIcon from '../../theme/CustomIcon';
 import { AlertNotif } from '../../components/AlertNotif';
 import { GeneralContext } from '../../state/GeneralProvider';
 
@@ -17,15 +16,26 @@ interface Props extends StackScreenProps<any, any>{};
 export const LoginScreen = ({ navigation }:Props) => {
     
     // const { top } = useSafeAreaInsets();
+    
      const { isAlertLoginVisible ,setIsAlertLoginVisible} = useContext( GeneralContext )
     const {  validarLogin, } = useLogin(); 
     
+    useEffect(() => {
+        
+        navigation.setOptions(
+            {
+                headerShown:false,
+                title:'',
+            }
+            )
+    }, [])
+    
     return (
         <View style={styles.container}>
-
+         <ImageBackground style={styles.background} resizeMode='cover' source={require('../../assets/Background.png')}>
            <Spacer height={60} ></Spacer>
 
-            <View><Image source={require('../../assets/vertical-logo.png')} ></Image></View>
+            <View style={styles.logo} ><Image source={require('../../assets/vertical-logo.png')} ></Image></View>
            
             <Spacer height={60} ></Spacer>
             
@@ -60,9 +70,10 @@ export const LoginScreen = ({ navigation }:Props) => {
           </View>
             </View>
 
-            <ButtonForgotPassword label='Forgot password' bottom={120} onPress={ async() =>  { 
+            <ButtonTextGoTo label='Forgot password' bottom={120} onPress={ async() =>  { 
                            navigation.navigate({name:'ForgotPasswordScreen'} as never); 
-                        }} ></ButtonForgotPassword>
+                        }} ></ButtonTextGoTo>
+          </ImageBackground>
         </View>
     )
 }
@@ -79,6 +90,11 @@ const styles = StyleSheet.create({
     formulario:{
         flex:1,
     },
-    
+    background:{
+        flex:1, justifyContent:'center',
+    },
+    logo:{
+        justifyContent:'center', alignItems:'center'
+    }
 });
 

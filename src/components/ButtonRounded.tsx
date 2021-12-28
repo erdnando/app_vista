@@ -17,7 +17,7 @@ export const ButtonRounded = ( { label,onPress }: Props ) => {
 
     //invoke global state
     const { email,password } = useContext( GeneralContext )
-    const { onChangePassword, setPassVisible, passwordVisible } = useLogin(); 
+    const { onChangePassword, } = useLogin(); 
 
     
     return (

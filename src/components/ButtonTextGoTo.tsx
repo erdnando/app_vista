@@ -2,9 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useLogin } from '../hooks/useLogin';
 import { GeneralContext } from '../state/GeneralProvider';
-import CustomIcon from '../theme/CustomIcon';
 import { colores } from '../theme/appTheme';
-import { StackNavigationProp } from '@react-navigation/stack';
 
 
 interface Props{
@@ -13,13 +11,13 @@ interface Props{
   onPress: () => void,
 }
 
-export const ButtonForgotPassword = ( { label,onPress,bottom }: Props ) => {
+export const ButtonTextGoTo = ( { label,onPress,bottom }: Props ) => {
 
   let colorIcono = colores.primary;
 
     //invoke global state
     const { email,password } = useContext( GeneralContext )
-    const { onChangePassword, setPassVisible, passwordVisible } = useLogin(); 
+    const { onChangePassword, } = useLogin(); 
 
     
     return (

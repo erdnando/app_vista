@@ -21,7 +21,7 @@ export const InputPassword = ( { modo, label, iconLeft ,iconRight, iconSee, Icon
 
     //invoke global state
     const { setPassword,password } = useContext( GeneralContext )
-    const { onChangePassword, setPassVisible, passwordVisible } = useLogin(); 
+    const { onChangePassword, setPasswordVisible, passwordVisible } = useLogin(); 
 
     
     return (
@@ -52,7 +52,7 @@ export const InputPassword = ( { modo, label, iconLeft ,iconRight, iconSee, Icon
               maxLength={27}
               value={password}
           />
-          <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ if(password!='')setPassVisible(!passwordVisible)  }}>
+          <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ if(password!='')setPasswordVisible(!passwordVisible)  }}>
               <Text>
                   <CustomIcon  name={password==='' ? iconRight : (passwordVisible ? IconHide : iconSee) } size={24} color= {password===''? colorIcono : 'black' }  ></CustomIcon>
               </Text>

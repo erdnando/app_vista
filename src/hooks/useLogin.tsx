@@ -1,5 +1,3 @@
-
-
 import { useContext, useState } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
 
@@ -7,9 +5,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 
 export const useLogin =  () => {
     const { setEmail,email,setPassword, password,isLogedIn, setIsLogedIn ,isAlertLoginVisible, setIsAlertLoginVisible} = useContext( GeneralContext )
-   // const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
-   // const [ alertVisible, setAlertVisible ] = useState<boolean>(false);
-
+   const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
         const onChangeEmail = async (email:string) =>{
             console.log(email);
             setIsAlertLoginVisible(false);
@@ -23,16 +19,20 @@ export const useLogin =  () => {
             setPassword(password);
             
         }
-
-        // const setPassVisible = (valor:boolean) =>{
-        //   //  setAlertVisible(false);
-        //     setPasswordVisible(valor);
-        // }
         
+        const setPasswordAux = (password:string)=>{
+            setPassword(password);
+        }
+
+        const setEmailAux = (email:string)=>{
+            setEmail(email);
+        }
 
         const validarLogin = async() =>{
-            //add logic to validate
-            if(password ==='12345' && email === 'erdnando@gmail.com'){
+
+            //TODO add logic to validate
+
+            if(password ==='12345' && email === 'erdnando'){
                 setIsLogedIn(true);
                 setIsAlertLoginVisible(false);
                 return true;
@@ -43,10 +43,20 @@ export const useLogin =  () => {
                 return false;
             }
         }
+
+        const resetContrasena = async() =>{
+            
+            //TODO add logic to send reset by email
+            return true;
+        }
+
+         const setPassVisible = (valor:boolean) =>{
+            setPasswordVisible(valor);
+        }
         
         
         //exposed objets 
         return {
-            onChangeEmail,onChangePassword,validarLogin,
+            onChangeEmail,onChangePassword,validarLogin,resetContrasena,setPasswordAux,setEmailAux, passwordVisible, setPasswordVisible
         }
 }
