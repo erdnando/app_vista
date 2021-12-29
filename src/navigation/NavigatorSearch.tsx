@@ -1,6 +1,5 @@
 import React from 'react';  
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Text} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colores } from '../theme/appTheme';
 import { ExigenciaLegalScreen } from '../screens/search/ExigenciaLegalScreen';
@@ -9,39 +8,48 @@ import { ParecerScreen } from '../screens/search/ParecerScreen';
 import { ResultadoScreen } from '../screens/search/ResultadoScreen';
 import { PendienteScreen } from '../screens/search/PendienteScreen';
 import { PlanAccionScreen } from '../screens/search/PlanAccionScreen';
-import CustomIcon from '../theme/CustomIcon';
-
 
 //LogBox.ignoreLogs(['Sending']);
-
 const Tab = createMaterialTopTabNavigator();
-
-
 
 export const Navigatorsearch = () => {
 
     const {top} = useSafeAreaInsets();
 
   return (
-    <Tab.Navigator style={{ paddingTop:top }} 
+    <Tab.Navigator style={{ paddingTop:top-35 }} 
     sceneContainerStyle={{
         backgroundColor:'white'
     }}
+    
     screenOptions={({route}) => ({
         tabBarStyle:{
             backgroundColor: 'white',
-            borderTopColor: colores.primary,
-            borderBottomWidth:0,
-            borderTopWidth: 0,
-            elevation:0,
-            shadowColor: 'transparent'
+            borderBottomWidth:3,
+            borderColor:'#D6DBDF',
+            elevation:2,
+           // shadowColor: 'red',
+            width:400,
         },
-        tabBarActiveTintColor:'orange',
-        tabBarInactiveTintColor:'black',
+        tabBarScrollEnabled:true,
+        tabBarItemStyle:{
+          width:170, //width single tab
+         },
+        tabBarLabelStyle:{
+          fontWeight:'bold',
+          fontFamily:'Roboto-Regular',
+          fontSize:15
+        },
+        tabBarInactiveTintColor:'grey', //label color
         tabBarPressColor:colores.primary,
-        tabBarShowIcon:true,
         tabBarIndicatorStyle:{
-            backgroundColor:colores.primary
+            borderBottomWidth:4,
+            borderBottomColor:colores.primary,
+        },
+        tabBarActiveTintColor:colores.primary,
+        tabBarIndicatorContainerStyle:{
+          borderBottomWidth:4,
+          borderBottomColor:'#E5E8E8',
         },
     })}
     >

@@ -10,17 +10,13 @@ export const useLogin =  () => {
 
    const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
         const onChangeEmail = async (email:string) =>{
-            //console.log(email);
             setIsAlertLoginVisible(false);
-           // console.log(isAlertLoginVisible===true? 'visible': 'no visible')
             setEmail(email);
-         
         }
 
         const onChangePassword = async (password:string) =>{
             setIsAlertLoginVisible(false);
             setPassword(password);
-            
         }
         
         const setPasswordAux = (password:string)=>{
@@ -72,6 +68,7 @@ export const useLogin =  () => {
         
         //exposed objets 
         return {
-            onChangeEmail,onChangePassword,validarLogin,resetContrasena,setPasswordAux,setEmailAux, passwordVisible, setPasswordVisible
+            onChangeEmail,onChangePassword,validarLogin,resetContrasena,setPasswordAux,
+            setEmailAux, passwordVisible, setPasswordVisible
         }
 }

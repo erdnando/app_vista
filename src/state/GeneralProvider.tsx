@@ -12,6 +12,8 @@ interface GeneralState{
     isLogedIn: boolean,
     isAlertLoginVisible:boolean,
     resultadosBusquedaVisible:boolean,
+    codigoBusqueda:string,
+    isLoadingSearch:boolean,
     //functions/methods
     setEmail: (email:string)=>void,
     setPassword: (password:string)=>void,
@@ -20,6 +22,8 @@ interface GeneralState{
     setIsAlertLoginVisible: (isAlertLoginVisible:boolean) =>void;
     setTipoUsuario: (tipoUsuario: tipoUsuario) => void;
     setResultadosBusquedaVisible:(resultadosBusquedaVisible:boolean)=>void;
+    setCodigoBusqueda: (codigoBusqueda:string)=> void;
+    setIsLoadingSearch: (isLoadingSearch:boolean)=>void;
 }
 
 
@@ -33,7 +37,9 @@ class GeneralProvider extends React.Component{
         password:'',
         isLogedIn: false,
         isAlertLoginVisible:false,
-        resultadosBusquedaVisible:false
+        resultadosBusquedaVisible:false,
+        codigoBusqueda:'',
+        isLoadingSearch:false,
     }
 
     setTipoUsuario = (tipoUsuario: tipoUsuario) =>{
@@ -69,6 +75,14 @@ class GeneralProvider extends React.Component{
         this.setState({resultadosBusquedaVisible});
      }
 
+     setCodigoBusqueda=(codigoBusqueda:string) =>{
+         this.setState({codigoBusqueda});
+     }
+
+     setIsLoadingSearch=(isLoadingSearch:boolean) =>{
+         this.setState({isLoadingSearch});
+     }
+
      render(): React.ReactNode {
          return(
            <GeneralContext.Provider
@@ -80,6 +94,8 @@ class GeneralProvider extends React.Component{
                     isLogedIn: this.state.isLogedIn,
                     isAlertLoginVisible: this.state.isAlertLoginVisible,
                     resultadosBusquedaVisible: this.state.resultadosBusquedaVisible,
+                    codigoBusqueda:this.state.codigoBusqueda,
+                    isLoadingSearch: this.state.isLoadingSearch,
                     //functions/methods
                     setEmail: this.setEmail,
                     setPassword: this.setPassword,
@@ -88,6 +104,8 @@ class GeneralProvider extends React.Component{
                     setIsAlertLoginVisible: this.setIsAlertLoginVisible,
                     setTipoUsuario: this.setTipoUsuario,
                     setResultadosBusquedaVisible: this.setResultadosBusquedaVisible,
+                    setCodigoBusqueda: this.setCodigoBusqueda,
+                    setIsLoadingSearch: this.setIsLoadingSearch,
                     }}
                 >
                {this.props.children}
