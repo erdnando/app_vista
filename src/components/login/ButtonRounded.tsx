@@ -23,10 +23,10 @@ export const ButtonRounded = ( { label,onPress }: Props ) => {
     return (
           <View style={{ flex:1,flexDirection:'column', alignItems:'center',height:40, backgroundColor:'green', justifyContent:'center', alignContent:'center', }}>
             <TouchableOpacity disabled={(email === '' && password === '') ? true : false} 
-            style={{alignSelf:'stretch', marginHorizontal:50 , borderRadius: 100, backgroundColor:(email !== '' && password !== '') ? colores.primary : '#BCC1CB', 
-            height:48, justifyContent:'center',  }} 
-              onPress= {onPress}>
-               <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color:(email !== '' && password !== '') ? 'black' : 'white'}}>{label}</Text>
+              style={{alignSelf:'stretch', marginHorizontal:50 , borderRadius: 100, backgroundColor:(email !== '' && password !== '') ? colores.primary : '#BCC1CB', 
+              height:48, justifyContent:'center',  }} 
+                onPress= {onPress}>
+                <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color:(email !== '' && password !== '') ? 'black' : 'white'}}>{label}</Text>
             </TouchableOpacity>
           </View>
     )

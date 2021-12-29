@@ -10,7 +10,8 @@ interface GeneralState{
     email:string,
     password:string,
     isLogedIn: boolean,
-    isAlertLoginVisible:boolean
+    isAlertLoginVisible:boolean,
+    resultadosBusquedaVisible:boolean,
     //functions/methods
     setEmail: (email:string)=>void,
     setPassword: (password:string)=>void,
@@ -18,6 +19,7 @@ interface GeneralState{
     logOut: ()=>void,
     setIsAlertLoginVisible: (isAlertLoginVisible:boolean) =>void;
     setTipoUsuario: (tipoUsuario: tipoUsuario) => void;
+    setResultadosBusquedaVisible:(resultadosBusquedaVisible:boolean)=>void;
 }
 
 
@@ -31,6 +33,7 @@ class GeneralProvider extends React.Component{
         password:'',
         isLogedIn: false,
         isAlertLoginVisible:false,
+        resultadosBusquedaVisible:false
     }
 
     setTipoUsuario = (tipoUsuario: tipoUsuario) =>{
@@ -62,6 +65,10 @@ class GeneralProvider extends React.Component{
     
      }
 
+     setResultadosBusquedaVisible=(resultadosBusquedaVisible:boolean) =>{
+        this.setState({resultadosBusquedaVisible});
+     }
+
      render(): React.ReactNode {
          return(
            <GeneralContext.Provider
@@ -72,6 +79,7 @@ class GeneralProvider extends React.Component{
                     password : this.state.password,
                     isLogedIn: this.state.isLogedIn,
                     isAlertLoginVisible: this.state.isAlertLoginVisible,
+                    resultadosBusquedaVisible: this.state.resultadosBusquedaVisible,
                     //functions/methods
                     setEmail: this.setEmail,
                     setPassword: this.setPassword,
@@ -79,6 +87,7 @@ class GeneralProvider extends React.Component{
                     logOut: this.logOut,
                     setIsAlertLoginVisible: this.setIsAlertLoginVisible,
                     setTipoUsuario: this.setTipoUsuario,
+                    setResultadosBusquedaVisible: this.setResultadosBusquedaVisible,
                     }}
                 >
                {this.props.children}

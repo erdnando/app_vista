@@ -49,6 +49,8 @@ export const useLogin =  () => {
             else{
                 setIsLogedIn(false);
                 setIsAlertLoginVisible(true);
+                console.log('credenciales invalidas');
+
                 return false;
             }
         }

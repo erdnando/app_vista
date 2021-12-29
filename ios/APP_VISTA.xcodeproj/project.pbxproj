@@ -26,6 +26,7 @@
 		87064653277BCBD10037A96F /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87064640277BC8290037A96F /* Roboto-Regular.ttf */; };
 		87064654277BCBD10037A96F /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87064648277BC82A0037A96F /* Roboto-Thin.ttf */; };
 		87064655277BCBD10037A96F /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87064649277BC82A0037A96F /* Roboto-ThinItalic.ttf */; };
+		87064656277BEA740037A96F /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 873AA3422778F386002E6519 /* icomoon.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,7 @@
 		873AA33D2778E850002E6519 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				873AA3422778F386002E6519 /* icomoon.ttf */,
 				87064643277BC82A0037A96F /* Roboto-Black.ttf */,
 				87064642277BC82A0037A96F /* Roboto-BlackItalic.ttf */,
 				8706463F277BC8290037A96F /* Roboto-Bold.ttf */,
@@ -180,7 +182,6 @@
 				87064640277BC8290037A96F /* Roboto-Regular.ttf */,
 				87064648277BC82A0037A96F /* Roboto-Thin.ttf */,
 				87064649277BC82A0037A96F /* Roboto-ThinItalic.ttf */,
-				873AA3422778F386002E6519 /* icomoon.ttf */,
 				873AA3402778E925002E6519 /* FontAwesome.ttf */,
 				873AA33F2778E910002E6519 /* Ionicons.ttf */,
 			);
@@ -290,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87064656277BEA740037A96F /* icomoon.ttf in Resources */,
 				8706464A277BCBD10037A96F /* Roboto-Black.ttf in Resources */,
 				8706464B277BCBD10037A96F /* Roboto-BlackItalic.ttf in Resources */,
 				8706464C277BCBD10037A96F /* Roboto-Bold.ttf in Resources */,
