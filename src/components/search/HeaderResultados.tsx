@@ -15,10 +15,10 @@ export const HeaderResultados = ( { iconClose,color, label }: Props ) => {
 
   const { setResultadosBusquedaVisible} = useContext(GeneralContext);
 
-    return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:10}}> 
+    return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
 
               <TouchableOpacity style={{marginLeft:15, padding:5}} onPress={() =>{ 
-                console.log('cerrando modal'); 
+                
                 setResultadosBusquedaVisible(false);
                 }}>
                   <Text>

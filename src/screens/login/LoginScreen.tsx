@@ -1,6 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useContext, useEffect } from 'react'
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ImageBackground, StyleSheet, View } from 'react-native'
 import { ButtonTextGoTo } from '../../components/login/ButtonTextGoTo';
 import { ButtonRounded } from '../../components/login/ButtonRounded';
 import { InputEmail } from '../../components/login/InputEmail';

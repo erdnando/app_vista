@@ -29,7 +29,7 @@ export const Navigatorsearch = () => {
             borderColor:'#D6DBDF',
             elevation:2,
            // shadowColor: 'red',
-            width:400,
+            width:'100%',
         },
         tabBarScrollEnabled:true,
         tabBarItemStyle:{
