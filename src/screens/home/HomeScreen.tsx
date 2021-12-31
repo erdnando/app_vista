@@ -45,32 +45,46 @@ export const HomeScreen = () => {
             descripcion:string;
             color:string;
             icon:string;
+            diaVisible:boolean;
         }
 
         const LastUpdates = [
             {
                 id:'1',
-                dia:'HOY',
+                dia:'Hoy',
                 hora: '13:01:45',
                 descripcion:'Se ha habierto la posicion 345.',
                 color: 'red',
-                icon:'bx_bxs-message-alt-error'
+                icon:'bx_bxs-message-alt-error',
+                diaVisible:true
+
             },
             {
                 id:'2',
-                dia:'HOY',
+                dia:'Hoy',
                 hora: '13:11:25',
                 descripcion:'Se ha habierto la posicion 345.',
                 color: 'red',
-                icon:'bx_bxs-message-alt-error'
+                icon:'bx_bxs-message-alt-error',
+                diaVisible:false
             },
             {
                 id:'3',
-                dia:'HOY',
+                dia:'Ayer',
                 hora: '13:23:45',
                 descripcion:'Se ha habierto la posicion 345.',
                 color: 'red',
-                icon:'bx_bxs-message-alt-error'
+                icon:'bx_bxs-message-alt-error',
+                diaVisible:true
+            },
+            {
+                id:'4',
+                dia:'Ayer',
+                hora: '13:23:45',
+                descripcion:'Se ha habierto la posicion 345.',
+                color: 'red',
+                icon:'bx_bxs-message-alt-error',
+                diaVisible:false
             }
         ]
 
@@ -78,48 +92,50 @@ export const HomeScreen = () => {
         
         const renderUpdateItem = (updateItem:LastUpdates) =>{
             return (
-                <View style={{height:190, flexDirection:'row', width:'73%',  justifyContent:'flex-end', 
-                        alignItems:'flex-start', borderWidth: 0,backgroundColor:'#B85050', borderRadius:7,padding:5,elevation:6,
-                        shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
-                        height: 1, width: 1
-                    }}}>
-
-                    <View style={{ flexDirection:'column', width:'75%',height:50, justifyContent:'flex-start',  alignItems:'flex-start'}}>
-                       <Text style={{fontFamily:'Roboto-Bold', fontSize:17, color:'#F8BBBB'}}>{updateItem.hora}</Text>
-                       <Text style={{fontFamily:'Roboto-Bold', fontSize:17, color:'#FFFFFF'}}>{updateItem.descripcion}</Text>
+                <View style={{flexDirection:'row',justifyContent:'flex-end'}}>
+                    <View style={{width:'11%',}}>
+                        {/* label hoy/ayer */}
+                        <View  style={{left:-8,elevation:2, backgroundColor:'#BCC1CB',justifyContent:'center',alignContent:'center',alignItems:'center'}}>
+                           <Text>{updateItem.diaVisible ? updateItem.dia : ''}</Text>
+                        </View>
+                       {/* linea */}
+                        <View style={{backgroundColor:'#838892',left:6, width:3,opacity:0.2,top:2, height:103,position:'absolute',}}></View>
                     </View>
 
-                    <View style={{ flexDirection:'column', flex:1}}>
-                    
-                    <Text style={{right:5,top:28}}> 
-                            <CustomIcon style={{left:16}} name='bx_bxs-message-alt-error' size={36} color='white' ></CustomIcon>
-                        </Text>
-                    <View style={{ backgroundColor:'#F8BBBB',opacity:0.3, borderWidth:0,top:-26,right:22, borderRadius:50,margin:3, height:64, width:64, 
-                         }}>
-                            
-                    </View>
+
+                    <View style={{height:88, flexDirection:'row', width:'88%',   
+                            borderWidth: 0,backgroundColor:'#B85050', borderRadius:7,padding:5,elevation:6,
+                            shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
+                            height: 1, width: 1
+                        }}}>
+
+                        <View style={{ flexDirection:'column', width:'82%',height:50,left:8,top:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
+                        <Text style={{fontFamily:'Roboto-Bold', fontSize:15, color:'#F8BBBB'}}>{updateItem.hora}</Text>
+                        <Text style={{fontFamily:'Roboto-Regular', fontSize:15, color:'#FFFFFF',marginTop:8,width:'89%'}}>{updateItem.descripcion}</Text>
+                        </View>
+
                         
-                    
+                        <View style={{ flexDirection:'column', flex:1}}>
+                            {/* icono */}
+                            <Text style={{right:10,top:25}}> 
+                                    <CustomIcon  name='bx_bxs-message-alt-error' size={36} color='white' ></CustomIcon>
+                            </Text>
+                            {/* circulo */}
+                            <View style={{ backgroundColor:'#F8BBBB',opacity:0.3, borderWidth:0,top:-30,right:26, 
+                                        borderRadius:50,margin:3, height:62, width:62, }}></View>
+                        </View>
+
                     </View>
-
                 </View>
             )
         }
 
-        const renderListHeader = () =>{
-            return (
-                <View>
-                    <Text style={{ fontFamily:'Roboto-Bold', fontSize:20}}>Ultimas actualizaciones</Text>
-                    <Spacer height={20}></Spacer>
-                </View>
-                
-            )
-        }
+     
 
         const renderSeparator = () =>{
             return (
                 <View>
-                    <Spacer height={20}></Spacer>
+                    <Spacer height={10}></Spacer>
                 </View>
             )
 
@@ -140,15 +156,17 @@ export const HomeScreen = () => {
 
                             <View style={{ flexDirection:'column',backgroundColor:'#BCC1CB', position:'absolute', bottom:0, 
                             width:'100%', height:Platform.OS=='ios' ? '74%': '79%', justifyContent:'flex-end',alignItems:'center',}}>
-                               {/* <Text style={{top:95+30, left:15, fontFamily:'Roboto-Bold', fontSize:19}}>Ultimas actualizaciones</Text> */}
+                              
 
-
-                                {/* lista de ultimops updates */}
-                                <View style={{flex:1,backgroundColor:'green',justifyContent:'center',alignItems:'flex-end',alignContent:'flex-end', top:95+30, width:'85%'}}>
+                               <View style={{ width:'90%',alignContent:'flex-start', left:0,top:95+30,}}>
+                                    <Text style={{ fontFamily:'Roboto-Bold', fontSize:20}}>Ultimas actualizaciones</Text>
+                                    <Spacer height={20}></Spacer>
+                                </View>
+                                {/* lista de ultimoos updates */}
+                                <View style={{flex:1,justifyContent:'center',alignItems:'flex-end',alignContent:'flex-end', top:95+30, width:'90%'}}>
                                     <FlatList data={LastUpdates} 
                                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                                     keyExtractor={(item) => item.id} 
-                                    ListHeaderComponent={ () => renderListHeader()}
                                     ItemSeparatorComponent={ () => renderSeparator()} />
                                 </View>
 

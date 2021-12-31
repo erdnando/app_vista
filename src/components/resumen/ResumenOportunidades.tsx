@@ -14,7 +14,7 @@ interface Props{
 export const ResumenOportunidades = ( {  }: Props ) => {
 
     return (
-      <View style={{height:190, flexDirection:'column', width:'83%', left:-3, justifyContent:'center', 
+      <View style={{height:190, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', 
             alignItems:'flex-start', borderWidth: 0,backgroundColor:'white', borderRadius:7,padding:5,elevation:6,
             shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
             height: 1,
