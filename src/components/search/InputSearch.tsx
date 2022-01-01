@@ -26,9 +26,9 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
             <TextInput style={{
                   fontFamily:'Roboto-Regular',
                   height: 40,
-                  width:'85%',
+                  width:Platform.OS=='ios' ? '89%': '90%',
                   margin: 12,
-                  left:14,
+                  left:8,
                   paddingLeft:20, borderWidth:Platform.OS=='android' ? 3 : 0,borderColor:Platform.OS=='android' ? '#E2E5EA' : 'transparent',
                   borderRadius: 20, padding:5,elevation:0,backgroundColor : "white",
                   shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {

@@ -17,9 +17,6 @@ interface Props{
 
 export const Search = ( { label,iconSearch, iconClose}: Props ) => {
 
-  // let colorIcono = colores.primary;
-
-    //invoke global state
      const { codigoBusqueda, } = useContext( GeneralContext )
   
     return (
