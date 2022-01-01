@@ -153,7 +153,7 @@ const renderSeparator = () =>{
 }
 
     return (
-      <View style={{flexGrow:1,backgroundColor:'#BCC1CB', justifyContent:'center',alignItems:'flex-start',alignContent:'flex-end', top:95+30, width:'90%',bottom:-200}}>
+      <View style={{flexGrow:1,backgroundColor:'#BCC1CB', justifyContent:'center',alignItems:'flex-start',alignContent:'flex-end', top:95+30, width:'90%',}}>
         
         <FlatList data={Data} 
         renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
