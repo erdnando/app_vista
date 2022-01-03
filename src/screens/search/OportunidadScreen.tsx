@@ -3,16 +3,15 @@ import { View } from 'react-native';
 import { TextOportunidad } from '../../components/oportunidad/TextOportunidad';
 import { Spacer } from '../../components/Spacer';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
+import { HeaderTitle } from '../../components/HeaderTitle';
+import { gstyles } from '../../theme/appTheme';
 
 export const OportunidadScreen = () => {
     return (
-        <View style={{ flex:1,backgroundColor:'white'}}>
-          
-           <View style={{ width:'90%', alignContent:'center', marginHorizontal:15, top:10 }}>
-                
-          
+        <View style={gstyles.globalTabView}>
               
-                <TextOportunidad label='Nome do Cliente' valor='' size={20} colorValor='black' ></TextOportunidad>
+                {/* <TextOportunidad label='Nome do Cliente' valor='' size={20} colorValor='black' ></TextOportunidad> */}
+                <HeaderTitle label='Nome do Cliente' top={20} fontSize={20}></HeaderTitle>
                 <Spacer height={20}></Spacer>
 
                 <TextOportunidad label='Orgao: ' valor='lorem ipsum dolor sit amet' size={17} ></TextOportunidad>
@@ -27,8 +26,6 @@ export const OportunidadScreen = () => {
                 <TextOportunidadIcono label='Localidade: ' valor='Uberaba - MG' size={17} icono='ic_baseline-place'></TextOportunidadIcono>
                 <Spacer height={10}></Spacer>
                 <TextOportunidadIcono label='' valor='Download do Edital' size={17} icono='ic_baseline-cloud-download'></TextOportunidadIcono>
-           
-            </View>
 
         </View>
     )

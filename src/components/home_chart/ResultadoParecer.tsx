@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, Text, View } from 'react-native';
 import { BarChart } from 'react-native-gifted-charts';
-import { HeaderActualizaciones } from '../ultimasActualizaciones/HeaderActualizaciones';
+import { HeaderTitle } from '../HeaderTitle';
 
 
 interface Props{
@@ -24,7 +24,7 @@ export const ResultadoParecer = ( ) => {
 
     return  <View style={{flex:1, flexDirection:'column',backgroundColor:'#BCC1CB', position:'absolute', bottom:0, 
                         width:'100%', height:Platform.OS=='ios' ? '73%': '78%',  alignItems:'center',}}>
-                    <HeaderActualizaciones label='Resultado do parecer'></HeaderActualizaciones>
+                    <HeaderTitle label='Resultado do parecer' top={95+30} fontSize={17}></HeaderTitle>
 
                     <View style={{height:Platform.OS=='ios' ? '58%': '72%',bottom: -115, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', 
                         alignItems:'flex-start', borderWidth: 0,backgroundColor:'white', borderRadius:7,padding:5,elevation:6,
@@ -49,6 +49,6 @@ export const ResultadoParecer = ( ) => {
                               data={barData}
                               isAnimated/>
                     </View>
-                    <HeaderActualizaciones label='Total de Pareceres: 710'></HeaderActualizaciones>
+                    <HeaderTitle label='Total de Pareceres: 710' top={95+30} fontSize={17}></HeaderTitle>
             </View>
 }

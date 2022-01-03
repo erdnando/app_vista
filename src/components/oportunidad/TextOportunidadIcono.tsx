@@ -16,7 +16,7 @@ export const TextOportunidadIcono = ( { size, label,valor, icono, colorValor = '
 
     return  <View style={{flexDirection:'row', paddingVertical:3}}>
               {/* (icono != '') ? <Text><CustomIcon  name={icono} size={24} color='#000000'  ></CustomIcon></Text> : <View></View> */}
-              <Text style={{top:-4}}><CustomIcon  name={icono} size= {icono==='' ? 0 :28} color='black'  ></CustomIcon></Text>
+              <Text style={{top:-6}}><CustomIcon  name={icono} size= {icono==='' ? 0 :28} color='black'  ></CustomIcon></Text>
               <Text style={{ fontFamily:'Roboto-Bold', color:'black', fontSize:size }}> {label}</Text>
               <Text style={{ fontFamily:valueIsBold?'Roboto-Bold':'Roboto-Regular', fontSize:size, color:colorValor }}> {valor}</Text>
             </View>  

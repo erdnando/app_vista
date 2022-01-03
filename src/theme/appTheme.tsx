@@ -10,6 +10,14 @@ export const gstyles = StyleSheet.create({
     globalMargin:{
         marginHorizontal:20
     },
+    globalTabView:{
+        flex:1, 
+        
+        width:'92%', 
+        alignItems:'flex-start',
+        top:10,
+        marginHorizontal:15,
+    },
     title:{
         fontSize:30,
         marginBottom:10,
