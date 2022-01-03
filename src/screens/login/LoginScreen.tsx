@@ -16,9 +16,9 @@ interface Props extends StackScreenProps<any, any>{};
 //https://www.reactnative.guide/12-svg-icons-using-react-native-vector-icons/12.1-creating-custom-iconset.html
 export const LoginScreen = ({ navigation }:Props) => {
     
-     const { top,left } = useSafeAreaInsets();
+    const { top,left } = useSafeAreaInsets();
     
-     const { isAlertLoginVisible ,setIsAlertLoginVisible} = useContext( GeneralContext )
+    const { isAlertLoginVisible ,setIsAlertLoginVisible} = useContext( GeneralContext )
     const {  validarLogin, } = useLogin(); 
     
     useEffect(() => {

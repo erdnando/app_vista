@@ -63,11 +63,14 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
      <DrawerContentScrollView>
 
        {/* Imagen avatar */}
-       <View style={gstyles.avatarContainer}>
+       {/* <View style={gstyles.avatarContainer}>
           <Image style={gstyles.avatar} 
             source={{ uri:'https://www.caribbeangamezone.com/wp-content/uploads/2018/03/avatar-placeholder-300x300.png' }} >
           </Image>
-       </View>
+       </View> */}
+       <View  style={gstyles.avatarContainer} >
+         <Image style={{justifyContent:'center', alignItems:'center', width:150,height:150}} source={require('../assets/vertical-logo.png')} ></Image>
+         </View>
 
         {/* Opciones del menu */}
         <View style={gstyles.menuContainer}>
