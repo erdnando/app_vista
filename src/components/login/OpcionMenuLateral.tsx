@@ -23,7 +23,7 @@ export const OpcionMenuLateral = ( { iconName,label,color, onPress }: Props ) =>
           <Text>
           <CustomIcon name={iconName} size={25} color={color} ></CustomIcon>
           </Text>
-          <Text style={{...gstyles.menuTexto, paddingLeft:8, fontFamily:'Roboto-Regular'}}>{label}</Text>
+          <Text style={{...gstyles.menuTexto,marginTop:2, paddingLeft:8, fontFamily:'Roboto-Regular', fontSize:16}}>{label}</Text>
           </View>
       </TouchableOpacity>
     )

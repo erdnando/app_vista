@@ -14,6 +14,9 @@ interface GeneralState{
     resultadosBusquedaVisible:boolean,
     codigoBusqueda:string,
     isLoadingSearch:boolean,
+    filtroCliente:string,
+    filtroFechaInicial:string,
+    filtroFechaFinal:string,
     //functions/methods
     setEmail: (email:string)=>void,
     setPassword: (password:string)=>void,
@@ -24,6 +27,9 @@ interface GeneralState{
     setResultadosBusquedaVisible:(resultadosBusquedaVisible:boolean)=>void;
     setCodigoBusqueda: (codigoBusqueda:string)=> void;
     setIsLoadingSearch: (isLoadingSearch:boolean)=>void;
+    setFiltroCliente: (filtroCliente:string)=>void;
+    setFiltroFechaInicial: (filtroFechaInicial:string)=>void;
+    setFiltroFechaFinal: (filtroFechaFinal:string)=>void;
 }
 
 
@@ -40,6 +46,9 @@ class GeneralProvider extends React.Component{
         resultadosBusquedaVisible:false,
         codigoBusqueda:'',
         isLoadingSearch:false,
+        filtroCliente:'',
+        filtroFechaInicial:'',
+        filtroFechaFinal:'',
     }
 
     setTipoUsuario = (tipoUsuario: tipoUsuario) =>{
@@ -83,6 +92,18 @@ class GeneralProvider extends React.Component{
          this.setState({isLoadingSearch});
      }
 
+     setFiltroCliente=(filtroCliente:string) =>{
+        this.setState({filtroCliente});
+    }
+
+    setFiltroFechaInicial= (filtroFechaInicial:string) =>{
+        this.setState({filtroFechaInicial});
+    }
+
+    setFiltroFechaFinal= (filtroFechaFinal:string) =>{
+        this.setState({filtroFechaFinal});
+    }
+
      render(): React.ReactNode {
          return(
            <GeneralContext.Provider
@@ -96,6 +117,9 @@ class GeneralProvider extends React.Component{
                     resultadosBusquedaVisible: this.state.resultadosBusquedaVisible,
                     codigoBusqueda:this.state.codigoBusqueda,
                     isLoadingSearch: this.state.isLoadingSearch,
+                    filtroCliente: this.state.filtroCliente,
+                    filtroFechaInicial: this.state.filtroFechaInicial,
+                    filtroFechaFinal: this.state.filtroFechaFinal,
                     //functions/methods
                     setEmail: this.setEmail,
                     setPassword: this.setPassword,
@@ -106,6 +130,9 @@ class GeneralProvider extends React.Component{
                     setResultadosBusquedaVisible: this.setResultadosBusquedaVisible,
                     setCodigoBusqueda: this.setCodigoBusqueda,
                     setIsLoadingSearch: this.setIsLoadingSearch,
+                    setFiltroCliente: this.setFiltroCliente,
+                    setFiltroFechaInicial: this.setFiltroFechaInicial,
+                    setFiltroFechaFinal: this.setFiltroFechaFinal,
                     }}
                 >
                {this.props.children}

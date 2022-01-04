@@ -33,7 +33,7 @@ export const NavigationLateral = ( { navigation }:Props) => {
           {
               headerShown:false,
               title:'',
-              
+             
           },
           
           )
@@ -44,10 +44,12 @@ export const NavigationLateral = ( { navigation }:Props) => {
               screenOptions={{
                               drawerPosition:'left',
                               headerShown: false, 
-                              drawerType:(width >=768 ? 'permanent' : 'front')  
+                              drawerType:(width >=768 ? 'permanent' : 'front')  ,
+                            
                               }}  
               drawerContent={ (props) => <MenuInterno { ...props }></MenuInterno> } >
-              <Drawer.Screen name="NavigationHome" component={ NavigationHome } initialParams={{screen:'HomeScreen'}}/>              
+              <Drawer.Screen name="NavigationHome" component={ NavigationHome } options={{ title:'', }} initialParams={{screen:'HomeScreen'}}/>      
+
               <Drawer.Screen name="NavigationHomeagenda" component={ NavigationHome } initialParams={{screen:'AgendaScreen'}}/>
               <Drawer.Screen name="NavigationHomeParecer" component={ NavigationHome } initialParams={{screen:'ParecerScreen'}}/>
               <Drawer.Screen name="NavigationHomeRelatorio" component={ NavigationHome } initialParams={{screen:'RelatorioScreen'}}/>
@@ -74,7 +76,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
         {/* Opciones del menu */}
         <View style={gstyles.menuContainer}>
-          <OpcionMenuLateral iconName='fe_home' color='black' label='Home' onPress={() =>{ navigation.navigate('NavigationHome'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='fe_home' color='black' label='Home'  onPress={() =>{ navigation.navigate('NavigationHome'); }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='bi_calendar-week' color='black' label='Agenda' onPress={() =>{ navigation.navigate('AgendaScreen'); }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='icomoon-free_hammer2' color='black' label='Parecer' onPress={() =>{ navigation.navigate('ParecerScreen'); }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='bi_bar-chart-line-fill' color='black' label='Relatorio' onPress={() =>{ navigation.navigate('RelatorioScreen'); }}></OpcionMenuLateral>
