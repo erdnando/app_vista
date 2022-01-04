@@ -17,6 +17,8 @@ interface GeneralState{
     filtroCliente:string,
     filtroFechaInicial:string,
     filtroFechaFinal:string,
+    isFilterCollapsed:boolean,
+    isSelectorParecer:boolean,
     //functions/methods
     setEmail: (email:string)=>void,
     setPassword: (password:string)=>void,
@@ -30,6 +32,8 @@ interface GeneralState{
     setFiltroCliente: (filtroCliente:string)=>void;
     setFiltroFechaInicial: (filtroFechaInicial:string)=>void;
     setFiltroFechaFinal: (filtroFechaFinal:string)=>void;
+    setIsFilterCollapsed: (isFilterCollapsed:boolean) =>void;
+    setIsSelectorParecer: (isSelectorParecer:boolean)=>void;
 }
 
 
@@ -49,6 +53,8 @@ class GeneralProvider extends React.Component{
         filtroCliente:'',
         filtroFechaInicial:'',
         filtroFechaFinal:'',
+        isFilterCollapsed:false,
+        isSelectorParecer:true,
     }
 
     setTipoUsuario = (tipoUsuario: tipoUsuario) =>{
@@ -104,6 +110,13 @@ class GeneralProvider extends React.Component{
         this.setState({filtroFechaFinal});
     }
 
+    setIsFilterCollapsed= (isFilterCollapsed:boolean) =>{
+        this.setState({isFilterCollapsed});
+    }
+    setIsSelectorParecer= (isSelectorParecer:boolean) =>{
+        this.setState({isSelectorParecer});
+    }
+
      render(): React.ReactNode {
          return(
            <GeneralContext.Provider
@@ -120,6 +133,8 @@ class GeneralProvider extends React.Component{
                     filtroCliente: this.state.filtroCliente,
                     filtroFechaInicial: this.state.filtroFechaInicial,
                     filtroFechaFinal: this.state.filtroFechaFinal,
+                    isFilterCollapsed: this.state.isFilterCollapsed,
+                    isSelectorParecer: this.state.isSelectorParecer,
                     //functions/methods
                     setEmail: this.setEmail,
                     setPassword: this.setPassword,
@@ -133,6 +148,8 @@ class GeneralProvider extends React.Component{
                     setFiltroCliente: this.setFiltroCliente,
                     setFiltroFechaInicial: this.setFiltroFechaInicial,
                     setFiltroFechaFinal: this.setFiltroFechaFinal,
+                    setIsFilterCollapsed: this.setIsFilterCollapsed,
+                    setIsSelectorParecer: this.setIsSelectorParecer,
                     }}
                 >
                {this.props.children}
