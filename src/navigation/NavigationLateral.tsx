@@ -7,6 +7,7 @@ import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
 import { NavigationLogin } from './NavigationLogin';
 import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
+import { NotificacionesScreen } from '../screens/home/NotificacionesScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -55,12 +56,13 @@ export const NavigationLateral = ( { navigation }:Props) => {
               <Drawer.Screen name="NavigationHomeRelatorio" component={ NavigationHome } initialParams={{screen:'RelatorioScreen'}}/>
               <Drawer.Screen name="ChangePasswordScreen"  component={ ChangePasswordScreen } />
               <Drawer.Screen name="NavigationLogin"  component={ NavigationLogin } />
+              {/* <Drawer.Screen name="NotificacionesScreen" options={{ title:'' }} component={ NotificacionesScreen } /> */}
             </Drawer.Navigator>
         );
 }
 
 const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
-  const { logOut} = useContext( GeneralContext )
+  const { logOut, setIsNotificaciones} = useContext( GeneralContext )
   return (
      <DrawerContentScrollView>
 
@@ -76,12 +78,13 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
         {/* Opciones del menu */}
         <View style={gstyles.menuContainer}>
-          <OpcionMenuLateral iconName='fe_home' color='black' label='Home'  onPress={() =>{ navigation.navigate('NavigationHome'); }}></OpcionMenuLateral>
-          <OpcionMenuLateral iconName='bi_calendar-week' color='black' label='Agenda' onPress={() =>{ navigation.navigate('AgendaScreen'); }}></OpcionMenuLateral>
-          <OpcionMenuLateral iconName='icomoon-free_hammer2' color='black' label='Parecer' onPress={() =>{ navigation.navigate('ParecerScreen'); }}></OpcionMenuLateral>
-          <OpcionMenuLateral iconName='bi_bar-chart-line-fill' color='black' label='Relatorio' onPress={() =>{ navigation.navigate('RelatorioScreen'); }}></OpcionMenuLateral>
-          <OpcionMenuLateral iconName='ic_outline-lock' color='black' label='Cambio contraseña' onPress={() =>{ navigation.navigate('ChangePasswordScreen'); }}></OpcionMenuLateral>
-          <OpcionMenuLateral iconName='ic_round-close' color='black' label='Cerrar sesion' onPress={() =>{ logOut(); navigation.navigate('NavigationLogin'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='fe_home' color='black' label='Home'  onPress={() =>{setIsNotificaciones(false); navigation.navigate('NavigationHome'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='bi_calendar-week' color='black' label='Agenda' onPress={() =>{setIsNotificaciones(false); navigation.navigate('AgendaScreen'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='icomoon-free_hammer2' color='black' label='Parecer' onPress={() =>{setIsNotificaciones(false); navigation.navigate('ParecerScreen'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='bi_bar-chart-line-fill' color='black' label='Relatorio' onPress={() =>{setIsNotificaciones(false); navigation.navigate('RelatorioScreen'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='ic_outline-lock' color='black' label='Cambio contraseña' onPress={() =>{setIsNotificaciones(false); navigation.navigate('ChangePasswordScreen'); }}></OpcionMenuLateral>
+          <OpcionMenuLateral iconName='ic_round-close' color='black' label='Cerrar sesion' onPress={() =>{setIsNotificaciones(false); logOut(); navigation.navigate('NavigationLogin'); }}></OpcionMenuLateral>
+          {/* <OpcionMenuLateral iconName='ic_round-close' color='black' label='notificaciones' onPress={() =>{ logOut(); navigation.navigate('NotificacionesScreen'); }}></OpcionMenuLateral> */}
         </View>
 
      </DrawerContentScrollView>

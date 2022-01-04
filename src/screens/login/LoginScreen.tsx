@@ -68,9 +68,6 @@ export const LoginScreen = ({ navigation }:Props) => {
 
             {(isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>}
 
-            {/* <Text>alertVisible:{(isAlertLoginVisible )? 'visible':'no visible'}</Text> */}
-
-
           </View>
             </View>
 

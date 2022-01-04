@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Text, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ListNotificaciones } from '../../components/notificaciones/ListNotificaciones';
+import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
 
 export const AgendaScreen = () => {
     const { top } = useSafeAreaInsets();
+    //call global state
+    const { isNotificaciones} = useContext(GeneralContext);
+
+    if(isNotificaciones){
+        return  <ListNotificaciones></ListNotificaciones>
+    }
     
     return (
         <View style={ { ...gstyles.globalMargin, marginTop: top+20, flex:1, alignItems:'center'}}>

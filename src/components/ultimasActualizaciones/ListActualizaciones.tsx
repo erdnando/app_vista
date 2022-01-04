@@ -133,7 +133,7 @@ const renderUpdateItem = (updateItem:LastUpdates) =>{
                 
               {
                 (updateItem.tipo==='ALERT' || updateItem.tipo==='EVENT') ?
-                <IconoActualizacion icono={updateItem.icon} color={(updateItem.tipo==='ALERT') ? 'white' : '#68AABF'} 
+                <IconoActualizacion topIcon={25} rightIcon={10} right={26} icono={updateItem.icon} size={36} color={(updateItem.tipo==='ALERT') ? 'white' : '#68AABF'} 
                 background= {(updateItem.tipo==='ALERT') ? '#F8BBBB' : '#BCC1CB'} ></IconoActualizacion>
                 : <View></View>
               }

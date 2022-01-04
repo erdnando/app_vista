@@ -7,20 +7,24 @@ import { Spacer } from '../Spacer';
 interface Props{
   icono:string,
   color:string,
-  background:string
+  background:string,
+  size:number,
+  right:number,
+  rightIcon:number,
+  topIcon:number,
 }
 
-export const IconoActualizacion = ( { icono,color,background }: Props ) => {
+export const IconoActualizacion = ( { icono,color,background,size,right,rightIcon,topIcon }: Props ) => {
 
     return (
-      <View style={{ flexDirection:'column', flex:1}}>
-          {/* icono */}
-          <Text style={{right:10,top:25}}> 
-                  <CustomIcon  name={icono} size={36} color={color} ></CustomIcon>
-          </Text>
-          {/* circulo */}
-          <View style={{ backgroundColor:background,opacity:0.3, borderWidth:0,top:-30,right:26, 
-                      borderRadius:50,margin:3, height:62, width:62, }}></View>
-      </View>
-    )
+        <View style={{ flexDirection:'column', flex:1}}>
+        {/* icono */}
+        <Text style={{right:rightIcon,top:topIcon}}> 
+                <CustomIcon  name={icono} size={size} color={color} ></CustomIcon>
+        </Text>
+        {/* circulo */}
+        <View style={{ backgroundColor:background,opacity:0.3, borderWidth:0,top:-30,right:right, 
+                    borderRadius:50,margin:3, height:62, width:62, }}></View>
+        </View>
+            )
 }

@@ -19,6 +19,7 @@ interface GeneralState{
     filtroFechaFinal:string,
     isFilterCollapsed:boolean,
     isSelectorParecer:boolean,
+    isNotificaciones:boolean,
     //functions/methods
     setEmail: (email:string)=>void,
     setPassword: (password:string)=>void,
@@ -34,6 +35,7 @@ interface GeneralState{
     setFiltroFechaFinal: (filtroFechaFinal:string)=>void;
     setIsFilterCollapsed: (isFilterCollapsed:boolean) =>void;
     setIsSelectorParecer: (isSelectorParecer:boolean)=>void;
+    setIsNotificaciones: (isNotificaciones:boolean)=>void;
 }
 
 
@@ -55,6 +57,7 @@ class GeneralProvider extends React.Component{
         filtroFechaFinal:'',
         isFilterCollapsed:false,
         isSelectorParecer:true,
+        isNotificaciones:false,
     }
 
     setTipoUsuario = (tipoUsuario: tipoUsuario) =>{
@@ -117,6 +120,10 @@ class GeneralProvider extends React.Component{
         this.setState({isSelectorParecer});
     }
 
+    setIsNotificaciones= (isNotificaciones:boolean) =>{
+        this.setState({isNotificaciones});
+    }
+
      render(): React.ReactNode {
          return(
            <GeneralContext.Provider
@@ -135,6 +142,7 @@ class GeneralProvider extends React.Component{
                     filtroFechaFinal: this.state.filtroFechaFinal,
                     isFilterCollapsed: this.state.isFilterCollapsed,
                     isSelectorParecer: this.state.isSelectorParecer,
+                    isNotificaciones: this.state.isNotificaciones,
                     //functions/methods
                     setEmail: this.setEmail,
                     setPassword: this.setPassword,
@@ -150,6 +158,7 @@ class GeneralProvider extends React.Component{
                     setFiltroFechaFinal: this.setFiltroFechaFinal,
                     setIsFilterCollapsed: this.setIsFilterCollapsed,
                     setIsSelectorParecer: this.setIsSelectorParecer,
+                    setIsNotificaciones: this.setIsNotificaciones,
                     }}
                 >
                {this.props.children}

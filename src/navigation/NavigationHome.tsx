@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';  
-import { Button, Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import React, { useContext } from 'react';  
+import {  Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colores, gstyles } from '../theme/appTheme';
 import { AgendaScreen } from '../screens/home/AgendaScreen';
@@ -10,9 +10,8 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 import CustomIcon from '../theme/CustomIcon';
 import { OpcionBottomTab } from '../components/login/OpcionBottomTab';
 import { OpcionHeader } from '../components/login/OpcionHeader';
-import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
-import { NavigationContainer } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { GeneralContext } from '../state/GeneralProvider';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,13 +21,14 @@ interface Props extends DrawerScreenProps<any, any>{};
 export const NavigationHome = ( { navigation }:Props) => {
 
   const { top } = useSafeAreaInsets();
+  //call global state
+  const { tipoUsuario,setTipoUsuario,isNotificaciones, setIsNotificaciones} = useContext(GeneralContext);
 
 
   return (
     <Tab.Navigator  sceneContainerStyle={{ backgroundColor:'transparent',  }}  
         
         screenOptions={({route}) => ({
-          
                 tabBarActiveTintColor:colores.primary,
                 tabBarInactiveTintColor:'white',
                 tabBarStyle:{
@@ -50,31 +50,33 @@ export const NavigationHome = ( { navigation }:Props) => {
                   () => {
                     return <View style={{alignSelf:'flex-start',alignContent:'center',justifyContent:'center', 
                                          flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66}}>
-
+                                {/* menu hamburguesa */}
                                 <OpcionHeader iconName='ic_baseline-menu' color={colores.primary} 
                                   onPress={() =>{ 
                                     navigation.toggleDrawer(); 
                                   }} ></OpcionHeader>
 
+                                {/* logo app */}
                                 <View style={{flex:1, left:24,top:15 }}>
                                    <Image style={{...gstyles.avatar,height:24*1.15,width:79.89*1.15, top:3}} 
                                    source={require('../assets/horizontal-logo.png')}  >
                                 </Image>
                                 </View>
                                
-
-
-
-
-
+                               
                                 <View style={{ flexDirection:'row',alignSelf:'flex-end', top:-20   }} >  
-                                  <TouchableOpacity onPress={() =>{  navigation.toggleDrawer(); }}>
+                                {/* notificaciones */}
+                                  <TouchableOpacity onPress={() =>{  
+                                        //navigation.navigate('NotificacionesScreen')
+                                        setIsNotificaciones(!isNotificaciones);
+                                   }}>
                                     <Text>
                                         <CustomIcon name='clarity_tasks-solid' size={30} color='white' style={{padding:150}} ></CustomIcon>
                                     </Text>
                                   </TouchableOpacity>
-
-                                  <TouchableOpacity style={{ marginRight:10, marginLeft:16, marginEnd:16 }} onPress={() =>{  navigation.toggleDrawer(); }}>
+                                  {/* perfil */}
+                                  <TouchableOpacity style={{ marginRight:10, marginLeft:16, marginEnd:16 }} 
+                                  onPress={() =>{  navigation.toggleDrawer(); }}>
                                     <Text>
                                         <CustomIcon name='gridicons_user' size={30} color='white' style={{padding:150}} ></CustomIcon>
                                     </Text>
@@ -90,10 +92,14 @@ export const NavigationHome = ( { navigation }:Props) => {
       
         >
 
-      <Tab.Screen name="HomeScreen" options={{ title:'' }} component={ HomeScreen } />
-      <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } />
-      <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } />
-      <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } />
+      <Tab.Screen name="HomeScreen" options={{ title:'' }}  component={ HomeScreen } listeners={({ navigation, route }) => ({
+    tabPress: e => {   setIsNotificaciones(false)  }, })} />
+      <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
+    tabPress: e => {   setIsNotificaciones(false)  }, })} />
+      <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
+    tabPress: e => {   setIsNotificaciones(false)  }, })} />
+      <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
+    tabPress: e => {   setIsNotificaciones(false)  }, })} />
     </Tab.Navigator>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ImageBackground, Modal, StyleSheet, Text, View, Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMovies } from '../../hooks/useMovies';
@@ -9,17 +9,22 @@ import { Search } from '../../components/search/Search';
 import { ResumenOportunidades } from '../../components/resumen/ResumenOportunidades';
 import { ResultadoParecer } from '../../components/home_chart/ResultadoParecer';
 import { UltimasActualizaciones } from '../../components/ultimasActualizaciones/UltimasActualizaciones';
+import { ListNotificaciones } from '../../components/notificaciones/ListNotificaciones';
 
 export const HomeScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
-    const { tipoUsuario} = useContext(GeneralContext);
+    const { tipoUsuario,isNotificaciones} = useContext(GeneralContext);
     //call service to get data
     const { isLoading } = useMovies();
 //https://github.com/osdnk/react-native-reanimated-bottom-sheet/issues/243#issuecomment-644091552
 //https://github.com/osdnk/react-native-reanimated-bottom-sheet
   
+    
 
+    if(isNotificaciones){
+        return  <ListNotificaciones></ListNotificaciones>
+    }
     if(isLoading){
         return <Loading color='green'></Loading>
     }
