@@ -5,18 +5,24 @@ import { GeneralContext } from '../state/GeneralProvider';
 
 
 export const useMensaje =  () => {
-    const { mensaje, setMenjase,asuntoMensaje, setAsuntoMensaje} = useContext( GeneralContext );
+ 
+    const { mensaje,setMensaje,usuario} = useContext( GeneralContext );
  
 
-        const onChangeMensaje = (mensaje:string) =>{
-                 setMenjase(mensaje);
-                  console.log(asuntoMensaje)
+        const onChangeMensaje = (msg:string) =>{
+            const payload= mensaje;
+            payload.mensaje =msg;
+            setMensaje(payload)
+                 //setMenjase(mensaje);
+                 // console.log(asuntoMensaje)
         }
 
         
        
         //exposed objets 
         return {
-            onChangeMensaje,mensaje,asuntoMensaje, setAsuntoMensaje,setMenjase
+//            onChangeMensaje,mensaje,asuntoMensaje, setAsuntoMensaje,setMenjase
+            onChangeMensaje,setMensaje, mensaje,usuario
+
         }
 }

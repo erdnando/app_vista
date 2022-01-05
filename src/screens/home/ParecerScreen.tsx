@@ -8,9 +8,9 @@ import { gstyles } from '../../theme/appTheme';
 export const ParecerScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
-    const { isNotificaciones} = useContext(GeneralContext);
+    const { flags} = useContext(GeneralContext);
     
-    if(isNotificaciones){
+    if(flags.isNotificaciones){
         return  <ListNotificaciones></ListNotificaciones>
     }
     

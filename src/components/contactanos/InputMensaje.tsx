@@ -34,7 +34,7 @@ export const InputMensaje = ( { placeholder,longitud}: Props ) => {
                       borderLeftWidth:0,
                       borderRightWidth:0,
                       borderTopWidth:0,
-                      borderColor:mensaje===''?'black':colorIcono
+                      borderColor:mensaje.mensaje===''?'black':colorIcono
                   }}
                   onChangeText={ onChangeMensaje }
                   placeholder={placeholder}
@@ -44,7 +44,7 @@ export const InputMensaje = ( { placeholder,longitud}: Props ) => {
                   multiline= {true}
                   numberOfLines={8}
                   maxLength={255}
-                  value={mensaje}
+                  value={mensaje.mensaje}
               />
 
               <View style={{justifyContent:'flex-end',alignContent:'flex-end',alignItems:'flex-end', right:32}}>

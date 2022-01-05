@@ -20,15 +20,15 @@ export const InputPassword = ( { modo, label, iconLeft ,iconRight, iconSee, Icon
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { setPassword,password } = useContext( GeneralContext )
+    const { usuario } = useContext( GeneralContext )
     const { onChangePassword, setPasswordVisible, passwordVisible } = useLogin(); 
 
     
     return (
       <View style={{flexDirection: 'row',left:-8 }}>
       <View style={{flexDirection:'column', }}>
-          <Text style={{ left:52,top:5, color:password===''?'transparent':colorIcono,  }}>{label}</Text>
-          <CustomIcon  name={iconLeft} size={24} color={password===''?'black':colorIcono }  style={{left:58, top:5,}} ></CustomIcon>
+          <Text style={{ left:52,top:5, color:usuario.password===''?'transparent':colorIcono,  }}>{label}</Text>
+          <CustomIcon  name={iconLeft} size={24} color={usuario.password===''?'black':colorIcono }  style={{left:58, top:5,}} ></CustomIcon>
       </View>
      
           <TextInput
@@ -42,7 +42,7 @@ export const InputPassword = ( { modo, label, iconLeft ,iconRight, iconSee, Icon
                   borderLeftWidth:0,
                   borderRightWidth:0,
                   borderTopWidth:0,
-                  borderColor:password===''?'black':colorIcono
+                  borderColor:usuario.password===''?'black':colorIcono
               }}
               secureTextEntry={passwordVisible ? true : false}
               onChangeText={ onChangePassword }
@@ -51,11 +51,11 @@ export const InputPassword = ( { modo, label, iconLeft ,iconRight, iconSee, Icon
               autoCapitalize='none'
               autoCorrect = {false}
               maxLength={27}
-              value={password}
+              value={usuario.password}
           />
-          <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ if(password!='')setPasswordVisible(!passwordVisible)  }}>
+          <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ if(usuario.password!='')setPasswordVisible(!passwordVisible)  }}>
               <Text>
-                  <CustomIcon  name={password==='' ? iconRight : (passwordVisible ? IconHide : iconSee) } size={24} color= {password===''? colorIcono : 'black' }  ></CustomIcon>
+                  <CustomIcon  name={usuario.password==='' ? iconRight : (passwordVisible ? IconHide : iconSee) } size={24} color= {usuario.password===''? colorIcono : 'black' }  ></CustomIcon>
               </Text>
           </TouchableOpacity>
      

@@ -17,9 +17,9 @@ export const ModalSearchResultados = ( { iconClose,color, label }: Props ) => {
 
   //call service to get data
   const { peliculasEnCine } = useSearch();
-  const { resultadosBusquedaVisible,isLoadingSearch } = useContext(GeneralContext);
+  const { resultadosBusquedaVisible,flags } = useContext(GeneralContext);
 
-  if(isLoadingSearch){
+  if(flags.isLoadingSearch){
     return <Modal animationType='slide' transparent={true}  visible={ resultadosBusquedaVisible }>
               <View style={{ flex:1,backgroundColor:'white',paddingTop:50 }}>
                   <HeaderResultados iconClose={iconClose} color={color} label={label}></HeaderResultados>

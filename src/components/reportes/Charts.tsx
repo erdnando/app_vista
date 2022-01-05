@@ -14,7 +14,7 @@ export const Charts = () => {
 
   let colorIcono = colores.primary;
  //invoke global state
- const {  isFilterCollapsed,isSelectorParecer } = useContext( GeneralContext )
+ const { relatorio } = useContext( GeneralContext )
  
  const { onChangeFiltroCliente } = useRelatorios(); 
 
@@ -44,14 +44,14 @@ const barDataParticipaciones = [
 
  
 
-    return    <View style={{  width:'90%',flexGrow:1, height: !isFilterCollapsed ? '15%' : '68%', justifyContent:'center',
+    return    <View style={{  width:'90%',flexGrow:1, height: !relatorio.isFilterCollapsed ? '15%' : '68%', justifyContent:'center',
                     alignItems:'flex-start', borderWidth: 0,backgroundColor:'white', borderRadius:7,padding:5,elevation:6,
                     shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: { height: 1, width: 1}}}>   
 
                          <TituloGrafico></TituloGrafico>
                           
-                          <BarChart barWidth={isSelectorParecer ? 85 : 50}
-                                    height={!isFilterCollapsed ? 200 : 350}
+                          <BarChart barWidth={relatorio.isSelectorParecer ? 85 : 50}
+                                    height={!relatorio.isFilterCollapsed ? 200 : 350}
                                     barBorderRadius={4}
                                     verticalLinesThickness={1}
                                     cappedBars={true}
@@ -66,15 +66,15 @@ const barDataParticipaciones = [
                                     showYAxisIndices={true}
                                     noOfSections={5}
                                     width={280}
-                                    maxValue={isSelectorParecer ? 80 : 100}
-                                    data={isSelectorParecer ? barDataParecer : barDataParticipaciones}
+                                    maxValue={relatorio.isSelectorParecer ? 80 : 100}
+                                    data={relatorio.isSelectorParecer ? barDataParecer : barDataParticipaciones}
                                     isAnimated />
                           
                             {/* indicadores de color */}
                             <View >
-                                {isSelectorParecer && <IndicadorSimple></IndicadorSimple>}
+                                {relatorio.isSelectorParecer && <IndicadorSimple></IndicadorSimple>}
 
-                                {!isSelectorParecer && <IndicadorDoble></IndicadorDoble> }
+                                {!relatorio.isSelectorParecer && <IndicadorDoble></IndicadorDoble> }
                             </View>
                 </View>
 

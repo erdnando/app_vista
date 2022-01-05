@@ -7,7 +7,7 @@ import { MoviesDBPlaying } from '../models/MoviesDBPlaying';
 
 export const useSearch =  () => {
         //const [ isLoading, setIsLoading ] = useState(false);
-        const { codigoBusqueda, setCodigoBusqueda , setIsLoadingSearch} = useContext( GeneralContext );
+        const { codigoBusqueda, setCodigoBusqueda , flags,setFlags} = useContext( GeneralContext );
         const [ peliculasEnCine, setPeliculasEncine ] = useState<Movie[]>([])
 
     
@@ -26,7 +26,10 @@ export const useSearch =  () => {
 
               const peliculas = resp.data.results;
               setPeliculasEncine(peliculas);
-              setIsLoadingSearch(false);
+    
+              const payload= flags;
+              payload.isLoadingSearch=false;
+              setFlags(payload);
            
             
         }

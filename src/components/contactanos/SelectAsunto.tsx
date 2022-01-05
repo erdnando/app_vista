@@ -17,10 +17,10 @@ export const SelectAsunto = ( { campo,placeholder}: Props ) => {
   let colorIcono = colores.primary;
   
   //const [selectedValue, setSelectedValue] = useState("Assunto");
-  const { asuntoMensaje, setAsuntoMensaje,mensaje } = useMensaje(); 
+  const { mensaje, setMensaje } = useMensaje(); 
 
     return (
-      <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:'87%',borderBottomColor: asuntoMensaje !=null ? 'orange' : 'grey' }}>
+      <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:'87%',borderBottomColor: mensaje.mensaje !=null ? 'orange' : 'grey' }}>
 
               <RNPickerSelect 
               style={pickerSelectStyles}
@@ -28,7 +28,11 @@ export const SelectAsunto = ( { campo,placeholder}: Props ) => {
                 useNativeAndroidPickerStyle={false}
                 onValueChange={(value) => {
                   console.log(value)
-                  setAsuntoMensaje(value);
+                  
+                  const payload= mensaje;
+                  payload.asunto=value;
+                  setMensaje(payload)
+                  
                   
                 }}
                 items={[

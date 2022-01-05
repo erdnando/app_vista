@@ -9,15 +9,21 @@ export const Comandos = () => {
 
 
  //invoke global state
- const {  setFiltroFechaInicial,setFiltroFechaFinal } = useContext( GeneralContext )
+ const {  relatorio,setRelatorio } = useContext( GeneralContext )
 
  
 
     return    <View style={{flexDirection:'row',justifyContent:'flex-end', top:35}}>
                     <TouchableOpacity  style={{ borderRadius: 100,  }} onPress={()=>{  
                       // limpiar
-                      setFiltroFechaInicial('');
-                      setFiltroFechaFinal('');
+                      // setFiltroFechaInicial('');
+                      // setFiltroFechaFinal('');
+
+                      const payload= relatorio;
+                      payload.filtroFechaInicial='';
+                      payload.filtroFechaFinal='';
+                      setRelatorio(payload);
+
                       }}>
                       <Text  style={{ fontFamily:'Roboto-Regular',fontSize:15,fontWeight:'600', textAlign:'center',color:colores.primary }}>LIMPIAR</Text>
                     </TouchableOpacity>

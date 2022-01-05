@@ -16,8 +16,8 @@ export const ButtonTextGoTo = ( { label,onPress,bottom }: Props ) => {
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { email,password } = useContext( GeneralContext )
-    const { onChangePassword, } = useLogin(); 
+    // const { usuario } = useContext( GeneralContext )
+    // const { onChangePassword, } = useLogin(); 
 
     
     return (

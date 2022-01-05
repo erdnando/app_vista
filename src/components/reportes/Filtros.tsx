@@ -12,8 +12,7 @@ export const Filtros = () => {
 
   let colorIcono = colores.primary;
  //invoke global state
- const { filtroCliente, filtroFechaInicial, 
-  setFiltroFechaInicial,filtroFechaFinal,setFiltroFechaFinal } = useContext( GeneralContext )
+ const { relatorio,setRelatorio } = useContext( GeneralContext )
 
  const { onChangeFiltroCliente } = useRelatorios(); 
 
@@ -32,21 +31,21 @@ export const Filtros = () => {
                                     borderLeftWidth:0,
                                     borderRightWidth:0,
                                     borderTopWidth:0,
-                                    borderColor:filtroCliente===''?'black':colorIcono
+                                    borderColor:relatorio.filtroCliente===''?'black':colorIcono
                                 }}
                                 onChangeText={ onChangeFiltroCliente }
                                 placeholder='Cliente'
                                 keyboardType='web-search'
                                 autoCapitalize='none'
                                 autoCorrect = {false}
-                                maxLength={27} value={filtroCliente} />
+                                maxLength={27} value={relatorio.filtroCliente} />
                           
                         <Spacer height={15}></Spacer>
                         {/* filtros fechas*/}
                         <View style={{flexDirection:'row'}}>
-                            <FechaInput filtroFecha={filtroFechaInicial} setFiltroFecha={setFiltroFechaInicial} placeHolder='Fecha inicial'></FechaInput>
+                            <FechaInput filtroFecha={relatorio.filtroFechaInicial} setFiltroFecha={setRelatorio} iniFini='ini' placeHolder='Fecha inicial'></FechaInput>
                             <View style={{width:30}}></View>
-                            <FechaInput filtroFecha={filtroFechaFinal} setFiltroFecha={setFiltroFechaFinal} placeHolder='Fecha final'></FechaInput>
+                            <FechaInput filtroFecha={relatorio.filtroFechaFinal} setFiltroFecha={setRelatorio} iniFini='fini' placeHolder='Fecha final'></FechaInput>
                         </View>
       
               </View>

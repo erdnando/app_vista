@@ -16,17 +16,17 @@ export const ButtonRounded = ( { label,onPress }: Props ) => {
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { email,password } = useContext( GeneralContext )
+    const { usuario } = useContext( GeneralContext )
     const { onChangePassword, } = useLogin(); 
 
     
     return (
           <View style={{ flex:1,flexDirection:'column', alignItems:'center',height:40, backgroundColor:'green', justifyContent:'center', alignContent:'center', }}>
-            <TouchableOpacity disabled={(email === '' && password === '') ? true : false} 
-              style={{alignSelf:'stretch', marginHorizontal:50 , borderRadius: 100, backgroundColor:(email !== '' && password !== '') ? colores.primary : '#BCC1CB', 
+            <TouchableOpacity disabled={(usuario.email === '' && usuario.password === '') ? true : false} 
+              style={{alignSelf:'stretch', marginHorizontal:50 , borderRadius: 100, backgroundColor:(usuario.email !== '' && usuario.password !== '') ? colores.primary : '#BCC1CB', 
               height:48, justifyContent:'center',  }} 
                 onPress= {onPress}>
-                <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color:(email !== '' && password !== '') ? 'black' : 'white'}}>{label}</Text>
+                <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color:(usuario.email !== '' && usuario.password !== '') ? 'black' : 'white'}}>{label}</Text>
             </TouchableOpacity>
           </View>
     )

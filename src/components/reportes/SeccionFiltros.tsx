@@ -14,7 +14,7 @@ export const SeccionFiltros = () => {
 
   let colorIcono = colores.primary;
  //invoke global state
- const {  isFilterCollapsed } = useContext( GeneralContext )
+ const {  relatorio } = useContext( GeneralContext )
 
 
     return   <View style={{flex:1, width:'100%',justifyContent:'flex-start', backgroundColor:'white'}}>
@@ -22,7 +22,7 @@ export const SeccionFiltros = () => {
                  <TopFilter></TopFilter>
 
                 {/* https://github.com/oblador/react-native-collapsible */}
-                <Collapsible collapsed={isFilterCollapsed} >
+                <Collapsible collapsed={relatorio.isFilterCollapsed} >
                     <View style={{ width:'100%',height:180, backgroundColor:'white', paddingHorizontal:18}} >
                             {/* filtro cliente */}
                             <Filtros></Filtros>

@@ -16,7 +16,7 @@ export const DatosContacto = () => {
 
   let colorIcono = colores.primary;
  //invoke global state
- const { email,whatsapp,telefono,direccion } = useContext( GeneralContext )
+ const {usuario } = useContext( GeneralContext )
 
  
   return (
@@ -25,10 +25,10 @@ export const DatosContacto = () => {
             shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: { height: 1, width: 1 }}}>
 
 
-              <InputContactanos label='E-mail' iconLeft='ic_outline-email' campo={email} multiline={false}></InputContactanos>
-              <InputContactanos label='Whatsapp' iconLeft='mdi_whatsapp' campo={whatsapp} multiline={false}></InputContactanos>
-              <InputContactanos label='Telefone' iconLeft='bx_bxs-phone' campo={telefono} multiline={false}></InputContactanos>
-              <InputContactanos label='Endereco' iconLeft='ic_baseline-place' campo={direccion} multiline={true}></InputContactanos>
+              <InputContactanos label='E-mail' iconLeft='ic_outline-email' campo={usuario.email} multiline={false}></InputContactanos>
+              <InputContactanos label='Whatsapp' iconLeft='mdi_whatsapp' campo={usuario.whatsapp} multiline={false}></InputContactanos>
+              <InputContactanos label='Telefone' iconLeft='bx_bxs-phone' campo={usuario.telefono} multiline={false}></InputContactanos>
+              <InputContactanos label='Endereco' iconLeft='ic_baseline-place' campo={usuario.direccion} multiline={true}></InputContactanos>
 
         </View>
         )

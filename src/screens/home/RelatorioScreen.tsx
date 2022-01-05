@@ -9,9 +9,9 @@ import { GeneralContext } from '../../state/GeneralProvider';
 export const RelatorioScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
-    const { isNotificaciones} = useContext(GeneralContext);
+    const { flags} = useContext(GeneralContext);
 
-    if(isNotificaciones){
+    if(flags.isNotificaciones){
         return  <ListNotificaciones></ListNotificaciones>
     }
     

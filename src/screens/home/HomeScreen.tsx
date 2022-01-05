@@ -14,7 +14,7 @@ import { ListNotificaciones } from '../../components/notificaciones/ListNotifica
 export const HomeScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
-    const { tipoUsuario,isNotificaciones} = useContext(GeneralContext);
+    const { usuario,flags} = useContext(GeneralContext);
     //call service to get data
     const { isLoading } = useMovies();
 //https://github.com/osdnk/react-native-reanimated-bottom-sheet/issues/243#issuecomment-644091552
@@ -22,14 +22,14 @@ export const HomeScreen = () => {
   
     
 
-    if(isNotificaciones){
+    if(flags.isNotificaciones){
         return  <ListNotificaciones></ListNotificaciones>
     }
     if(isLoading){
         return <Loading color='green'></Loading>
     }
     //render view after getting data
-    if(tipoUsuario === 1){//terciario
+    if(usuario.tipo === 1){//terciario
        return ( 
         <View style={ {  flex:1,}}>
                 <ImageBackground style={styles.background}  resizeMode='cover' source={require('../../assets/Background.png')}>
@@ -50,7 +50,7 @@ export const HomeScreen = () => {
             </ImageBackground>
         </View>
             )
-     }else if(tipoUsuario === 2) {//colaborador
+     }else if(usuario.tipo === 2) {//colaborador
 
         return(
         <View style={ {  flex:1,}}>

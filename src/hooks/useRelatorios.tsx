@@ -1,14 +1,18 @@
 import { useContext, useState } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
-import { tipoUsuario } from '../models/enums';
+// import { tipoUsuario } from '../models/enums';
 
 
 export const useRelatorios =  () => {
 
-    const { setFiltroCliente } = useContext( GeneralContext );
+    const { relatorio,setRelatorio } = useContext( GeneralContext );
 
         const onChangeFiltroCliente = async (filtroCliente:string) =>{
-          setFiltroCliente(filtroCliente);
+
+          // setFiltroCliente(filtroCliente);
+          const payload= relatorio;
+            payload.filtroCliente=filtroCliente;
+            setRelatorio(payload);
         }
 
         

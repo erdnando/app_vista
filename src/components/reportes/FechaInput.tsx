@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {  TextInput, View } from 'react-native';
 import { useRelatorios } from '../../hooks/useRelatorios';
 import { colores } from '../../theme/appTheme';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import CustomIcon from '../../theme/CustomIcon';
+import { GeneralContext } from '../../state/GeneralProvider';
 
 
 interface Props{
   filtroFecha:string;
-  setFiltroFecha: (filtroFecha:string)=>void;
-  placeHolder:string
+  setFiltroFecha: (relatorio:Relatorio)=>void;
+  placeHolder:string,
+  iniFini:string
   }
 
-export const FechaInput = ({filtroFecha,setFiltroFecha,placeHolder} : Props) => {
+export const FechaInput = ({filtroFecha,setFiltroFecha,placeHolder,iniFini} : Props) => {
 
 
   let colorIcono = colores.primary;
 
   // const { onChangeFiltroCliente } = useRelatorios(); 
+  const { relatorio,setRelatorio} = useContext( GeneralContext );
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -34,7 +37,13 @@ export const FechaInput = ({filtroFecha,setFiltroFecha,placeHolder} : Props) => 
   }
 
   const handleConfirm = (date:Date) => {
-    setFiltroFecha(validaCeros(date.getDate()) + "-"+ validaCeros(date.getMonth()+1)+ "-" +date.getFullYear())
+    //setFiltroFecha(validaCeros(date.getDate()) + "-"+ validaCeros(date.getMonth()+1)+ "-" +date.getFullYear())
+
+    const payload= relatorio;
+    iniFini=='ini' ? payload.filtroFechaInicial=validaCeros(date.getDate()) + "-"+ validaCeros(date.getMonth()+1)+ "-" +date.getFullYear()
+    : payload.filtroFechaFinal=validaCeros(date.getDate()) + "-"+ validaCeros(date.getMonth()+1)+ "-" +date.getFullYear();
+    setRelatorio(payload);
+
     hideDatePicker();
   };
   

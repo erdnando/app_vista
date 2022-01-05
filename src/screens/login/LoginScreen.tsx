@@ -18,7 +18,7 @@ export const LoginScreen = ({ navigation }:Props) => {
     
     const { top,left } = useSafeAreaInsets();
     
-    const { isAlertLoginVisible ,setIsAlertLoginVisible} = useContext( GeneralContext )
+    const { flags,setFlags } = useContext( GeneralContext )
     const {  validarLogin, } = useLogin(); 
     
     useEffect(() => {
@@ -52,11 +52,16 @@ export const LoginScreen = ({ navigation }:Props) => {
                            let resp = await validarLogin();
                             if(resp){
                                 console.log('login correcto')
-                                setIsAlertLoginVisible(false);
+                                const payload= flags;
+                                payload.isAlertLoginVisible=false;
+                                setFlags(payload);
+                                
                                 navigation.replace('NavigationLateral');  
                             }else{
                                 //show alert
-                                setIsAlertLoginVisible(true);
+                                const payload= flags;
+                                payload.isAlertLoginVisible=true;
+                                setFlags(payload);
                                 console.log('error al autenticarse');
                             }     
                         }} />
@@ -66,7 +71,7 @@ export const LoginScreen = ({ navigation }:Props) => {
 
             <Spacer height={30} ></Spacer>
 
-            {(isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>}
+            {(flags.isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>}
 
           </View>
             </View>

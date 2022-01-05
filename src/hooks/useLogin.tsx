@@ -1,50 +1,90 @@
 import { useContext, useState } from 'react';
+import { TipoUsuario } from '../models/Usuario';
 import { GeneralContext } from '../state/GeneralProvider';
-import { tipoUsuario } from '../models/enums';
+//import { tipoUsuario } from '../models/enums';
 
 
 export const useLogin =  () => {
-    const { setEmail,email,setPassword, password,isLogedIn, 
-        setIsLogedIn ,isAlertLoginVisible, setIsAlertLoginVisible,
-        setTipoUsuario} = useContext( GeneralContext );
+    const { flags, usuario,setUsuario,setFlags} = useContext( GeneralContext );
 
    const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
         const onChangeEmail = async (email:string) =>{
-            setIsAlertLoginVisible(false);
-            setEmail(email);
+            
+            const payloadx= flags;
+            payloadx.isAlertLoginVisible=false;
+            setFlags(payloadx);
+
+            const payload= usuario;
+            payload.email=email;
+            setUsuario(payload);
         }
 
         const onChangePassword = async (password:string) =>{
-            setIsAlertLoginVisible(false);
-            setPassword(password);
+            
+            const payloadx= flags;
+            payloadx.isAlertLoginVisible=false;
+            setFlags(payloadx);
+
+            const payload= usuario;
+            payload.password=password;
+            setUsuario(payload);
+            
         }
         
         const setPasswordAux = (password:string)=>{
-            setPassword(password);
+            const payload= usuario;
+            payload.password=password;
+            setUsuario(payload);
+            //setPassword(password);
         }
 
         const setEmailAux = (email:string)=>{
-            setEmail(email);
+
+            const payload= usuario;
+            payload.email=email;
+            setUsuario(payload);
+
+            //setEmail(email);
         }
 
         const validarLogin = async() =>{
 
             //TODO add logic to validate
 
-            if(password ==='12345' && email === 'colaborador'){
-                setIsLogedIn(true);
-                setIsAlertLoginVisible(false);
-                setTipoUsuario( tipoUsuario.COLABORADOR);
+            if(usuario.password ==='12345' && usuario.email === 'colaborador'){
+              
+                const payloadx= flags;
+                payloadx.isLogedIn=true;
+                payloadx.isAlertLoginVisible=false;
+                setFlags(payloadx);
+
+                const payload= usuario;
+                payload.tipo=TipoUsuario.COLABORADOR;
+                setUsuario(payload);
+                
                 return true;
-            } else if(password ==='12345' && email === 'terciario'){
-                setIsLogedIn(true);
-                setIsAlertLoginVisible(false);
-                setTipoUsuario( tipoUsuario.USER_TERCEIRO);
+            } else if(usuario.password ==='12345' && usuario.email === 'terciario'){
+             
+                const payloadx= flags;
+                payloadx.isLogedIn=true;
+                payloadx.isAlertLoginVisible=false;
+                setFlags(payloadx);
+
+
+
+                const payload= usuario;
+                payload.tipo=TipoUsuario.USER_TERCEIRO;
+                setUsuario(payload);
+
                 return true;
             }
             else{
-                setIsLogedIn(false);
-                setIsAlertLoginVisible(true);
+               
+                const payloadx= flags;
+                payloadx.isLogedIn=false;
+                payloadx.isAlertLoginVisible=true;
+                setFlags(payloadx);
+
                 console.log('credenciales invalidas');
 
                 return false;
@@ -62,7 +102,12 @@ export const useLogin =  () => {
         }
 
         const asignaTipoUsuario = (tipo: TipoUsuario) =>{
-            setTipoUsuario(tipo);
+
+            const payload= usuario;
+                payload.tipo=tipo;
+                setUsuario(payload);
+
+           // setTipoUsuario(tipo);
         }
         
         

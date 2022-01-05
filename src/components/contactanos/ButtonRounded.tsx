@@ -18,10 +18,12 @@ export const ButtonRounded = ( { label,onPress }: Props ) => {
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { asuntoMensaje,mensaje } = useContext( GeneralContext )
+   // const { asuntoMensaje,mensaje } = useContext( GeneralContext )
+   const { mensaje,setMensaje } = useContext( GeneralContext )
+
    // const { asuntoMensaje, mensaje } = useMensaje(); 
 
-    const hasData = ((asuntoMensaje === '' || asuntoMensaje === null) || mensaje === '');
+    const hasData = ((mensaje.asunto === '' || mensaje.asunto === null) || mensaje.mensaje === '');
     return (
           <View style={{ flex:1,width:'100%', flexDirection:'column', alignItems:'center',height:40,  justifyContent:'center', alignContent:'center', }}>
             <TouchableOpacity 

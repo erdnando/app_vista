@@ -17,7 +17,7 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { codigoBusqueda,setResultadosBusquedaVisible,setIsLoadingSearch } = useContext( GeneralContext )
+    const { codigoBusqueda,setResultadosBusquedaVisible,flags,setFlags } = useContext( GeneralContext )
     const { onChangeSearch,getResultadoBusqueda } = useSearch(); 
 
     
@@ -48,7 +48,10 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
 
           <TouchableOpacity style={{ right:35, top:20}} onPress={() =>{ 
             //call search engine api
-            setIsLoadingSearch(true);//start loading
+            const payload= flags;
+            payload.isLoadingSearch=true;
+            setFlags(payload);
+
             console.log('searching...')
             setResultadosBusquedaVisible(true);//openModal
             setTimeout(

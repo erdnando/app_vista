@@ -18,15 +18,15 @@ export const InputEmail = ( { modo, label, iconLeft ,iconRight}: Props ) => {
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { setEmail,email,setIsAlertLoginVisible } = useContext( GeneralContext )
+    const { usuario,setUsuario, flags,setFlags } = useContext( GeneralContext )
     const { onChangeEmail } = useLogin(); 
 
     
     return (
       <View style={{flexDirection: 'row',left:-8 }}>
       <View style={{flexDirection:'column', }}>
-          <Text style={{ left:52,top:5, color:email===''?'transparent':colorIcono,  }}>{label}</Text>
-          <CustomIcon  name={iconLeft} size={24} color={email===''?'black':colorIcono }  style={{left:58, top:5,}} ></CustomIcon>
+          <Text style={{ left:52,top:5, color: (usuario.email==='')?'transparent':colorIcono,  }}>{label}</Text>
+          <CustomIcon  name={iconLeft} size={24} color={usuario.email===''?'black':colorIcono }  style={{left:58, top:5,}} ></CustomIcon>
       </View>
      
           <TextInput
@@ -40,7 +40,7 @@ export const InputEmail = ( { modo, label, iconLeft ,iconRight}: Props ) => {
                   borderLeftWidth:0,
                   borderRightWidth:0,
                   borderTopWidth:0,
-                  borderColor:email===''?'black':colorIcono
+                  borderColor:usuario.email===''?'black':colorIcono
               }}
               onChangeText={ onChangeEmail }
               placeholder={label}
@@ -48,9 +48,22 @@ export const InputEmail = ( { modo, label, iconLeft ,iconRight}: Props ) => {
               autoCapitalize='none'
               autoCorrect = {false}
               maxLength={27}
-              value={email}
+              value={usuario.email}
           />
-          <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ setEmail('');setIsAlertLoginVisible(false);  }}>
+          <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ 
+
+            const payload= usuario;
+            payload.email='';
+            setUsuario(payload)
+          
+           
+            const payload2= flags;
+            payload2.isAlertLoginVisible=false;
+            setFlags(payload2);
+
+
+
+            }}>
               <Text>
                   <CustomIcon  name={iconRight} size={24} color='#000000'  ></CustomIcon>
               </Text>
