@@ -62,7 +62,7 @@ export const NavigationLateral = ( { navigation }:Props) => {
 }
 
 const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
-  const { logOut, flags,setFlags} = useContext( GeneralContext )
+  const { logOut, flags,setFlags,setTabSelected} = useContext( GeneralContext )
   return (
      <DrawerContentScrollView>
 
@@ -79,43 +79,64 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
         {/* Opciones del menu */}
         <View style={gstyles.menuContainer}>
           <OpcionMenuLateral iconName='fe_home' color='black' label='Home'  onPress={() =>{
-            //setIsNotificaciones(false); 
+            setTabSelected('Logo')
             const payload= flags;
                   payload.isNotificaciones=false;
                   setFlags(payload);
 
+            
+
             navigation.navigate('NavigationHome'); 
             }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='bi_calendar-week' color='black' label='Agenda' onPress={() =>{
-            //setIsNotificaciones(false); 
+            
+            setTabSelected('Agenda');
             const payload= flags;
                   payload.isNotificaciones=false;
                   setFlags(payload);
-            navigation.navigate('AgendaScreen'); }}></OpcionMenuLateral>
+
+            navigation.navigate('AgendaScreen'); 
+            
+            }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='icomoon-free_hammer2' color='black' label='Parecer' onPress={() =>{
-            //setIsNotificaciones(false); 
+            
+            setTabSelected('Parecer');
+
             const payload= flags;
                   payload.isNotificaciones=false;
                   setFlags(payload);
-            navigation.navigate('ParecerScreen'); }}></OpcionMenuLateral>
+            navigation.navigate('ParecerScreen'); 
+            
+            }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='bi_bar-chart-line-fill' color='black' label='Relatorio' onPress={() =>{
-            //setIsNotificaciones(false); 
+            
+            setTabSelected('Relatorio');
+
             const payload= flags;
                   payload.isNotificaciones=false;
                   setFlags(payload);
-            navigation.navigate('RelatorioScreen'); }}></OpcionMenuLateral>
+            navigation.navigate('RelatorioScreen'); 
+            
+            }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='ic_outline-lock' color='black' label='Cambio contraseña' onPress={() =>{
-            //setIsNotificaciones(false); 
+            
+            setTabSelected('Cambio contraseña');
+
             const payload= flags;
                   payload.isNotificaciones=false;
                   setFlags(payload);
-            navigation.navigate('ChangePasswordScreen'); }}></OpcionMenuLateral>
+            navigation.navigate('ChangePasswordScreen'); 
+            
+            }}></OpcionMenuLateral>
           <OpcionMenuLateral iconName='ic_round-close' color='black' label='Cerrar sesion' onPress={() =>{
-            //setIsNotificaciones(false); 
+            
             const payload= flags;
                   payload.isNotificaciones=false;
                   setFlags(payload);
-            logOut(); navigation.navigate('NavigationLogin'); }}></OpcionMenuLateral>
+            logOut(); 
+            navigation.navigate('NavigationLogin'); 
+            
+            }}></OpcionMenuLateral>
           {/* <OpcionMenuLateral iconName='ic_round-close' color='black' label='notificaciones' onPress={() =>{ logOut(); navigation.navigate('NotificacionesScreen'); }}></OpcionMenuLateral> */}
         </View>
 
