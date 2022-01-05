@@ -7,7 +7,7 @@ import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
 import { NavigationLogin } from './NavigationLogin';
 import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
-import { NotificacionesScreen } from '../screens/home/NotificacionesScreen';
+
 
 const Drawer = createDrawerNavigator();
 

@@ -24,20 +24,20 @@ export const OpcionBottomTab = ( { routeName,color }: Props ) => {
           iconName= 'bi_calendar-week';
           break;
       case 'ParecerScreen':
-           iconName= 'icomoon-free_hammer2';
+          iconName= 'icomoon-free_hammer2';
           break;
       case 'RelatorioScreen':
-            iconName= 'bi_bar-chart-line-fill';
-            break;
-      case 'NotificacionesScreen':
-        iconName= 'fe_home';
+          iconName= 'bi_bar-chart-line-fill';
+          break;
+      case 'ContactoScreen':
+          iconName= 'ic_baseline-lightbulb';
         break;
       default:
-        iconName= 'fe_home';
+          iconName= 'fe_home';
           break;
   }
     
-  return (<View style={{ height:56, width:72}}>
+  return (<View style={{ height:56, width:62}}>
               <Text style={{ right:-15,top:Platform.OS === 'ios' ? 26 : 22}} > 
               <CustomIcon name={iconName} size={30} color={color} ></CustomIcon>
             </Text>

@@ -20,6 +20,11 @@ interface GeneralState{
     isFilterCollapsed:boolean,
     isSelectorParecer:boolean,
     isNotificaciones:boolean,
+    tabSelected:string,
+    whatsapp:string,
+    telefono:string,
+    direccion:string,
+    mensaje:string,
     //functions/methods
     setEmail: (email:string)=>void,
     setPassword: (password:string)=>void,
@@ -36,6 +41,11 @@ interface GeneralState{
     setIsFilterCollapsed: (isFilterCollapsed:boolean) =>void;
     setIsSelectorParecer: (isSelectorParecer:boolean)=>void;
     setIsNotificaciones: (isNotificaciones:boolean)=>void;
+    setTabSelected: (tabSelected:string)=>void;
+    setWhatsapp:(whatsapp:string)=>void;
+    setTelefono:(telefono:string)=>void;
+    setDireccion:(direccion:string)=>void;
+    setMenjase:(mensaje:string)=>void;
 }
 
 
@@ -58,6 +68,11 @@ class GeneralProvider extends React.Component{
         isFilterCollapsed:false,
         isSelectorParecer:true,
         isNotificaciones:false,
+        tabSelected:'',
+        whatsapp:'(34) 99830-0082',
+        telefono:'(34) 99830-0082',
+        direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia',
+        mensaje:'',
     }
 
     setTipoUsuario = (tipoUsuario: tipoUsuario) =>{
@@ -124,6 +139,26 @@ class GeneralProvider extends React.Component{
         this.setState({isNotificaciones});
     }
 
+    setTabSelected= (tabSelected:string) =>{
+        this.setState({tabSelected})
+    }
+
+    setWhatsapp=(whatsapp:string)=>{
+        this.setState({whatsapp})
+    }
+
+    setTelefono=(telefono:string)=>{
+        this.setState({telefono})
+    }
+
+    setDireccion=(direccion:string)=>{
+        this.setState({direccion})
+    }
+
+    setMensaje=(mensaje:string)=>{
+        this.setState({mensaje})
+    }
+
      render(): React.ReactNode {
          return(
            <GeneralContext.Provider
@@ -143,6 +178,11 @@ class GeneralProvider extends React.Component{
                     isFilterCollapsed: this.state.isFilterCollapsed,
                     isSelectorParecer: this.state.isSelectorParecer,
                     isNotificaciones: this.state.isNotificaciones,
+                    tabSelected: this.state.tabSelected,
+                    whatsapp:this.state.whatsapp,
+                    telefono:this.state.telefono,
+                    direccion:this.state.direccion,
+                    mensaje:this.state.mensaje,
                     //functions/methods
                     setEmail: this.setEmail,
                     setPassword: this.setPassword,
@@ -159,6 +199,11 @@ class GeneralProvider extends React.Component{
                     setIsFilterCollapsed: this.setIsFilterCollapsed,
                     setIsSelectorParecer: this.setIsSelectorParecer,
                     setIsNotificaciones: this.setIsNotificaciones,
+                    setTabSelected: this.setTabSelected,
+                    setWhatsapp:this.setWhatsapp,
+                    setTelefono:this.setTelefono,
+                    setDireccion:this.setDireccion,
+                    setMenjase:this.setMensaje,
                     }}
                 >
                {this.props.children}
