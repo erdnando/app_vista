@@ -13,6 +13,7 @@ import { OpcionHeader } from '../components/login/OpcionHeader';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GeneralContext } from '../state/GeneralProvider';
 import { ContactoScreen } from '../screens/home/ContactoScreen';
+import { TitleApp } from '../components/TitleApp';
 
 
 const Tab = createBottomTabNavigator();
@@ -23,8 +24,7 @@ export const NavigationHome = ( { navigation }:Props) => {
 
   const { top } = useSafeAreaInsets();
   //call global state
-  const { usuario,flags,setFlags,setTabSelected} = useContext(GeneralContext);
-
+  const { usuario,flags,setFlags,setTabSelected,tabSelected} = useContext(GeneralContext);
 
 
   //terciario
@@ -62,16 +62,16 @@ export const NavigationHome = ( { navigation }:Props) => {
 
                                 {/* logo app */}
                                 <View style={{flex:1, left:24,top:15 }}>
-                                  <Image style={{...gstyles.avatar,height:24*1.15,width:79.89*1.15, top:3}} 
+                                  {/* <Image style={{...gstyles.avatar,height:24*1.15,width:79.89*1.15, top:3}} 
                                   source={require('../assets/horizontal-logo.png')}  >
-                                </Image>
+                                </Image> */}
+                                   <TitleApp></TitleApp>
                                 </View>
                               
                               
                                 <View style={{ flexDirection:'row',alignSelf:'flex-end', top:-20   }} >  
                                 {/* notificaciones */}
                                   <TouchableOpacity onPress={() =>{  
-                                        //navigation.navigate('NotificacionesScreen')
                                         setTabSelected('Notificaciones');
                                         const payload= flags;
                                         payload.isNotificaciones=!flags.isNotificaciones;
@@ -99,9 +99,8 @@ export const NavigationHome = ( { navigation }:Props) => {
         })} >
 
         <Tab.Screen name="HomeScreen" options={{ title:'' }}  component={ HomeScreen } listeners={({ navigation, route }) => ({
-                    tabPress: e => {   
-                      
-                      //setIsNotificaciones(false) 
+                    tabPress: e => {  
+                      setTabSelected('Logo');   
                       const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);
@@ -109,23 +108,27 @@ export const NavigationHome = ( { navigation }:Props) => {
                        }, })} />
         <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => {   
+                      setTabSelected('Agenda');   
                       const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);  }, })} />
         <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
-                    tabPress: e => { setTabSelected('Parecer');  
+                    tabPress: e => { 
+                      setTabSelected('Parecer');  
                     const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);
                         }, })} />
         <Tab.Screen  name="ContactoScreen" options={{ title:'' }} component={ ContactoScreen } listeners={({ navigation, route }) => ({
-                    tabPress: e => { setTabSelected('Contacto');  
+                    tabPress: e => { 
+                      setTabSelected('Contacto');  
                      const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);
                     }, })} />
         <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
-                    tabPress: e => { setTabSelected('Relatorios'); 
+                    tabPress: e => { 
+                      setTabSelected('Relatorios'); 
                       const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);
@@ -134,8 +137,7 @@ export const NavigationHome = ( { navigation }:Props) => {
       )
   }
   else{
-
- 
+      //colaborador
       return (
         <Tab.Navigator  sceneContainerStyle={{ backgroundColor:'transparent',  }}  
             
@@ -169,18 +171,18 @@ export const NavigationHome = ( { navigation }:Props) => {
 
                                     {/* logo app */}
                                     <View style={{flex:1, left:24,top:15 }}>
-                                      <Image style={{...gstyles.avatar,height:24*1.15,width:79.89*1.15, top:3}} 
-                                      source={require('../assets/horizontal-logo.png')}  >
-                                    </Image>
+                                          <TitleApp></TitleApp>
+                                            {/* <Image style={{...gstyles.avatar,height:24*1.15,width:79.89*1.15, top:3}} 
+                                               source={require('../assets/horizontal-logo.png')}  >
+                                            </Image> */}
+                                        
                                     </View>
                                   
                                   
                                     <View style={{ flexDirection:'row',alignSelf:'flex-end', top:-20   }} >  
                                     {/* notificaciones */}
                                       <TouchableOpacity onPress={() =>{  
-                                            //navigation.navigate('NotificacionesScreen')
                                             setTabSelected('Notificaciones');
-                                            //setIsNotificaciones(!isNotificaciones);
                                             const payload= flags;
                                             payload.isNotificaciones=!flags.isNotificaciones;
                                             setFlags(payload);
@@ -207,25 +209,24 @@ export const NavigationHome = ( { navigation }:Props) => {
 
           <Tab.Screen name="HomeScreen" options={{ title:'' }}  component={ HomeScreen } listeners={({ navigation, route }) => ({
                       tabPress: e => {   
+                        setTabSelected('Logo');   
                         const payload= flags;
                         payload.isNotificaciones=false;
                         setFlags(payload);
-
-                        //setIsNotificaciones(false)  
                         }, })} />
           <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
+                      
                       tabPress: e => {   
+                        setTabSelected('Agenda');   
                         const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);
-                       // setIsNotificaciones(false) 
                          }, })} />
           <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
                       tabPress: e => { setTabSelected('Parecer');  
                       const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);
-                      //setIsNotificaciones(false)  
                       }, })} />
           <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
                       tabPress: e => { setTabSelected('Relatorios'); 
@@ -233,7 +234,6 @@ export const NavigationHome = ( { navigation }:Props) => {
                       const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);
-                      //setIsNotificaciones(false)  
                       }, })} />
         </Tab.Navigator>
       );

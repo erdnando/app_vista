@@ -12,10 +12,6 @@ interface GeneralState{
     mensaje:Mensajes,
     relatorio:Realtorio,
     flags:Flags,
-    // isLogedIn: boolean,
-    // isAlertLoginVisible:boolean,
-    // isLoadingSearch:boolean,
-    // isNotificaciones:boolean,
     resultadosBusquedaVisible:boolean,
     codigoBusqueda:string,
     tabSelected:string,
@@ -25,13 +21,9 @@ interface GeneralState{
     setUsuario:(usuario:Usuario)=>void;
     setRelatorio:(relatorio:Realtorio)=>void;
     setFlags:(flags:Flags)=>void;
-    //setIsLogedIn: (isLogedIn: boolean)=>void,
     logOut: ()=>void,
-    //setIsAlertLoginVisible: (isAlertLoginVisible:boolean) =>void;
     setResultadosBusquedaVisible:(resultadosBusquedaVisible:boolean)=>void;
     setCodigoBusqueda: (codigoBusqueda:string)=> void;
-    //setIsLoadingSearch: (isLoadingSearch:boolean)=>void;
-    //setIsNotificaciones: (isNotificaciones:boolean)=>void;
     setTabSelected: (tabSelected:string)=>void;
 
 }
@@ -42,13 +34,9 @@ const GeneralContext = React.createContext({} as GeneralState);
 class GeneralProvider extends React.Component{
     
     state = {
-        //isLogedIn: false,
-        //isAlertLoginVisible:false,
         resultadosBusquedaVisible:false,
         codigoBusqueda:'',
-        //isLoadingSearch:false,
-        //isNotificaciones:false,
-        tabSelected:'',
+        tabSelected:'Logo',
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
             tipo: TipoUsuario.NONE,
@@ -85,13 +73,6 @@ class GeneralProvider extends React.Component{
     setFlags=(flags:Flags)=>{
         this.setState({flags})
     }
-    // setIsLogedIn = (isLogedIn:boolean) =>{
-    //    this.setState({isLogedIn});
-    // }
-
-    // setIsAlertLoginVisible = (isAlertLoginVisible:boolean) =>{
-    //     this.setState({isAlertLoginVisible});
-    //  }
 
      setResultadosBusquedaVisible=(resultadosBusquedaVisible:boolean) =>{
         this.setState({resultadosBusquedaVisible});
@@ -101,14 +82,6 @@ class GeneralProvider extends React.Component{
          this.setState({codigoBusqueda});
      }
 
-    //  setIsLoadingSearch=(isLoadingSearch:boolean) =>{
-    //      this.setState({isLoadingSearch});
-    //  }
-
-    // setIsNotificaciones= (isNotificaciones:boolean) =>{
-    //     this.setState({isNotificaciones});
-    // }
-
     setTabSelected= (tabSelected:string) =>{
         this.setState({tabSelected})
     }
@@ -116,7 +89,6 @@ class GeneralProvider extends React.Component{
    
 
     logOut = () =>{
-        this.setIsLogedIn(false);
 
         const payload= this.state.usuario;
             payload.tipo=TipoUsuario.NONE;
@@ -124,8 +96,11 @@ class GeneralProvider extends React.Component{
             payload.password='';
             this.setState({payload})
 
+            const payload2= this.state.flags;
+            payload2.isLogedIn=false;
+            payload2.isAlertLoginVisible=false;
 
-        this.setIsAlertLoginVisible(false);
+            this.setState({payload2})
     
      }
 
@@ -138,27 +113,18 @@ class GeneralProvider extends React.Component{
                     relatorio:this.state.relatorio,
                     mensaje:this.state.mensaje,
                     flags:this.state.flags,
-                    //isLogedIn: this.state.isLogedIn,
-                    //isAlertLoginVisible: this.state.isAlertLoginVisible,
                     resultadosBusquedaVisible: this.state.resultadosBusquedaVisible,
                     codigoBusqueda:this.state.codigoBusqueda,
-                    //isLoadingSearch: this.state.isLoadingSearch,
-                    //isNotificaciones: this.state.isNotificaciones,
                     tabSelected: this.state.tabSelected,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
                     setRelatorio:this.setRelatorio,
                     setFlags:this.setFlags,
-                    //setIsLogedIn: this.setIsLogedIn,
                     logOut: this.logOut,
-                    //setIsAlertLoginVisible: this.setIsAlertLoginVisible,
                     setResultadosBusquedaVisible: this.setResultadosBusquedaVisible,
                     setCodigoBusqueda: this.setCodigoBusqueda,
-                    //setIsLoadingSearch: this.setIsLoadingSearch,
-                    //setIsNotificaciones: this.setIsNotificaciones,
                     setTabSelected: this.setTabSelected,
-                    
                     }}
                 >
                {this.props.children}
