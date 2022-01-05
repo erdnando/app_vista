@@ -165,7 +165,7 @@ const renderSeparator = () =>{
         
         <FlatList data={Data} 
         renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
-        keyExtractor={(item) => item.id} 
+        keyExtractor={(item,index) => item.id + index} 
         ItemSeparatorComponent={ () => renderSeparator()}
         />
      

@@ -5,6 +5,9 @@ import { GeneralContext } from '../../state/GeneralProvider';
 import { InputContactanos } from './InputContactanos';
 import { InputMensaje } from './InputMensaje';
 import { SelectAsunto } from './SelectAsunto';
+import { Spacer } from '../Spacer';
+import { ButtonRounded } from './ButtonRounded';
+import { useMensaje } from '../../hooks/useMensaje';
 
 
 
@@ -13,18 +16,23 @@ export const EnviarAsunto = () => {
 
   let colorIcono = colores.primary;
  //invoke global state
- const { mensaje,email } = useContext( GeneralContext )
-
+ const { email } = useContext( GeneralContext )
+ const { asuntoMensaje, mensaje } = useMensaje(); 
  
   return (
-    <View style={{height:170, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', borderWidth: 0,
+    <View style={{height:280, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', borderWidth: 0,
             backgroundColor:'white', borderRadius:7,padding:5,elevation:6,
             shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: { height: 1, width: 1 }}}>
 
-
+              <Spacer height={10}></Spacer>
               <SelectAsunto placeholder='' campo={email}></SelectAsunto>
-              <InputMensaje placeholder='Mensagem' campo={mensaje}></InputMensaje>
-              
+              <Spacer height={10}></Spacer>
+              <InputMensaje placeholder='Mensagem' longitud={mensaje.length}></InputMensaje>
+              <Spacer height={30}></Spacer>
+              <ButtonRounded label={'ENVIAR'} onPress={function (): void {
+                  console.log(asuntoMensaje)
+                  console.log(mensaje)
+                } } ></ButtonRounded>
        
 
         </View>

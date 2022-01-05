@@ -6,13 +6,13 @@ import { useMensaje } from '../../hooks/useMensaje';
 
 interface Props{
   placeholder:string,
-  campo:string,
+  longitud:number
 }
 
-export const InputMensaje = ( { placeholder, campo}: Props ) => {
+export const InputMensaje = ( { placeholder,longitud}: Props ) => {
 
   let colorIcono = colores.primary;
-  const { onChangeMensaje } = useMensaje(); 
+  const { onChangeMensaje,mensaje } = useMensaje(); 
 
 
 
@@ -24,16 +24,17 @@ export const InputMensaje = ( { placeholder, campo}: Props ) => {
                   style={{
                       textAlign:'justify',
                       fontFamily:'Roboto-Regular',
-                      height: 90 ,
+                      maxHeight:100,
                       width:'88%',
                       margin: 8,
                       paddingTop:10,
-                      paddingLeft:5,
+                      paddingLeft:10,
                       borderWidth: 1,
+                      paddingBottom:10,
                       borderLeftWidth:0,
                       borderRightWidth:0,
                       borderTopWidth:0,
-                      borderColor:campo===''?'black':colorIcono
+                      borderColor:mensaje===''?'black':colorIcono
                   }}
                   onChangeText={ onChangeMensaje }
                   placeholder={placeholder}
@@ -41,10 +42,21 @@ export const InputMensaje = ( { placeholder, campo}: Props ) => {
                   autoCapitalize='none'
                   autoCorrect = {false}
                   multiline= {true}
+                  numberOfLines={8}
                   maxLength={255}
-                  value={campo}
+                  value={mensaje}
               />
+
+              <View style={{justifyContent:'flex-end',alignContent:'flex-end',alignItems:'flex-end', right:32}}>
+                  <Text>{longitud} de 255</Text>
               </View>
+
+
+              </View>
+              
+              
+
+              
       </View>
     )
 }

@@ -25,6 +25,7 @@ interface GeneralState{
     telefono:string,
     direccion:string,
     mensaje:string,
+    asuntoMensaje:string,
     //functions/methods
     setEmail: (email:string)=>void,
     setPassword: (password:string)=>void,
@@ -46,6 +47,7 @@ interface GeneralState{
     setTelefono:(telefono:string)=>void;
     setDireccion:(direccion:string)=>void;
     setMenjase:(mensaje:string)=>void;
+    setAsuntoMensaje:(mensaje:string)=>void;
 }
 
 
@@ -73,6 +75,7 @@ class GeneralProvider extends React.Component{
         telefono:'(34) 99830-0082',
         direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia',
         mensaje:'',
+        asuntoMensaje:'',
     }
 
     setTipoUsuario = (tipoUsuario: tipoUsuario) =>{
@@ -159,6 +162,10 @@ class GeneralProvider extends React.Component{
         this.setState({mensaje})
     }
 
+    setAsuntoMensaje=(asuntoMensaje:string)=>{
+        this.setState({asuntoMensaje})
+    }
+
      render(): React.ReactNode {
          return(
            <GeneralContext.Provider
@@ -183,6 +190,7 @@ class GeneralProvider extends React.Component{
                     telefono:this.state.telefono,
                     direccion:this.state.direccion,
                     mensaje:this.state.mensaje,
+                    asuntoMensaje:this.state.asuntoMensaje,
                     //functions/methods
                     setEmail: this.setEmail,
                     setPassword: this.setPassword,
@@ -204,6 +212,7 @@ class GeneralProvider extends React.Component{
                     setTelefono:this.setTelefono,
                     setDireccion:this.setDireccion,
                     setMenjase:this.setMensaje,
+                    setAsuntoMensaje:this.setAsuntoMensaje,
                     }}
                 >
                {this.props.children}
