@@ -81,7 +81,7 @@ export const ParecerScreen = () => {
     const renderUpdateItem = (item:Oportunidades) =>{
 
         {/* alerta */}
-        return ( <View style={{height:115, flexDirection:'row', width:'98%',   
+        return ( <View style={{height:115, flexDirection:'row',   
                         backgroundColor: '#EDF0F5', borderRadius:7,padding:5,elevation:6,
                         shadowColor: "black", shadowOpacity: 0.3,shadowOffset: {
                         height: 4, width: 1
@@ -111,7 +111,7 @@ export const ParecerScreen = () => {
     return (
         <View style={gstyles.globalTabView}>
              <Spacer height={10}></Spacer>
-             <View style={{flex:1,width:'100%',}}>
+             <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:2 }}>
         
                 <FlatList data={Data} 
                     scrollEnabled={true}

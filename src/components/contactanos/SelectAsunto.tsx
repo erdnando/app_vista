@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { colores } from '../../theme/appTheme';
 import RNPickerSelect from 'react-native-picker-select';
 import CustomIcon from '../../theme/CustomIcon';
@@ -24,8 +24,9 @@ export const SelectAsunto = ( { campo,placeholder}: Props ) => {
 
               <RNPickerSelect 
               style={pickerSelectStyles}
+    
                 placeholder={{label:'Assunto', value:null}}
-                useNativeAndroidPickerStyle={false}
+                useNativeAndroidPickerStyle={true}
                 onValueChange={(value) => {
                   console.log(value)
                   
@@ -45,9 +46,10 @@ export const SelectAsunto = ( { campo,placeholder}: Props ) => {
                 ]}
                 />
                 
-              <View style={{right:-40 }}>
+                { Platform.OS=='ios' ? <View style={{right: -40 }}>
                   <CustomIcon  name='ic_baseline-arrow-drop-down' size={33} color='#838892'   style={{left:-40, top:-5,}} ></CustomIcon>
-               </View>
+               </View>:<View></View>
+               }
       </View>
     )
 }
@@ -67,11 +69,11 @@ const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     flex:1,
     width:250,
-      fontSize: 16,
-      paddingHorizontal: 10,
-      paddingVertical: 8,
-      borderWidth: 0,
-      color: 'black',
-      paddingRight: 30, // to ensure the text is never behind the icon
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 18,
+    borderWidth: 0,
+    color: 'black',
+    paddingRight: 30, // to ensure the text is never behind the icon
   },
   });

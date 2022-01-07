@@ -1,13 +1,6 @@
 import React, { useContext } from 'react';
-import { FlatList, SectionList, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import CustomIcon from '../../theme/CustomIcon';
+import { FlatList,  Text, TouchableOpacity, View } from 'react-native';
 import { Spacer } from '../Spacer';
-import { IconoActualizacion } from '../ultimasActualizaciones/IconoActualizacion';
-//import { IconoActualizacion } from './IconoActualizacion';
-
-
-
 
 export const ListOportunidades = ( ) => {
 
@@ -25,10 +18,10 @@ export const ListOportunidades = ( ) => {
 const Data:LastUpdates[] = [
     {
         id:'1',
-        tipo:'ALERT',
+        tipo:'EVENT',
         dia:'Hoy',
         hora: '8:00',
-        descripcion:'Se ha habierto la posicion 345.',
+        descripcion:'Nombre dela empresa',
         color: 'red',
         icon:'bx_bxs-message-alt-error',
         horaVisible:true
@@ -36,10 +29,10 @@ const Data:LastUpdates[] = [
     },
     {
         id:'2',
-        tipo:'SIMPLE',
+        tipo:'EVENT',
         dia:'Hoy',
         hora: '9:00',
-        descripcion:'Se ha habierto la posicion A32. Y la opcion 45',
+        descripcion:'Nombre dela empresa',
         color: 'red',
         icon:'bx_bxs-message-alt-error',
         horaVisible:true
@@ -49,7 +42,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '9:00',
-        descripcion:'Se ha habierto la posicion 89.',
+        descripcion:'Nombre dela empresa',
         color: 'red',
         icon:'icomoon-free_hammer2',
         horaVisible:false
@@ -59,7 +52,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '9:00',
-        descripcion:'Se ha habierto la posicion W321.',
+        descripcion:'Nombre dela empresa',
         color: 'red',
         icon:'icomoon-free_hammer2',
         horaVisible:false
@@ -69,7 +62,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '9:00',
-        descripcion:'Se ha habierto la posicion W321.',
+        descripcion:'Nombre dela empresa',
         color: 'red',
         icon:'icomoon-free_hammer2',
         horaVisible:false
@@ -79,7 +72,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '13:00',
-        descripcion:'Se ha habierto la posicion W321.',
+        descripcion:'Nombre dela empresa',
         color: 'red',
         icon:'icomoon-free_hammer2',
         horaVisible:true
@@ -89,7 +82,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '13:00',
-        descripcion:'Se ha habierto la posicion W321.',
+        descripcion:'Nombre dela empresa',
         color: 'red',
         icon:'icomoon-free_hammer2',
         horaVisible:false
@@ -99,7 +92,7 @@ const Data:LastUpdates[] = [
       tipo:'EVENT',
       dia:'Ayer',
       hora: '13:00',
-      descripcion:'Se ha habierto la posicion 8.',
+      descripcion:'Nombre dela empresa',
       color: 'red',
       icon:'icomoon-free_hammer2',
       horaVisible:false
@@ -121,22 +114,33 @@ const renderUpdateItem = (updateItem:LastUpdates) =>{
 
            {/* alerta */}
             <View style={{height:88, flexDirection:'row', width:'88%',   
-                    borderWidth: 0,backgroundColor: (updateItem.tipo==='ALERT') ?'#B85050' : 'white', borderRadius:7,padding:5,elevation:6,
+                    borderWidth: 0,backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,
                     shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                     height: 1, width: 1
                 }}}>
 
-                <View style={{ flexDirection:'column', width:'82%',height:50,left:8,top:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
-                <Text style={{fontFamily:'Roboto-Bold', fontSize:14, color:(updateItem.tipo==='ALERT') ?'#F8BBBB' : 'grey'}}>{updateItem.hora}</Text>
-                <Text style={{fontFamily:'Roboto-Regular', fontSize:14, color:(updateItem.tipo==='ALERT') ?'#FFFFFF' : 'black',marginTop:8,width:'89%'}}>{updateItem.descripcion}</Text>
+                <View style={{ flexDirection:'column', width:'82%',height:40,left:8,top:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
+                    <Text style={{fontFamily:'Roboto-Bold', fontSize:14, color: 'grey'}}>{updateItem.hora}</Text>
+                    <Text style={{fontFamily:'Roboto-Regular', fontSize:14, color:'black',marginTop:8,width:'89%'}}>{updateItem.descripcion}</Text>
                 </View>
 
                 
               {
-                (updateItem.tipo==='ALERT' || updateItem.tipo==='EVENT') ?
-                <IconoActualizacion topIcon={25} rightIcon={10} right={26} icono={updateItem.icon} size={36} color={(updateItem.tipo==='ALERT') ? 'white' : '#68AABF'} 
-                background= {(updateItem.tipo==='ALERT') ? '#F8BBBB' : '#BCC1CB'} ></IconoActualizacion>
-                : <View></View>
+                (updateItem.tipo==='EVENT') ?
+
+                    <View style={{ flex:1, alignItems:'center',justifyContent:'center', alignContent:'center' }}>
+                        <TouchableOpacity  style={{alignSelf:'stretch', marginHorizontal:0 , borderRadius: 100, backgroundColor:'blue',
+                        height:33,width:100,right:60, justifyContent:'center',  }} 
+                        onPress={()=>{
+                            console.log('click..');
+                        }} >
+                            <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color:'white'}}>xxxx</Text>
+                        </TouchableOpacity>
+                </View>
+              
+                    // <IconoActualizacion topIcon={25} rightIcon={10} right={26} icono={updateItem.icon} size={36} color={'#68AABF'} 
+                    // background= '#BCC1CB' ></IconoActualizacion>
+                    : <View></View>
               }
                  
             </View>

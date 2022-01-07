@@ -9,11 +9,10 @@ import { Charts } from './Charts';
 export const Participaciones = ( ) => {
 
 
-    return  <View style={{flex:1,backgroundColor:'#BCC1CB', width:'100%',  alignItems:'center',}}>
+    return  <View style={{flex:1,backgroundColor:'#BCC1CB', width:'100%',  alignItems:'center', }}>
                 {/* filtros    */}
-                <View style={{flex:1, width:'100%',justifyContent:'flex-start', backgroundColor:'white'}}>
-                    <SeccionFiltros></SeccionFiltros>
-                </View>
+                
+                  <SeccionFiltros></SeccionFiltros>
       
                   <Spacer height={20}></Spacer>
               

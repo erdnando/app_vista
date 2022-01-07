@@ -1,25 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View,Text, TouchableOpacity } from 'react-native';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
+import { DayComponent } from './DayComponent';
 
 
-
-interface Props{
-  
-}
+interface Props{}
 
 export const Calendario = ( {  }: Props ) => {
 
-  const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'blue'};
-  const massage = {key: 'massage', color: 'blue', selectedDotColor: 'blue'};
-  const workout = {key: 'workout', color: 'green'};
+  //invoke global state
+  const { agenda,setAgenda } = useContext( GeneralContext )
+
+  const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'red'};
+  const massage = {key: 'massage', color: '#68AABF', selectedDotColor: '#68AABF'};
+  const workout = {key: 'workout', color: '#FDBE0F', selectedDotColor: '#FDBE0F'};
+  const eventox = {key: 'eventox', color: '#FF9029', selectedDotColor: '#FF9029'};
 
   const armaMes = (month:number) => {
 
-  
-    
     switch (month) {
       case 1:
         return 'Enero'
@@ -53,39 +53,58 @@ export const Calendario = ( {  }: Props ) => {
     }
   }
 
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = armaMes( today.getMonth() + 1); //January is 0!
-var yyyy = today.getFullYear();
-
- const [mes, setmes] = useState(mm+' '+yyyy.toString() )
-
   
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = armaMes( today.getMonth() + 1); //January is 0!
+  var yyyy = today.getFullYear();
 
-    return (
-      <View style={{flex: 1,top: 10, bottom:70}}>
+  const [mes, setmes] = useState(mm+' '+yyyy.toString() );
+
+  useEffect(() => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = armaMes( today.getMonth() + 1); //January is 0!
+    var yyyy = today.getFullYear();
+
+    //TODO get appointments day from service
+
+    const payload= agenda;
+    payload. selectedDate = yyyy+'-'+today.getMonth() + 1+'-'+dd;
+    payload.markedDates={
+      '2022-01-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
+      '2022-01-12': {dots: [vacation, eventox], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
+      '2022-01-21': {dots: [vacation, eventox,massage,workout], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
+    }
+    setAgenda(payload)
+    
+    
+  }, [])
+
+
+  return (
+      <View style={{top: 10, backgroundColor:'red',marginBottom:-25}}>
 
             <Calendar ref={ref=>this.calendar=ref}
-                      // Initially visible month. Default = Date()
-                      current={'2022-01-05'}
                       // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-                      minDate={'2012-05-10'}
+                      minDate={'2021-01-01'}
                       // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-                      maxDate={'2022-05-30'}
-                      // Handler which gets executed on day press. Default = undefined
-                      onDayPress={day => {
-                        console.log('selected day', day);
-                        console.log(day.month+1);
-                        var mess=armaMes(day.month);
-                        var fecha = mess+' '+ day.year.toString();
-                        setmes( fecha );
+                      maxDate={'2022-12-31'}
+                      dayComponent={({date, state}) => {
+                        
+                        const dateString = date.dateString;
+                        const day = date.day;
+
+                        return (
+                          <DayComponent dateString={dateString} day={day} dayState={state === 'disabled'? 'disabled':'enabled'} ></DayComponent>
+                      
+                        );
                       }}
                       // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
                       monthFormat={'MMMM yyyy'}
                       // Handler which gets executed when visible month changes in calendar. Default = undefined
                       onMonthChange={month => {
                         console.log('month changed', month);
-                        // setmes( month.dateString )
                         var mess=armaMes(month.month);
                         setmes( mess+' '+ month.year );
                       }}
@@ -149,9 +168,6 @@ var yyyy = today.getFullYear();
                         )
                       }}
                     />
-                      
-                    
-
       </View>
     )
 }

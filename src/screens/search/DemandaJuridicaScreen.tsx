@@ -95,7 +95,7 @@ export const DemandaJuridicaScreen = () => {
     return (
         <View style={gstyles.globalTabView}>
              <Spacer height={10}></Spacer>
-             <View style={{flex:1,width:'100%',}}>
+             <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
                 <FlatList data={Data} 
                     scrollEnabled={true}

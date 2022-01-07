@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { colores } from '../../theme/appTheme';
 import Collapsible from 'react-native-collapsible';
 import { GeneralContext } from '../../state/GeneralProvider';
@@ -17,13 +17,13 @@ export const SeccionFiltros = () => {
  const {  relatorio } = useContext( GeneralContext )
 
 
-    return   <View style={{flex:1, width:'100%',justifyContent:'flex-start', backgroundColor:'white'}}>
+    return   <View style={{flex:1, width:'100%',justifyContent:'space-around', backgroundColor:'white'}}>
                  {/* colapsar filtro */}
                  <TopFilter></TopFilter>
 
                 {/* https://github.com/oblador/react-native-collapsible */}
                 <Collapsible collapsed={relatorio.isFilterCollapsed} >
-                    <View style={{ width:'100%',height:180, backgroundColor:'white', paddingHorizontal:18}} >
+                    <View style={{ width:'100%',height:180, backgroundColor:'white', paddingHorizontal:18,marginBottom:Platform.OS==='ios'? 0: 70}} >
                             {/* filtro cliente */}
                             <Filtros></Filtros>
                             {/* commands to clean and filter */}

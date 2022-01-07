@@ -13,7 +13,7 @@ export const HeaderTitle = ( { label,top,fontSize }: Props ) => {
 
     return (
       <View style={{ width:'90%',alignContent:'flex-start', left:0,top:top,paddingVertical:3}}>
-          <Text style={{ fontFamily:'Roboto-Bold', fontSize:fontSize}}>{label}</Text>
+          <Text style={{ fontFamily:'Roboto-Bold',color:'#838892', fontSize:fontSize}}>{label}</Text>
           <Spacer height={10}></Spacer>
       </View>
     )

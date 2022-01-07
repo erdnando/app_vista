@@ -1,5 +1,7 @@
 import React from 'react'
 import { createContext } from 'react';
+import { Agenda } from '../models/Agenda';
+
 import { Flags } from '../models/Flags';
 import { Mensajes } from '../models/Mensajes';
 import { Realtorio } from '../models/Relatorio';
@@ -12,6 +14,7 @@ interface GeneralState{
     mensaje:Mensajes,
     relatorio:Realtorio,
     flags:Flags,
+    agenda:Agenda,
     resultadosBusquedaVisible:boolean,
     codigoBusqueda:string,
     tabSelected:string,
@@ -25,6 +28,7 @@ interface GeneralState{
     setResultadosBusquedaVisible:(resultadosBusquedaVisible:boolean)=>void;
     setCodigoBusqueda: (codigoBusqueda:string)=> void;
     setTabSelected: (tabSelected:string)=>void;
+    setAgenda:(agenda:Agenda)=>void;
 
 }
 
@@ -56,6 +60,10 @@ class GeneralProvider extends React.Component{
             isAlertLoginVisible:false,
             isLoadingSearch:false,
             isNotificaciones:false,
+        },
+        agenda:{
+            selectedDate:'2022-01-10',
+            markedDates:{}
         }
     }
 
@@ -86,6 +94,10 @@ class GeneralProvider extends React.Component{
         this.setState({tabSelected})
     }
 
+    setAgenda= (agenda:Agenda)=>{
+        this.setState({agenda});
+    }
+
    
 
     logOut = () =>{
@@ -113,6 +125,7 @@ class GeneralProvider extends React.Component{
                     relatorio:this.state.relatorio,
                     mensaje:this.state.mensaje,
                     flags:this.state.flags,
+                    agenda:this.state.agenda,
                     resultadosBusquedaVisible: this.state.resultadosBusquedaVisible,
                     codigoBusqueda:this.state.codigoBusqueda,
                     tabSelected: this.state.tabSelected,
@@ -121,6 +134,7 @@ class GeneralProvider extends React.Component{
                     setUsuario:this.setUsuario,
                     setRelatorio:this.setRelatorio,
                     setFlags:this.setFlags,
+                    setAgenda:this.setAgenda,
                     logOut: this.logOut,
                     setResultadosBusquedaVisible: this.setResultadosBusquedaVisible,
                     setCodigoBusqueda: this.setCodigoBusqueda,

@@ -16,9 +16,6 @@ export const Comandos = () => {
     return    <View style={{flexDirection:'row',justifyContent:'flex-end', top:35}}>
                     <TouchableOpacity  style={{ borderRadius: 100,  }} onPress={()=>{  
                       // limpiar
-                      // setFiltroFechaInicial('');
-                      // setFiltroFechaFinal('');
-
                       const payload= relatorio;
                       payload.filtroFechaInicial='';
                       payload.filtroFechaFinal='';
