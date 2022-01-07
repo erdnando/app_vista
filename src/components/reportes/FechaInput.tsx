@@ -59,31 +59,7 @@ export const FechaInput = ({filtroFecha,setFiltroFecha,placeHolder,iniFini} : Pr
                         <CustomIcon name='bi_calendar-week' size={24} color={filtroFecha===''?'black':colorIcono }  style={{left:8,top:8,}} ></CustomIcon>
                      </View>
                 
-                     {/* <TextInput
-                        style={{
-                          // backgroundColor:'red',
-                            fontFamily:'Roboto-Regular',
-                            fontSize:16,
-                            height: 40,
-                            width:'100%',
-                            margin: 2,
-                            left:0,
-                            paddingLeft: 45,
-                            borderWidth: 1,
-                            borderLeftWidth:0,
-                            borderRightWidth:0,
-                            borderTopWidth:0,
-                            borderColor:filtroFecha===''?'black':colorIcono
-                        }}
-                        selectTextOnFocus={false}
-                        onPressIn={showDatePicker}
-                        placeholder={placeHolder}
-                        keyboardType='default'
-                        autoCapitalize='none'
-                        autoCorrect = {false}
-                        maxLength={10}
-                        value={filtroFecha}
-                    /> */}
+                   
                      <TouchableOpacity style={{left:0, top:8,backgroundColor:'transparent', width:'100%',height:30,borderBottomWidth:1,
                                                borderColor:filtroFecha===''?'black':colorIcono  }} onPress={() =>{showDatePicker()    }}>
                                             <Text style={{color:'black', left:50,fontFamily:'Roboto-Bold',fontSize:16,}}>
