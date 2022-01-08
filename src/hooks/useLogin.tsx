@@ -2,10 +2,12 @@ import { useContext, useState } from 'react';
 import { TipoUsuario } from '../models/Usuario';
 import { GeneralContext } from '../state/GeneralProvider';
 //import { tipoUsuario } from '../models/enums';
+import vistaApi from '../api/vista';
+import { AuthLogin } from '../models/response/AuthLogin';
 
 
 export const useLogin =  () => {
-    const { flags, usuario,setUsuario,setFlags} = useContext( GeneralContext );
+    const { flags, usuario,setUsuario,setFlags, sesion,setSesion} = useContext( GeneralContext );
 
    const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
         const onChangeEmail = async (email:string) =>{
@@ -47,9 +49,33 @@ export const useLogin =  () => {
             //setEmail(email);
         }
 
-        const validarLogin = async() =>{
+        const authLogin = async () =>{
+
+            const resp = await vistaApi.post<AuthLogin>('/auth/login',{
+                username:usuario.email.trim().toLowerCase(),
+                password:usuario.password.trim()
+            });
+
+            console.log(resp);
+
+        //    if(resp.data !=undefined){
+
+        //         const payload= sesion;
+        //         payload.token =resp.data.token;
+        //         payload.usuario.tipo =resp.data.tipoUsuario=='USUARIO_TERCEIRO' ? TipoUsuario.USER_TERCEIRO : TipoUsuario.COLABORADOR;
+        //         payload.menu =resp.data.info.menuSistema;
+        //         setSesion(payload)
+
+        //    }
+            
+
+          
+        }
+
+        const validarLogin = () =>{
 
             //TODO add logic to validate
+            //authLogin();
 
             if(usuario.password ==='12345' && usuario.email === 'colaborador'){
               

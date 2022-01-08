@@ -17,8 +17,8 @@ export const HomeScreen = () => {
     const { usuario,flags} = useContext(GeneralContext);
     //call service to get data
     const { isLoading } = useMovies();
-//https://github.com/osdnk/react-native-reanimated-bottom-sheet/issues/243#issuecomment-644091552
-//https://github.com/osdnk/react-native-reanimated-bottom-sheet
+    //https://github.com/osdnk/react-native-reanimated-bottom-sheet/issues/243#issuecomment-644091552
+    //https://github.com/osdnk/react-native-reanimated-bottom-sheet
   
     
 
@@ -37,7 +37,7 @@ export const HomeScreen = () => {
                     
                     <Spacer height={15}></Spacer>
                     {/* buscador */}
-                    <Search   label='Cod oportunidade' iconClose='ic_round-close' iconSearch='gg_search'></Search>
+                    <Search label='Cod oportunidade' iconClose='ic_round-close' iconSearch='gg_search'></Search>
                     <Spacer height={8}></Spacer>
                     
                     {/* Charts https://gifted-charts.web.app/barchart*/}

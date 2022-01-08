@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
-import { colores } from '../../theme/appTheme';
+//import { colores } from '../../theme/appTheme';
 import RNPickerSelect, { Item } from 'react-native-picker-select';
-import CustomIcon from '../../theme/CustomIcon';
-import { useMensaje } from '../../hooks/useMensaje';
+import CustomIcon from '../theme/CustomIcon';
+// import CustomIcon from '../../theme/CustomIcon';
+// import { useMensaje } from '../../hooks/useMensaje';
 
 
 
@@ -14,11 +15,9 @@ interface Props{
   campo:string
 }
 
-export const SelectAsunto = ( { onValueChange,items,placeholder,campo}: Props ) => {
+export const Select = ( { onValueChange,items,placeholder,campo}: Props ) => {
 
-  let colorIcono = colores.primary;
-
-  
+  //let colorIcono = colores.primary;
   
   //const [selectedValue, setSelectedValue] = useState("Assunto");
   //const { mensaje, setMensaje } = useMensaje(); 
@@ -29,7 +28,7 @@ export const SelectAsunto = ( { onValueChange,items,placeholder,campo}: Props ) 
               <RNPickerSelect 
               style={pickerSelectStyles}
     
-                placeholder={{label:'Assunto', value:null}}
+                placeholder={{label:placeholder, value:null}}
                 useNativeAndroidPickerStyle={true}
                 onValueChange={onValueChange}
                 items={items}

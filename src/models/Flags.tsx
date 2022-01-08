@@ -5,4 +5,8 @@ export interface Flags{
     isAlertLoginVisible:boolean,
     isLoadingSearch:boolean,
     isNotificaciones:boolean,
+    verDetalleAgenda:boolean,
+    resultadosBusquedaVisible:boolean,
+    modalFiltrosVisible:boolean,
+    modalFechaVisible:boolean,
 }

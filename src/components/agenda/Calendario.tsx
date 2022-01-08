@@ -11,7 +11,7 @@ interface Props{}
 export const Calendario = ( {  }: Props ) => {
 
   //invoke global state
-  const { agenda,setAgenda } = useContext( GeneralContext )
+  const { agenda,setAgenda,flags,setFlags } = useContext( GeneralContext )
 
   const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'red'};
   const massage = {key: 'massage', color: '#68AABF', selectedDotColor: '#68AABF'};
@@ -62,15 +62,24 @@ export const Calendario = ( {  }: Props ) => {
   const [mes, setmes] = useState(mm+' '+yyyy.toString() );
 
   useEffect(() => {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = armaMes( today.getMonth() + 1); //January is 0!
-    var yyyy = today.getFullYear();
+
+
+    const payload= agenda;
+    
+    if(agenda.selectedDate===''){
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = armaMes( today.getMonth() + 1); //January is 0!
+        var yyyy = today.getFullYear();
+
+        payload. selectedDate = yyyy+'-'+today.getMonth() + 1+'-'+dd;
+    }
+   
 
     //TODO get appointments day from service
 
-    const payload= agenda;
-    payload. selectedDate = yyyy+'-'+today.getMonth() + 1+'-'+dd;
+   
+    
     payload.markedDates={
       '2022-01-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
       '2022-01-12': {dots: [vacation, eventox], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
@@ -155,8 +164,11 @@ export const Calendario = ( {  }: Props ) => {
                                       </TouchableOpacity>
                                   </View>
 
+                                   {/* filtros agenda */}
                                   <TouchableOpacity style={{left:0, top:-4}} onPress={() =>{ 
-                                    
+                                     const payload= flags;
+                                     payload.modalFiltrosVisible =true;
+                                     setFlags(payload)
                                   }}>
                                         <Text style={{fontFamily:'Roboto-Bold'}}>
                                             <CustomIcon  name='carbon_overflow-menu-vertical' size={26} color='black'  ></CustomIcon>

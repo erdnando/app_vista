@@ -82,6 +82,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
             setTabSelected('Logo')
             const payload= flags;
                   payload.isNotificaciones=false;
+                  payload.verDetalleAgenda=false;
                   setFlags(payload);
 
             
@@ -93,6 +94,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
             setTabSelected('Agenda');
             const payload= flags;
                   payload.isNotificaciones=false;
+                  payload.verDetalleAgenda=false;
                   setFlags(payload);
 
             navigation.navigate('AgendaScreen'); 
@@ -104,6 +106,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
             const payload= flags;
                   payload.isNotificaciones=false;
+                  payload.verDetalleAgenda=false;
                   setFlags(payload);
             navigation.navigate('ParecerScreen'); 
             
@@ -114,6 +117,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
             const payload= flags;
                   payload.isNotificaciones=false;
+                  payload.verDetalleAgenda=false;
                   setFlags(payload);
             navigation.navigate('RelatorioScreen'); 
             
@@ -124,6 +128,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
             const payload= flags;
                   payload.isNotificaciones=false;
+                  payload.verDetalleAgenda=false;
                   setFlags(payload);
             navigation.navigate('ChangePasswordScreen'); 
             
@@ -132,6 +137,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
             
             const payload= flags;
                   payload.isNotificaciones=false;
+                  payload.verDetalleAgenda=false;
                   setFlags(payload);
             logOut(); 
             navigation.navigate('NavigationLogin'); 

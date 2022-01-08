@@ -1,11 +1,13 @@
 import React from 'react'
 import { createContext } from 'react';
 import { Agenda } from '../models/Agenda';
-
 import { Flags } from '../models/Flags';
 import { Mensajes } from '../models/Mensajes';
 import { Realtorio } from '../models/Relatorio';
+import { Sesion } from '../models/Sesion';
 import { TipoUsuario, Usuario } from '../models/Usuario';
+import { MenuSistema } from '../models/MenuSistema';
+import { AgendaFiltro } from '../models/AgendaFiltro';
 
 
 interface GeneralState{
@@ -15,7 +17,9 @@ interface GeneralState{
     relatorio:Realtorio,
     flags:Flags,
     agenda:Agenda,
-    resultadosBusquedaVisible:boolean,
+    sesion:Sesion,
+    agendaFiltro:AgendaFiltro,
+    //resultadosBusquedaVisible:boolean,
     codigoBusqueda:string,
     tabSelected:string,
     
@@ -25,18 +29,19 @@ interface GeneralState{
     setRelatorio:(relatorio:Realtorio)=>void;
     setFlags:(flags:Flags)=>void;
     logOut: ()=>void,
-    setResultadosBusquedaVisible:(resultadosBusquedaVisible:boolean)=>void;
+    //setResultadosBusquedaVisible:(resultadosBusquedaVisible:boolean)=>void;
     setCodigoBusqueda: (codigoBusqueda:string)=> void;
     setTabSelected: (tabSelected:string)=>void;
     setAgenda:(agenda:Agenda)=>void;
-
+    setSesion:(sesion:Sesion)=>void;
+    setAgendaFiltro:(agendaFiltro:AgendaFiltro)=>void;
 }
 
 
 const GeneralContext = React.createContext({} as GeneralState);
 
 class GeneralProvider extends React.Component{
-    
+
     state = {
         resultadosBusquedaVisible:false,
         codigoBusqueda:'',
@@ -60,11 +65,38 @@ class GeneralProvider extends React.Component{
             isAlertLoginVisible:false,
             isLoadingSearch:false,
             isNotificaciones:false,
+            verDetalleAgenda:false,
+            resultadosBusquedaVisible:false,
+            modalFiltrosVisible:false,
+            modalFechaVisible:false,
         },
         agenda:{
-            selectedDate:'2022-01-10',
+            selectedDate:'',
             markedDates:{}
-        }
+        },
+        sesion:{
+            usuario:{
+                tipo: TipoUsuario.NONE,
+                email:'',
+                password:'',
+                whatsapp:'(34) 99830-0082',
+                telefono:'(34) 99830-0082',
+                direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'
+            },
+            token:'',
+            menu:[
+                {
+                    id:0,
+                    descricao:'',
+                    colaborador:'',
+                    usuario:''
+                }
+            ]
+        },
+        agendafiltro:{
+            filtroHorario: '',
+            filtroFecha: 'Seleccione un horario'
+        },
     }
 
     setMensaje=(mensaje: Mensajes)=>{
@@ -82,9 +114,9 @@ class GeneralProvider extends React.Component{
         this.setState({flags})
     }
 
-     setResultadosBusquedaVisible=(resultadosBusquedaVisible:boolean) =>{
-        this.setState({resultadosBusquedaVisible});
-     }
+    //  setResultadosBusquedaVisible=(resultadosBusquedaVisible:boolean) =>{
+    //     this.setState({resultadosBusquedaVisible});
+    //  }
 
      setCodigoBusqueda=(codigoBusqueda:string) =>{
          this.setState({codigoBusqueda});
@@ -98,9 +130,22 @@ class GeneralProvider extends React.Component{
         this.setState({agenda});
     }
 
+    setSesion= (sesion:Sesion)=>{
+        this.setState({sesion});
+    }
+
+    setAgendaFiltro= (agendaFiltro:AgendaFiltro)=>{
+        this.setState({agendaFiltro});
+    }
+
    
 
     logOut = () =>{
+
+        const payload0 = this.state.sesion;
+            payload0.token='';
+            this.setState({payload0})
+        
 
         const payload= this.state.usuario;
             payload.tipo=TipoUsuario.NONE;
@@ -108,11 +153,15 @@ class GeneralProvider extends React.Component{
             payload.password='';
             this.setState({payload})
 
-            const payload2= this.state.flags;
+        const payload2= this.state.flags;
             payload2.isLogedIn=false;
             payload2.isAlertLoginVisible=false;
 
             this.setState({payload2})
+
+        const payload3 = this.state.agenda;
+            payload3.selectedDate ='';
+            this.setState({payload3})
     
      }
 
@@ -126,7 +175,9 @@ class GeneralProvider extends React.Component{
                     mensaje:this.state.mensaje,
                     flags:this.state.flags,
                     agenda:this.state.agenda,
-                    resultadosBusquedaVisible: this.state.resultadosBusquedaVisible,
+                    agendaFiltro:this.state.agendafiltro,
+                    sesion:this.state.sesion,
+                    //resultadosBusquedaVisible: this.state.resultadosBusquedaVisible,
                     codigoBusqueda:this.state.codigoBusqueda,
                     tabSelected: this.state.tabSelected,
                    //////////////////functions///////////////////////////
@@ -135,8 +186,10 @@ class GeneralProvider extends React.Component{
                     setRelatorio:this.setRelatorio,
                     setFlags:this.setFlags,
                     setAgenda:this.setAgenda,
+                    setAgendaFiltro:this.setAgendaFiltro,
+                    setSesion:this.setSesion,
                     logOut: this.logOut,
-                    setResultadosBusquedaVisible: this.setResultadosBusquedaVisible,
+                    //setResultadosBusquedaVisible: this.setResultadosBusquedaVisible,
                     setCodigoBusqueda: this.setCodigoBusqueda,
                     setTabSelected: this.setTabSelected,
                     }}
