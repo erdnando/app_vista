@@ -9,4 +9,5 @@ export interface Flags{
     resultadosBusquedaVisible:boolean,
     modalFiltrosVisible:boolean,
     modalFechaVisible:boolean,
+    modalFechaHorarioVisible:boolean,
 }

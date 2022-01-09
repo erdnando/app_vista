@@ -8,30 +8,26 @@ import { GeneralContext } from '../../state/GeneralProvider';
 
 interface Props{
   campo:string,
-  modo:string
+  onPress: () => void;
   }
 
-export const InputLauncherModal = ({ campo,modo} : Props) => {
+export const InputLauncherModal = ({ campo,onPress} : Props) => {
 
 
   let colorIcono = colores.primary;
 
-  const { agendaFiltro,setAgendaFiltro,flags,setFlags} = useContext( GeneralContext );
+  // const { } = useContext( GeneralContext );
 
-    return <View style={{flex:1}}>  
-               <View style={{flexDirection:'row', }}>
+    return   <View style={{flexDirection:'row', }}>
 
                      <TouchableOpacity style={{left:20, top:8,backgroundColor:'transparent', width:'86%',height:30,borderBottomWidth:1,
                                                borderColor:campo===''?'black':colorIcono  }} 
-                                               onPress={() =>{  
-                                                  console.log('modal de filtro fecha..');
-                                                  const payload= flags;
-                                                  payload.modalFechaVisible=true;
-                                                  setFlags(payload)
-                                               }}>
+                                               onPress={onPress}
+                                              >
                                                  
-                                            <Text style={{color:'black', left:0, top:2,fontFamily:'Roboto-Bold',fontSize:14,}}>
-                                            {campo}
+                                            <Text style={{color:'#838892',marginLeft:15, top:2,fontFamily:'Roboto-Regular',fontSize:14,}}>
+                                            {/* seleccione un horario */}
+                                            {campo} 
                                             </Text>
                      </TouchableOpacity>
                      <View style={{position:'absolute',right:40}} pointerEvents="none">
@@ -39,8 +35,4 @@ export const InputLauncherModal = ({ campo,modo} : Props) => {
                     </View>
                    
                </View>
-             
-
-
-            </View>
 }

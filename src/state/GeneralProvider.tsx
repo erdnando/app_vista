@@ -69,6 +69,7 @@ class GeneralProvider extends React.Component{
             resultadosBusquedaVisible:false,
             modalFiltrosVisible:false,
             modalFechaVisible:false,
+            modalFechaHorarioVisible:false,
         },
         agenda:{
             selectedDate:'',
@@ -94,8 +95,12 @@ class GeneralProvider extends React.Component{
             ]
         },
         agendafiltro:{
-            filtroHorario: '',
-            filtroFecha: 'Seleccione un horario'
+            filtroHorario: 'Seleccione una horario',
+            filtroFecha: 'Seleccione una fecha',
+            bTodo:false,
+            bParecerOK:false,
+            bAguardando:false,
+            bFinalizado:false,
         },
     }
 

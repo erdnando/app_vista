@@ -57,5 +57,12 @@ export const gstyles = StyleSheet.create({
     menuBoton:{
       marginVertical:10
     },
+    tituloModal:{
+        color:'black',
+        fontFamily:'Roboto-Bold', 
+        fontSize:18,
+        paddingTop:20,
+        paddingLeft:20
+    }
 
 });
