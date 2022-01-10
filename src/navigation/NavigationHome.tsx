@@ -26,7 +26,7 @@ export const NavigationHome = ( { navigation }:Props) => {
 
   const { top } = useSafeAreaInsets();
   //call global state
-  const { usuario,flags,setFlags,setTabSelected,tabSelected, setCodigoBusqueda} = useContext(GeneralContext);
+  const { usuario,flags,setFlags,setTabSelected,tabSelected,ids, setIds} = useContext(GeneralContext);
   const { getResultadoBusqueda } = useSearch(); 
 
   //terciario
@@ -56,12 +56,21 @@ export const NavigationHome = ( { navigation }:Props) => {
                     return <View style={{alignSelf:'flex-start',alignContent:'center',justifyContent:'center', 
                                         flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66}}>
                                 
-                               { flags.verDetalleAgenda ?   
+                               { flags.verDetalleAgenda || ids.idOpinionSeleccionado !='' ?   
                                   <OpcionHeader iconName='ic_round-arrow-back' color={colores.primary}  // back option 
                                       onPress={() =>{ 
                                         const payload= flags;
                                         payload.verDetalleAgenda=false;
                                         setFlags(payload);
+
+                                        const payload1 = ids;
+                                        payload1.idOpinionBusqueda= '';
+                                        payload1.idOpinionSeleccionado='';
+                                        setIds(payload1);
+
+                                        setTabSelected('Logo')
+
+
                                       }} /> : 
                                     
                                     <OpcionHeader iconName='ic_baseline-menu' color={colores.primary}  //menu hamburguesa
@@ -103,12 +112,14 @@ export const NavigationHome = ( { navigation }:Props) => {
                                       </TouchableOpacity>
 
                                       {/* search just on agenda detail */}
-                                      { flags.verDetalleAgenda ?   
+                                      { flags.verDetalleAgenda || ids.idOpinionSeleccionado !='' ?   
                                          <TouchableOpacity style={{ marginEnd:16 }} 
                                          onPress={() =>{ 
+                                              console.log('searching...')
+                                              const payload1= ids;
+                                              payload1.codigoBusqueda='xxx';
+                                              setIds(payload1);
 
-                                          
-                                              setCodigoBusqueda('xxx');
                                                   //call search engine api
                                               const payload= flags;
                                               payload.isLoadingSearch=true;
@@ -217,12 +228,20 @@ export const NavigationHome = ( { navigation }:Props) => {
                         return <View style={{alignSelf:'flex-start',alignContent:'center',justifyContent:'center', 
                                             flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66}}>
                                    
-                                   { flags.verDetalleAgenda ?   
+                                   { flags.verDetalleAgenda || ids.idOpinionSeleccionado!='' ?   
                                       <OpcionHeader iconName='ic_round-arrow-back' color={colores.primary}  // back option 
                                           onPress={() =>{ 
                                             const payload= flags;
                                             payload.verDetalleAgenda=false;
                                             setFlags(payload);
+
+                                            const payload1 = ids;
+                                            payload1.idOpinionBusqueda= '';
+                                            payload1.idOpinionSeleccionado='';
+                                            setIds(payload1);
+
+                                            setTabSelected('Logo')
+
                                           }} /> : 
                                         
                                         <OpcionHeader iconName='ic_baseline-menu' color={colores.primary}  //menu hamburguesa
@@ -266,11 +285,14 @@ export const NavigationHome = ( { navigation }:Props) => {
 
 
                                       {/* search just on agenda detail */}
-                                      { flags.verDetalleAgenda ?   
+                                      { flags.verDetalleAgenda || ids.idOpinionSeleccionado!='' ?   
                                          <TouchableOpacity style={{ marginEnd:16 }} 
                                          onPress={() =>{ 
 
-                                          setCodigoBusqueda('xxx');
+                                              const payload1= ids;
+                                              payload1.codigoBusqueda='xxx';
+                                              setIds(payload1);
+
                                                   //call search engine api
                                               const payload= flags;
                                               payload.isLoadingSearch=true;

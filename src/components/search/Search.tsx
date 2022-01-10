@@ -17,12 +17,12 @@ interface Props{
 
 export const Search = ( { label,iconSearch, iconClose}: Props ) => {
 
-     const { codigoBusqueda, } = useContext( GeneralContext )
+     const { ids, } = useContext( GeneralContext )
   
     return (
-      <View>
-          <InputSearch label={label} iconRight={iconSearch} ></InputSearch>
-             <ModalSearchResultados iconClose={iconClose} color='black' label={`Oportunidade ${ codigoBusqueda }`}></ModalSearchResultados>
+          <View>
+            <InputSearch label={label} iconRight={iconSearch} ></InputSearch>
+            <ModalSearchResultados iconClose={iconClose} color='black' label={`Oportunidade ${ ids.codigoBusqueda }`}></ModalSearchResultados>
           </View>
     )
 }

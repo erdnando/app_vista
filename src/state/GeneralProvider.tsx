@@ -6,8 +6,8 @@ import { Mensajes } from '../models/Mensajes';
 import { Realtorio } from '../models/Relatorio';
 import { Sesion } from '../models/Sesion';
 import { TipoUsuario, Usuario } from '../models/Usuario';
-import { MenuSistema } from '../models/MenuSistema';
 import { AgendaFiltro } from '../models/AgendaFiltro';
+import { IDs } from '../models/IDs';
 
 
 interface GeneralState{
@@ -19,8 +19,9 @@ interface GeneralState{
     agenda:Agenda,
     sesion:Sesion,
     agendaFiltro:AgendaFiltro,
-    //resultadosBusquedaVisible:boolean,
-    codigoBusqueda:string,
+    ids:IDs,
+    //codigoBusqueda:string,
+    //idOpinion:string,
     tabSelected:string,
     
     //functions/methods
@@ -28,9 +29,10 @@ interface GeneralState{
     setUsuario:(usuario:Usuario)=>void;
     setRelatorio:(relatorio:Realtorio)=>void;
     setFlags:(flags:Flags)=>void;
+    setIds:(ids:IDs)=>void;
     logOut: ()=>void,
-    //setResultadosBusquedaVisible:(resultadosBusquedaVisible:boolean)=>void;
-    setCodigoBusqueda: (codigoBusqueda:string)=> void;
+    //setCodigoBusqueda: (codigoBusqueda:string)=> void;
+    //setIdOpinion:(idOpinion:string)=>void;
     setTabSelected: (tabSelected:string)=>void;
     setAgenda:(agenda:Agenda)=>void;
     setSesion:(sesion:Sesion)=>void;
@@ -44,7 +46,8 @@ class GeneralProvider extends React.Component{
 
     state = {
         resultadosBusquedaVisible:false,
-        codigoBusqueda:'',
+        //codigoBusqueda:'',
+        //idOpinion:'',
         tabSelected:'Logo',
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
@@ -70,6 +73,11 @@ class GeneralProvider extends React.Component{
             modalFiltrosVisible:false,
             modalFechaVisible:false,
             modalFechaHorarioVisible:false,
+        },
+        ids:{
+            idOpinionBusqueda: '',
+            idOpinionSeleccionado:'',
+            codigoBusqueda:'',
         },
         agenda:{
             selectedDate:'',
@@ -119,13 +127,17 @@ class GeneralProvider extends React.Component{
         this.setState({flags})
     }
 
-    //  setResultadosBusquedaVisible=(resultadosBusquedaVisible:boolean) =>{
-    //     this.setState({resultadosBusquedaVisible});
+    setIds=(ids:IDs)=>{
+        this.setState({ids})
+    }
+
+    //  setCodigoBusqueda=(codigoBusqueda:string) =>{
+    //      this.setState({codigoBusqueda});
     //  }
 
-     setCodigoBusqueda=(codigoBusqueda:string) =>{
-         this.setState({codigoBusqueda});
-     }
+    //  setIdOpinion=(idOpinion:string) =>{
+    //     this.setState({idOpinion});
+    // }
 
     setTabSelected= (tabSelected:string) =>{
         this.setState({tabSelected})
@@ -142,8 +154,6 @@ class GeneralProvider extends React.Component{
     setAgendaFiltro= (agendaFiltro:AgendaFiltro)=>{
         this.setState({agendaFiltro});
     }
-
-   
 
     logOut = () =>{
 
@@ -179,23 +189,25 @@ class GeneralProvider extends React.Component{
                     relatorio:this.state.relatorio,
                     mensaje:this.state.mensaje,
                     flags:this.state.flags,
+                    ids:this.state.ids,
                     agenda:this.state.agenda,
                     agendaFiltro:this.state.agendafiltro,
                     sesion:this.state.sesion,
-                    //resultadosBusquedaVisible: this.state.resultadosBusquedaVisible,
-                    codigoBusqueda:this.state.codigoBusqueda,
+                    //codigoBusqueda:this.state.codigoBusqueda,
+                    //idOpinion:this.state.idOpinion,
                     tabSelected: this.state.tabSelected,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
                     setRelatorio:this.setRelatorio,
                     setFlags:this.setFlags,
+                    setIds:this.setIds,
                     setAgenda:this.setAgenda,
                     setAgendaFiltro:this.setAgendaFiltro,
                     setSesion:this.setSesion,
                     logOut: this.logOut,
-                    //setResultadosBusquedaVisible: this.setResultadosBusquedaVisible,
-                    setCodigoBusqueda: this.setCodigoBusqueda,
+                    //setCodigoBusqueda: this.setCodigoBusqueda,
+                    //setIdOpinion:this.setIdOpinion,
                     setTabSelected: this.setTabSelected,
                     }}
                 >

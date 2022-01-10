@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { Text, TextInput, TouchableOpacity, View, Platform } from 'react-native';
-import { useLogin } from '../../hooks/useLogin';
 import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
 import { colores } from '../../theme/appTheme';
-import { useSearch } from '../../hooks/useSearch';
+import { useSearchOpinion } from '../../hooks/useSearchOpinion';
 
 
 interface Props{
@@ -17,8 +16,8 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { ids,flags,setFlags } = useContext( GeneralContext )
-    const { onChangeSearch,getResultadoBusqueda } = useSearch(); 
+    const { ids } = useContext( GeneralContext )
+    const { onChangeSearch,getResultadoBusqueda } = useSearchOpinion(); 
 
     
     return (
@@ -43,18 +42,17 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
               autoCapitalize='none'
               autoCorrect = {false}
               maxLength={27}
-              value={ids.codigoBusqueda}
+              value={ids.idOpinionBusqueda}
           />
 
           <TouchableOpacity style={{ right:35, top:20}} onPress={() =>{ 
                 //call search engine api
-                const payload= flags;
-                payload.isLoadingSearch=true;
-                payload.resultadosBusquedaVisible=true;
-                setFlags(payload);
-
+                // const payload= flags;
+                // payload.isLoadingSearch=true;
+                // payload.resultadosBusquedaVisible=true;
+                // setFlags(payload);
                 console.log('searching...')
-              // setResultadosBusquedaVisible(true);//openModal
+              
                 setTimeout(
                   () => { 
                     getResultadoBusqueda();//consume api
@@ -64,7 +62,7 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
             }}>
               
              <Text style={{right:10,}}>
-                        <CustomIcon   name={iconRight} size={24} color= {ids.codigoBusqueda===''?'black':colorIcono}  ></CustomIcon>
+                        <CustomIcon   name={iconRight} size={24} color= {ids.idOpinionBusqueda===''?'black':colorIcono}  ></CustomIcon>
               </Text>  
           </TouchableOpacity>
      

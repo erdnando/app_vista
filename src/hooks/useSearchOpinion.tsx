@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
+// import { tipoUsuario } from '../models/enums';
 import movieDB from '../api/movieDB';
 import { MoviesDBPlaying } from '../models/MoviesDBPlaying';
 
 
-export const useSearch =  () => {
-        //const [ isLoading, setIsLoading ] = useState(false);
+export const useSearchOpinion =  () => {
+        
         const { ids ,setIds, flags,setFlags} = useContext( GeneralContext );
         const [ peliculasEnCine, setPeliculasEncine ] = useState<Movie[]>([])
 
     
         const getResultadoBusqueda = async () =>{
            
-            const resp = await movieDB.get<MoviesDBPlaying>('/now_playing');
-           
+            const resp = await movieDB.get<MoviesDBPlaying>('/now_playing'); 
 
               const peliculas = resp.data.results;
               setPeliculasEncine(peliculas);
@@ -25,12 +25,12 @@ export const useSearch =  () => {
             
         }
 
-        const onChangeSearch = async (codigoBusqueda:string) =>{
+        const onChangeSearch = async (idOpinion:string) =>{
             //TODO ad logic to consume search api
-            
             const payload= ids;
-            payload.codigoBusqueda= codigoBusqueda;
+            payload.idOpinionBusqueda= idOpinion;
             setIds(payload);
+
         }
 
   
