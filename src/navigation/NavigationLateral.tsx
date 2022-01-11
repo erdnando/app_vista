@@ -34,9 +34,7 @@ export const NavigationLateral = ( { navigation }:Props) => {
           {
               headerShown:false,
               title:'',
-             
           },
-          
           )
   }, [])
 
@@ -46,23 +44,20 @@ export const NavigationLateral = ( { navigation }:Props) => {
                               drawerPosition:'left',
                               headerShown: false, 
                               drawerType:(width >=768 ? 'permanent' : 'front')  ,
-                            
                               }}  
               drawerContent={ (props) => <MenuInterno { ...props }></MenuInterno> } >
               <Drawer.Screen name="NavigationHome" component={ NavigationHome } options={{ title:'', }} initialParams={{screen:'HomeScreen'}}/>      
-
               <Drawer.Screen name="NavigationHomeagenda" component={ NavigationHome } initialParams={{screen:'AgendaScreen'}}/>
               <Drawer.Screen name="NavigationHomeParecer" component={ NavigationHome } initialParams={{screen:'ParecerScreen'}}/>
               <Drawer.Screen name="NavigationHomeRelatorio" component={ NavigationHome } initialParams={{screen:'RelatorioScreen'}}/>
               <Drawer.Screen name="ChangePasswordScreen"  component={ ChangePasswordScreen } />
               <Drawer.Screen name="NavigationLogin"  component={ NavigationLogin } />
-              {/* <Drawer.Screen name="NotificacionesScreen" options={{ title:'' }} component={ NotificacionesScreen } /> */}
             </Drawer.Navigator>
         );
 }
 
 const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
-  const { logOut, flags,setFlags,setTabSelected} = useContext( GeneralContext )
+  const { logOut, flags,setFlags,setTabSelected,ids,setIds,setTabModule} = useContext( GeneralContext )
   return (
      <DrawerContentScrollView>
 
@@ -78,72 +73,103 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
         {/* Opciones del menu */}
         <View style={gstyles.menuContainer}>
+          
           <OpcionMenuLateral iconName='fe_home' color='black' label='Home'  onPress={() =>{
             setTabSelected('Logo')
+            setTabModule('Logo');
             const payload= flags;
                   payload.isNotificaciones=false;
                   payload.verDetalleAgenda=false;
                   setFlags(payload);
 
-            
+                  const payload1 = ids;
+                  payload1.idOpinionBusqueda= '';
+                  payload1.idOpinionSeleccionado='';
+                  setIds(payload1);
 
             navigation.navigate('NavigationHome'); 
             }}></OpcionMenuLateral>
+
           <OpcionMenuLateral iconName='bi_calendar-week' color='black' label='Agenda' onPress={() =>{
-            
             setTabSelected('Agenda');
+            setTabModule('Agenda');
             const payload= flags;
                   payload.isNotificaciones=false;
                   payload.verDetalleAgenda=false;
-                  setFlags(payload);
 
+                  const payload1 = ids;
+                  payload1.idOpinionBusqueda= '';
+                  payload1.idOpinionSeleccionado='';
+                  setIds(payload1);
+
+                  setFlags(payload);
             navigation.navigate('AgendaScreen'); 
-            
             }}></OpcionMenuLateral>
+
           <OpcionMenuLateral iconName='icomoon-free_hammer2' color='black' label='Parecer' onPress={() =>{
-            
             setTabSelected('Parecer');
-
+            setTabModule('Parecer');
             const payload= flags;
                   payload.isNotificaciones=false;
                   payload.verDetalleAgenda=false;
                   setFlags(payload);
+
+                  const payload1 = ids;
+                  payload1.idOpinionBusqueda= '';
+                  payload1.idOpinionSeleccionado='';
+                  setIds(payload1);
+
             navigation.navigate('ParecerScreen'); 
-            
             }}></OpcionMenuLateral>
+
           <OpcionMenuLateral iconName='bi_bar-chart-line-fill' color='black' label='Relatorio' onPress={() =>{
-            
             setTabSelected('Relatorio');
-
+            setTabModule('Relatorio');
             const payload= flags;
                   payload.isNotificaciones=false;
                   payload.verDetalleAgenda=false;
                   setFlags(payload);
+
+                  const payload1 = ids;
+                  payload1.idOpinionBusqueda= '';
+                  payload1.idOpinionSeleccionado='';
+                  setIds(payload1);
+
             navigation.navigate('RelatorioScreen'); 
-            
             }}></OpcionMenuLateral>
-          <OpcionMenuLateral iconName='ic_outline-lock' color='black' label='Cambio contraseña' onPress={() =>{
-            
-            setTabSelected('Cambio contraseña');
 
+          <OpcionMenuLateral iconName='ic_outline-lock' color='black' label='Cambio contraseña' onPress={() =>{
+            setTabSelected('Cambio contraseña');
+            setTabModule('Cambio contraseña');
             const payload= flags;
                   payload.isNotificaciones=false;
                   payload.verDetalleAgenda=false;
                   setFlags(payload);
+
+                  const payload1 = ids;
+                  payload1.idOpinionBusqueda= '';
+                  payload1.idOpinionSeleccionado='';
+                  setIds(payload1);
+
+
             navigation.navigate('ChangePasswordScreen'); 
-            
             }}></OpcionMenuLateral>
+
           <OpcionMenuLateral iconName='ic_round-close' color='black' label='Cerrar sesion' onPress={() =>{
-            
             const payload= flags;
                   payload.isNotificaciones=false;
                   payload.verDetalleAgenda=false;
                   setFlags(payload);
+
+                  const payload1 = ids;
+                  payload1.idOpinionBusqueda= '';
+                  payload1.idOpinionSeleccionado='';
+                  setIds(payload1);
+                  
             logOut(); 
             navigation.navigate('NavigationLogin'); 
-            
             }}></OpcionMenuLateral>
-          {/* <OpcionMenuLateral iconName='ic_round-close' color='black' label='notificaciones' onPress={() =>{ logOut(); navigation.navigate('NotificacionesScreen'); }}></OpcionMenuLateral> */}
+          
         </View>
 
      </DrawerContentScrollView>

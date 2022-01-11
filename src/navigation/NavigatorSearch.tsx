@@ -4,10 +4,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colores } from '../theme/appTheme';
 import { DemandaJuridicaScreen } from '../screens/search/DemandaJuridicaScreen';
 import { OportunidadScreen } from '../screens/search/OportunidadScreen';
-import { ParecerScreen } from '../screens/search/ParecerScreen';
 import { ResultadoScreen } from '../screens/search/ResultadoScreen';
 import { PendienteScreen } from '../screens/search/PendienteScreen';
 import { PlanAccionScreen } from '../screens/search/PlanAccionScreen';
+import { ParecerScreenSearch } from '../screens/search/ParecerScreenSearch';
 
 //LogBox.ignoreLogs(['Sending']);
 const Tab = createMaterialTopTabNavigator();
@@ -58,7 +58,7 @@ export const Navigatorsearch = () => {
     >
         
       <Tab.Screen name="OportunidadScreen" options={ { tabBarLabel:'OPORTUNIDADE' , swipeEnabled:true} } component={ OportunidadScreen } />
-      <Tab.Screen name="ParecerScreen" options={ { tabBarLabel:'PARECER' , swipeEnabled:true,} } component={ ParecerScreen }  />
+      <Tab.Screen name="ParecerScreenSearch" options={ { tabBarLabel:'PARECER' , swipeEnabled:true,} } component={ ParecerScreenSearch }  />
       <Tab.Screen name="DemandaJuridicaScreen" options={ { tabBarLabel:'DEMANDA JURIDICA', swipeEnabled:true,} } component={ DemandaJuridicaScreen } />
       <Tab.Screen name="ResultadoScreen" options={ { tabBarLabel:'RESULTADO', swipeEnabled:true,} } component={ ResultadoScreen } />
       <Tab.Screen name="PendienteScreen" options={ { tabBarLabel:'PENDENCIAS', swipeEnabled:true,} } component={ PendienteScreen } />

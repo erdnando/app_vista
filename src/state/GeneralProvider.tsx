@@ -20,10 +20,9 @@ interface GeneralState{
     sesion:Sesion,
     agendaFiltro:AgendaFiltro,
     ids:IDs,
-    //codigoBusqueda:string,
-    //idOpinion:string,
     tabSelected:string,
-    
+    tabSelectedOld:string,
+    tabModule:string,
     //functions/methods
     setMensaje:(mensaje:Mensajes)=>void;
     setUsuario:(usuario:Usuario)=>void;
@@ -31,14 +30,13 @@ interface GeneralState{
     setFlags:(flags:Flags)=>void;
     setIds:(ids:IDs)=>void;
     logOut: ()=>void,
-    //setCodigoBusqueda: (codigoBusqueda:string)=> void;
-    //setIdOpinion:(idOpinion:string)=>void;
     setTabSelected: (tabSelected:string)=>void;
+    setTabSelectedOld: (tabSelectedOld:string)=>void;
+    setTabModule: (tabModule:string)=>void;
     setAgenda:(agenda:Agenda)=>void;
     setSesion:(sesion:Sesion)=>void;
     setAgendaFiltro:(agendaFiltro:AgendaFiltro)=>void;
 }
-
 
 const GeneralContext = React.createContext({} as GeneralState);
 
@@ -46,9 +44,9 @@ class GeneralProvider extends React.Component{
 
     state = {
         resultadosBusquedaVisible:false,
-        //codigoBusqueda:'',
-        //idOpinion:'',
         tabSelected:'Logo',
+        tabSelectedOld:'Logo',
+        tabModule:'Logo',
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
             tipo: TipoUsuario.NONE,
@@ -99,7 +97,7 @@ class GeneralProvider extends React.Component{
                     descricao:'',
                     colaborador:'',
                     usuario:''
-                }
+                },
             ]
         },
         agendafiltro:{
@@ -112,49 +110,17 @@ class GeneralProvider extends React.Component{
         },
     }
 
-    setMensaje=(mensaje: Mensajes)=>{
-        this.setState({mensaje})
-    }
-
-    setUsuario=(usuario:Usuario)=>{
-        this.setState({usuario})
-    }
-    setRelatorio=(relatorio:Realtorio)=>{
-        this.setState({relatorio})
-    }
-
-    setFlags=(flags:Flags)=>{
-        this.setState({flags})
-    }
-
-    setIds=(ids:IDs)=>{
-        this.setState({ids})
-    }
-
-    //  setCodigoBusqueda=(codigoBusqueda:string) =>{
-    //      this.setState({codigoBusqueda});
-    //  }
-
-    //  setIdOpinion=(idOpinion:string) =>{
-    //     this.setState({idOpinion});
-    // }
-
-    setTabSelected= (tabSelected:string) =>{
-        this.setState({tabSelected})
-    }
-
-    setAgenda= (agenda:Agenda)=>{
-        this.setState({agenda});
-    }
-
-    setSesion= (sesion:Sesion)=>{
-        this.setState({sesion});
-    }
-
-    setAgendaFiltro= (agendaFiltro:AgendaFiltro)=>{
-        this.setState({agendaFiltro});
-    }
-
+    setMensaje=(mensaje: Mensajes) => this.setState({mensaje})
+    setUsuario=(usuario:Usuario)=> this.setState({usuario})
+    setRelatorio=(relatorio:Realtorio)=> this.setState({relatorio})
+    setFlags=(flags:Flags)=> this.setState({flags})
+    setIds=(ids:IDs)=> this.setState({ids})
+    setTabSelected= (tabSelected:string) => this.setState({tabSelected})
+    setTabSelectedOld= (tabSelectedOld:string) => this.setState({tabSelectedOld})
+    setTabModule= (tabModule:string) => this.setState({tabModule})
+    setAgenda= (agenda:Agenda)=> this.setState({agenda});
+    setSesion= (sesion:Sesion)=> this.setState({sesion});
+    setAgendaFiltro= (agendaFiltro:AgendaFiltro)=> this.setState({agendaFiltro});
     logOut = () =>{
 
         const payload0 = this.state.sesion;
@@ -193,9 +159,9 @@ class GeneralProvider extends React.Component{
                     agenda:this.state.agenda,
                     agendaFiltro:this.state.agendafiltro,
                     sesion:this.state.sesion,
-                    //codigoBusqueda:this.state.codigoBusqueda,
-                    //idOpinion:this.state.idOpinion,
                     tabSelected: this.state.tabSelected,
+                    tabSelectedOld: this.state.tabSelectedOld,
+                    tabModule: this.state.tabModule,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
@@ -206,9 +172,9 @@ class GeneralProvider extends React.Component{
                     setAgendaFiltro:this.setAgendaFiltro,
                     setSesion:this.setSesion,
                     logOut: this.logOut,
-                    //setCodigoBusqueda: this.setCodigoBusqueda,
-                    //setIdOpinion:this.setIdOpinion,
                     setTabSelected: this.setTabSelected,
+                    setTabSelectedOld: this.setTabSelectedOld,
+                    setTabModule:this.setTabModule,
                     }}
                 >
                {this.props.children}
@@ -216,6 +182,5 @@ class GeneralProvider extends React.Component{
          )
      }
 }
-
 
 export { GeneralProvider, GeneralContext }

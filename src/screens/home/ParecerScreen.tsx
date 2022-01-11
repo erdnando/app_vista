@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
-import { Text, View } from 'react-native'
+import React, { useContext, useEffect } from 'react'
+import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Loading } from '../../components/Loading';
 import { ListNotificaciones } from '../../components/notificaciones/ListNotificaciones';
 import { useMovies } from '../../hooks/useMovies';
 import { GeneralContext } from '../../state/GeneralProvider';
-import { gstyles } from '../../theme/appTheme';
 import { Spacer } from '../../components/Spacer';
 import { Search } from '../../components/opiniones/Search';
 import { ListOpiniones } from '../../components/opiniones/ListOpiniones';
@@ -16,8 +15,10 @@ import { ModalSearchResultados } from '../../components/opiniones/ModalSearchRes
 export const ParecerScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
-    const { usuario,flags, ids} = useContext(GeneralContext);
+    const { flags, ids} = useContext(GeneralContext);
     const { isLoading } = useMovies();
+
+  
     
     if(flags.isNotificaciones){
         return  <ListNotificaciones></ListNotificaciones>
@@ -28,6 +29,9 @@ export const ParecerScreen = () => {
     }
 
     if(ids.idOpinionSeleccionado!=''){
+
+       
+
         return (
             <View style={{flex:1,}}>
                 <DetalleOpinion></DetalleOpinion>

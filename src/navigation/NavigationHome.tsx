@@ -10,12 +10,11 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 import CustomIcon from '../theme/CustomIcon';
 import { OpcionBottomTab } from '../components/login/OpcionBottomTab';
 import { OpcionHeader } from '../components/login/OpcionHeader';
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GeneralContext } from '../state/GeneralProvider';
 import { ContactoScreen } from '../screens/home/ContactoScreen';
 import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
-import { ModalSearchResultados } from '../components/search/ModalSearchResultados';
 
 
 const Tab = createBottomTabNavigator();
@@ -26,7 +25,7 @@ export const NavigationHome = ( { navigation }:Props) => {
 
   const { top } = useSafeAreaInsets();
   //call global state
-  const { usuario,flags,setFlags,setTabSelected,tabSelected,ids, setIds} = useContext(GeneralContext);
+  const { usuario,flags,setFlags,setTabSelected,setTabSelectedOld,tabSelectedOld, tabSelected,ids, setIds, tabModule,setTabModule} = useContext(GeneralContext);
   const { getResultadoBusqueda } = useSearch(); 
 
   //terciario
@@ -56,20 +55,25 @@ export const NavigationHome = ( { navigation }:Props) => {
                     return <View style={{alignSelf:'flex-start',alignContent:'center',justifyContent:'center', 
                                         flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66}}>
                                 
+                                {/* icono left side (hamburguer or back arrow) */}
                                { flags.verDetalleAgenda || ids.idOpinionSeleccionado !='' ?   
                                   <OpcionHeader iconName='ic_round-arrow-back' color={colores.primary}  // back option 
                                       onPress={() =>{ 
+                                        ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
+
                                         const payload= flags;
                                         payload.verDetalleAgenda=false;
                                         setFlags(payload);
+
+                                        setTabSelected(tabModule)
+                                         
 
                                         const payload1 = ids;
                                         payload1.idOpinionBusqueda= '';
                                         payload1.idOpinionSeleccionado='';
                                         setIds(payload1);
 
-                                        setTabSelected('Logo')
-
+                                      
 
                                       }} /> : 
                                     
@@ -77,7 +81,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                       onPress={() =>{ 
                                         navigation.toggleDrawer(); 
                                       }} />
-                                }
+                               }
                                   
 
                                 {/* logo app/ menu option */}
@@ -85,23 +89,34 @@ export const NavigationHome = ( { navigation }:Props) => {
                                    <TitleApp></TitleApp>
                                 </View>
                               
-                              
+                               {/* iconos right side */}
                                 <View style={{ flexDirection:'row',alignSelf:'flex-end', top:-20   }} >  
-                                    {/* notificaciones */}
+                                      {/* notificaciones */}
                                       <TouchableOpacity onPress={() =>{  
-                                            setTabSelected('Notificaciones');
+                                            ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
+                                            //setTabSelectedOld(tabSelected);//aux
+                                            //setTabSelected('Notificaciones');
                                             const payload= flags;
                                             payload.isNotificaciones=!flags.isNotificaciones;
                                             payload.verDetalleAgenda=false;
                                             setFlags(payload);
+
+                                            const payload1= ids;
+                                            payload1.idOpinionSeleccionado='';
+                                            payload1.codigoBusqueda='';
+                                            payload1.idOpinionBusqueda='';
+                                            setIds(payload1);
+
+                                            flags.isNotificaciones ? setTabSelected('Notificaciones'): setTabSelected(tabSelectedOld);
+                                            
                                       }}>
                                         
                                           {/* <Text><CustomIcon name='clarity_notification-solid-badged' size={30} color='white' style={{padding:150}} ></CustomIcon></Text> */}
                                           <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
                                               source={require('../assets/clarity_notification-solid-badged.png')}  >
                                           </Image>
-                                      </TouchableOpacity>
 
+                                      </TouchableOpacity>
 
                                       {/* perfil */}
                                       <TouchableOpacity style={{ marginRight:10, marginLeft:16, marginEnd:16 }} 
@@ -145,63 +160,92 @@ export const NavigationHome = ( { navigation }:Props) => {
                                          : <View></View>
                                       }
 
-
-
-
                                 </View>
-
-                                
                           </View>
                   }
-                ,
-
         })} >
 
         <Tab.Screen name="HomeScreen" options={{ title:'' }}   component={ HomeScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => {  
                       setTabSelected('Logo');   
+                      setTabModule('Logo');
                       const payload= flags;
                       payload.isNotificaciones=false;
                       payload.verDetalleAgenda=false;
                       setFlags(payload);
+
+                      const payload1 = ids;
+                      payload1.idOpinionBusqueda= '';
+                      payload1.idOpinionSeleccionado='';
+                      setIds(payload1);
 
                        }, })} />
         <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => {   
                       setTabSelected('Agenda');   
+                      setTabModule('Agenda');
                       const payload= flags;
                       payload.isNotificaciones=false;
                       payload.verDetalleAgenda=false;
-                      setFlags(payload);  }, })} />
+                      setFlags(payload);
+                      
+                      const payload1 = ids;
+                      payload1.idOpinionBusqueda= '';
+                      payload1.idOpinionSeleccionado='';
+                      setIds(payload1);
+                      }, })} />
         <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => { 
                       setTabSelected('Parecer');  
+                      setTabModule('Parecer');
                     const payload= flags;
                       payload.isNotificaciones=false;
                       setFlags(payload);
+
+                      const payload1 = ids;
+                      payload1.idOpinionBusqueda= '';
+                      payload1.idOpinionSeleccionado='';
+                      setIds(payload1);
+
                         }, })} />
         <Tab.Screen  name="ContactoScreen" options={{ title:'' }} component={ ContactoScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => { 
-                      setTabSelected('Contacto');  
+                      setTabSelected('Contacto'); 
+                      setTabModule('Contacto'); 
                      const payload= flags;
                       payload.isNotificaciones=false;
                       payload.verDetalleAgenda=false;
                       setFlags(payload);
+
+                      const payload1 = ids;
+                      payload1.idOpinionBusqueda= '';
+                      payload1.idOpinionSeleccionado='';
+                      setIds(payload1);
+
                     }, })} />
         <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => { 
                       setTabSelected('Relatorios'); 
+                      setTabModule('Relatorios');
                       const payload= flags;
                       payload.isNotificaciones=false;
                       payload.verDetalleAgenda=false;
                       setFlags(payload);
+
+                      const payload1 = ids;
+                      payload1.idOpinionBusqueda= '';
+                      payload1.idOpinionSeleccionado='';
+                      setIds(payload1);
+
+
                     }, })} />
 
       </Tab.Navigator>
       )
   }
-  else{
-      //colaborador
+ //colaborador
+  if( usuario.tipo === 2){
+     
       return (
         <Tab.Navigator  sceneContainerStyle={{ backgroundColor:'transparent',  }}  
             
@@ -231,6 +275,8 @@ export const NavigationHome = ( { navigation }:Props) => {
                                    { flags.verDetalleAgenda || ids.idOpinionSeleccionado!='' ?   
                                       <OpcionHeader iconName='ic_round-arrow-back' color={colores.primary}  // back option 
                                           onPress={() =>{ 
+                                           
+
                                             const payload= flags;
                                             payload.verDetalleAgenda=false;
                                             setFlags(payload);
@@ -240,7 +286,10 @@ export const NavigationHome = ( { navigation }:Props) => {
                                             payload1.idOpinionSeleccionado='';
                                             setIds(payload1);
 
-                                            setTabSelected('Logo')
+                                            //setTabSelected(tabSelectedOld);
+                                            setTabSelected(tabModule)
+
+                                            
 
                                           }} /> : 
                                         
@@ -263,11 +312,22 @@ export const NavigationHome = ( { navigation }:Props) => {
                                     <View style={{ flexDirection:'row',alignSelf:'flex-end', top:-20   }} >  
                                         {/* notificaciones */}
                                         <TouchableOpacity onPress={() =>{  
-                                              setTabSelected('Notificaciones');
+                                              ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
+                                              //setTabSelectedOld(tabSelected);//aux
+
+                                             // setTabSelected('Notificaciones');
                                               const payload= flags;
                                               payload.isNotificaciones=!flags.isNotificaciones;
                                               payload.verDetalleAgenda=false;
                                               setFlags(payload);
+
+                                              const payload1= ids;
+                                              payload1.idOpinionSeleccionado='';
+                                              payload1.codigoBusqueda='';
+                                              payload1.idOpinionBusqueda='';
+                                              setIds(payload1);
+                                             
+                                              flags.isNotificaciones ? setTabSelected('Notificaciones'): setTabSelected(tabSelectedOld);
                                         }}>
                                           {/* <Text><CustomIcon name='clarity_tasks-solid' size={30} color='white' style={{padding:150}} ></CustomIcon></Text> */}
                                           <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
@@ -326,38 +386,72 @@ export const NavigationHome = ( { navigation }:Props) => {
 
           <Tab.Screen name="HomeScreen" options={{ title:'' }}  component={ HomeScreen } listeners={({ navigation, route }) => ({
                       tabPress: e => {   
-                        setTabSelected('Logo');   
+                        setTabSelected('Logo'); 
+                        setTabModule('Logo');  
                         const payload= flags;
                         payload.isNotificaciones=false;
                         payload.verDetalleAgenda=false;
                         setFlags(payload);
+
+                        const payload1 = ids;
+                        payload1.idOpinionBusqueda= '';
+                        payload1.idOpinionSeleccionado='';
+                        setIds(payload1);
+
                         }, })} />
           <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
                       
                       tabPress: e => {   
                         setTabSelected('Agenda');   
+                        setTabModule('Agenda');
                         const payload= flags;
                       payload.isNotificaciones=false;
                       payload.verDetalleAgenda=false;
                       setFlags(payload);
+
+                      const payload1 = ids;
+                      payload1.idOpinionBusqueda= '';
+                      payload1.idOpinionSeleccionado='';
+                      setIds(payload1);
+
                          }, })} />
           <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
-                      tabPress: e => { setTabSelected('Parecer');  
+                      tabPress: e => { setTabSelected('Parecer'); 
+                      setTabModule('Parecer'); 
                       const payload= flags;
                       payload.isNotificaciones=false;
                       payload.verDetalleAgenda=false;
                       setFlags(payload);
+
+                      const payload1 = ids;
+                      payload1.idOpinionBusqueda= '';
+                      payload1.idOpinionSeleccionado='';
+                      setIds(payload1);
+
                       }, })} />
           <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
                       tabPress: e => { setTabSelected('Relatorios'); 
-                      
+                      setTabModule('Relatorios');
                       const payload= flags;
                       payload.isNotificaciones=false;
                       payload.verDetalleAgenda=false;
                       setFlags(payload);
+
+                      const payload1 = ids;
+                      payload1.idOpinionBusqueda= '';
+                      payload1.idOpinionSeleccionado='';
+                      setIds(payload1);
+
                       }, })} />
         </Tab.Navigator>
       );
+}
+else{
+  return(
+    <View>
+      <Text>Sin permisos</Text>
+    </View>
+  )
 }
 }
 

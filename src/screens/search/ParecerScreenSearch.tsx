@@ -1,10 +1,10 @@
 import React from 'react'
-import { FlatList, Platform, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { Spacer } from '../../components/Spacer';
 import { gstyles } from '../../theme/appTheme';
 
-export const ParecerScreen = () => {
+export const ParecerScreenSearch = () => {
 
     interface Oportunidades{
         id:number,
@@ -116,7 +116,7 @@ export const ParecerScreen = () => {
                 <FlatList data={Data} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
-                    //keyExtractor={(item) => item.id} 
+                    keyExtractor={(item) => item.id+item.fecha} 
                     ItemSeparatorComponent={ () => renderSeparator()}
                 />
             </View>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {  FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
@@ -8,7 +8,7 @@ import { Spacer } from '../Spacer';
 export const ListOpiniones = () => {
 
   //invoke global state
-  const { ids,setIds,tabSelected,setTabSelected } = useContext( GeneralContext )
+  const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected } = useContext( GeneralContext )
 
   interface Opiniones{
     id:number,
@@ -126,6 +126,8 @@ const Data:Opiniones[] = [
 
 const renderUpdateItem = (item:Opiniones) =>{
 
+  
+
     {/* alerta */}
     return (  <TouchableOpacity style={{ borderRadius: 100,  }} 
                                 onPress={()=>{
@@ -135,7 +137,7 @@ const renderUpdateItem = (item:Opiniones) =>{
                                   payload.idOpinionSeleccionado=item.idOpinion;
                                   setIds(payload);
 
-                                  
+                                  setTabSelectedOld(tabSelected)
                                   setTabSelected(item.idOpinion);
 
                                 }}>
@@ -186,6 +188,7 @@ const renderSeparator = () =>{
          <Spacer height={17} ></Spacer>
     )
 }
+
 
 return (
     <View style={gstyles.globalTabView}>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {  Text, View } from 'react-native';
 import { useRelatorios } from '../../hooks/useRelatorios';
 import { colores } from '../../theme/appTheme';
@@ -41,6 +41,7 @@ const barDataParticipaciones = [
   {value: 23,label: '',frontColor: '#B85050',topLabelComponent:labelFracasadas },
   {value: 85,label: '',frontColor: '#F9A61A',topLabelComponent:labelAndamento },
   ];
+
 
  
 
