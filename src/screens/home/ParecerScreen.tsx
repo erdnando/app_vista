@@ -15,7 +15,7 @@ import { ModalSearchResultados } from '../../components/opiniones/ModalSearchRes
 export const ParecerScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
-    const { flags, ids} = useContext(GeneralContext);
+    const { flags, ids, usuario} = useContext(GeneralContext);
     const { isLoading } = useMovies();
 
   
@@ -28,18 +28,17 @@ export const ParecerScreen = () => {
         return <Loading color='green'></Loading>
     }
 
+    //vista detalle d euna opinion
     if(ids.idOpinionSeleccionado!=''){
-
-       
-
         return (
             <View style={{flex:1,}}>
-                <DetalleOpinion></DetalleOpinion>
+                <DetalleOpinion tipoUsuario={usuario.tipo.toString()}></DetalleOpinion>
                 <ModalSearchResultados iconClose='ic_round-close' color='black' label={`Oportunidade ${ ids.codigoBusqueda }`}></ModalSearchResultados>
             </View>
         )
     }
 
+    // vista inicial -listado de opiniones y buscador
     return (
         <View style={ {  marginTop: top+10, flex:1,paddingBottom:20, alignItems:'center',backgroundColor:'#E2E5EA'}}>
                             
@@ -50,28 +49,4 @@ export const ParecerScreen = () => {
                 
         </View>
     )
-
-    // if(usuario.tipo === 2){//colaborador
-    //     return (
-    //         <View style={ {  marginTop: top+10, flex:1,paddingBottom:20, alignItems:'center',backgroundColor:'#E2E5EA'}}>
-                                
-    //                 {/* buscador */}
-    //                 <Search label='Id de opinion' iconClose='ic_round-close' iconSearch='gg_search'></Search>
-    //                 <Spacer height={0}></Spacer>
-    //                 <ListOpiniones></ListOpiniones>
-                  
-    //         </View>
-    //     )
-    
-    
-    // }else if(usuario.tipo === 1) {//terciario
-    //     return (
-    //         <View style={ { ...gstyles.globalMargin, marginTop: top+20, flex:1, alignItems:'center'}}>
-    //             <Text style={{fontSize:60, alignContent:'center',  justifyContent:'center', paddingBottom:250}}>parecer terciario</Text>
-    //         </View>
-    //     )
-
-    // }
-    
-   
 }

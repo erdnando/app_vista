@@ -8,6 +8,7 @@ import { Sesion } from '../models/Sesion';
 import { TipoUsuario, Usuario } from '../models/Usuario';
 import { AgendaFiltro } from '../models/AgendaFiltro';
 import { IDs } from '../models/IDs';
+import { MenuOpiniones } from '../models/MenuOpiniones';
 
 
 interface GeneralState{
@@ -19,6 +20,7 @@ interface GeneralState{
     agenda:Agenda,
     sesion:Sesion,
     agendaFiltro:AgendaFiltro,
+    menuOpiniones:MenuOpiniones[],
     ids:IDs,
     tabSelected:string,
     tabSelectedOld:string,
@@ -36,6 +38,7 @@ interface GeneralState{
     setAgenda:(agenda:Agenda)=>void;
     setSesion:(sesion:Sesion)=>void;
     setAgendaFiltro:(agendaFiltro:AgendaFiltro)=>void;
+    setMenuOpiniones:(menuOpiniones:MenuOpiniones[])=>void;
 }
 
 const GeneralContext = React.createContext({} as GeneralState);
@@ -76,6 +79,7 @@ class GeneralProvider extends React.Component{
             idOpinionBusqueda: '',
             idOpinionSeleccionado:'',
             codigoBusqueda:'',
+            idMenuOpinionSelected:1,
         },
         agenda:{
             selectedDate:'',
@@ -108,6 +112,32 @@ class GeneralProvider extends React.Component{
             bAguardando:false,
             bFinalizado:false,
         },
+        menuOpiniones:[
+            {
+                id:1,
+                opcion:'Parecer',
+                icon:'icomoon-free_hammer2',
+                estatus:1
+            },
+            {
+              id:2,
+              opcion:'Pareceres realizados',
+                icon:'ant-design_check-circle-filled',
+                estatus:0
+            },
+            {
+              id:3,
+              opcion:'Valores',
+              icon:'ic_round-monetization-on',
+              estatus:0
+            },
+            {
+              id:4,
+              opcion:'Exigencias',
+                icon:'ic_baseline-lightbulb',
+                estatus:0
+            },
+        ]
     }
 
     setMensaje=(mensaje: Mensajes) => this.setState({mensaje})
@@ -121,6 +151,7 @@ class GeneralProvider extends React.Component{
     setAgenda= (agenda:Agenda)=> this.setState({agenda});
     setSesion= (sesion:Sesion)=> this.setState({sesion});
     setAgendaFiltro= (agendaFiltro:AgendaFiltro)=> this.setState({agendaFiltro});
+    setMenuOpiniones= (menuopiniones:MenuOpiniones[])=>this.setState({menuopiniones});
     logOut = () =>{
 
         const payload0 = this.state.sesion;
@@ -162,6 +193,7 @@ class GeneralProvider extends React.Component{
                     tabSelected: this.state.tabSelected,
                     tabSelectedOld: this.state.tabSelectedOld,
                     tabModule: this.state.tabModule,
+                    menuOpiniones:this.state.menuOpiniones,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
@@ -175,6 +207,7 @@ class GeneralProvider extends React.Component{
                     setTabSelected: this.setTabSelected,
                     setTabSelectedOld: this.setTabSelectedOld,
                     setTabModule:this.setTabModule,
+                    setMenuOpiniones:this.setMenuOpiniones,
                     }}
                 >
                {this.props.children}

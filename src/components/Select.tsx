@@ -1,11 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
-//import { colores } from '../../theme/appTheme';
+import { StyleSheet, View, Platform } from 'react-native';
 import RNPickerSelect, { Item } from 'react-native-picker-select';
 import CustomIcon from '../theme/CustomIcon';
-// import CustomIcon from '../../theme/CustomIcon';
-// import { useMensaje } from '../../hooks/useMensaje';
-
 
 
 interface Props{
@@ -17,10 +13,6 @@ interface Props{
 
 export const Select = ( { onValueChange,items,placeholder,campo}: Props ) => {
 
-  //let colorIcono = colores.primary;
-  
-  //const [selectedValue, setSelectedValue] = useState("Assunto");
-  //const { mensaje, setMensaje } = useMensaje(); 
 
     return (
       <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:'87%',borderBottomColor: campo !=null ? 'orange' : 'grey' }}>
@@ -32,23 +24,6 @@ export const Select = ( { onValueChange,items,placeholder,campo}: Props ) => {
                 useNativeAndroidPickerStyle={true}
                 onValueChange={onValueChange}
                 items={items}
-                // onValueChange={(value) => {
-                //   console.log(value)
-                  
-                //   const payload= mensaje;
-                //   payload.asunto=value;
-                //   setMensaje(payload)
-                  
-                  
-                // }}
-                // items={[
-                //     { label: "JavaScript", value: "JavaScript" },
-                //     { label: "TypeStript", value: "TypeStript" },
-                //     { label: "Python", value: "Python" },
-                //     { label: "Java", value: "Java" },
-                //     { label: "C++", value: "C++" },
-                //     { label: "C", value: "C" },
-                // ]}
                 />
                 
                 { Platform.OS=='ios' ? <View style={{right: -40 }}>

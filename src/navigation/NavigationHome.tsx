@@ -25,7 +25,8 @@ export const NavigationHome = ( { navigation }:Props) => {
 
   const { top } = useSafeAreaInsets();
   //call global state
-  const { usuario,flags,setFlags,setTabSelected,setTabSelectedOld,tabSelectedOld, tabSelected,ids, setIds, tabModule,setTabModule} = useContext(GeneralContext);
+  const { usuario,flags,setFlags,setTabSelected,setTabSelectedOld,tabSelectedOld, tabSelected,ids, 
+          setIds, tabModule,setTabModule,menuOpiniones,setMenuOpiniones} = useContext(GeneralContext);
   const { getResultadoBusqueda } = useSearch(); 
 
   //terciario
@@ -71,7 +72,19 @@ export const NavigationHome = ( { navigation }:Props) => {
                                         const payload1 = ids;
                                         payload1.idOpinionBusqueda= '';
                                         payload1.idOpinionSeleccionado='';
+                                        payload1.idMenuOpinionSelected=1;
                                         setIds(payload1);
+
+
+
+
+                                        const payload2 = menuOpiniones;
+                                        payload2.forEach(function(part, index) {
+                                               payload2[index].estatus=0;  
+                                        });
+
+                                        payload2[0].estatus=1;
+                                        setMenuOpiniones(payload2);
 
                                       
 
@@ -284,12 +297,23 @@ export const NavigationHome = ( { navigation }:Props) => {
                                             const payload1 = ids;
                                             payload1.idOpinionBusqueda= '';
                                             payload1.idOpinionSeleccionado='';
+                                            payload1.idMenuOpinionSelected=1;
                                             setIds(payload1);
 
-                                            //setTabSelected(tabSelectedOld);
                                             setTabSelected(tabModule)
 
-                                            
+
+
+                                            const payload2 = menuOpiniones;
+                                        payload2.forEach(function(part, index) {
+                                               payload2[index].estatus=0;  
+                                        });
+
+                                        payload2[0].estatus=1;
+                                        setMenuOpiniones(payload2);
+
+
+                                        
 
                                           }} /> : 
                                         
