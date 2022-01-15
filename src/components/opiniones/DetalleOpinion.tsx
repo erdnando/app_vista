@@ -21,7 +21,7 @@ export const DetalleOpinion = ( { tipoUsuario}: Props ) => {
     return (
       <View style={ {  marginTop: top, flex:1, alignItems:'center',}}>
            
-           <View style={{height:130,width:'100%', backgroundColor:'#838892',  }}>
+           <View style={{height:136,width:'100%', backgroundColor:'#838892',  }}>
             <DetallHeaderOpiniones />
           </View>
 

@@ -8,17 +8,15 @@ interface Props{
   placeholder:string;
   campo:string;
   width?:string,
+  maxLength?:number,
   onChangeMensaje: (msg:string) =>void;
 }
 
-export const InputMensajeSimple = ( { placeholder,campo,width='90%',onChangeMensaje}: Props ) => {
+export const InputMensajeSimple = ( { placeholder,campo,width='90%',maxLength=8,onChangeMensaje}: Props ) => {
 
   let colorIcono = colores.primary;
   
-    return (
-      <View style={{ flexDirection: 'row',left:0 }}>
-
-              <View style={{width:'100%', left:0}}>
+    return (<View style={{flex:1,width:'100%'}}>
               <TextInput
                   style={{
                       textAlign:'justify',
@@ -27,7 +25,7 @@ export const InputMensajeSimple = ( { placeholder,campo,width='90%',onChangeMens
                       maxHeight:50,
                       width:width,
                       paddingLeft:12,
-                      left:5,
+                      left:0,
                       margin: 8,
                       borderWidth: 1,
                       paddingBottom:10,
@@ -43,7 +41,7 @@ export const InputMensajeSimple = ( { placeholder,campo,width='90%',onChangeMens
                   autoCorrect = {false}
                   multiline= {false}
                   numberOfLines={2}
-                  maxLength={8}
+                  maxLength={maxLength}
                   value={campo}
               />
 
@@ -53,7 +51,5 @@ export const InputMensajeSimple = ( { placeholder,campo,width='90%',onChangeMens
               
               
 
-              
-      </View>
     )
 }

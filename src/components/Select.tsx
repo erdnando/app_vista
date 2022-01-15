@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View, Platform, Dimensions } from 'react-native';
 import RNPickerSelect, { Item } from 'react-native-picker-select';
 import CustomIcon from '../theme/CustomIcon';
 
@@ -14,20 +14,21 @@ interface Props{
 
 export const Select = ( { onValueChange,items,placeholder,campo,width='87%'}: Props ) => {
 
+  const windowWidth = Dimensions.get('window').width;
 
     return (
       <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:width,borderBottomColor: campo !=null ? 'orange' : 'grey' }}>
 
               <RNPickerSelect 
               style={pickerSelectStyles}
-                value={campo}
+                value={campo} 
                 placeholder={{label:placeholder, value:null}}
                 useNativeAndroidPickerStyle={true}
                 onValueChange={onValueChange}
                 items={items}
                 />
                 
-                { Platform.OS=='ios' ? <View style={{right: -40 }}>
+                { Platform.OS=='ios' ? <View style={{right: -70 }}>
                   <CustomIcon  name='ic_baseline-arrow-drop-down' size={33} color='#838892'   style={{left:-40, top:-5,}} ></CustomIcon>
                </View>:<View></View>
                }
@@ -49,7 +50,7 @@ const pickerSelectStyles = StyleSheet.create({
   },
   inputAndroid: {
     flex:1,
-    width:250,
+    width:350,
     fontSize: 14,
     paddingHorizontal: 10,
     paddingVertical: 18,

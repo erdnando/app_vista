@@ -49,14 +49,16 @@ const [hasData, sethasData] = useState(false)
                                           setOpiniones(payload);
                                         }} 
                                       />
-                                      <Spacer height={20}></Spacer>
+                                      <Spacer height={10}></Spacer>
 
-                                      <InputMensajeSimple placeholder='Qtde de dias' width='33%' campo={opiniones.exigencias.qtededias}
-                                      onChangeMensaje={(msg:string)=>{
-                                        const payload = opiniones;
-                                        opiniones.exigencias.qtededias=msg;
-                                        setOpiniones(payload);
-                                      }}></InputMensajeSimple>
+                                      <View style={{flex:0,width:'100%',height:50,left:7}}>
+                                        <InputMensajeSimple placeholder='Qtde de dias' width='33%' campo={opiniones.exigencias.qtededias}
+                                        onChangeMensaje={(msg:string)=>{
+                                          const payload = opiniones;
+                                          opiniones.exigencias.qtededias=msg;
+                                          setOpiniones(payload);
+                                        }}></InputMensajeSimple>
+                                      </View>
 
                                       <Spacer height={20}></Spacer>
 

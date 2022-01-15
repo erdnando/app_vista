@@ -15,7 +15,7 @@ export const DetallHeaderOpiniones = () => {
 
 
     {/* opcion */}
-    return (  <TouchableOpacity style={{ borderRadius: 100,  }} 
+    return ( item.visible ? <TouchableOpacity style={{ borderRadius: 100,  }} 
                                 onPress={()=>{
                                   console.log('menu opiniones click..');
                                  //TODO logic to load component view, based in selected option
@@ -35,46 +35,41 @@ export const DetallHeaderOpiniones = () => {
 
                                 setMenuOpiniones(payload);
 
-                               
-                              
-
-
-
                                 }}>
-                      <View style={{height:120, flexDirection:'row', width:95,
-                                      backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,marginRight:15,
-                                      borderColor:(item.estatus==1 ? 'orange': '#E2E5EA'),borderWidth:2,
-                                      shadowColor: (item.estatus==1 ? 'orange': 'grey'), shadowOpacity: 0.8,shadowOffset: {
-                                        height: 1, width: 3, }               
-                                      }}>
+                            <View style={{height:124, flexDirection:'row', width:122,
+                                            backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,marginRight:15,marginLeft:2,
+                                            borderColor:(item.estatus==1 ? 'orange': '#E2E5EA'),borderWidth:2,
+                                            shadowColor: (item.estatus==1 ? 'orange': 'grey'), shadowOpacity: 0.8,shadowOffset: {
+                                                height: 1, width: 3, }               
+                                            }}>
 
-                                  <View style={{ justifyContent:'flex-start',width:'100%',  alignItems:'center',alignContent:'flex-start',}}>
-                      
-                                      
-                                      <View style={{flex:1, height:120, justifyContent:'flex-start',alignItems:'center'}}>
-                                          
-                                          {/* icon */}
-                                          <View style={{ backgroundColor:(item.estatus==1 ? '#FF9029': '#E2E5EA'), borderWidth:0, borderRadius:50,margin:6, height:60, width:60, 
-                                          justifyContent:'center', alignContent:'center', alignItems:'center' }}>
-                                              <Text > 
-                                              <CustomIcon name={item.icon} size={24} color={item.estatus==1 ? 'white': 'grey'} ></CustomIcon>
-                                              </Text>
-                                          </View>
+                                        <View style={{ justifyContent:'flex-start',width:'100%',  alignItems:'center',alignContent:'flex-start',}}>
+                            
+                                            
+                                            <View style={{flex:1, height:120, justifyContent:'center',alignItems:'center'}}>
+                                                
+                                                {/* icon */}
+                                                <View style={{ backgroundColor:(item.estatus==1 ? '#FF9029': '#E2E5EA'), borderWidth:0, borderRadius:50,margin:6, height:48, width:48, 
+                                                justifyContent:'center', alignContent:'center', alignItems:'center' }}>
+                                                    <Text > 
+                                                    <CustomIcon name={item.icon} size={24} color={item.estatus==1 ? 'white': 'grey'} ></CustomIcon>
+                                                    </Text>
+                                                </View>
 
-                                          {/* titulo */}
-                                        <View style={{width:'100%', justifyContent:'center',alignContent:'center',alignItems:'center'}}>
-                                            <Text style={{fontFamily:'Roboto-Regular', fontSize:14, textAlign:'center'}}>{item.opcion}</Text>
+                                                {/* titulo */}
+                                                <View style={{width:'100%', justifyContent:'center',alignContent:'center',alignItems:'center'}}>
+                                                    <Text style={{fontFamily:'Roboto-Regular', fontSize:14, textAlign:'center'}}>{item.opcion.length >10 ? item.opcion : item.opcion+ `\n`}</Text>
+                                                </View>
+
+                                            </View>
+
+                                            
+                                            
+                                            
+                        
                                         </View>
-
-                                    </View>
-
-                                    
-                                      
-                                     
-                   
-                                  </View>
-                      </View>
-            </TouchableOpacity>
+                            </View>
+                    </TouchableOpacity> : <View></View>
     )
 }
 
@@ -86,7 +81,7 @@ const renderSeparator = () =>{
 
 
 return (
-    <View style={{ flex:1, width:'92%', alignItems:'flex-start', top:10, marginHorizontal:15}}>
+    <View style={{ flex:1, width:'100%', alignItems:'flex-start', top:10, marginHorizontal:16}}>
          
          <View style={{flex:1,width:'100%',justifyContent:'center', }}>
     

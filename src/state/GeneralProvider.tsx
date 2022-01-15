@@ -120,7 +120,49 @@ class GeneralProvider extends React.Component{
                 qtededias:'',
                 tipoUsuario:'',
                 observaciones:'',
-            }
+            },
+            valores:[{
+                id:0,
+                go: false,
+                motivo:'',
+                lote:'001',
+                item:'001',
+                qtde:'001',
+                familia:'',
+                productoServicio:'',
+                valorinicial:'',
+                valorFinal:'',
+                justificativa:'',
+                colapsado:true,
+            },
+            {
+                id:1,
+                go: false,
+                motivo:'',
+                lote:'002',
+                item:'002',
+                qtde:'002',
+                familia:'',
+                productoServicio:'',
+                valorinicial:'',
+                valorFinal:'',
+                justificativa:'',
+                colapsado:true,
+            },
+            {
+                id:2,
+                go: false,
+                motivo:'',
+                lote:'003',
+                item:'003',
+                qtde:'003',
+                familia:'',
+                productoServicio:'',
+                valorinicial:'',
+                valorFinal:'',
+                justificativa:'',
+                colapsado:true,
+            }]
         },
         agendafiltro:{
             filtroHorario: 'Seleccione una horario',
@@ -135,25 +177,29 @@ class GeneralProvider extends React.Component{
               id:1,
               opcion:'Parecer',
               icon:'icomoon-free_hammer2',
-              estatus:1
+              estatus:1,
+              visible:true
             },
             {
               id:2,
               opcion:'Pareceres realizados',
               icon:'ant-design_check-circle-filled',
-              estatus:0
+              estatus:0,
+              visible:true
             },
             {
               id:3,
               opcion:'Valores',
               icon:'ic_round-monetization-on',
-              estatus:0
+              estatus:0,
+              visible:true
             },
             {
               id:4,
               opcion:'Exigencias',
               icon:'ic_baseline-lightbulb',
-              estatus:0
+              estatus:0,
+              visible:true
             },
         ]
     }

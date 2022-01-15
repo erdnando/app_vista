@@ -7,7 +7,7 @@ import { AuthLogin } from '../models/response/AuthLogin';
 
 
 export const useLogin =  () => {
-    const { flags, usuario,setUsuario,setFlags, sesion,setSesion} = useContext( GeneralContext );
+    const { flags, usuario,setUsuario,setFlags,menuOpiniones,setMenuOpiniones } = useContext( GeneralContext );
 
    const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
         const onChangeEmail = async (email:string) =>{
@@ -87,6 +87,10 @@ export const useLogin =  () => {
                 const payload= usuario;
                 payload.tipo=TipoUsuario.COLABORADOR;
                 setUsuario(payload);
+
+                const payload1= menuOpiniones;
+                payload1[2].visible = false;//valores hidden
+                setMenuOpiniones(payload1);
                 
                 return true;
             } else if(usuario.password ==='12345' && usuario.email === 'terciario'){
@@ -101,6 +105,10 @@ export const useLogin =  () => {
                 const payload= usuario;
                 payload.tipo=TipoUsuario.USER_TERCEIRO;
                 setUsuario(payload);
+
+                const payload1= menuOpiniones;
+                payload1[2].visible = true;//valores visible
+                setMenuOpiniones(payload1);
 
                 return true;
             }

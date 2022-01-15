@@ -5,5 +5,6 @@ export interface MenuOpiniones{
     id:number,
     opcion:string,
     icon:string,
-    estatus:number
+    estatus:number,
+    visible:boolean,
 }
