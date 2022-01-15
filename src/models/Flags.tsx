@@ -10,4 +10,5 @@ export interface Flags{
     modalFiltrosVisible:boolean,
     modalFechaVisible:boolean,
     modalFechaHorarioVisible:boolean,
+
 }

@@ -4,11 +4,9 @@ import React, { useContext } from 'react'
 import { ForgotPasswordScreen } from '../screens/login/ForgotPasswordScreen';
 import { LoginScreen } from '../screens/login/LoginScreen';
 import { ResetContrasenaScreen } from '../screens/login/ResetContrasenaScreen';
-import { GeneralContext } from '../state/GeneralProvider';
 import { NavigationHome } from './NavigationHome';
 import { NavigationLateral } from './NavigationLateral';
-import { ModalSearchResultados } from '../components/search/ModalSearchResultados';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 
 
 const Stack = createStackNavigator();

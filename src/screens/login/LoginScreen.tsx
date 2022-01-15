@@ -54,6 +54,7 @@ export const LoginScreen = ({ navigation }:Props) => {
                                 console.log('login correcto')
                                 const payload= flags;
                                 payload.isAlertLoginVisible=false;
+                                //payload.leftMenuAccesible=true;
                                 setFlags(payload);
                                 
                                 navigation.replace('NavigationLateral');  
@@ -61,6 +62,7 @@ export const LoginScreen = ({ navigation }:Props) => {
                                 //show alert
                                 const payload= flags;
                                 payload.isAlertLoginVisible=true;
+                                //payload.leftMenuAccesible=false;
                                 setFlags(payload);
                                 console.log('error al autenticarse');
                             }     

@@ -1,12 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import { Image, useWindowDimensions, View  } from 'react-native';
+import { Image, useWindowDimensions, View, TextStyle } from 'react-native';
 import { gstyles } from '../theme/appTheme';
 import { NavigationHome } from './NavigationHome';
 import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
 import { NavigationLogin } from './NavigationLogin';
 import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
+import { Text } from 'react-native-svg';
+import CodePush from 'react-native-code-push';
 
 
 const Drawer = createDrawerNavigator();
@@ -27,6 +29,7 @@ const Drawer = createDrawerNavigator();
 export const NavigationLateral = ( { navigation }:Props) => {
 
     const { width } = useWindowDimensions();
+    const { flags,setFlags } = useContext( GeneralContext )
    
     useEffect(() => {
         
@@ -38,22 +41,28 @@ export const NavigationLateral = ( { navigation }:Props) => {
           )
   }, [])
 
-  return (
-            <Drawer.Navigator 
-              screenOptions={{
-                              drawerPosition:'left',
-                              headerShown: false, 
-                              drawerType:(width >=768 ? 'permanent' : 'front')  ,
-                              }}  
-              drawerContent={ (props) => <MenuInterno { ...props }></MenuInterno> } >
-              <Drawer.Screen name="NavigationHome" component={ NavigationHome } options={{ title:'', }} initialParams={{screen:'HomeScreen'}}/>      
-              <Drawer.Screen name="NavigationHomeagenda" component={ NavigationHome } initialParams={{screen:'AgendaScreen'}}/>
-              <Drawer.Screen name="NavigationHomeParecer" component={ NavigationHome } initialParams={{screen:'ParecerScreen'}}/>
-              <Drawer.Screen name="NavigationHomeRelatorio" component={ NavigationHome } initialParams={{screen:'RelatorioScreen'}}/>
-              <Drawer.Screen name="ChangePasswordScreen"  component={ ChangePasswordScreen } />
-              <Drawer.Screen name="NavigationLogin"  component={ NavigationLogin } />
-            </Drawer.Navigator>
-        );
+ 
+      return (
+                <Drawer.Navigator 
+                
+                  screenOptions={{
+                    //swipeEnabled:flags.leftMenuAccesible? true:false,
+                    // gestureEnabled:flags.leftMenuAccesible? true:false,
+                                  drawerPosition:'left',
+                                  headerShown: false, 
+                                  drawerType:(width >=768 ? 'permanent' : 'front')  ,
+                                  }}  
+                  drawerContent={ (props) => <MenuInterno { ...props }></MenuInterno> } >
+                  <Drawer.Screen name="NavigationHome" component={ NavigationHome } options={{ title:'', }} initialParams={{screen:'HomeScreen'}}/>      
+                  <Drawer.Screen name="NavigationHomeagenda" component={ NavigationHome } initialParams={{screen:'AgendaScreen'}}/>
+                  <Drawer.Screen name="NavigationHomeParecer" component={ NavigationHome } initialParams={{screen:'ParecerScreen'}}/>
+                  <Drawer.Screen name="NavigationHomeRelatorio" component={ NavigationHome } initialParams={{screen:'RelatorioScreen'}}/>
+                  <Drawer.Screen name="ChangePasswordScreen"  component={ ChangePasswordScreen } />
+                  <Drawer.Screen name="NavigationLogin"  component={ NavigationLogin } />
+                </Drawer.Navigator>
+            );
+          
+   
 }
 
 const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
@@ -159,6 +168,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
             const payload= flags;
                   payload.isNotificaciones=false;
                   payload.verDetalleAgenda=false;
+                  //payload.leftMenuAccesible=false;
                   setFlags(payload);
 
                   const payload1 = ids;
@@ -167,7 +177,9 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   setIds(payload1);
                   
             logOut(); 
-            navigation.navigate('NavigationLogin'); 
+            //navigation.navigate('NavigationLogin'); 
+            CodePush.restartApp();
+            
             }}></OpcionMenuLateral>
           
         </View>
