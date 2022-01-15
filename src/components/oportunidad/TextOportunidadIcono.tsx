@@ -9,14 +9,14 @@ interface Props{
   icono:string,
   colorValor?:string,
   valueIsBold?:boolean,
-  
+  colorIcono?:string,
 }
 
-export const TextOportunidadIcono = ( { size, label,valor, icono, colorValor = 'black', valueIsBold = false }: Props ) => {
+export const TextOportunidadIcono = ( { size, label,valor, icono, colorValor = 'black',colorIcono='black', valueIsBold = false }: Props ) => {
 
     return  <View style={{flexDirection:'row', paddingVertical:3}}>
               {/* (icono != '') ? <Text><CustomIcon  name={icono} size={24} color='#000000'  ></CustomIcon></Text> : <View></View> */}
-              <Text style={{top:-6}}><CustomIcon  name={icono} size= {icono==='' ? 0 :28} color='black'  ></CustomIcon></Text>
+              <Text style={{top:-6}}><CustomIcon  name={icono} size= {icono==='' ? 0 :28} color={colorIcono} ></CustomIcon></Text>
               <Text style={{ fontFamily:'Roboto-Bold', color:'black', fontSize:size }}> {label}</Text>
               <Text style={{ fontFamily:valueIsBold?'Roboto-Bold':'Roboto-Regular', fontSize:size, color:colorValor }}> {valor}</Text>
             </View>  

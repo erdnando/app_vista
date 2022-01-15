@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
-import { Text, TextInput, TouchableOpacity, View, Platform } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GeneralContext } from '../../state/GeneralProvider';
-import { gstyles } from '../../theme/appTheme';
-import { Spacer } from '../Spacer';
 import { DetallHeaderOpiniones } from './DetalleHeaderOpiniones';
 import { DetalleContentOpinion } from './DetalleContentOpinion';
 
@@ -31,12 +29,13 @@ export const DetalleOpinion = ( { tipoUsuario}: Props ) => {
           <View style={{flex:1, width:'100%', backgroundColor:'#838892',justifyContent:'center',alignContent:'center',
                         alignItems:'center', paddingTop:15,paddingBottom:20}}>
               
-              <View style={{flex:1,width:'92%',justifyContent:'center',  backgroundColor:'red',
-                            alignContent:'center',alignItems:'center' }}>
 
+              {/* TODO add backgound */}
+
+
+              <View style={{flex:1,width:'92%',justifyContent:'center',  backgroundColor:'transparent',
+                            alignContent:'center',alignItems:'center' }}>
                   <DetalleContentOpinion></DetalleContentOpinion>
-                  
-                   
               </View>
           </View>
           

@@ -4,8 +4,9 @@ import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
 import { TextOportunidadIcono } from '../oportunidad/TextOportunidadIcono';
 import { Spacer } from '../Spacer';
+import { LabelTexto } from './LabelTexto';
 
-export const ListOpiniones = () => {
+export const CardParecerRealizados = () => {
 
   //invoke global state
   const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected } = useContext( GeneralContext )
@@ -126,57 +127,36 @@ const Data:Opiniones[] = [
 
 const renderUpdateItem = (item:Opiniones) =>{
 
-  
-
-    {/* alerta */}
+    {/* tarjeta */}
     return (  <TouchableOpacity style={{ borderRadius: 100,  }} 
                                 onPress={()=>{
-                                  console.log('tarjeta click..');
-                                  const payload= ids;
-                                  payload.idOpinionBusqueda= '';
-                                  payload.idOpinionSeleccionado=item.idOpinion;
-                                  setIds(payload);
-
-                                  setTabSelectedOld(tabSelected)
-                                  setTabSelected(item.idOpinion);
+                                  
 
                                 }}>
-                      <View style={{height:135, flexDirection:'row', width:'98%',borderLeftColor:(item.estatus==1 ? '#83AE69':'#FF9029'),borderLeftWidth:5,
+                      <View style={{height:220, width:'100%',
                                       backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,
                                       shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {
                                       height: 3, width: 3 }
                                   }}>
 
-                                  <View style={{ flexDirection:'column', margin:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
+                                  <View style={{ flexDirection:'column', margin:16, justifyContent:'flex-start',  alignItems:'flex-start'}}>
 
-                                    {/* titulo */}
-                                      <View style={{width:'85%', justifyContent:'space-evenly', marginBottom:10}}>
-                                          <Text style={{fontFamily:'Roboto-Regular',fontWeight:'400', fontSize:18,color:'#373737', textAlign:'justify'}}>{item.opinion}</Text>
-                                      </View>
-                                      {/* id, edital */}
-                                      <View style={{flexDirection:'row', width:'100%', justifyContent:'flex-start', marginBottom:5,marginTop:5 }}>
-                                        <Text style={{fontFamily:'Roboto-Regular',fontWeight:'400', fontSize:14, textAlign:'justify',color:'#373737'}}>ID: 
-                                          <Text style={{fontFamily:'Roboto-Regular',fontWeight:'400', fontSize:14, textAlign:'justify',color:'#838892'}}> {item.idOpinion}</Text>
-                                        </Text>
-                                        <View style={{width:10}}></View>
-                                        <Text style={{fontFamily:'Roboto-Regular',fontWeight:'700', fontSize:14, textAlign:'justify'}}>Edital: 
-                                          <Text style={{fontFamily:'Roboto-Regular',fontWeight:'400', fontSize:14, textAlign:'justify',color:'#838892'}}> {item.edital}</Text>
-                                        </Text>
-                                      </View>
-                                      {/* Orgao */}
-                                      <Text style={{fontFamily:'Roboto-Regular', fontSize:14,fontWeight:'700', textAlign:'justify', marginBottom:10}}>Orgao: 
-                                          <Text style={{fontFamily:'Roboto-Regular', fontSize:14,fontWeight:'400', textAlign:'justify',color:'#838892'}}> {item.oragao}</Text>
-                                      </Text>
-
-
-                                      <View style={{flexDirection:'row', width:'80%', justifyContent:'space-between' }}>
-                                          <TextOportunidadIcono icono='ic_round-date-range' colorIcono='#838892' label='' colorValor='#838892' valor={item.fechaOpinion} size={15} ></TextOportunidadIcono>
-                                          <View style={{width:20,}}></View>
-                                          <TextOportunidadIcono icono='ic_baseline-place'  colorIcono='#838892' colorValor='#838892' label='' valor={item.ubicacion} size={15} ></TextOportunidadIcono>
-                                          {/* <View style={{width:30,}}></View> */}
-                                      </View>
-
-
+                                     {/* usuario */}
+                                     <TextOportunidadIcono icono='gridicons_user' colorIcono='#838892' label='Usuario' colorValor='#838892' valor='Lorem ispum dolor'  size={15} ></TextOportunidadIcono>
+                                      {/* line */}
+                                      <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
+                                       {/* usuario */}
+                                     <TextOportunidadIcono icono='icomoon-free_hammer2' colorIcono='#838892' label='Parecer' colorValor='#838892' valor='Lorem ispum dolor'  size={15} ></TextOportunidadIcono>
+                                      {/* line */}
+                                      <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
+                                       {/* usuario */}
+                                     <TextOportunidadIcono icono='ic_round-pin' colorIcono='#838892' label='Motivo' colorValor='#838892' valor='Lorem ispum dolor'  size={15} ></TextOportunidadIcono>
+                                      {/* line */}
+                                      <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
+                                       {/* usuario */}
+                                       <LabelTexto  fontSize={14} color='#454A53' label='Justificativa:' value=' Lorem ispum dolor sit amet consectetur adipiscing elit. Nulla vehicula vetibulum laoreet. Vestibulum vitae.'></LabelTexto>
+                                      
+                                    
                                   </View>
                       </View>
             </TouchableOpacity>
@@ -185,15 +165,15 @@ const renderUpdateItem = (item:Opiniones) =>{
 
 const renderSeparator = () =>{
     return (
-         <Spacer height={17} ></Spacer>
+         <Spacer height={15} ></Spacer>
     )
 }
 
 
 return (
-    <View style={gstyles.globalTabView}>
+    <View style={{...gstyles.globalTabView , width:'100%',top:-8}}>
          <Spacer height={10}></Spacer>
-         <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
+         <View style={{flex:1,width:'100%',justifyContent:'center',}}>
     
             <FlatList data={Data} 
                 scrollEnabled={true}

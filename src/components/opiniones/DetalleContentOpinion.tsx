@@ -1,51 +1,33 @@
 
 import React, { useContext, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
+import { CardParecer } from './CardParecer';
+import { CardParecerRealizados } from './CardParecerRealizados';
+import { CardParecerExigencias } from './CardParecerExigencias';
+import { CardParecerValores } from './CardParecerValores';
 
 
 
 export const DetalleContentOpinion = ( ) => {
 
-  const { menuOpiniones,ids } = useContext(GeneralContext);
-  // const [opcionMenuSelected, setOpcionMenuSelected] = useState(0)
-
-
-  // const payload = menuOpiniones;
-  // payload.forEach(function(part, index) {
-  //   payload[index].estatus===1 ? setOpcionMenuSelected(payload[index].id): 0;
-  // });
-                                
+  const { ids } = useContext(GeneralContext);
+                     
 
   switch (ids.idMenuOpinionSelected) {
     case 1:
-      return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
-                 <Text>Parecer</Text>
-              </View> 
+      return  <CardParecer></CardParecer>
     case 2:
-      return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
-                  <Text>Pareceres realizados</Text>
-              </View> 
+      return  <CardParecerRealizados></CardParecerRealizados>
     case 3:
-      return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
-                  <Text>Valores</Text>
-              </View> 
+      return  <CardParecerValores></CardParecerValores>
     case 4:
-      return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
-                  <Text>Exigencias</Text>
-              </View> 
+      return  <CardParecerExigencias></CardParecerExigencias>
     default:
       return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
                  <Text>Opcion no valida</Text>
               </View> 
   }
-
-  
-
-//   return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
-//   <Text>Opcion no valida</Text>
-// </View> 
-      
      
 
              

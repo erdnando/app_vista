@@ -8,18 +8,19 @@ interface Props{
   placeholder:string,
   onValueChange: (value: any, index: number) => void,
   items:Item[],
-  campo:string
+  campo:string,
+  width?:string
 }
 
-export const Select = ( { onValueChange,items,placeholder,campo}: Props ) => {
+export const Select = ( { onValueChange,items,placeholder,campo,width='87%'}: Props ) => {
 
 
     return (
-      <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:'87%',borderBottomColor: campo !=null ? 'orange' : 'grey' }}>
+      <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:width,borderBottomColor: campo !=null ? 'orange' : 'grey' }}>
 
               <RNPickerSelect 
               style={pickerSelectStyles}
-    
+                value={campo}
                 placeholder={{label:placeholder, value:null}}
                 useNativeAndroidPickerStyle={true}
                 onValueChange={onValueChange}
@@ -39,7 +40,7 @@ const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     flex:1,
     width:250,
-      fontSize: 16,
+      fontSize: 14,
       paddingVertical: 12,
       paddingHorizontal: 10,
       borderWidth: 0,
@@ -49,7 +50,7 @@ const pickerSelectStyles = StyleSheet.create({
   inputAndroid: {
     flex:1,
     width:250,
-    fontSize: 16,
+    fontSize: 14,
     paddingHorizontal: 10,
     paddingVertical: 18,
     borderWidth: 0,

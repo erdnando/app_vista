@@ -9,6 +9,8 @@ import { TipoUsuario, Usuario } from '../models/Usuario';
 import { AgendaFiltro } from '../models/AgendaFiltro';
 import { IDs } from '../models/IDs';
 import { MenuOpiniones } from '../models/MenuOpiniones';
+import { Opiniones } from '../models/Opiniones';
+import { OpinionesParecer } from '../models/OpinionesParecer';
 
 
 interface GeneralState{
@@ -25,6 +27,7 @@ interface GeneralState{
     tabSelected:string,
     tabSelectedOld:string,
     tabModule:string,
+    opiniones: Opiniones,
     //functions/methods
     setMensaje:(mensaje:Mensajes)=>void;
     setUsuario:(usuario:Usuario)=>void;
@@ -39,6 +42,7 @@ interface GeneralState{
     setSesion:(sesion:Sesion)=>void;
     setAgendaFiltro:(agendaFiltro:AgendaFiltro)=>void;
     setMenuOpiniones:(menuOpiniones:MenuOpiniones[])=>void;
+    setOpiniones:(opiniones:Opiniones)=>void;
 }
 
 const GeneralContext = React.createContext({} as GeneralState);
@@ -104,6 +108,20 @@ class GeneralProvider extends React.Component{
                 },
             ]
         },
+        opiniones:{
+            parecer:{
+                motivo: '',
+                justificacion:'',
+                estatusGO:0
+            },
+            exigencias:{
+                descripcion: '',
+                oportunidad:'',
+                qtededias:'',
+                tipoUsuario:'',
+                observaciones:'',
+            }
+        },
         agendafiltro:{
             filtroHorario: 'Seleccione una horario',
             filtroFecha: 'Seleccione una fecha',
@@ -114,16 +132,16 @@ class GeneralProvider extends React.Component{
         },
         menuOpiniones:[
             {
-                id:1,
-                opcion:'Parecer',
-                icon:'icomoon-free_hammer2',
-                estatus:1
+              id:1,
+              opcion:'Parecer',
+              icon:'icomoon-free_hammer2',
+              estatus:1
             },
             {
               id:2,
               opcion:'Pareceres realizados',
-                icon:'ant-design_check-circle-filled',
-                estatus:0
+              icon:'ant-design_check-circle-filled',
+              estatus:0
             },
             {
               id:3,
@@ -134,8 +152,8 @@ class GeneralProvider extends React.Component{
             {
               id:4,
               opcion:'Exigencias',
-                icon:'ic_baseline-lightbulb',
-                estatus:0
+              icon:'ic_baseline-lightbulb',
+              estatus:0
             },
         ]
     }
@@ -152,6 +170,7 @@ class GeneralProvider extends React.Component{
     setSesion= (sesion:Sesion)=> this.setState({sesion});
     setAgendaFiltro= (agendaFiltro:AgendaFiltro)=> this.setState({agendaFiltro});
     setMenuOpiniones= (menuopiniones:MenuOpiniones[])=>this.setState({menuopiniones});
+    setOpiniones= (opiniones:Opiniones)=>this.setState({opiniones});
     logOut = () =>{
 
         const payload0 = this.state.sesion;
@@ -194,6 +213,7 @@ class GeneralProvider extends React.Component{
                     tabSelectedOld: this.state.tabSelectedOld,
                     tabModule: this.state.tabModule,
                     menuOpiniones:this.state.menuOpiniones,
+                    opiniones:this.state.opiniones,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
@@ -208,6 +228,7 @@ class GeneralProvider extends React.Component{
                     setTabSelectedOld: this.setTabSelectedOld,
                     setTabModule:this.setTabModule,
                     setMenuOpiniones:this.setMenuOpiniones,
+                    setOpiniones:this.setOpiniones,
                     }}
                 >
                {this.props.children}
