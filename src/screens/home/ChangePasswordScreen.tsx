@@ -8,9 +8,7 @@ import { Spacer } from '../../components/Spacer';
 import { AlertNotif } from '../../components/login/AlertNotif';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-//import CodePush from 'react-native-code-push';
- //import RNRestart from 'react-native-restart';
-//import {Restart} from 'fiction-expo-restart';
+import RNRestart from 'react-native-restart';
 
 interface Props extends StackScreenProps<any, any>{};
 
@@ -72,7 +70,8 @@ export const ChangePasswordScreen = ({ navigation }:Props) => {
 
                                     //TODO reload app
                                     //CodePush.restartApp();
-                                    //RNRestart.Restart();                          
+                                    RNRestart.Restart();   
+                                    //NativeModules.DevSettings.reload();                       
                                 }} />
                     </View>
                 
@@ -160,9 +159,8 @@ export const ChangePasswordScreen = ({ navigation }:Props) => {
                                 logOut(); 
                         
                             // navigation.navigate('NavigationLogin'); 
-                                //CodePush.restartApp();
-                                //RNRestart.Restart();
-                               //Restart();
+                                RNRestart.Restart();
+                              // NativeModules.DevSettings.reload();
 
                                 }} ></ButtonTextGoTo>
                     </View>

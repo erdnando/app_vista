@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.facebook.react.bridge.JSIModulePackage; // <- add
 import com.swmansion.reanimated.ReanimatedJSIModulePackage; // <- add
+import com.reactnativerestart.RestartPackage; 
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -28,7 +29,9 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+          //packages.add(new RestartPackage());
           return packages;
+
         }
 
         @Override
@@ -41,6 +44,8 @@ public class MainApplication extends Application implements ReactApplication {
         return new ReanimatedJSIModulePackage(); // <- add
       }
 
+
+       
      
 
      

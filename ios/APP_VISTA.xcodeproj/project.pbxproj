@@ -37,6 +37,13 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = APP_VISTA;
 		};
+		87945AE32794A56F0009EA73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 87945ADF2794A56F0009EA73 /* Restart.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = Restart;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +75,7 @@
 		873AA33F2778E910002E6519 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		873AA3402778E925002E6519 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		873AA3422778F386002E6519 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = icomoon.ttf; path = ../../resources/fonts/icomoon.ttf; sourceTree = "<group>"; };
+		87945ADF2794A56F0009EA73 /* Restart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Restart.xcodeproj; path = "../node_modules/react-native-restart/ios/Restart.xcodeproj"; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-APP_VISTA-APP_VISTATests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-APP_VISTA-APP_VISTATests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A881CF5CF3F2B244570E2A /* Pods-APP_VISTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APP_VISTA.debug.xcconfig"; path = "Target Support Files/Pods-APP_VISTA/Pods-APP_VISTA.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-APP_VISTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APP_VISTA.release.xcconfig"; path = "Target Support Files/Pods-APP_VISTA/Pods-APP_VISTA.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +145,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				87945ADF2794A56F0009EA73 /* Restart.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -186,6 +195,14 @@
 				873AA33F2778E910002E6519 /* Ionicons.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		87945AE02794A56F0009EA73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87945AE42794A56F0009EA73 /* libRestart.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E233CBF5F47BEE60B243DCF8 /* Pods */ = {
@@ -271,6 +288,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 87945AE02794A56F0009EA73 /* Products */;
+					ProjectRef = 87945ADF2794A56F0009EA73 /* Restart.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* APP_VISTA */,
@@ -278,6 +301,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		87945AE42794A56F0009EA73 /* libRestart.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestart.a;
+			remoteRef = 87945AE32794A56F0009EA73 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {

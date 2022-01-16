@@ -7,7 +7,7 @@ import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
 import { NavigationLogin } from './NavigationLogin';
 import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
-// import RNRestart from 'react-native-restart';
+import RNRestart from 'react-native-restart';
  //import CodePush from 'react-native-code-push';
 
 
@@ -179,7 +179,8 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
             logOut(); 
             //navigation.navigate('NavigationLogin'); 
             //CodePush.restartApp();
-            //RNRestart.Restart();
+            RNRestart.Restart();
+            //NativeModules.DevSettings.reload();
             
             }}></OpcionMenuLateral>
           
