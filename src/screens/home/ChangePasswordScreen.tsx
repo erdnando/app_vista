@@ -37,11 +37,11 @@ export const ChangePasswordScreen = ({ navigation }:Props) => {
             <View style={{...styles.container, marginTop:top-50, }}>
             <ImageBackground style={styles.background} resizeMode='cover' source={require('../../assets/Background.png')}>
 
-                <View style={{alignItems:'center',height:40,top:top+30,}}>
+            <View style={{alignItems:'center',height:40,top:Platform.OS==='android' ? top+80: top+20}}>
                     <Text style={{fontFamily:'Roboto-Bold',fontSize:18}}>Reset de shena</Text>
                 </View>
                     
-                <Spacer height={100} ></Spacer>
+                <Spacer height={150} ></Spacer>
 
                 <View style={styles.logo} ><Image source={require('../../assets/vertical-logo.png')} ></Image></View>
             
