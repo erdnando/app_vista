@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import { Image, useWindowDimensions, View, TextStyle } from 'react-native';
+import { Image, useWindowDimensions, View, NativeModules } from 'react-native';
 import { gstyles } from '../theme/appTheme';
 import { NavigationHome } from './NavigationHome';
 import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
 import { NavigationLogin } from './NavigationLogin';
 import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
-import { Text } from 'react-native-svg';
-import CodePush from 'react-native-code-push';
+// import RNRestart from 'react-native-restart';
+ //import CodePush from 'react-native-code-push';
 
 
 const Drawer = createDrawerNavigator();
@@ -178,7 +178,8 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   
             logOut(); 
             //navigation.navigate('NavigationLogin'); 
-            CodePush.restartApp();
+            //CodePush.restartApp();
+            //RNRestart.Restart();
             
             }}></OpcionMenuLateral>
           

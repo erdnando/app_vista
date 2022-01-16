@@ -41,6 +41,10 @@ public class MainApplication extends Application implements ReactApplication {
         return new ReanimatedJSIModulePackage(); // <- add
       }
 
+     
+
+     
+
       };
 
   @Override

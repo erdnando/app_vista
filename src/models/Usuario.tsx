@@ -14,5 +14,6 @@ export interface Usuario{
     whatsapp:string,
     telefono:string,
     direccion:string,
-
+    nuevoPassword1:string,
+    nuevoPassword2:string,
 }

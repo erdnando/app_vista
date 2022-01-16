@@ -18,7 +18,7 @@ export const LoginScreen = ({ navigation }:Props) => {
     
     const { top,left } = useSafeAreaInsets();
     
-    const { flags,setFlags } = useContext( GeneralContext )
+    const { flags,setFlags,usuario } = useContext( GeneralContext )
     const {  validarLogin, } = useLogin(); 
     
     useEffect(() => {
@@ -32,7 +32,7 @@ export const LoginScreen = ({ navigation }:Props) => {
     }, [])
     
     return (
-        <View style={{...styles.container, marginTop:top-50, marginHorizontal:left-25}}>
+        <View style={{...styles.container, marginTop:top-50, marginHorizontal:left-5}}>
          <ImageBackground style={styles.background} resizeMode='cover' source={require('../../assets/Background.png')}>
            <Spacer height={100} ></Spacer>
 
@@ -43,7 +43,7 @@ export const LoginScreen = ({ navigation }:Props) => {
             <View style={styles.formulario}>
 
                 <InputEmail modo='normal' label='E-mail' iconLeft='ic_outline-email' iconRight='ic_round-close'></InputEmail>
-                <InputPassword modo='normal' label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPassword>
+                <InputPassword modo='normal' campo={usuario.password} width='78%' placeHolder='Senha' label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPassword>
                 <Spacer height={40} ></Spacer>
 
                 <View>

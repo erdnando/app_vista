@@ -62,6 +62,8 @@ class GeneralProvider extends React.Component{
             whatsapp:'(34) 99830-0082',
             telefono:'(34) 99830-0082',
             direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia',},
+            nuevoPassword1:'',
+            nuevoPassword2:'',
         relatorio:{ 
             filtroCliente:'',
             filtroFechaInicial:'',
@@ -78,6 +80,7 @@ class GeneralProvider extends React.Component{
             modalFiltrosVisible:false,
             modalFechaVisible:false,
             modalFechaHorarioVisible:false,
+            isPasswordReseted:false,
         },
         ids:{
             idOpinionBusqueda: '',
