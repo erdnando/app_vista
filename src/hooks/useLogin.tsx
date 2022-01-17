@@ -7,6 +7,9 @@ import { AuthLogin } from '../models/response/AuthLogin';
 
 
 export const useLogin =  () => {
+
+  
+
     const { flags, usuario,setUsuario,setFlags,menuOpiniones,setMenuOpiniones } = useContext( GeneralContext );
 
    const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
@@ -51,12 +54,64 @@ export const useLogin =  () => {
 
         const authLogin = async () =>{
 
-            const resp = await vistaApi.post<AuthLogin>('/auth/login',{
-                username:usuario.email.trim().toLowerCase(),
-                password:usuario.password.trim()
-            });
+            try {
+                const resp = await vistaApi.post<AuthLogin>('/auth/login',{}, {
+                                                            headers:{
+                                                            'Content-Type': 'application/json',
+                                                            'Accept': 'application/json',
+                                                        },auth:{
+                                                            username : usuario.email.trim().toLowerCase(),
+                                                            password : usuario.password.trim()
+                                                        }
+                }
+                
+                );
 
-            console.log(resp);
+
+                const payloadx= flags;
+                payloadx.isLogedIn=true;
+                payloadx.isAlertLoginVisible=false;
+                setFlags(payloadx);
+
+                if(resp.data.tipoUsuario==='USUARIO_TERCEIRO'){
+                   
+    
+                    const payload= usuario;
+                    payload.tipo=TipoUsuario.USER_TERCEIRO;
+                    setUsuario(payload);
+    
+                    const payload1= menuOpiniones;
+                    payload1[2].visible = true;//valores visible
+                    setMenuOpiniones(payload1);
+    
+                    return true;
+                }else if(resp.data.tipoUsuario==='COLABORADOR'){
+                   
+                    const payload= usuario;
+                    payload.tipo=TipoUsuario.COLABORADOR;
+                    setUsuario(payload);
+    
+                    const payload1= menuOpiniones;
+                    payload1[2].visible = false;//valores hidden
+                    setMenuOpiniones(payload1);
+                    return true;
+                }
+    
+                console.log(resp);
+                console.log(resp.data.tipoUsuario);
+            } catch (error) {
+                console.log(error);
+
+                const payloadx= flags;
+                payloadx.isLogedIn=false;
+                payloadx.isAlertLoginVisible=true;
+                setFlags(payloadx);
+
+                console.log('credenciales invalidas');
+
+                return false;
+            }
+           
 
         //    if(resp.data !=undefined){
 
@@ -75,54 +130,54 @@ export const useLogin =  () => {
         const validarLogin = () =>{
 
             //TODO add logic to validate
-            //authLogin();
+            return authLogin();
 
-            if(usuario.password ==='12345' && usuario.email === 'colaborador'){
+            // if(usuario.password ==='12345' && usuario.email === 'colaborador'){
               
-                const payloadx= flags;
-                payloadx.isLogedIn=true;
-                payloadx.isAlertLoginVisible=false;
-                setFlags(payloadx);
+            //     const payloadx= flags;
+            //     payloadx.isLogedIn=true;
+            //     payloadx.isAlertLoginVisible=false;
+            //     setFlags(payloadx);
 
-                const payload= usuario;
-                payload.tipo=TipoUsuario.COLABORADOR;
-                setUsuario(payload);
+            //     const payload= usuario;
+            //     payload.tipo=TipoUsuario.COLABORADOR;
+            //     setUsuario(payload);
 
-                const payload1= menuOpiniones;
-                payload1[2].visible = false;//valores hidden
-                setMenuOpiniones(payload1);
+            //     const payload1= menuOpiniones;
+            //     payload1[2].visible = false;//valores hidden
+            //     setMenuOpiniones(payload1);
                 
-                return true;
-            } else if(usuario.password ==='12345' && usuario.email === 'terciario'){
+            //     return true;
+            // } else if(usuario.password ==='12345' && usuario.email === 'terciario'){
              
-                const payloadx= flags;
-                payloadx.isLogedIn=true;
-                payloadx.isAlertLoginVisible=false;
-                setFlags(payloadx);
+            //     const payloadx= flags;
+            //     payloadx.isLogedIn=true;
+            //     payloadx.isAlertLoginVisible=false;
+            //     setFlags(payloadx);
 
 
 
-                const payload= usuario;
-                payload.tipo=TipoUsuario.USER_TERCEIRO;
-                setUsuario(payload);
+            //     const payload= usuario;
+            //     payload.tipo=TipoUsuario.USER_TERCEIRO;
+            //     setUsuario(payload);
 
-                const payload1= menuOpiniones;
-                payload1[2].visible = true;//valores visible
-                setMenuOpiniones(payload1);
+            //     const payload1= menuOpiniones;
+            //     payload1[2].visible = true;//valores visible
+            //     setMenuOpiniones(payload1);
 
-                return true;
-            }
-            else{
+            //     return true;
+            // }
+            // else{
                
-                const payloadx= flags;
-                payloadx.isLogedIn=false;
-                payloadx.isAlertLoginVisible=true;
-                setFlags(payloadx);
+            //     const payloadx= flags;
+            //     payloadx.isLogedIn=false;
+            //     payloadx.isAlertLoginVisible=true;
+            //     setFlags(payloadx);
 
-                console.log('credenciales invalidas');
+            //     console.log('credenciales invalidas');
 
-                return false;
-            }
+            //     return false;
+            // }
         }
 
         const resetContrasena = async() =>{
