@@ -10,7 +10,7 @@ export const useLogin =  () => {
 
   
 
-    const { flags, usuario,setUsuario,setFlags,menuOpiniones,setMenuOpiniones } = useContext( GeneralContext );
+    const { flags, usuario,setUsuario,setFlags,menuOpiniones,setMenuOpiniones,sesion,setSesion } = useContext( GeneralContext );
 
    const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
         const onChangeEmail = async (email:string) =>{
@@ -73,11 +73,18 @@ export const useLogin =  () => {
                 payloadx.isAlertLoginVisible=false;
                 setFlags(payloadx);
 
+                //TODO to map menues
+                // const payloads= sesion;
+                // payloads.token=resp.data.token;
+                // payloads.menu=resp.data.info.menuSistema;
+                // setSesion(payloads);
+
                 if(resp.data.tipoUsuario==='USUARIO_TERCEIRO'){
                    
     
                     const payload= usuario;
                     payload.tipo=TipoUsuario.USER_TERCEIRO;
+                    
                     setUsuario(payload);
     
                     const payload1= menuOpiniones;
