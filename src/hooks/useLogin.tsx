@@ -67,7 +67,7 @@ export const useLogin =  () => {
                                 }
                 });
 
-
+                console.log(resp);
                 // const payloadx= flags;
                 // payloadx.isLogedIn=true;
                 // payloadx.isAlertLoginVisible=false;

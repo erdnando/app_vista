@@ -474,13 +474,13 @@ export const NavigationHome = ( { navigation }:Props) => {
         </Tab.Navigator>
       );
   }
-// else{
-//   return(
-//     <View>
-//       <Text>Sin permisos</Text>
-//     </View>
-//   )
-// }
+else{
+  return(
+    <View>
+      <Text>Sin permisos</Text>
+    </View>
+  )
+}
 }
 
 
