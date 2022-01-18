@@ -8,6 +8,7 @@ import { NavigationLogin } from './NavigationLogin';
 import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
 import RNRestart from 'react-native-restart';
+import { Loading } from '../components/Loading';
  //import CodePush from 'react-native-code-push';
 
 
@@ -42,6 +43,9 @@ export const NavigationLateral = ( { navigation }:Props) => {
   }, [])
 
  
+      if(flags.isLoading){
+        return <Loading color='red'></Loading>
+      }
       return (
                 <Drawer.Navigator 
                 

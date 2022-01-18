@@ -48,7 +48,7 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
           <TouchableOpacity style={{ right:35, top:20}} onPress={() =>{ 
                 //call search engine api
                 // const payload= flags;
-                // payload.isLoadingSearch=true;
+                // payload.isLoading=true;
                 // payload.resultadosBusquedaVisible=true;
                 // setFlags(payload);
                 console.log('searching...')

@@ -52,18 +52,20 @@ export const LoginScreen = ({ navigation }:Props) => {
                            let resp = await validarLogin();
                             if(resp){
                                 console.log('login correcto')
-                                const payload= flags;
-                                payload.isAlertLoginVisible=false;
-                                //payload.leftMenuAccesible=true;
-                                setFlags(payload);
+                                // const payload= flags;
+                                // payload.isAlertLoginVisible=false;
+                                // //payload.leftMenuAccesible=true;
+                                // setFlags(payload);
                                 
                                 navigation.replace('NavigationLateral');  
-                            }else{
+                            }
+                            else{
                                 //show alert
-                                const payload= flags;
-                                payload.isAlertLoginVisible=true;
-                                //payload.leftMenuAccesible=false;
-                                setFlags(payload);
+                                //const payload= flags;
+                                // payload.isAlertLoginVisible=true;
+                                // payload.isLoading=false;
+                                // //payload.leftMenuAccesible=false;
+                                // setFlags(payload);
                                 console.log('error al autenticarse');
                             }     
                         }} />

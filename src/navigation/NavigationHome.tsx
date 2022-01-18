@@ -15,6 +15,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 import { ContactoScreen } from '../screens/home/ContactoScreen';
 import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
+import { Loading } from '../components/Loading';
 
 
 const Tab = createBottomTabNavigator();
@@ -28,6 +29,9 @@ export const NavigationHome = ( { navigation }:Props) => {
   const { usuario,flags,setFlags,setTabSelected,setTabSelectedOld,tabSelectedOld, tabSelected,ids, 
           setIds, tabModule,setTabModule,menuOpiniones,setMenuOpiniones} = useContext(GeneralContext);
   const { getResultadoBusqueda } = useSearch(); 
+
+
+ 
 
   //terciario
   if( usuario.tipo === 1){
@@ -150,7 +154,7 @@ export const NavigationHome = ( { navigation }:Props) => {
 
                                                   //call search engine api
                                               const payload= flags;
-                                              payload.isLoadingSearch=true;
+                                              payload.isLoading=true;
                                               payload.resultadosBusquedaVisible=true;//openModal
                                               setFlags(payload);
 
@@ -379,7 +383,7 @@ export const NavigationHome = ( { navigation }:Props) => {
 
                                                   //call search engine api
                                               const payload= flags;
-                                              payload.isLoadingSearch=true;
+                                              payload.isLoading=true;
                                               payload.resultadosBusquedaVisible=true;//openModal
                                               setFlags(payload);
 
@@ -469,14 +473,14 @@ export const NavigationHome = ( { navigation }:Props) => {
                       }, })} />
         </Tab.Navigator>
       );
-}
-else{
-  return(
-    <View>
-      <Text>Sin permisos</Text>
-    </View>
-  )
-}
+  }
+// else{
+//   return(
+//     <View>
+//       <Text>Sin permisos</Text>
+//     </View>
+//   )
+// }
 }
 
 

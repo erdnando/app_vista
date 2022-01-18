@@ -19,7 +19,7 @@ export const useSearchOpinion =  () => {
               setPeliculasEncine(peliculas);
     
               const payload= flags;
-              payload.isLoadingSearch=false;
+              payload.isLoading=false;
               setFlags(payload);
            
             
