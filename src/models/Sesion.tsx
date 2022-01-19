@@ -7,6 +7,9 @@ import { Usuario } from './Usuario';
 export interface Sesion{
     usuario:Usuario,
     token:string,
+    clienteId:number,
+    charter:number,
+    colaboradorId:number,
     menu:MenuSistema[],
 }
 

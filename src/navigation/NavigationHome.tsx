@@ -31,7 +31,6 @@ export const NavigationHome = ( { navigation }:Props) => {
   const { getResultadoBusqueda } = useSearch(); 
 
 
- 
 
   //terciario
   if( usuario.tipo === 1){
@@ -182,7 +181,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                   }
         })} >
 
-        <Tab.Screen name="HomeScreen" options={{ title:'' }}   component={ HomeScreen } listeners={({ navigation, route }) => ({
+        <Tab.Screen name="HomeScreen" options={{ title:'',unmountOnBlur:true }}   component={ HomeScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => {  
                       setTabSelected('Logo');   
                       setTabModule('Logo');
@@ -197,7 +196,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                       setIds(payload1);
 
                        }, })} />
-        <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
+        <Tab.Screen name="AgendaScreen" options={{ title:'',unmountOnBlur:true }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => {   
                       setTabSelected('Agenda');   
                       setTabModule('Agenda');
@@ -211,7 +210,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                       payload1.idOpinionSeleccionado='';
                       setIds(payload1);
                       }, })} />
-        <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
+        <Tab.Screen name="ParecerScreen" options={{ title:'',unmountOnBlur:true }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => { 
                       setTabSelected('Parecer');  
                       setTabModule('Parecer');
@@ -225,7 +224,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                       setIds(payload1);
 
                         }, })} />
-        <Tab.Screen  name="ContactoScreen" options={{ title:'' }} component={ ContactoScreen } listeners={({ navigation, route }) => ({
+        <Tab.Screen  name="ContactoScreen" options={{ title:'',unmountOnBlur:true }} component={ ContactoScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => { 
                       setTabSelected('Contacto'); 
                       setTabModule('Contacto'); 
@@ -240,7 +239,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                       setIds(payload1);
 
                     }, })} />
-        <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
+        <Tab.Screen name="RelatorioScreen" options={{ title:'',unmountOnBlur:true }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => { 
                       setTabSelected('Relatorios'); 
                       setTabModule('Relatorios');
@@ -412,7 +411,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                     ,
             })} >
 
-          <Tab.Screen name="HomeScreen" options={{ title:'' }}  component={ HomeScreen } listeners={({ navigation, route }) => ({
+          <Tab.Screen name="HomeScreen" options={{ title:'',unmountOnBlur:true }}  component={ HomeScreen } listeners={({ navigation, route }) => ({
                       tabPress: e => {   
                         setTabSelected('Logo'); 
                         setTabModule('Logo');  
@@ -427,7 +426,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                         setIds(payload1);
 
                         }, })} />
-          <Tab.Screen name="AgendaScreen" options={{ title:'' }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
+          <Tab.Screen name="AgendaScreen" options={{ title:'',unmountOnBlur:true }} component={ AgendaScreen } listeners={({ navigation, route }) => ({
                       
                       tabPress: e => {   
                         setTabSelected('Agenda');   
@@ -443,7 +442,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                       setIds(payload1);
 
                          }, })} />
-          <Tab.Screen name="ParecerScreen" options={{ title:'' }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
+          <Tab.Screen name="ParecerScreen" options={{ title:'',unmountOnBlur:true }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
                       tabPress: e => { setTabSelected('Parecer'); 
                       setTabModule('Parecer'); 
                       const payload= flags;
@@ -457,7 +456,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                       setIds(payload1);
 
                       }, })} />
-          <Tab.Screen name="RelatorioScreen" options={{ title:'' }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
+          <Tab.Screen name="RelatorioScreen" options={{ title:'',unmountOnBlur:true }} component={ RelatorioScreen } listeners={({ navigation, route }) => ({
                       tabPress: e => { setTabSelected('Relatorios'); 
                       setTabModule('Relatorios');
                       const payload= flags;

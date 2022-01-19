@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform, Text, View } from 'react-native';
 import { BarChart } from 'react-native-gifted-charts';
 import { HeaderTitle } from '../HeaderTitle';
+import { useHome } from '../../hooks/useHome';
+import { GraphMotiveGoNoGo } from '../../models/response/GraphMotiveGoNoGo';
 
 
 interface Props{
@@ -10,15 +12,26 @@ interface Props{
 
 export const ResultadoParecer = ( ) => {
 
-  const labelTopGo = () =>{  return( <Text style={{width:70, textAlign:'right'}}>455</Text> ) }
-  const labelTopNoGo = () =>{  return( <Text style={{width:70, textAlign:'right'}}>210</Text> ) }
-  const labelEnAnalisis = () =>{  return( <Text style={{width:70, textAlign:'right'}}>6</Text> ) }
+ // const [graphData, setgraphData] = useState<GraphMotiveGoNoGo[]>([]);
+  const {  graphMotiveGoNoGo,graphData,floading,totalPareceres } = useHome(); 
+
+  // useEffect(() => {
+  //   console.log('recargando home');
+  //   floading(true)
+  //   graphMotiveGoNoGo();
+  //   floading(false)
+   
+  // }, [])
+
+  const labelTopGo = () =>{  return( <Text style={{width:70, textAlign:'right'}}>{graphData[0].go}</Text> ) }
+  const labelTopNoGo = () =>{  return( <Text style={{width:70, textAlign:'right'}}>{graphData[0].noGo}</Text> ) }
+  const labelEnAnalisis = () =>{  return( <Text style={{width:70, textAlign:'right'}}>{graphData[0].analise}</Text> ) }
   
 
   const barData = [
-      {value: 455,label: 'GO',frontColor: '#83AE69',topLabelComponent:labelTopGo },
-      {value: 210,label: 'NO GO',frontColor: '#B85050',topLabelComponent:labelTopNoGo },
-      {value: 6,label: 'EM ANALISE',frontColor: '#F9A61A',topLabelComponent:labelEnAnalisis },
+      {value: graphData[0].go,label: 'GO',frontColor: '#83AE69',topLabelComponent:labelTopGo },
+      {value: graphData[0].noGo,label: 'NO GO',frontColor: '#B85050',topLabelComponent:labelTopNoGo },
+      {value: graphData[0].analise,label: 'EM ANALISE',frontColor: '#F9A61A',topLabelComponent:labelEnAnalisis },
      
       ];
 
@@ -49,6 +62,6 @@ export const ResultadoParecer = ( ) => {
                               data={barData}
                               isAnimated/>
                     </View>
-                    <HeaderTitle label='Total de Pareceres: 710' top={95+30} fontSize={17}></HeaderTitle>
+                    <HeaderTitle label={`Total de Pareceres: ${totalPareceres}`} top={95+30} fontSize={17}></HeaderTitle>
             </View>
 }

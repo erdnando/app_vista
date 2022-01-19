@@ -102,6 +102,9 @@ class GeneralProvider extends React.Component{
                 direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'
             },
             token:'',
+            clienteId:0,
+            charter:0,
+            colaboradorId:0,
             menu:[
                 {
                     id:0,
