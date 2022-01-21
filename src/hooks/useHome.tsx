@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import { TipoUsuario } from '../models/Usuario';
 import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
-import { AuthLogin } from '../models/response/AuthLogin';
 import { GraphMotiveGoNoGo } from '../models/response/GraphMotiveGoNoGo';
 
 

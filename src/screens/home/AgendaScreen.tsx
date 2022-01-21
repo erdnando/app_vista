@@ -10,9 +10,9 @@ import { OportunidadesDia } from '../../components/agenda/OportunidadesDia';
 import { DetalleAgenda } from '../../components/agenda/DetalleAgenda';
 import { ModalSearchResultados } from '../../components/search/ModalSearchResultados';
 import { ModalFiltros } from '../../components/agenda/ModalFiltros';
-import { ModalFecha } from '../../components/agenda/ModalFecha';
 
 export const AgendaScreen = () => {
+
     const { top } = useSafeAreaInsets();
     //call global state
     const { flags} = useContext(GeneralContext);

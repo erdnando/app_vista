@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, Text, View, Animated, Easing, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { useNotificaciones } from '../../hooks/useNotificaciones';
+import { NotificacionByLoginAux } from '../../models/response/NotificacionesByLoginAux';
 import { GeneralContext } from '../../state/GeneralProvider';
+import { Loading } from '../Loading';
 import { Spacer } from '../Spacer';
 import { IconoActualizacion } from '../ultimasActualizaciones/IconoActualizacion';
 // import { IconoActualizacion } from './IconoActualizacion';
@@ -10,111 +13,114 @@ import { IconoActualizacion } from '../ultimasActualizaciones/IconoActualizacion
 
 export const ListNotificaciones = ( ) => {
 
-  interface LastUpdates{
-    id:string,
-    tipo:string,
-    dia:string;
-    hora:string;
-    descripcion:string;
-    color:string;
-    background:string;
-    icon:string;
-    diaVisible:boolean;
-    }
+//   interface LastUpdates{
+//     id:string,
+//     tipo:string,
+//     dia:string;
+//     hora:string;
+//     descripcion:string;
+//     color:string;
+//     background:string;
+//     icon:string;
+//     diaVisible:boolean;
+//     }
 
-    const Data:LastUpdates[] = [
-        {
-            id:'1',
-            tipo:'SIMPLE',
-            dia:'Hoy',
-            hora: 'Hoje. 00:00',
-            descripcion:'Lorem ipsum dolor sit amet adipis',
-            color: 'red',
-            background:'#F8BBBB',
-            icon:'bx_bxs-message-alt-error',
-            diaVisible:true
+    const { arrNotificaciones, } = useNotificaciones(); 
+    const {flags  } = useContext( GeneralContext );
 
-        },
-        {
-            id:'2',
-            tipo:'SIMPLE',
-            dia:'Hoy',
-            hora: 'Hoje. 00:00',
-            descripcion:'Se ha habierto la posicion A32x. Y la opcion 45',
-            color: 'red',
-            background:'#F8BBBB',
-            icon:'bx_bxs-message-alt-error',
-            diaVisible:false
-        },
-        {
-            id:'3',
-            tipo:'EVENT',
-            dia:'Ayer',
-            hora: 'Hoje. 00:00',
-            descripcion:'Se ha habierto la posicion 89.',
-            color: 'grey',
-            background:'#BCC1CB',
-            icon:'ic_baseline-lightbulb',
-            diaVisible:true
-        },
-        {
-            id:'4',
-            tipo:'EVENT',
-            dia:'Ayer',
-            hora: 'Hoje. 00:00',
-            descripcion:'Se ha habierto la posicion W321.',
-            color: 'grey',
-            background:'#BCC1CB',
-            icon:'icomoon-free_hammer2',
-            diaVisible:false
-        },
-        {
-            id:'5',
-            tipo:'EVENT',
-            dia:'Ayer',
-            hora: 'Hoje. 00:00',
-            descripcion:'Se ha habierto la posicion W321.',
-            color: 'grey',
-            background:'#BCC1CB',
-            icon:'ic_baseline-lightbulb',
-            diaVisible:false
-        },
-        {
-            id:'6',
-            tipo:'EVENT',
-            dia:'Ayer',
-            hora: 'Hoje. 00:00',
-            descripcion:'Se ha habierto la posicion W321.',
-            color: 'grey',
-            background:'#BCC1CB',
-            icon:'icomoon-free_hammer2',
-            diaVisible:false
-        },
-        {
-            id:'7',
-            tipo:'EVENT',
-            dia:'Ayer',
-            hora: 'Hoje. 00:00',
-            descripcion:'Se ha habierto la posicion W321.',
-            color: 'grey',
-            background:'#BCC1CB',
-            icon:'icomoon-free_hammer2',
-            diaVisible:false
-        },
-        {
-        id:'8',
-        tipo:'EVENT',
-        dia:'Ayer',
-        hora: 'Hoje. 00:00',
-        descripcion:'Se ha habierto la posicion 8.',
-        color: 'grey',
-        background:'#BCC1CB',
-        icon:'icomoon-free_hammer2',
-        diaVisible:false
-    },
-    ]
+    // const Data:LastUpdates[] = [
+    //     {
+    //         id:'1',
+    //         tipo:'SIMPLE',
+    //         dia:'Hoy',
+    //         hora: 'Hoje. 00:00',
+    //         descripcion:'Lorem ipsum dolor sit amet adipis',
+    //         color: 'red',
+    //         background:'#F8BBBB',
+    //         icon:'bx_bxs-message-alt-error',
+    //         diaVisible:true
 
-    const renderUpdateItem = (updateItem:LastUpdates) =>{
+    //     },
+    //     {
+    //         id:'2',
+    //         tipo:'SIMPLE',
+    //         dia:'Hoy',
+    //         hora: 'Hoje. 00:00',
+    //         descripcion:'Se ha habierto la posicion A32x. Y la opcion 45',
+    //         color: 'red',
+    //         background:'#F8BBBB',
+    //         icon:'bx_bxs-message-alt-error',
+    //         diaVisible:false
+    //     },
+    //     {
+    //         id:'3',
+    //         tipo:'EVENT',
+    //         dia:'Ayer',
+    //         hora: 'Hoje. 00:00',
+    //         descripcion:'Se ha habierto la posicion 89.',
+    //         color: 'grey',
+    //         background:'#BCC1CB',
+    //         icon:'ic_baseline-lightbulb',
+    //         diaVisible:true
+    //     },
+    //     {
+    //         id:'4',
+    //         tipo:'EVENT',
+    //         dia:'Ayer',
+    //         hora: 'Hoje. 00:00',
+    //         descripcion:'Se ha habierto la posicion W321.',
+    //         color: 'grey',
+    //         background:'#BCC1CB',
+    //         icon:'icomoon-free_hammer2',
+    //         diaVisible:false
+    //     },
+    //     {
+    //         id:'5',
+    //         tipo:'EVENT',
+    //         dia:'Ayer',
+    //         hora: 'Hoje. 00:00',
+    //         descripcion:'Se ha habierto la posicion W321.',
+    //         color: 'grey',
+    //         background:'#BCC1CB',
+    //         icon:'ic_baseline-lightbulb',
+    //         diaVisible:false
+    //     },
+    //     {
+    //         id:'6',
+    //         tipo:'EVENT',
+    //         dia:'Ayer',
+    //         hora: 'Hoje. 00:00',
+    //         descripcion:'Se ha habierto la posicion W321.',
+    //         color: 'grey',
+    //         background:'#BCC1CB',
+    //         icon:'icomoon-free_hammer2',
+    //         diaVisible:false
+    //     },
+    //     {
+    //         id:'7',
+    //         tipo:'EVENT',
+    //         dia:'Ayer',
+    //         hora: 'Hoje. 00:00',
+    //         descripcion:'Se ha habierto la posicion W321.',
+    //         color: 'grey',
+    //         background:'#BCC1CB',
+    //         icon:'icomoon-free_hammer2',
+    //         diaVisible:false
+    //     },
+    //     {
+    //     id:'8',
+    //     tipo:'EVENT',
+    //     dia:'Ayer',
+    //     hora: 'Hoje. 00:00',
+    //     descripcion:'Se ha habierto la posicion 8.',
+    //     color: 'grey',
+    //     background:'#BCC1CB',
+    //     icon:'icomoon-free_hammer2',
+    //     diaVisible:false
+    // },
+    // ]
+
+    const renderUpdateItem = (updateItem:NotificacionByLoginAux) =>{
         return (
         
             <View style={{flex:1, flexDirection:'row',justifyContent:'flex-end'}}>
@@ -174,20 +180,23 @@ export const ListNotificaciones = ( ) => {
    }, [])
 
   
-
-    return (
-      <Animated.View  style={{...transformStyle,opacity:fadeValue}}>
-         
-        
-        <FlatList data={Data} 
-        renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
-        keyExtractor={(item,index) => item.id + index} 
-        ItemSeparatorComponent={ () => renderSeparator()}
-        />
-     
-      
-     </Animated.View>
-    )
+    if(flags.isLoading){
+       return <Loading color='green'></Loading>
+    }else{
+            return (
+            <Animated.View  style={{...transformStyle,opacity:fadeValue}}>
+                
+                
+                <FlatList data={arrNotificaciones} 
+                renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
+                keyExtractor={(item,index) => item.id + index} 
+                ItemSeparatorComponent={ () => renderSeparator()}
+                />
+            
+            
+            </Animated.View>
+            )
+       }
 }
 
 

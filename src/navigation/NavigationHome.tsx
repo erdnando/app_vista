@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';  
-import {  Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colores, gstyles } from '../theme/appTheme';
 import { AgendaScreen } from '../screens/home/AgendaScreen';
@@ -15,7 +15,6 @@ import { GeneralContext } from '../state/GeneralProvider';
 import { ContactoScreen } from '../screens/home/ContactoScreen';
 import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
-import { Loading } from '../components/Loading';
 
 
 const Tab = createBottomTabNavigator();
@@ -473,13 +472,13 @@ export const NavigationHome = ( { navigation }:Props) => {
         </Tab.Navigator>
       );
   }
-else{
+  else{
   return(
     <View>
       <Text>Sin permisos</Text>
     </View>
   )
-}
+  }
 }
 
 
