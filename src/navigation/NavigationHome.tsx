@@ -147,7 +147,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                          onPress={() =>{ 
                                               console.log('searching...')
                                               const payload1= ids;
-                                              payload1.codigoBusqueda='xxx';
+                                              payload1.codigoBusqueda='1';
                                               setIds(payload1);
 
                                                   //call search engine api
@@ -158,12 +158,13 @@ export const NavigationHome = ( { navigation }:Props) => {
 
                                               console.log('searching...')
                                               
-                                              setTimeout(
-                                                () => { 
-                                                  getResultadoBusqueda();//consume api
-                                                },
-                                                3000
-                                              )   
+                                              // setTimeout(
+                                              //   () => { 
+                                              //     getResultadoBusqueda(true);//consume api
+                                              //   },
+                                              //   3000
+                                              // )   
+                                              getResultadoBusqueda(true);//consume api
 
 
                                           }}>
@@ -376,7 +377,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                          onPress={() =>{ 
 
                                               const payload1= ids;
-                                              payload1.codigoBusqueda='xxx';
+                                              payload1.codigoBusqueda='1';
                                               setIds(payload1);
 
                                                   //call search engine api
@@ -387,12 +388,13 @@ export const NavigationHome = ( { navigation }:Props) => {
 
                                               console.log('searching...')
                                               
-                                              setTimeout(
-                                                () => { 
-                                                  getResultadoBusqueda();//consume api
-                                                },
-                                                3000
-                                              ) 
+                                              // setTimeout(
+                                              //   () => { 
+                                              //     getResultadoBusqueda(true);//consume api
+                                              //   },
+                                              //   3000
+                                              // ) 
+                                              getResultadoBusqueda(true);//consume api
 
                                               
                                           }}>

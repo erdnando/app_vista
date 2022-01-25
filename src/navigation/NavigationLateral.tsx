@@ -98,6 +98,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   const payload1 = ids;
                   payload1.idOpinionBusqueda= '';
                   payload1.idOpinionSeleccionado='';
+                  payload1.codigoBusqueda='';
                   setIds(payload1);
 
             navigation.navigate('NavigationHome'); 
@@ -113,6 +114,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   const payload1 = ids;
                   payload1.idOpinionBusqueda= '';
                   payload1.idOpinionSeleccionado='';
+                  payload1.codigoBusqueda='';
                   setIds(payload1);
 
                   setFlags(payload);
@@ -130,6 +132,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   const payload1 = ids;
                   payload1.idOpinionBusqueda= '';
                   payload1.idOpinionSeleccionado='';
+                  payload1.codigoBusqueda='';
                   setIds(payload1);
 
             navigation.navigate('ParecerScreen'); 
@@ -146,6 +149,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   const payload1 = ids;
                   payload1.idOpinionBusqueda= '';
                   payload1.idOpinionSeleccionado='';
+                  payload1.codigoBusqueda='';
                   setIds(payload1);
 
             navigation.navigate('RelatorioScreen'); 
@@ -162,6 +166,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   const payload1 = ids;
                   payload1.idOpinionBusqueda= '';
                   payload1.idOpinionSeleccionado='';
+                  payload1.codigoBusqueda='';
                   setIds(payload1);
 
 
@@ -178,6 +183,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   const payload1 = ids;
                   payload1.idOpinionBusqueda= '';
                   payload1.idOpinionSeleccionado='';
+                  payload1.codigoBusqueda='';
                   setIds(payload1);
                   
             logOut(); 

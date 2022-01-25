@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Text, TextInput, TouchableOpacity, View, Platform } from 'react-native';
-import { useLogin } from '../../hooks/useLogin';
 import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
 import { colores } from '../../theme/appTheme';
@@ -49,18 +48,21 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
           <TouchableOpacity style={{ right:35, top:20}} onPress={() =>{ 
                 //call search engine api
                 const payload= flags;
-                payload.isLoading=true;
+                //payload.isLoading=true;
                 payload.resultadosBusquedaVisible=true;
                 setFlags(payload);
 
                 console.log('searching...')
-              // setResultadosBusquedaVisible(true);//openModal
-                setTimeout(
-                  () => { 
-                    getResultadoBusqueda();//consume api
-                  },
-                  3000
-                )   
+
+                getResultadoBusqueda(true);//consume api
+                // setTimeout(
+                //   () => { 
+                //     getResultadoBusqueda();//consume api
+                //   },
+                //   300
+                // ) 
+               
+
             }}>
               
              <Text style={{right:10,}}>

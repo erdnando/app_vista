@@ -15,13 +15,13 @@ export const AgendaScreen = () => {
 
     const { top } = useSafeAreaInsets();
     //call global state
-    const { flags} = useContext(GeneralContext);
+    const { flags,ids} = useContext(GeneralContext);
     //call service to get data
     const { isLoading } = useMovies();
 
      if(flags?.resultadosBusquedaVisible){
         return <SafeAreaProvider>
-                <ModalSearchResultados iconClose='ic_round-close' color='black' label={`Oportunidade ${ 'xxxx' }`}></ModalSearchResultados>
+                <ModalSearchResultados iconClose='ic_round-close' color='black' label={`Oportunidade ${ ids.codigoBusqueda }`}></ModalSearchResultados>
             </SafeAreaProvider> 
      }
 
