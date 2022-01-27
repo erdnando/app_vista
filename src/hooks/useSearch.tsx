@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
 import { OpportunityCustomFindById } from '../models/response/OpportunityCustomFindById';
 import vistaApi from '../api/vista';
-
+import RNFetchBlob, { RNFetchBlobConfig } from 'rn-fetch-blob';
+import { Platform } from 'react-native';
 
 export const useSearch =  () => {
         const { ids ,setIds, flags,setFlags, sesion} = useContext( GeneralContext );
@@ -127,6 +128,11 @@ export const useSearch =  () => {
             setIds(payload);
         }
 
+ 
+        
+
+
+      
 
         useEffect(() => {
             //console.log('recargando getResultadoBusqueda');
@@ -142,3 +148,5 @@ export const useSearch =  () => {
             onChangeSearch,oportunidadesTab,getResultadoBusqueda
         }
 }
+        
+

@@ -29,7 +29,7 @@ const Drawer = createDrawerNavigator();
 
 export const NavigationLateral = ( { navigation }:Props) => {
 
-    const { width } = useWindowDimensions();
+    const { width,height } = useWindowDimensions();
     const { flags,setFlags } = useContext( GeneralContext )
    
     useEffect(() => {

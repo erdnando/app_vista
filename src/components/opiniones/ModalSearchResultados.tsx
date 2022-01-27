@@ -16,7 +16,7 @@ interface Props{
 export const ModalSearchResultados = ( { iconClose,color, label }: Props ) => {
 
   //call service to get data
-  const { peliculasEnCine } = useSearch();
+  //const { peliculasEnCine } = useSearch();
   const { flags } = useContext(GeneralContext);
 
   if(flags.isLoading){

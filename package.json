@@ -19,6 +19,7 @@
     "@react-navigation/material-top-tabs": "^6.0.6",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
+    "@types/rn-fetch-blob": "^1.2.3",
     "axios": "^0.24.0",
     "base-64": "^1.0.0",
     "react": "17.0.2",
@@ -26,6 +27,7 @@
     "react-native-calendars": "^1.1275.0",
     "react-native-checkbox": "^2.0.0",
     "react-native-collapsible": "^1.6.0",
+    "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "^2.1.0",
     "react-native-gifted-charts": "^0.2.3",
     "react-native-linear-gradient": "^2.5.6",
@@ -39,7 +41,8 @@
     "react-native-svg": "^12.1.1",
     "react-native-tab-view": "^3.1.1",
     "react-native-vector-icons": "^9.0.0",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
