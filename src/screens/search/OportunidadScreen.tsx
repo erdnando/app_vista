@@ -8,6 +8,7 @@ import { gstyles } from '../../theme/appTheme';
 import { useSearch } from '../../hooks/useSearch';
 import { useDownloadFile } from '../../hooks/useDownloadFile';
 import FileViewer from "react-native-file-viewer";
+import CustomIcon from '../../theme/CustomIcon';
 
 export const OportunidadScreen = () => {
 
@@ -32,14 +33,21 @@ export const OportunidadScreen = () => {
                 <TextOportunidadIcono label='data Certame: ' valor={oportunidadesTab.dataCertame} size={17} icono='ic_round-date-range'></TextOportunidadIcono>
                 <Spacer height={10}></Spacer>
                 <TextOportunidadIcono label='Localidade: ' valor={oportunidadesTab.localidade} size={17} icono='ic_baseline-place'></TextOportunidadIcono>
-                <Spacer height={10}></Spacer>
-                <TextOportunidadIcono label='' valor='Download do Edital' size={17} icono='ic_baseline-cloud-download'></TextOportunidadIcono>
-                {/* <Link to='http://www.redbooks.ibm.com/redbooks/pdfs/sg247363.pdf' target='_blank'   >Download</Link> */}
-                <Button title='Download' onPress={()=>{
-                      checkPermission('https://www.mysu.org.uy/haceclick/folletos/02-el-deseo-sexual.pdf','pdf','application/pdf');
-                   
-                     
-                }}></Button>
+                <Spacer height={5}></Spacer>
+
+
+                <View style={{ flexDirection:'row', alignContent:'center', alignItems:'center' ,marginLeft:5}}>
+                        {/* <TextOportunidadIcono label='' valor='' size={17} icono='ic_baseline-cloud-download' ></TextOportunidadIcono> */}
+
+                        <View style={{}} >
+                          <CustomIcon name='ic_baseline-cloud-download' size={25} color='black'  style={{}} ></CustomIcon>
+                        </View>
+                        {/* <Link to='http://www.redbooks.ibm.com/redbooks/pdfs/sg247363.pdf' target='_blank'   >Download</Link> */}
+                        <Button title='Download do Edital' onPress={()=>{
+                              checkPermission('https://www.mysu.org.uy/haceclick/folletos/02-el-deseo-sexual.pdf','pdf','application/pdf');
+                        }}></Button>
+                </View>
+               
         </View>
     )
 }
