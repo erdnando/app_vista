@@ -128,11 +128,6 @@ export const useSearch =  () => {
             setIds(payload);
         }
 
- 
-        
-
-
-      
 
         useEffect(() => {
             //console.log('recargando getResultadoBusqueda');

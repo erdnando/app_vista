@@ -11,4 +11,5 @@ export interface Flags{
     modalFechaVisible:boolean,
     modalFechaHorarioVisible:boolean,
     isPasswordReseted:boolean,
+    isDownloadingFile:number,
 }

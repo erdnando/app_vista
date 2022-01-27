@@ -1,19 +1,20 @@
+import { useContext } from "react";
 import { PermissionsAndroid, Platform } from "react-native";
 import RNFetchBlob, { RNFetchBlobConfig } from "rn-fetch-blob";
+import FileViewer from "react-native-file-viewer";
 
-export const downloadFile = async () => {
+export const useDownloadFile = () => {
    
 
-  //const fileUrl = 'https://1000marcas.net/wp-content/uploads/2020/02/logo-Intel-500x281.png';
 
-  const downloadAndroidFile = (fileUrl: string,fileExt: string,mime:string) => {
- 
+  const downloadAndroidFile = (fileUrl:string,extension:string,mime:string) => {
+   
     // Get today's date to add the time suffix in filename
     let date = new Date();
     // File URL which we want to download
     let FILE_URL = fileUrl;    
 
-    let file_ext = '.' + fileExt;
+    let file_ext = '.' + extension;
   
     const { config, fs } = RNFetchBlob;
     let RootDir = fs.dirs.DownloadDir;//PictureDir
@@ -40,23 +41,23 @@ export const downloadFile = async () => {
       });
   };
 
-  const downloadFileIOs = async (fileUrl:string,fileExt: string,mime:string) => {
+
+  const downloadFileIOs = async (fileUrl:string,extension:string,mime:string) => {
     var date = new Date();
 
-    const { dirs: {DownloadDir, DocumentDir,PictureDir } } = RNFetchBlob.fs; 
+    const { dirs: {DownloadDir, DocumentDir,CacheDir } } = RNFetchBlob.fs; 
     const {config} = RNFetchBlob; 
-    //const isIOS = Platform.OS == "ios"; 
-    const aPath = Platform.select({ios: DocumentDir , android: DownloadDir});
-    const fPath = aPath + '/' + Math.floor(date.getTime() + date.getSeconds() / 2)+'.'+fileExt;
+    const aPath = Platform.select({ios: CacheDir , android: DownloadDir});
+    const fPath = aPath + '/' + Math.floor(date.getTime() + date.getSeconds() / 2)+'.'+extension;
 
     const configOptions = Platform.select({
       ios: {
         fileCache: true,
-        title:'xxxx'+'.'+fileExt,
+        title:'xxxx.png',
         path: fPath,
         mime: mime,
-        appendExt: fileExt,
-       notification: true,
+        appendExt: extension,
+        notification: true,
       },
     
       android: {
@@ -70,38 +71,40 @@ export const downloadFile = async () => {
       },
     });
 
- 
+    
       config(configOptions as RNFetchBlobConfig)
         .fetch('GET', fileUrl)
         .then(res => {        
-          //console.log('res -> ', JSON.stringify(res));
           console.log('res -> ', JSON.stringify(res.path()));
-           setTimeout(() => {
-          //   //RNFetchBlob.ios.previewDocument('file://' + res.path());
-          //     //  RNFetchBlob.fs.writeFile(fPath, res.data, 'base64');
-           //RNFetchBlob.ios.previewDocument(res.path());//fPath
-     
-          RNFetchBlob.ios.openDocument(res.path())
+           //setTimeout(() => {
+      
+        // RNFetchBlob.ios.openDocument(res.path())
+         FileViewer.open(res.path(), {
+            showOpenWithDialog: true,
+            onDismiss: () => {
+                  console.log('ventana cerrada...')
+            },
+        }).catch((error) => {
           
-          //openFile(res.path());
-           }, 2000);
-        })
-        .catch(errorMessage => {
+        });
+          
+       
+           //}, 2000);
+        }).catch(errorMessage => {
           console.log('error al abrir el archivo'),
           console.log(errorMessage);
         });
     };
 
-//main method
-  const prepareDownload = async (fileUrl: string,fileExt: string,mime:string) => {
+
+  const checkPermission = async (urlResource:string,extension:string, mime:string) => {
   
       // Function to check the platform
       // If Platform is Android then check for permissions.
   
       if (Platform.OS === 'ios') {
         
-        await downloadFileIOs(fileUrl,fileExt,mime);
-
+        await downloadFileIOs(urlResource,extension,mime);
       } else {
         try {
           const granted = await PermissionsAndroid.request(
@@ -114,7 +117,7 @@ export const downloadFile = async () => {
           );
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             // Start downloading
-            downloadAndroidFile(fileUrl,fileExt,mime);
+            downloadAndroidFile(urlResource,extension,mime);
             console.log('Storage Permission Granted.');
           } else {
             // If permission denied then show alert
@@ -128,6 +131,6 @@ export const downloadFile = async () => {
     };
 
 
-    return {   prepareDownload   }
+    return {   checkPermission  }
     
   };

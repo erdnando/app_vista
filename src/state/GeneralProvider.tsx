@@ -81,6 +81,7 @@ class GeneralProvider extends React.Component{
             modalFechaVisible:false,
             modalFechaHorarioVisible:false,
             isPasswordReseted:false,
+            isDownloadingFile:0,
         },
         ids:{
             idOpinionBusqueda: '',
