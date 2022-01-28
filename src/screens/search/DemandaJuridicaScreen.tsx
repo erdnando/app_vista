@@ -2,72 +2,15 @@ import React from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { Spacer } from '../../components/Spacer';
+import { useSearch } from '../../hooks/useSearch';
+import { ListJudgeResourceByOpportunityIdAux } from '../../models/response/ListJudgeResourceByOpportunityIdAux';
 import { gstyles } from '../../theme/appTheme';
 
 export const DemandaJuridicaScreen = () => {
 
-    interface Demandas{
-        id:number,
-        procedimiento:string,
-        fechaProtocolo:string,
-        resultado:string,
-    }
+    const { demandaJuridicaTab } = useSearch();
 
-    const Data:Demandas[] = [
-        {
-          id:1,
-          procedimiento:'Lorem ipsum dolor',
-          fechaProtocolo:'00/00/00 00:00',
-          resultado:'procedente'
-      },{
-        id:2,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'procedente'
-    },{
-        id:3,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'no procedente'
-    },{
-        id:4,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'procedente'
-    },{
-        id:5,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'no procedente'
-    },{
-        id:6,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'procedente'
-    },{
-        id:7,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'no procedente'
-    },{
-        id:8,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'no procedente'
-    },{
-        id:9,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'procedente'
-    },{
-        id:10,
-        procedimiento:'Lorem ipsum dolor',
-        fechaProtocolo:'00/00/00 00:00',
-        resultado:'no procedente'
-    },
-    ]
-
-    const renderUpdateItem = (item:Demandas) =>{
+    const renderUpdateItem = (item:ListJudgeResourceByOpportunityIdAux) =>{
 
         {/* alerta */}
         return ( <View style={{height:115, flexDirection:'row', width:'98%',   
@@ -97,7 +40,7 @@ export const DemandaJuridicaScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
-                <FlatList data={Data} 
+                <FlatList data={demandaJuridicaTab} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                     //keyExtractor={(item) => item.id} 

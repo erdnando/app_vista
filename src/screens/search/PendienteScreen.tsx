@@ -3,103 +3,106 @@ import { FlatList, Platform, Text, View } from 'react-native';
 import { TextOportunidad } from '../../components/oportunidad/TextOportunidad';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { Spacer } from '../../components/Spacer';
+import { useSearch } from '../../hooks/useSearch';
+import { ListAllRequirementByOpportunityAux } from '../../models/response/ListAllRequirementByOpportunityAux';
 import { gstyles } from '../../theme/appTheme';
 
 export const PendienteScreen = () => {
 
-    interface Pendientes{
-        id:number,
-        descripcion:string,
-        tipo:string,
-        tipoUsuario:string,
-        dias:string,
-        acepto:string
-    }
+    const { pendenciasTab } = useSearch();
+    // interface Pendientes{
+    //     id:number,
+    //     descripcion:string,
+    //     tipo:string,
+    //     tipoUsuario:string,
+    //     dias:string,
+    //     acepto:string
+    // }
 
-    const Data:Pendientes[] = [
-        {
-          id:1,
-          descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-          tipo:'Lorem ipsum dolor',
-          tipoUsuario:'Lorem ipsum dolor',
-          dias:'000',
-          acepto:'Sim'
-      },
-      {
-        id:2,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Sim'
-    },
-    {
-        id:3,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Nao'
-    },
-    {
-        id:4,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Sim'
-    },
-    {
-        id:5,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Nao'
-    },
-    {
-        id:6,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Sim'
-    },
-    {
-        id:7,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Sim'
-    },
-    {
-        id:8,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Sim'
-    },
-    {
-        id:9,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Nao'
-    },
-    {
-        id:10,
-        descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
-        tipo:'Lorem ipsum dolor',
-        tipoUsuario:'Lorem ipsum dolor',
-        dias:'000',
-        acepto:'Nao'
-    },
-    ]
+    // const Data:Pendientes[] = [
+    //     {
+    //       id:1,
+    //       descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //       tipo:'Lorem ipsum dolor',
+    //       tipoUsuario:'Lorem ipsum dolor',
+    //       dias:'000',
+    //       acepto:'Sim'
+    //   },
+    //   {
+    //     id:2,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Sim'
+    // },
+    // {
+    //     id:3,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Nao'
+    // },
+    // {
+    //     id:4,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Sim'
+    // },
+    // {
+    //     id:5,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Nao'
+    // },
+    // {
+    //     id:6,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Sim'
+    // },
+    // {
+    //     id:7,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Sim'
+    // },
+    // {
+    //     id:8,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Sim'
+    // },
+    // {
+    //     id:9,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Nao'
+    // },
+    // {
+    //     id:10,
+    //     descripcion:'Lorem ipsum dolor sit amet consectetur adipiscing eit Mauris nisi sapien.',
+    //     tipo:'Lorem ipsum dolor',
+    //     tipoUsuario:'Lorem ipsum dolor',
+    //     dias:'000',
+    //     acepto:'Nao'
+    // },
+    // ]
 
-    const renderUpdateItem = (item:Pendientes) =>{
+    const renderUpdateItem = (item:ListAllRequirementByOpportunityAux) =>{
 
         {/* alerta */}
         return ( <View style={{height:160, flexDirection:'row', width:'98%',   
@@ -139,7 +142,7 @@ export const PendienteScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
-                <FlatList data={Data} 
+                <FlatList data={pendenciasTab} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                     //keyExtractor={(item) => item.id} 

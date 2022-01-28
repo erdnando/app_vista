@@ -13,7 +13,7 @@ import CustomIcon from '../../theme/CustomIcon';
 export const OportunidadScreen = () => {
 
    const { oportunidadesTab } = useSearch();
-   //const {  checkPermission } = useDownloadFile();  
+   
    const { checkPermission} = useDownloadFile()
       
     return (
@@ -30,24 +30,16 @@ export const OportunidadScreen = () => {
                 <TextOportunidad label='Status: ' valor={oportunidadesTab.statusOportunidade} colorValor='orange' valueIsBold={true} size={17}  ></TextOportunidad>
                 
                 <Spacer height={20}></Spacer>
-                <TextOportunidadIcono label='data Certame: ' valor={oportunidadesTab.dataCertame} size={17} icono='ic_round-date-range'></TextOportunidadIcono>
+                <TextOportunidadIcono label='Data Certame: ' valor={oportunidadesTab.dataCertame} size={17} icono='ic_round-date-range'></TextOportunidadIcono>
                 <Spacer height={10}></Spacer>
                 <TextOportunidadIcono label='Localidade: ' valor={oportunidadesTab.localidade} size={17} icono='ic_baseline-place'></TextOportunidadIcono>
-                <Spacer height={5}></Spacer>
-
-
-                <View style={{ flexDirection:'row', alignContent:'center', alignItems:'center' ,marginLeft:5}}>
-                        {/* <TextOportunidadIcono label='' valor='' size={17} icono='ic_baseline-cloud-download' ></TextOportunidadIcono> */}
-
-                        <View style={{}} >
-                          <CustomIcon name='ic_baseline-cloud-download' size={25} color='black'  style={{}} ></CustomIcon>
-                        </View>
-                        {/* <Link to='http://www.redbooks.ibm.com/redbooks/pdfs/sg247363.pdf' target='_blank'   >Download</Link> */}
-                        <Button title='Download do Edital' onPress={()=>{
+                <Spacer height={2}></Spacer>
+                <View style={{ flexDirection:'row', alignContent:'center', alignItems:'center' ,marginLeft:3}}>
+                        <CustomIcon name='ic_baseline-cloud-download' size={25} color='black'></CustomIcon>
+                        <Button title='Download do Edital'  onPress={()=>{
                               checkPermission('https://www.mysu.org.uy/haceclick/folletos/02-el-deseo-sexual.pdf','pdf','application/pdf');
                         }}></Button>
                 </View>
-               
         </View>
     )
 }

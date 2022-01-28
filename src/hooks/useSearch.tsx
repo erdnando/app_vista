@@ -4,6 +4,13 @@ import { OpportunityCustomFindById } from '../models/response/OpportunityCustomF
 import vistaApi from '../api/vista';
 import RNFetchBlob, { RNFetchBlobConfig } from 'rn-fetch-blob';
 import { Platform } from 'react-native';
+import { ListJudgeResourceByOpportunityId } from '../models/response/ListJudgeResourceByOpportunityId';
+import { ListJudgeResourceByOpportunityIdAux } from '../models/response/ListJudgeResourceByOpportunityIdAux';
+import { ListAllTaskByOpportunityId } from '../models/response/ListAllTaskByOpportunityId';
+import { ListAllRequirementByOpportunity } from '../models/response/ListAllRequirementByOpportunity';
+import { ListAllRequirementByOpportunityAux } from '../models/response/ListAllRequirementByOpportunityAux';
+import { ListAllTaskByOpportunityIdAux } from '../models/response/ListAllTaskByOpportunityIdAux';
+
 
 export const useSearch =  () => {
         const { ids ,setIds, flags,setFlags, sesion} = useContext( GeneralContext );
@@ -74,6 +81,38 @@ export const useSearch =  () => {
                                                                         "valorTotal": 0,
                                                                         "valorTotalRecebido": 0
                                                                     })
+        const [ demandaJuridicaTab, setDemandaJuridicaTab ] = useState<ListJudgeResourceByOpportunityIdAux[]>(
+            [
+            {
+                id:0,
+                procedimiento:'No data',
+                fechaProtocolo:'No data',
+                resultado:'No data'
+            }
+            ])
+
+        const [ planAccionTab, setPlanAccionTab ] = useState<ListAllTaskByOpportunityIdAux[]>(
+            [
+            {
+                id:0,
+                tarifa:"No data",
+                responsable:"No data",
+                fechaPlaneada:"No data",
+                fechaPlaneada2:"No data"
+            }
+            ])
+
+        const [ pendenciasTab, setPendenciasTab ] = useState<ListAllRequirementByOpportunityAux[]>(
+            [
+            {
+                id:0,
+                descripcion:'No data',
+                tipo:'No data',
+                tipoUsuario:'No data',
+                dias:'No data',
+                acepto:'No data'//Sim
+            }
+            ])
 
         const floading=(valor:boolean)=>{
             const payload= flags;
@@ -81,11 +120,14 @@ export const useSearch =  () => {
             
             setFlags(payload);
         }
-    
+        //main
         const getResultadoBusqueda = async (t:boolean) =>{
             if(t){ floading(false);return;}
               
             getOportunidadeTab();
+            getDemandaJuridicaTab();
+            getPlanAccionTab();
+            getPendenciasTab();
         }
 
         const getOportunidadeTab = async () =>{
@@ -122,6 +164,157 @@ export const useSearch =  () => {
             }
         }
 
+        const getDemandaJuridicaTab = async () =>{
+            try {
+                const resp = await vistaApi.get<ListJudgeResourceByOpportunityId[]>('/services/DemandJudge/listJudgeResourceByOpportunityId',{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                   params:{ "oportunidadeId" : ids.codigoBusqueda,
+                    "clienteId" : sesion.clienteId,
+                    }
+                }, 
+                );
+
+                console.log('op listJudgeResourceByOpportunityId:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length>0){
+
+                    setDemandaJuridicaTab([]);
+
+                    let arrDemandaJuridicaTabAux=demandaJuridicaTab;//get reference
+
+                    resp.data.forEach(function(item,index){
+
+                        arrDemandaJuridicaTabAux.push({
+                            id:index,
+                            procedimiento:item.procedimento,
+                            fechaProtocolo:item.dataProtocolo,
+                            resultado:item.resultado
+                        });
+                        
+                      })
+
+                      setDemandaJuridicaTab(arrDemandaJuridicaTabAux);
+                }
+
+                 //test
+                //  const payload= oportunidadesTab;
+                //  payload.razaoSocialOrgao= 'xxxxxxx';
+                //  setOportunidadesTab(payload); 
+                floading(false)
+            } catch (error) {
+                console.log(error);
+                floading(false)
+            }
+        }
+
+        const getPlanAccionTab = async () =>{
+            try {
+                const resp = await vistaApi.get<ListAllTaskByOpportunityId[]>('/services/plan/listAllTaskByOpportunityId',{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                   params:{ "oportunidadeId" : ids.codigoBusqueda,
+                    "charter" : 1,
+                    }
+                }, 
+                );
+
+                console.log('op listAllTaskByOpportunityId:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length>0){
+
+                    setDemandaJuridicaTab([]);
+
+                    let arrPlanAccionTabAux=planAccionTab;//get reference
+
+                    resp.data.forEach(function(item,index){
+
+                        arrPlanAccionTabAux.push({
+                            id:0,
+                            tarifa:item.descricaoTarefa,
+                            responsable:item.responsavel,
+                            fechaPlaneada:item.dataTarefaFimPlanejada,
+                            fechaPlaneada2:item.dataTarefaFimRealizada
+                        });
+                        
+                      })
+
+                      setPlanAccionTab(arrPlanAccionTabAux);
+                }
+
+                 //test
+                //  const payload= oportunidadesTab;
+                //  payload.razaoSocialOrgao= 'xxxxxxx';
+                //  setOportunidadesTab(payload); 
+                floading(false)
+            } catch (error) {
+                console.log(error);
+                floading(false)
+            }
+        }
+
+
+        const getPendenciasTab = async () =>{
+            try {
+                const resp = await vistaApi.get<ListAllRequirementByOpportunity[]>('/services/requirement/listAllRequirementByOpportunity',{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                   params:{ "oportunidadeId" : ids.codigoBusqueda,
+                    "charter" : 1,
+                    }
+                }, 
+                );
+
+                console.log('op listAllRequirementByOpportunity:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length>0){
+
+                    setPendenciasTab([]);
+
+                    let arrPlanAccionTabAux=pendenciasTab;//get reference
+
+                    resp.data.forEach(function(item,index){
+
+                        arrPlanAccionTabAux.push({
+                            id:0,
+                            descripcion:item.descricao,
+                            tipo:item.tipoMeta,
+                            tipoUsuario:item.usuario,
+                            dias:item.metaDias,
+                            acepto:item.atende
+                        });
+                        
+                      })
+
+                      setPendenciasTab(arrPlanAccionTabAux);
+                }
+
+                 //test
+                //  const payload= oportunidadesTab;
+                //  payload.razaoSocialOrgao= 'xxxxxxx';
+                //  setOportunidadesTab(payload); 
+                floading(false)
+            } catch (error) {
+                console.log(error);
+                floading(false)
+            }
+        }
+
         const onChangeSearch = async (codigoBusqueda:string) =>{
             const payload= ids;
             payload.codigoBusqueda= codigoBusqueda;
@@ -140,7 +333,7 @@ export const useSearch =  () => {
   
         //exposed objets 
         return {
-            onChangeSearch,oportunidadesTab,getResultadoBusqueda
+            onChangeSearch,oportunidadesTab,getResultadoBusqueda,demandaJuridicaTab,planAccionTab,pendenciasTab
         }
 }
         
