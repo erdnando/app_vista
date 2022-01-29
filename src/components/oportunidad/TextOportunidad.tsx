@@ -4,7 +4,7 @@ import CustomIcon from '../../theme/CustomIcon';
 
 interface Props{
   label:string,
-  valor:string,
+  valor:string | null,
   size:number,
   colorValor?:string,
   valueIsBold?:boolean,

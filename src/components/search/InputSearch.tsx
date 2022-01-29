@@ -16,8 +16,8 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { ids,flags,setFlags } = useContext( GeneralContext )
-    const { onChangeSearch,getResultadoBusqueda } = useSearch(); 
+    const { ids,flags,setFlags,setSearchResultados } = useContext( GeneralContext )
+    const { onChangeSearch,getResultadoBusqueda, } = useSearch(); 
 
     
     return (
@@ -52,9 +52,9 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
                 payload.resultadosBusquedaVisible=true;
                 setFlags(payload);
 
-                console.log('searching...')
-
-                getResultadoBusqueda(true);//consume api
+                console.log('searching...2')
+                
+                getResultadoBusqueda();//consume api
                 // setTimeout(
                 //   () => { 
                 //     getResultadoBusqueda();//consume api

@@ -2,83 +2,15 @@ import React from 'react'
 import { FlatList, View } from 'react-native';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { Spacer } from '../../components/Spacer';
+import { useSearch } from '../../hooks/useSearch';
+import { OpportunityCustomListOpinionsByIdAux } from '../../models/response/OpportunityCustomListOpinionsByIdAux';
 import { gstyles } from '../../theme/appTheme';
 
 export const ParecerScreenSearch = () => {
 
-    interface Oportunidades{
-        id:number,
-        responsable:string,
-        tipo:string,
-        parecer:string,
-        fecha:string
-    }
+    const { parecerTab,setParecerTab } = useSearch();
 
-    const Data:Oportunidades[] = [
-        {
-          id:1,
-          responsable:'Lorem ipsum dolor',
-          tipo:'Lorem ipsum dolor',
-          parecer:'Go',
-          fecha:'00/00/00 00:00'
-      },{
-        id:2,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },{
-        id:3,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },{
-        id:4,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },{
-        id:5,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },{
-        id:6,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },{
-        id:7,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },{
-        id:8,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },{
-        id:9,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },{
-        id:10,
-        responsable:'Lorem ipsum dolor',
-        tipo:'Lorem ipsum dolor',
-        parecer:'Go',
-        fecha:'00/00/00 00:00'
-    },
-    ]
-
-    const renderUpdateItem = (item:Oportunidades) =>{
+    const renderUpdateItem = (item:OpportunityCustomListOpinionsByIdAux) =>{
 
         {/* alerta */}
         return ( <View style={{height:115, flexDirection:'row',   
@@ -113,10 +45,10 @@ export const ParecerScreenSearch = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:2 }}>
         
-                <FlatList data={Data} 
+                <FlatList data={parecerTab} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
-                    keyExtractor={(item) => item.id+item.fecha} 
+                    keyExtractor={(item,index) => item.id+index.toString()} 
                     ItemSeparatorComponent={ () => renderSeparator()}
                 />
             </View>

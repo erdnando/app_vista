@@ -4,9 +4,9 @@ import CustomIcon from '../../theme/CustomIcon';
 import { TextOportunidadVertical } from './TextOportunidadVertical';
 
 interface Props{
-  producto:string,
-  participacion:string,
-  posicion:string,
+  producto:string | null,
+  participacion:string| null,
+  posicion:string| null,
   
 }
 

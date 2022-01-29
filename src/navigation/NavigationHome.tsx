@@ -145,7 +145,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                       { flags.verDetalleAgenda || ids.idOpinionSeleccionado !='' ?   
                                          <TouchableOpacity style={{ marginEnd:16 }} 
                                          onPress={() =>{ 
-                                              console.log('searching...')
+                                              console.log('searching...3')
                                               const payload1= ids;
                                               payload1.codigoBusqueda='1';
                                               setIds(payload1);
@@ -156,7 +156,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                               payload.resultadosBusquedaVisible=true;//openModal
                                               setFlags(payload);
 
-                                              console.log('searching...')
+                                              console.log('searching...4')
                                               
                                               // setTimeout(
                                               //   () => { 
@@ -386,14 +386,9 @@ export const NavigationHome = ( { navigation }:Props) => {
                                               payload.resultadosBusquedaVisible=true;//openModal
                                               setFlags(payload);
 
-                                              console.log('searching...')
+                                              console.log('searching...5')
                                               
-                                              // setTimeout(
-                                              //   () => { 
-                                              //     getResultadoBusqueda(true);//consume api
-                                              //   },
-                                              //   3000
-                                              // ) 
+                                            
                                               getResultadoBusqueda(true);//consume api
 
                                               

@@ -10,7 +10,7 @@ import { AgendaFiltro } from '../models/AgendaFiltro';
 import { IDs } from '../models/IDs';
 import { MenuOpiniones } from '../models/MenuOpiniones';
 import { Opiniones } from '../models/Opiniones';
-import { OpinionesParecer } from '../models/OpinionesParecer';
+import { SearchResultados } from '../models/SearchResultados';
 
 
 interface GeneralState{
@@ -28,6 +28,7 @@ interface GeneralState{
     tabSelectedOld:string,
     tabModule:string,
     opiniones: Opiniones,
+    searchResultados:SearchResultados[],
     //functions/methods
     setMensaje:(mensaje:Mensajes)=>void;
     setUsuario:(usuario:Usuario)=>void;
@@ -43,6 +44,7 @@ interface GeneralState{
     setAgendaFiltro:(agendaFiltro:AgendaFiltro)=>void;
     setMenuOpiniones:(menuOpiniones:MenuOpiniones[])=>void;
     setOpiniones:(opiniones:Opiniones)=>void;
+    setSearchResultados:(searchResultados:SearchResultados[])=>void;
 }
 
 const GeneralContext = React.createContext({} as GeneralState);
@@ -56,12 +58,13 @@ class GeneralProvider extends React.Component{
         tabModule:'Logo',
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
-            tipo: TipoUsuario.NONE,
-            email:'erdnando@gmail.com',
-            password:'248854',
-            whatsapp:'(34) 99830-0082',
-            telefono:'(34) 99830-0082',
-            direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia',},
+                tipo: TipoUsuario.NONE,
+                email:'erdnando@gmail.com',
+                password:'248854',
+                whatsapp:'(34) 99830-0082',
+                telefono:'(34) 99830-0082',
+                direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'
+            },
             nuevoPassword1:'',
             nuevoPassword2:'',
         relatorio:{ 
@@ -208,7 +211,23 @@ class GeneralProvider extends React.Component{
               estatus:0,
               visible:true
             },
-        ]
+        ],
+        searchResultados:
+          [
+            {
+            id:0,
+            lote:'No data',
+            item:'No data',
+            valorFechado:'No data',
+            valorTotal:'No data',
+            ganador:'No data',
+            producto:'No data',
+            participacion:'No data',
+            posicion:'No data',
+            collapsed:true
+            },
+            ]
+        
     }
 
     setMensaje=(mensaje: Mensajes) => this.setState({mensaje})
@@ -224,6 +243,7 @@ class GeneralProvider extends React.Component{
     setAgendaFiltro= (agendaFiltro:AgendaFiltro)=> this.setState({agendaFiltro});
     setMenuOpiniones= (menuopiniones:MenuOpiniones[])=>this.setState({menuopiniones});
     setOpiniones= (opiniones:Opiniones)=>this.setState({opiniones});
+    setSearchResultados= (searchResultados:SearchResultados)=>this.setState({searchResultados});
     logOut = () =>{
 
         const payload0 = this.state.sesion;
@@ -267,6 +287,7 @@ class GeneralProvider extends React.Component{
                     tabModule: this.state.tabModule,
                     menuOpiniones:this.state.menuOpiniones,
                     opiniones:this.state.opiniones,
+                    searchResultados:this.state.searchResultados,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
@@ -282,6 +303,7 @@ class GeneralProvider extends React.Component{
                     setTabModule:this.setTabModule,
                     setMenuOpiniones:this.setMenuOpiniones,
                     setOpiniones:this.setOpiniones,
+                    setSearchResultados:this.setSearchResultados,
                     }}
                 >
                {this.props.children}

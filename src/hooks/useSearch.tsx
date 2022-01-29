@@ -2,18 +2,19 @@ import { useContext, useEffect, useState } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
 import { OpportunityCustomFindById } from '../models/response/OpportunityCustomFindById';
 import vistaApi from '../api/vista';
-import RNFetchBlob, { RNFetchBlobConfig } from 'rn-fetch-blob';
-import { Platform } from 'react-native';
 import { ListJudgeResourceByOpportunityId } from '../models/response/ListJudgeResourceByOpportunityId';
 import { ListJudgeResourceByOpportunityIdAux } from '../models/response/ListJudgeResourceByOpportunityIdAux';
 import { ListAllTaskByOpportunityId } from '../models/response/ListAllTaskByOpportunityId';
 import { ListAllRequirementByOpportunity } from '../models/response/ListAllRequirementByOpportunity';
 import { ListAllRequirementByOpportunityAux } from '../models/response/ListAllRequirementByOpportunityAux';
 import { ListAllTaskByOpportunityIdAux } from '../models/response/ListAllTaskByOpportunityIdAux';
+import { OpportunityListitem } from '../models/response/OpportunityListitem';
+import { OpportunityListitemAux } from '../models/response/OpportunityListitemAux';
+import { OpportunityCustomListOpinionsByIdAux } from '../models/response/OpportunityCustomListOpinionsByIdAux';
 
 
 export const useSearch =  () => {
-        const { ids ,setIds, flags,setFlags, sesion} = useContext( GeneralContext );
+        const { ids ,setIds, flags,setFlags, sesion, searchResultados, setSearchResultados} = useContext( GeneralContext );
         const [ oportunidadesTab, setOportunidadesTab ] = useState<OpportunityCustomFindById>({
                                                                         "alertaVigenciaContrato": "",
                                                                         "arquivo": "",
@@ -91,6 +92,17 @@ export const useSearch =  () => {
             }
             ])
 
+        const [ parecerTab, setParecerTab ] = useState<OpportunityCustomListOpinionsByIdAux[]>(
+            [
+            {
+                id:0,
+                responsable:'No data',
+                tipo:'No data',
+                parecer:'No data',
+                fecha:'No data',
+            }
+            ])
+    
         const [ planAccionTab, setPlanAccionTab ] = useState<ListAllTaskByOpportunityIdAux[]>(
             [
             {
@@ -101,6 +113,23 @@ export const useSearch =  () => {
                 fechaPlaneada2:"No data"
             }
             ])
+
+        const [ resultadoTab, setResultadoTab ] = useState<OpportunityListitemAux[]>(
+           [ {
+                id:0,
+                lote:'No data',
+                item:'No data',
+                valorFechado:'No data',
+                valorTotal:'No data',
+                ganador:'No data',
+                producto:'No data',
+                participacion:'No data',
+                posicion:'No data',
+                collapsed:true,
+              },
+            ]
+              
+            )
 
         const [ pendenciasTab, setPendenciasTab ] = useState<ListAllRequirementByOpportunityAux[]>(
             [
@@ -121,18 +150,20 @@ export const useSearch =  () => {
             setFlags(payload);
         }
         //main
-        const getResultadoBusqueda = async (t:boolean) =>{
-            if(t){ floading(false);return;}
+        const getResultadoBusqueda = async () =>{
+           // if(t){ floading(false);return;}
               
-            getOportunidadeTab();
-            getDemandaJuridicaTab();
-            getPlanAccionTab();
-            getPendenciasTab();
+                 getOportunidadeTab();
+                 getParecerTab();
+                 getDemandaJuridicaTab();
+                 getPlanAccionTab();
+                 getResultadoTab();
+                 getPendenciasTab();
         }
 
         const getOportunidadeTab = async () =>{
             try {
-                const resp = await vistaApi.get<OpportunityCustomFindById>('/services/opportunityCustom/findById',{
+                const resp = await vistaApi.get<OpportunityCustomFindById>('/services/opportunityCustom/findById/'+ids.codigoBusqueda+'/'+sesion.clienteId,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -153,12 +184,58 @@ export const useSearch =  () => {
                     console.log("asignando datos");
                     setOportunidadesTab(resp.data);
                 }
-                 //test
-                //  const payload= oportunidadesTab;
-                //  payload.razaoSocialOrgao= 'xxxxxxx';
-                //  setOportunidadesTab(payload); 
+           
                 floading(false)
             } catch (error) {
+                console.log('error al consultar OpportunityCustomFindById')
+                console.log(error);
+                floading(false)
+            }
+        }
+
+        const getParecerTab = async () =>{
+            try {
+                const resp = await vistaApi.get<OpportunityCustomListOpinionsByIdAux[]>('/services/opportunityCustom/listOpinionsById/'+ids.codigoBusqueda,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                   params:{ 
+                       "listOpinionsById" : ids.codigoBusqueda
+                    }
+                }, 
+                );
+
+                console.log('op opportunityCustom/listOpinionsById:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length>0){
+
+                
+                    let arrParecerTabAux=parecerTab;//get reference
+                    arrParecerTabAux=[];
+                    console.log('cleaning data...')
+
+                    resp.data.forEach(function(item,index){
+                     console.log('parecer adding...')
+                        arrParecerTabAux.push({
+                            id:index,
+                            responsable:item.responsable,
+                            tipo:item.tipo,
+                            parecer:item.parecer,
+                            fecha:item.fecha
+                        });
+                        
+                      })
+                      console.log('elementos::::'+arrParecerTabAux.length)
+                      setParecerTab(arrParecerTabAux);
+                }
+
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar opportunityCustom/listOpinionsById')
                 console.log(error);
                 floading(false)
             }
@@ -172,7 +249,8 @@ export const useSearch =  () => {
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token 
                     },
-                   params:{ "oportunidadeId" : ids.codigoBusqueda,
+                   params:{ 
+                       "oportunidadeId" : ids.codigoBusqueda,
                     "clienteId" : sesion.clienteId,
                     }
                 }, 
@@ -184,10 +262,10 @@ export const useSearch =  () => {
                
                 if(resp.data.length>0){
 
-                    setDemandaJuridicaTab([]);
+                    //setDemandaJuridicaTab([]);
 
                     let arrDemandaJuridicaTabAux=demandaJuridicaTab;//get reference
-
+                    arrDemandaJuridicaTabAux=[];
                     resp.data.forEach(function(item,index){
 
                         arrDemandaJuridicaTabAux.push({
@@ -202,12 +280,9 @@ export const useSearch =  () => {
                       setDemandaJuridicaTab(arrDemandaJuridicaTabAux);
                 }
 
-                 //test
-                //  const payload= oportunidadesTab;
-                //  payload.razaoSocialOrgao= 'xxxxxxx';
-                //  setOportunidadesTab(payload); 
                 floading(false)
             } catch (error) {
+                console.log('error al consultar listJudgeResourceByOpportunityId')
                 console.log(error);
                 floading(false)
             }
@@ -222,7 +297,7 @@ export const useSearch =  () => {
                         "X-Auth-Token": sesion.token 
                     },
                    params:{ "oportunidadeId" : ids.codigoBusqueda,
-                    "charter" : 1,
+                    "charter" : 2,
                     }
                 }, 
                 );
@@ -233,10 +308,11 @@ export const useSearch =  () => {
                
                 if(resp.data.length>0){
 
-                    setDemandaJuridicaTab([]);
+                    //setDemandaJuridicaTab([]);
 
                     let arrPlanAccionTabAux=planAccionTab;//get reference
-
+                    arrPlanAccionTabAux=[];
+                    
                     resp.data.forEach(function(item,index){
 
                         arrPlanAccionTabAux.push({
@@ -252,17 +328,83 @@ export const useSearch =  () => {
                       setPlanAccionTab(arrPlanAccionTabAux);
                 }
 
-                 //test
-                //  const payload= oportunidadesTab;
-                //  payload.razaoSocialOrgao= 'xxxxxxx';
-                //  setOportunidadesTab(payload); 
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar listAllTaskByOpportunityId');
+                console.log(error);
+                floading(false)
+            }
+        }
+
+        const getResultadoTab = async () =>{
+            try {
+                const resp = await vistaApi.get<OpportunityListitem>('/services/opportunity/listItem/'+ids.codigoBusqueda,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                   params:{ 
+                       "opportunityId" : ids.codigoBusqueda
+                    }
+                }, 
+                );
+
+                console.log('op opportunity/listItem:::::::::::::::::::::x');
+                console.log(resp.data);
+
+                  
+
+                if(resp.data.itensOportunidadeDto.length>0){
+
+                   
+                    
+                     //let arrResultadosTabAux=resultadoTab;//get reference
+                     let arrResultadosTabAux=searchResultados;//get reference
+                     arrResultadosTabAux=[];
+                    //  resp.data.itensOportunidadeDto.forEach(function(item,index){
+
+                    //         arrResultadosTabAux.push({
+                    //             id:index,
+                    //             lote:item.lote.toString(),//detail
+                    //             item:item.item.toString(),//detail
+                    //             valorFechado:item.fechado,//detail
+                    //             valorTotal:item.valorFinal,//detail
+                    //             ganador:item.primeiroLugar,//detail
+                    //             producto:item.descricaoProduto,//header
+                    //             participacion:item.participa,//header
+                    //             posicion:item.posicaoCliente,//header
+                    //             collapsed:true,
+                    //         });
+                    //    })
+
+                       resp.data.itensOportunidadeDto.forEach(function(item,index){
+                                arrResultadosTabAux.push({
+                                    id:index,
+                                    lote:item.lote.toString(),//detail
+                                    item:item.item.toString(),//detail
+                                    valorFechado:item.fechado!,//detail
+                                    valorTotal:item.valorFinal!,//detail
+                                    ganador:item.primeiroLugar!,//detail
+                                    producto:item.descricaoProduto!,//header
+                                    participacion:item.participa!,//header
+                                    posicion:item.posicaoCliente!,//header
+                                    collapsed:true,
+                                });
+
+                        });
+
+                    setSearchResultados(arrResultadosTabAux)
+                    //setResultadoTab(arrResultadosTabAux);
+                }
+
+               
                 floading(false)
             } catch (error) {
                 console.log(error);
                 floading(false)
             }
         }
-
 
         const getPendenciasTab = async () =>{
             try {
@@ -284,9 +426,10 @@ export const useSearch =  () => {
                
                 if(resp.data.length>0){
 
-                    setPendenciasTab([]);
+                    
 
                     let arrPlanAccionTabAux=pendenciasTab;//get reference
+                    arrPlanAccionTabAux=[]
 
                     resp.data.forEach(function(item,index){
 
@@ -322,18 +465,19 @@ export const useSearch =  () => {
         }
 
 
-        useEffect(() => {
-            //console.log('recargando getResultadoBusqueda');
-            floading(true)
-            getResultadoBusqueda(false);
-            floading(false)
+        // useEffect(() => {
+        //     //console.log('recargando getResultadoBusqueda');
+        //     floading(true)
+        //     getResultadoBusqueda(false);
+        //     floading(false)
            
-          }, [])
+        //   }, [])
 
   
         //exposed objets 
         return {
-            onChangeSearch,oportunidadesTab,getResultadoBusqueda,demandaJuridicaTab,planAccionTab,pendenciasTab
+            onChangeSearch,oportunidadesTab,getResultadoBusqueda,demandaJuridicaTab,
+            planAccionTab,pendenciasTab,parecerTab, setParecerTab
         }
 }
         

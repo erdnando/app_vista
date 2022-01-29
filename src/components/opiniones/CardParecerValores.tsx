@@ -158,9 +158,7 @@ export const CardParecerValores = () => {
                                             </View>
 
                                             <Spacer height={10}></Spacer>
-                                            
-                                           
-
+                                    
                                         </View>
                                     </Collapsible>
                                     </View>

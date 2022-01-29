@@ -51,7 +51,7 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
                 // payload.isLoading=true;
                 // payload.resultadosBusquedaVisible=true;
                 // setFlags(payload);
-                console.log('searching...')
+                console.log('searching...1')
               
                 setTimeout(
                   () => { 
