@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { Spacer } from '../../components/Spacer';
 import { useSearch } from '../../hooks/useSearch';
 import { ListJudgeResourceByOpportunityIdAux } from '../../models/response/ListJudgeResourceByOpportunityIdAux';
+import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
 
 export const DemandaJuridicaScreen = () => {
 
-    const { demandaJuridicaTab } = useSearch();
+    const { search } = useContext( GeneralContext );
 
     const renderUpdateItem = (item:ListJudgeResourceByOpportunityIdAux) =>{
 
@@ -40,7 +41,7 @@ export const DemandaJuridicaScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
-                <FlatList data={demandaJuridicaTab} 
+                <FlatList data={search.demandaJuridica} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                     //keyExtractor={(item) => item.id} 

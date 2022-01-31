@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FlatList, View } from 'react-native';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { Spacer } from '../../components/Spacer';
 import { useSearch } from '../../hooks/useSearch';
 import { OpportunityCustomListOpinionsByIdAux } from '../../models/response/OpportunityCustomListOpinionsByIdAux';
+import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
 
 export const ParecerScreenSearch = () => {
 
-    const { parecerTab,setParecerTab } = useSearch();
+    const { search } = useContext( GeneralContext );
 
     const renderUpdateItem = (item:OpportunityCustomListOpinionsByIdAux) =>{
 
@@ -45,7 +46,7 @@ export const ParecerScreenSearch = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:2 }}>
         
-                <FlatList data={parecerTab} 
+                <FlatList data={search.parecer} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                     keyExtractor={(item,index) => item.id+index.toString()} 

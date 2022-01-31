@@ -17,7 +17,7 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
 
     //invoke global state
     const { ids } = useContext( GeneralContext )
-    const { onChangeSearch,getResultadoBusqueda } = useSearchOpinion(); 
+    const { onChangeSearch , getResultadoBusqueda } = useSearchOpinion(); 
 
     
     return (

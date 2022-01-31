@@ -68,11 +68,7 @@ export const useLogin =  () => {
                 });
 
                 console.log(resp);
-                // const payloadx= flags;
-                // payloadx.isLogedIn=true;
-                // payloadx.isAlertLoginVisible=false;
-                // payloadx.isLoading=false;
-                // setFlags(payloadx);
+
                 setTimeout(
                     () => { 
                         const payloadx= flags;
@@ -87,8 +83,8 @@ export const useLogin =  () => {
                 //TODO to map menues
                 const payloads= sesion;
                 payloads.token=resp.data.token;
-                payloads.clienteId=resp.data.info.clienteId;
-                payloads.clienteId=resp.data.info.charter;
+                payloads.clienteId=112; //resp.data.info.clienteId;
+                payloads.charter=resp.data.info.charter;
                 payloads.colaboradorId=resp.data.info.tipoUsuarioCliente.id
 
                 //payloads.menu=resp.data.info.menuSistema;

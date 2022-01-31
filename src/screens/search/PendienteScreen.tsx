@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
 import { TextOportunidad } from '../../components/oportunidad/TextOportunidad';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { Spacer } from '../../components/Spacer';
 import { useSearch } from '../../hooks/useSearch';
 import { ListAllRequirementByOpportunityAux } from '../../models/response/ListAllRequirementByOpportunityAux';
+import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
 
 export const PendienteScreen = () => {
 
-    const { pendenciasTab } = useSearch();
+    const { search } = useContext( GeneralContext );
     // interface Pendientes{
     //     id:number,
     //     descripcion:string,
@@ -142,7 +143,7 @@ export const PendienteScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
-                <FlatList data={pendenciasTab} 
+                <FlatList data={search.pendencias} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                     //keyExtractor={(item) => item.id} 

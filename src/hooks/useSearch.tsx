@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
 import { OpportunityCustomFindById } from '../models/response/OpportunityCustomFindById';
 import vistaApi from '../api/vista';
@@ -13,135 +13,72 @@ import { OpportunityListitemAux } from '../models/response/OpportunityListitemAu
 import { OpportunityCustomListOpinionsByIdAux } from '../models/response/OpportunityCustomListOpinionsByIdAux';
 
 
+
+
 export const useSearch =  () => {
-        const { ids ,setIds, flags,setFlags, sesion, searchResultados, setSearchResultados} = useContext( GeneralContext );
-        const [ oportunidadesTab, setOportunidadesTab ] = useState<OpportunityCustomFindById>({
-                                                                        "alertaVigenciaContrato": "",
-                                                                        "arquivo": "",
-                                                                        "ata": "",
-                                                                        "clienteId": 0,
-                                                                        "cnpjCliente": "",
-                                                                        "cnpjOrgao": "",
-                                                                        "cnpjOrgaoCondutor": "",
-                                                                        "compulsorio": "",
-                                                                        "condicaoPagamento": "",
-                                                                        "dataAdjudicacao": new Date(),
-                                                                        "dataAssinatura": new Date(),
-                                                                        "dataCadastro": new Date(),
-                                                                        "dataCaptacao": "dd/MM/yyyy",
-                                                                        "dataCertame": "No data",
-                                                                        "dataCertameInicial": "dd/MM/yyyy",
-                                                                        "dataEnvioDocumentacao": new Date(),
-                                                                        "dataEsclarecimento": new Date(),
-                                                                        "dataFimContrato": new Date(),
-                                                                        "dataImpugnacao": new Date(),
-                                                                        "dataInicioContrato": new Date(),
-                                                                        "dataProposta": new Date(),
-                                                                        "descricaoModalidade": "",
-                                                                        "descricaoOportunidade": "",
-                                                                        "diasParaVencimento": 0,
-                                                                        "edital": "No data",
-                                                                        "enderecoEntrega": "",
-                                                                        "enderecoEnvio": "",
-                                                                        "horaCertame": "",
-                                                                        "horaCertameInicial": "",
-                                                                        "horaProposta": "",
-                                                                        "linkContrato": "",
-                                                                        "linkProposta": "",
-                                                                        "linkTermoReferencia": "",
-                                                                        "localidade": "No data",
-                                                                        "meEpp": "",
-                                                                        "modalidade": "No data",
-                                                                        "nomeFantasiaCliente": "",
-                                                                        "nomeFantasiaOrgao": "",
-                                                                        "nomeFantasiaOrgaoCondutor": "",
-                                                                        "oportunidadeGanha": "",
-                                                                        "oportunidadeId": 0,
-                                                                        "orgaoCondutorId": 0,
-                                                                        "orgaoContrato": "",
-                                                                        "orgaoId": 0,
-                                                                        "pendencia": "",
-                                                                        "plataforma": "No data",
-                                                                        "prazoEntrega": 0,
-                                                                        "prazoPagamento": 0,
-                                                                        "pregoeiroEmail": "",
-                                                                        "pregoeiroNome": "",
-                                                                        "pregoeiroTelefone": "",
-                                                                        "razaoSocialCliente": "",
-                                                                        "razaoSocialOrgao": "No data",
-                                                                        "razaoSocialOrgaoCondutor": "",
-                                                                        "registroPreco": "",
-                                                                        "saldoOportunidade": 0,
-                                                                        "statusFaturamento": "",
-                                                                        "statusOportunidade": "--",
-                                                                        "tipoArqAta": "",
-                                                                        "tipoArquivo": "",
-                                                                        "tipoDisputa": "",
-                                                                        "uasg": "",
-                                                                        "valorFaturado": 0,
-                                                                        "valorTotal": 0,
-                                                                        "valorTotalRecebido": 0
-                                                                    })
-        const [ demandaJuridicaTab, setDemandaJuridicaTab ] = useState<ListJudgeResourceByOpportunityIdAux[]>(
-            [
-            {
-                id:0,
-                procedimiento:'No data',
-                fechaProtocolo:'No data',
-                resultado:'No data'
-            }
-            ])
 
-        const [ parecerTab, setParecerTab ] = useState<OpportunityCustomListOpinionsByIdAux[]>(
-            [
-            {
-                id:0,
-                responsable:'No data',
-                tipo:'No data',
-                parecer:'No data',
-                fecha:'No data',
-            }
-            ])
+        const { ids ,setIds, flags,setFlags, sesion, search, setSearch} = useContext( GeneralContext );
+
+        // const [ demandaJuridicaTab, setDemandaJuridicaTab ] = useState<ListJudgeResourceByOpportunityIdAux[]>(
+        //     [
+        //     {
+        //         id:0,
+        //         procedimiento:'No data',
+        //         fechaProtocolo:'No data',
+        //         resultado:'No data'
+        //     }
+        //     ])
+
+        // const [ parecerTab, setParecerTab ] = useState<OpportunityCustomListOpinionsByIdAux[]>(
+        //     [
+        //     {
+        //         id:0,
+        //         responsable:'No data',
+        //         tipo:'No data',
+        //         parecer:'No data',
+        //         fecha:'No data',
+        //     }
+        //     ])
     
-        const [ planAccionTab, setPlanAccionTab ] = useState<ListAllTaskByOpportunityIdAux[]>(
-            [
-            {
-                id:0,
-                tarifa:"No data",
-                responsable:"No data",
-                fechaPlaneada:"No data",
-                fechaPlaneada2:"No data"
-            }
-            ])
+        // const [ planAccionTab, setPlanAccionTab ] = useState<ListAllTaskByOpportunityIdAux[]>(
+        //     [
+        //     {
+        //         id:0,
+        //         tarifa:"No data",
+        //         responsable:"No data",
+        //         fechaPlaneada:"No data",
+        //         fechaPlaneada2:"No data"
+        //     }
+        //     ])
 
-        const [ resultadoTab, setResultadoTab ] = useState<OpportunityListitemAux[]>(
-           [ {
-                id:0,
-                lote:'No data',
-                item:'No data',
-                valorFechado:'No data',
-                valorTotal:'No data',
-                ganador:'No data',
-                producto:'No data',
-                participacion:'No data',
-                posicion:'No data',
-                collapsed:true,
-              },
-            ]
+        // const [ resultadoTab, setResultadoTab ] = useState<OpportunityListitemAux[]>(
+        //    [ {
+        //         id:0,
+        //         lote:'No data',
+        //         item:'No data',
+        //         valorFechado:'No data',
+        //         valorTotal:'No data',
+        //         ganador:'No data',
+        //         producto:'No data',
+        //         participacion:'No data',
+        //         posicion:'No data',
+        //         collapsed:true,
+        //       },
+        //     ]
               
-            )
+        //     )
 
-        const [ pendenciasTab, setPendenciasTab ] = useState<ListAllRequirementByOpportunityAux[]>(
-            [
-            {
-                id:0,
-                descripcion:'No data',
-                tipo:'No data',
-                tipoUsuario:'No data',
-                dias:'No data',
-                acepto:'No data'//Sim
-            }
-            ])
+        // const [ pendenciasTab, setPendenciasTab ] = useState<ListAllRequirementByOpportunityAux[]>(
+        //     [
+        //     {
+        //         id:0,
+        //         descripcion:'No data',
+        //         tipo:'No data',
+        //         tipoUsuario:'No data',
+        //         dias:'No data',
+        //         acepto:'No data'//Sim
+        //     }
+        //     ])
 
         const floading=(valor:boolean)=>{
             const payload= flags;
@@ -150,15 +87,15 @@ export const useSearch =  () => {
             setFlags(payload);
         }
         //main
-        const getResultadoBusqueda = async () =>{
+        const getResultadoBusqueda = () =>{
            // if(t){ floading(false);return;}
               
-                 getOportunidadeTab();
-                 getParecerTab();
-                 getDemandaJuridicaTab();
-                 getPlanAccionTab();
-                 getResultadoTab();
-                 getPendenciasTab();
+                  getOportunidadeTab();
+                  getParecerTab();
+                  getDemandaJuridicaTab();
+                  getResultadoTab();
+                  getPlanAccionTab();
+                  getPendenciasTab();
         }
 
         const getOportunidadeTab = async () =>{
@@ -171,18 +108,22 @@ export const useSearch =  () => {
                     },
                    params:{ "oportunidadeId" : ids.codigoBusqueda,
                     "clienteId" : sesion.clienteId,
+                    "charter" : '2',
+                    "colaboradorId" : '0',
                     }
                 }, 
                 );
 
-                console.log('op OpportunityCustomFindById:::::::::::::::::::::x');
+                console.log('op oportunidade:::::::::::::::::::::x');
                 console.log(resp.data);
 
                
 
-                if(resp.data.clienteId !== undefined){
+                if(resp.data.razaoSocialCliente !== undefined){
                     console.log("asignando datos");
-                    setOportunidadesTab(resp.data);
+                    const payload= search;
+                    payload.oportunidade= resp.data;
+                    setSearch(payload);
                 }
            
                 floading(false)
@@ -207,19 +148,19 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op opportunityCustom/listOpinionsById:::::::::::::::::::::x');
+                console.log('op parecer:::::::::::::::::::::x');
                 console.log(resp.data);
 
                
                 if(resp.data.length>0){
 
                 
-                    let arrParecerTabAux=parecerTab;//get reference
+                    let arrParecerTabAux=search.parecer;//get reference
                     arrParecerTabAux=[];
                     console.log('cleaning data...')
 
                     resp.data.forEach(function(item,index){
-                     console.log('parecer adding...')
+                     //console.log('parecer adding...')
                         arrParecerTabAux.push({
                             id:index,
                             responsable:item.responsable,
@@ -230,7 +171,14 @@ export const useSearch =  () => {
                         
                       })
                       console.log('elementos::::'+arrParecerTabAux.length)
-                      setParecerTab(arrParecerTabAux);
+                      //setParecerTab(arrParecerTabAux);
+                      const payload= search;
+                      payload.parecer= arrParecerTabAux;
+                      setSearch(payload);
+                }else{
+                    const payload= search;
+                    payload.parecer= [];
+                    setSearch(payload);
                 }
 
                 floading(false)
@@ -256,15 +204,14 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op listJudgeResourceByOpportunityId:::::::::::::::::::::x');
+                console.log('op demanda juridica:::::::::::::::::::::x');
                 console.log(resp.data);
 
                
                 if(resp.data.length>0){
 
                     //setDemandaJuridicaTab([]);
-
-                    let arrDemandaJuridicaTabAux=demandaJuridicaTab;//get reference
+                    let arrDemandaJuridicaTabAux=search.demandaJuridica;//get reference
                     arrDemandaJuridicaTabAux=[];
                     resp.data.forEach(function(item,index){
 
@@ -277,7 +224,14 @@ export const useSearch =  () => {
                         
                       })
 
-                      setDemandaJuridicaTab(arrDemandaJuridicaTabAux);
+                      //setDemandaJuridicaTab(arrDemandaJuridicaTabAux);
+                      const payload= search;
+                      payload.demandaJuridica= arrDemandaJuridicaTabAux;
+                      setSearch(payload);
+                }else{
+                    const payload= search;
+                    payload.demandaJuridica= [];
+                    setSearch(payload);
                 }
 
                 floading(false)
@@ -302,7 +256,7 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op listAllTaskByOpportunityId:::::::::::::::::::::x');
+                console.log('op plan accion:::::::::::::::::::::x');
                 console.log(resp.data);
 
                
@@ -310,7 +264,7 @@ export const useSearch =  () => {
 
                     //setDemandaJuridicaTab([]);
 
-                    let arrPlanAccionTabAux=planAccionTab;//get reference
+                    let arrPlanAccionTabAux=search.planAccion;//get reference
                     arrPlanAccionTabAux=[];
                     
                     resp.data.forEach(function(item,index){
@@ -325,7 +279,14 @@ export const useSearch =  () => {
                         
                       })
 
-                      setPlanAccionTab(arrPlanAccionTabAux);
+                      //setPlanAccionTab(arrPlanAccionTabAux);
+                      const payload= search;
+                      payload.planAccion= arrPlanAccionTabAux;
+                      setSearch(payload);
+                }else{
+                    const payload= search;
+                      payload.planAccion= [];
+                      setSearch(payload);
                 }
 
                 floading(false)
@@ -350,7 +311,7 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op opportunity/listItem:::::::::::::::::::::x');
+                console.log('op resultados:::::::::::::::::::::x');
                 console.log(resp.data);
 
                   
@@ -358,25 +319,9 @@ export const useSearch =  () => {
                 if(resp.data.itensOportunidadeDto.length>0){
 
                    
-                    
-                     //let arrResultadosTabAux=resultadoTab;//get reference
-                     let arrResultadosTabAux=searchResultados;//get reference
+                     let arrResultadosTabAux=search.resultados;//get reference
                      arrResultadosTabAux=[];
-                    //  resp.data.itensOportunidadeDto.forEach(function(item,index){
-
-                    //         arrResultadosTabAux.push({
-                    //             id:index,
-                    //             lote:item.lote.toString(),//detail
-                    //             item:item.item.toString(),//detail
-                    //             valorFechado:item.fechado,//detail
-                    //             valorTotal:item.valorFinal,//detail
-                    //             ganador:item.primeiroLugar,//detail
-                    //             producto:item.descricaoProduto,//header
-                    //             participacion:item.participa,//header
-                    //             posicion:item.posicaoCliente,//header
-                    //             collapsed:true,
-                    //         });
-                    //    })
+                   
 
                        resp.data.itensOportunidadeDto.forEach(function(item,index){
                                 arrResultadosTabAux.push({
@@ -394,8 +339,14 @@ export const useSearch =  () => {
 
                         });
 
-                    setSearchResultados(arrResultadosTabAux)
-                    //setResultadoTab(arrResultadosTabAux);
+                    //setSearchResultados(arrResultadosTabAux)
+                    const payload= search;
+                    payload.resultados= arrResultadosTabAux;
+                    setSearch(payload);
+                }else{
+                    const payload= search;
+                    payload.resultados= [];
+                    setSearch(payload);
                 }
 
                
@@ -420,15 +371,14 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op listAllRequirementByOpportunity:::::::::::::::::::::x');
+                console.log('op pendencias:::::::::::::::::::::x');
                 console.log(resp.data);
 
                
                 if(resp.data.length>0){
 
                     
-
-                    let arrPlanAccionTabAux=pendenciasTab;//get reference
+                    let arrPlanAccionTabAux=search.pendencias;//get reference
                     arrPlanAccionTabAux=[]
 
                     resp.data.forEach(function(item,index){
@@ -444,7 +394,14 @@ export const useSearch =  () => {
                         
                       })
 
-                      setPendenciasTab(arrPlanAccionTabAux);
+                      //setPendenciasTab(arrPlanAccionTabAux);
+                      const payload= search;
+                      payload.pendencias= arrPlanAccionTabAux;
+                      setSearch(payload);
+                }else{
+                    const payload= search;
+                      payload.pendencias= [];
+                      setSearch(payload);
                 }
 
                  //test
@@ -476,8 +433,7 @@ export const useSearch =  () => {
   
         //exposed objets 
         return {
-            onChangeSearch,oportunidadesTab,getResultadoBusqueda,demandaJuridicaTab,
-            planAccionTab,pendenciasTab,parecerTab, setParecerTab
+            onChangeSearch,getResultadoBusqueda
         }
 }
         

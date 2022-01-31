@@ -11,6 +11,9 @@ import { IDs } from '../models/IDs';
 import { MenuOpiniones } from '../models/MenuOpiniones';
 import { Opiniones } from '../models/Opiniones';
 import { SearchResultados } from '../models/SearchResultados';
+import { OpportunityCustomFindById } from '../models/response/OpportunityCustomFindById';
+import { OpportunityCustomListOpinionsByIdAux } from '../models/response/OpportunityCustomListOpinionsByIdAux';
+import { Search } from '../models/Search';
 
 
 interface GeneralState{
@@ -28,7 +31,7 @@ interface GeneralState{
     tabSelectedOld:string,
     tabModule:string,
     opiniones: Opiniones,
-    searchResultados:SearchResultados[],
+    search:Search,
     //functions/methods
     setMensaje:(mensaje:Mensajes)=>void;
     setUsuario:(usuario:Usuario)=>void;
@@ -44,7 +47,7 @@ interface GeneralState{
     setAgendaFiltro:(agendaFiltro:AgendaFiltro)=>void;
     setMenuOpiniones:(menuOpiniones:MenuOpiniones[])=>void;
     setOpiniones:(opiniones:Opiniones)=>void;
-    setSearchResultados:(searchResultados:SearchResultados[])=>void;
+    setSearch:(search:Search)=>void;
 }
 
 const GeneralContext = React.createContext({} as GeneralState);
@@ -212,21 +215,93 @@ class GeneralProvider extends React.Component{
               visible:true
             },
         ],
-        searchResultados:
-          [
-            {
+        search:{
+          oportunidade:{
+              descricaoOportunidade:'No data',
+              dataCertame:'No data',
+              dataCertameInicial:'No data',
+              horaCertame:'No data',
+              horaCertameInicial:'No data',
+              statusOportunidade:'No data',
+              descricaoModalidade:'No data',
+              edital:'No data',
+              razaoSocialCliente:'No data',
+              cnpjCliente:'No data',
+              localidade:'No data',
+              arquivo:'No data',
+              tipoArquivo:'No data',
+              razaoSocialOrgao:'No data',
+              cnpjOrgao:'No data',
+              razaoSocialOrgaoCondutor:'No data',
+              cnpjOrgaoCondutor:'No data',
+              orgaoContrato:'No data',
+              pendencia:'No data',
+              oportunidadeGanha:'No data',
+              meEpp:'No data',
+              valorFaturado:0,
+              saldoOportunidade:0,
+              statusFaturamento:'No data',
+              registroPreco:'No data',
+              dataProposta:0,
+              plataforma:'No data',
+              dataImpugnacao:0,
+              dataEsclarecimento:0,
+              dataCadastro:0,
+              modalidade:'No data',
+              dataCaptacao:'No data',
+              pregoeiroTelefone:'No data',
+              compulsorio:'No data'
+          },
+          parecer:{
             id:0,
-            lote:'No data',
-            item:'No data',
-            valorFechado:'No data',
-            valorTotal:'No data',
-            ganador:'No data',
-            producto:'No data',
-            participacion:'No data',
-            posicion:'No data',
-            collapsed:true
-            },
-            ]
+            responsable:'',
+            tipo:'',
+            parecer:'',
+            fecha:''
+          },
+          resultados:
+            [
+              {
+              id:0,
+              lote:'No data',
+              item:'No data',
+              valorFechado:'No data',
+              valorTotal:'No data',
+              ganador:'No data',
+              producto:'No data',
+              participacion:'No data',
+              posicion:'No data',
+              collapsed:true
+              },
+          ],
+          demandaJuridica:[
+              {
+                id:0,
+                procedimiento:'',
+                fechaProtocolo:'',
+                resultado:''
+              }
+          ],
+          planAccion:[
+              {
+                id:0,
+                tarifa:'',
+                responsable:'',
+                fechaPlaneada:'',
+                fechaPlaneada2:''
+              }
+          ],
+          pendencias:[
+                {id:0,
+                descripcion:'',
+                tipo:'',
+                tipoUsuario:'',
+                dias:'',
+                acepto:''}
+              ]
+          
+        },
+        
         
     }
 
@@ -243,7 +318,7 @@ class GeneralProvider extends React.Component{
     setAgendaFiltro= (agendaFiltro:AgendaFiltro)=> this.setState({agendaFiltro});
     setMenuOpiniones= (menuopiniones:MenuOpiniones[])=>this.setState({menuopiniones});
     setOpiniones= (opiniones:Opiniones)=>this.setState({opiniones});
-    setSearchResultados= (searchResultados:SearchResultados)=>this.setState({searchResultados});
+    setSearch= (search:Search)=>this.setState({search});
     logOut = () =>{
 
         const payload0 = this.state.sesion;
@@ -287,7 +362,7 @@ class GeneralProvider extends React.Component{
                     tabModule: this.state.tabModule,
                     menuOpiniones:this.state.menuOpiniones,
                     opiniones:this.state.opiniones,
-                    searchResultados:this.state.searchResultados,
+                    search:this.state.search,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
@@ -303,7 +378,7 @@ class GeneralProvider extends React.Component{
                     setTabModule:this.setTabModule,
                     setMenuOpiniones:this.setMenuOpiniones,
                     setOpiniones:this.setOpiniones,
-                    setSearchResultados:this.setSearchResultados,
+                    setSearch:this.setSearch,
                     }}
                 >
                {this.props.children}

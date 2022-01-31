@@ -11,7 +11,7 @@ import { GeneralContext } from '../../state/GeneralProvider';
 
 export const ResultadoScreen = () => {
 
-    const { searchResultados, setSearchResultados } = useContext( GeneralContext )
+    const { search,setSearch } = useContext( GeneralContext )
     //const { resultadoTab,setResultadoTab } = useSearch();
 
     const renderUpdateItem = (item:OpportunityListitemAux) =>{
@@ -22,9 +22,10 @@ export const ResultadoScreen = () => {
                 {/* productos */}
                 <TouchableOpacity onPress={() =>{ 
                     
-                                   const payload= searchResultados;
-                                   payload[item.id].collapsed=!item.collapsed;
-                                    setSearchResultados(payload)
+                                    const payload= search;
+                                    payload.resultados[item.id].collapsed=!item.collapsed;
+                                    setSearch(payload)
+
                                     }} >
                     <Producto producto={item.producto} participacion={item.participacion} posicion={item.posicion}></Producto>
                 </TouchableOpacity>
@@ -66,7 +67,7 @@ export const ResultadoScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
-                <FlatList data={searchResultados} 
+                <FlatList data={search.resultados} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                     keyExtractor={(item,index) => item.id.toString()+index }
