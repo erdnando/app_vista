@@ -4,6 +4,8 @@ import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
 import { colores } from '../../theme/appTheme';
 import { useSearchOpinion } from '../../hooks/useSearchOpinion';
+import { useParecer } from '../../hooks/useParecer';
+import { TipoUsuario } from '../../models/Usuario';
 
 
 interface Props{
@@ -16,9 +18,9 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
   let colorIcono = colores.primary;
 
     //invoke global state
-    const { ids } = useContext( GeneralContext )
-    const { onChangeSearch , getResultadoBusqueda } = useSearchOpinion(); 
-
+    const { ids,usuario } = useContext( GeneralContext )
+   // const { onChangeSearch , getResultadoBusqueda } = useSearchOpinion(); 
+    const { onChangeSearch,getListParecerColaborador,getListParecerTerciario } = useParecer();
     
     return (
       <View style={{flexDirection: 'row', }}>
@@ -55,7 +57,9 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
               
                 setTimeout(
                   () => { 
-                    getResultadoBusqueda();//consume api
+                   
+                   usuario.tipo==TipoUsuario.COLABORADOR?
+                   getListParecerColaborador():getListParecerTerciario()
                   },
                   3000
                 )   

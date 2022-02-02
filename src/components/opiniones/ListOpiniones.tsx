@@ -4,127 +4,18 @@ import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
 import { TextOportunidadIcono } from '../oportunidad/TextOportunidadIcono';
 import { Spacer } from '../Spacer';
+import { ListaParecerAux } from '../../models/response/ListaParecerAux';
+import { useParecer } from '../../hooks/useParecer';
 
 export const ListOpiniones = () => {
 
   //invoke global state
-  const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected } = useContext( GeneralContext )
+  const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected, parecer } = useContext( GeneralContext )
 
-  interface Opiniones{
-    id:number,
-    opinion:string,
-    idOpinion:string,
-    edital:string,
-    oragao:string,
-    fechaOpinion:string,
-    ubicacion:string,
-    estatus:number,
-}
+ 
 
-const Data:Opiniones[] = [
-   {
-      id:1,
-      opinion:'Lorem ipsum dolor sit amet',
-      idOpinion:'0000000000',
-      edital:'000000000',
-      oragao:'Lorem ipsum dolor sit amet',
-      fechaOpinion:'00/00/00 00:00',
-      ubicacion:'Uberbaba -MG',
-      estatus:2,  //1 realizado, 2 no realizado
-  },
-  {
-    id:2,
-    opinion:'Lorem ipsum dolor sit amet',
-    idOpinion:'0000000000',
-    edital:'000000000',
-    oragao:'Lorem ipsum dolor sit amet',
-    fechaOpinion:'00/00/00 00:00',
-    ubicacion:'Uberbaba -MG',
-    estatus:1,  //1 realizado, 2 no realizado
-  },
-  {
-    id:3,
-    opinion:'Lorem ipsum dolor sit amet',
-    idOpinion:'0000000000',
-    edital:'000000000',
-    oragao:'Lorem ipsum dolor sit amet',
-    fechaOpinion:'00/00/00 00:00',
-    ubicacion:'Uberbaba -MG',
-    estatus:2,  //1 realizado, 2 no realizado
-  },
-  {
-    id:4,
-    opinion:'Lorem ipsum dolor sit amet',
-    idOpinion:'0000000000',
-    edital:'000000000',
-    oragao:'Lorem ipsum dolor sit amet',
-    fechaOpinion:'00/00/00 00:00',
-    ubicacion:'Uberbaba -MG',
-    estatus:1,  //1 realizado, 2 no realizado
-  },
-  {
-    id:5,
-    opinion:'Lorem ipsum dolor sit amet',
-    idOpinion:'0000000000',
-    edital:'000000000',
-    oragao:'Lorem ipsum dolor sit amet',
-    fechaOpinion:'00/00/00 00:00',
-    ubicacion:'Uberbaba -MG',
-    estatus:2,  //1 realizado, 2 no realizado
-  },
-  {
-  id:6,
-  opinion:'Lorem ipsum dolor sit amet',
-  idOpinion:'0000000000',
-  edital:'000000000',
-  oragao:'Lorem ipsum dolor sit amet',
-  fechaOpinion:'00/00/00 00:00',
-  ubicacion:'Uberbaba -MG',
-  estatus:1,  //1 realizado, 2 no realizado
-  },
-  {
-    id:7,
-    opinion:'Lorem ipsum dolor sit amet',
-    idOpinion:'0000000000',
-    edital:'000000000',
-    oragao:'Lorem ipsum dolor sit amet',
-    fechaOpinion:'00/00/00 00:00',
-    ubicacion:'Uberbaba -MG',
-    estatus:2,  //1 realizado, 2 no realizado
-  },
-  {
-  id:8,
-  opinion:'Lorem ipsum dolor sit amet',
-  idOpinion:'0000000000',
-  edital:'000000000',
-  oragao:'Lorem ipsum dolor sit amet',
-  fechaOpinion:'00/00/00 00:00',
-  ubicacion:'Uberbaba -MG',
-  estatus:1,  //1 realizado, 2 no realizado
-  },
-  {
-    id:9,
-    opinion:'Lorem ipsum dolor sit amet',
-    idOpinion:'0000000000',
-    edital:'000000000',
-    oragao:'Lorem ipsum dolor sit amet',
-    fechaOpinion:'00/00/00 00:00',
-    ubicacion:'Uberbaba -MG',
-    estatus:2,  //1 realizado, 2 no realizado
-  },
-  {
-  id:10,
-  opinion:'Lorem ipsum dolor sit amet',
-  idOpinion:'0000000000',
-  edital:'000000000',
-  oragao:'Lorem ipsum dolor sit amet',
-  fechaOpinion:'00/00/00 00:00',
-  ubicacion:'Uberbaba -MG',
-  estatus:1,  //1 realizado, 2 no realizado
-  },
-]
 
-const renderUpdateItem = (item:Opiniones) =>{
+const renderUpdateItem = (item:ListaParecerAux) =>{
 
   
 
@@ -195,7 +86,7 @@ return (
          <Spacer height={10}></Spacer>
          <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
     
-            <FlatList data={Data} 
+            <FlatList data={parecer.listaParecer} 
                 scrollEnabled={true}
                 renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                 keyExtractor={(item) => item.id+item.idOpinion} 

@@ -10,13 +10,21 @@ import { Search } from '../../components/opiniones/Search';
 import { ListOpiniones } from '../../components/opiniones/ListOpiniones';
 import { DetalleOpinion } from '../../components/opiniones/DetalleOpinion';
 import { ModalSearchResultados } from '../../components/opiniones/ModalSearchResultados';
+import { useParecer } from '../../hooks/useParecer';
+import { TipoUsuario } from '../../models/Usuario';
 
 
 export const ParecerScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
     const { flags, ids, usuario} = useContext(GeneralContext);
-    const { isLoading } = useMovies();
+    
+    const { getListParecerColaborador,getListParecerTerciario } = useParecer();
+
+    useEffect(() => {
+             usuario.tipo==TipoUsuario.COLABORADOR?
+            getListParecerColaborador():getListParecerTerciario()
+          }, [])
 
   
     
@@ -24,7 +32,7 @@ export const ParecerScreen = () => {
         return  <ListNotificaciones></ListNotificaciones>
     }
 
-    if(isLoading){
+    if(flags.isLoading){
         return <Loading color='green'></Loading>
     }
 

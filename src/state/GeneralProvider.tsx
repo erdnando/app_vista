@@ -14,6 +14,7 @@ import { SearchResultados } from '../models/SearchResultados';
 import { OpportunityCustomFindById } from '../models/response/OpportunityCustomFindById';
 import { OpportunityCustomListOpinionsByIdAux } from '../models/response/OpportunityCustomListOpinionsByIdAux';
 import { Search } from '../models/Search';
+import { Parecer } from '../models/Parecer';
 
 
 interface GeneralState{
@@ -32,6 +33,7 @@ interface GeneralState{
     tabModule:string,
     opiniones: Opiniones,
     search:Search,
+    parecer:Parecer,
     //functions/methods
     setMensaje:(mensaje:Mensajes)=>void;
     setUsuario:(usuario:Usuario)=>void;
@@ -48,6 +50,7 @@ interface GeneralState{
     setMenuOpiniones:(menuOpiniones:MenuOpiniones[])=>void;
     setOpiniones:(opiniones:Opiniones)=>void;
     setSearch:(search:Search)=>void;
+    setParecer:(parecer:Parecer)=>void;
 }
 
 const GeneralContext = React.createContext({} as GeneralState);
@@ -62,8 +65,8 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'erdnando@gmail.com',
-                password:'248854',
+                email:'erdnandovr@algartech.com',//'erdnando@gmail.com',
+                password:'044482',//'248854',
                 whatsapp:'(34) 99830-0082',
                 telefono:'(34) 99830-0082',
                 direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'
@@ -301,6 +304,20 @@ class GeneralProvider extends React.Component{
               ]
           
         },
+        parecer:{
+            listaParecer:[
+                {
+                    id:0,
+                    opinion:'No data',
+                    idOpinion:'No data',
+                    edital:'No data',
+                    oragao:'No data',
+                    fechaOpinion:'No data',
+                    ubicacion:'No data',
+                    estatus:0,
+               }
+            ]
+        }
         
         
     }
@@ -319,6 +336,7 @@ class GeneralProvider extends React.Component{
     setMenuOpiniones= (menuopiniones:MenuOpiniones[])=>this.setState({menuopiniones});
     setOpiniones= (opiniones:Opiniones)=>this.setState({opiniones});
     setSearch= (search:Search)=>this.setState({search});
+    setParecer= (parecer:Parecer)=>this.setState({parecer});
     logOut = () =>{
 
         const payload0 = this.state.sesion;
@@ -363,6 +381,7 @@ class GeneralProvider extends React.Component{
                     menuOpiniones:this.state.menuOpiniones,
                     opiniones:this.state.opiniones,
                     search:this.state.search,
+                    parecer:this.state.parecer,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
@@ -379,6 +398,7 @@ class GeneralProvider extends React.Component{
                     setMenuOpiniones:this.setMenuOpiniones,
                     setOpiniones:this.setOpiniones,
                     setSearch:this.setSearch,
+                    setParecer:this.setParecer,
                     }}
                 >
                {this.props.children}

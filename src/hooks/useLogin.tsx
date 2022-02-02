@@ -81,11 +81,12 @@ export const useLogin =  () => {
                   )   
 
                 //TODO to map menues
+                
                 const payloads= sesion;
                 payloads.token=resp.data.token;
-                payloads.clienteId=112; //resp.data.info.clienteId;
+                payloads.clienteId=resp.data.info.clienteId,//148,//112; //resp.data.info.clienteId; //XXX
                 payloads.charter=resp.data.info.charter;
-                payloads.colaboradorId=resp.data.info.tipoUsuarioCliente.id
+                payloads.colaboradorId=148,//resp.data.info.tipoUsuarioCliente.id
 
                 //payloads.menu=resp.data.info.menuSistema;
                 setSesion(payloads);

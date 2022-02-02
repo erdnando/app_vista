@@ -19,66 +19,6 @@ export const useSearch =  () => {
 
         const { ids ,setIds, flags,setFlags, sesion, search, setSearch} = useContext( GeneralContext );
 
-        // const [ demandaJuridicaTab, setDemandaJuridicaTab ] = useState<ListJudgeResourceByOpportunityIdAux[]>(
-        //     [
-        //     {
-        //         id:0,
-        //         procedimiento:'No data',
-        //         fechaProtocolo:'No data',
-        //         resultado:'No data'
-        //     }
-        //     ])
-
-        // const [ parecerTab, setParecerTab ] = useState<OpportunityCustomListOpinionsByIdAux[]>(
-        //     [
-        //     {
-        //         id:0,
-        //         responsable:'No data',
-        //         tipo:'No data',
-        //         parecer:'No data',
-        //         fecha:'No data',
-        //     }
-        //     ])
-    
-        // const [ planAccionTab, setPlanAccionTab ] = useState<ListAllTaskByOpportunityIdAux[]>(
-        //     [
-        //     {
-        //         id:0,
-        //         tarifa:"No data",
-        //         responsable:"No data",
-        //         fechaPlaneada:"No data",
-        //         fechaPlaneada2:"No data"
-        //     }
-        //     ])
-
-        // const [ resultadoTab, setResultadoTab ] = useState<OpportunityListitemAux[]>(
-        //    [ {
-        //         id:0,
-        //         lote:'No data',
-        //         item:'No data',
-        //         valorFechado:'No data',
-        //         valorTotal:'No data',
-        //         ganador:'No data',
-        //         producto:'No data',
-        //         participacion:'No data',
-        //         posicion:'No data',
-        //         collapsed:true,
-        //       },
-        //     ]
-              
-        //     )
-
-        // const [ pendenciasTab, setPendenciasTab ] = useState<ListAllRequirementByOpportunityAux[]>(
-        //     [
-        //     {
-        //         id:0,
-        //         descripcion:'No data',
-        //         tipo:'No data',
-        //         tipoUsuario:'No data',
-        //         dias:'No data',
-        //         acepto:'No data'//Sim
-        //     }
-        //     ])
 
         const floading=(valor:boolean)=>{
             const payload= flags;
