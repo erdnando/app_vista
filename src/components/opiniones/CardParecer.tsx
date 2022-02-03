@@ -48,7 +48,7 @@ export const CardParecer = ( ) => {
                           {/* Status */}
                           <LabelTexto  fontSize={14} color='#FF9029' label='Status:' value=' Aguardando parecer'></LabelTexto>
 
-                          <Spacer height={10}></Spacer>
+                          <Spacer height={15}></Spacer>
                           <TextOportunidadIcono icono='ic_round-date-range' colorIcono='#838892' label='Data Certame' colorValor='#838892' valor='000000 00:00'  size={15} ></TextOportunidadIcono>
                           <TextOportunidadIcono icono='ic_baseline-place' colorIcono='#838892' label='Data Certame' colorValor='#838892' valor='000000 00:00'  size={15} ></TextOportunidadIcono>
                           <TextOportunidadIcono icono='ic_baseline-cloud-download' colorIcono='#838892' label='' colorValor='#838892' valor='Download do Edital'  size={15} ></TextOportunidadIcono>
@@ -68,7 +68,7 @@ export const CardParecer = ( ) => {
 
                           }} ></RoundedSelectors>
 
-                          <Spacer height={24}></Spacer>
+                          <Spacer height={20}></Spacer>
                           <Select placeholder='Motivo' campo={opiniones.parecer.motivo} items={items}
                             onValueChange={function (value: any, index: number): void {
 
@@ -77,7 +77,7 @@ export const CardParecer = ( ) => {
                                   setOpiniones(payload);
                             }} 
                           />
-                          <Spacer height={0}></Spacer>
+                          {/* <Spacer height={0}></Spacer> */}
                           <InputMensaje placeholder='Justificativa' campo={opiniones.parecer.justificacion}
                           longitud={opiniones.parecer.justificacion.length} 
                           onChangeMensaje={(msg:string)=>{

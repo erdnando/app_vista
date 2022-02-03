@@ -46,7 +46,7 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
                                       </View>
                                       {/* id, edital */}
                                       <View style={{flexDirection:'row', width:'100%', justifyContent:'flex-start', marginBottom:5,marginTop:5 }}>
-                                        <Text style={{fontFamily:'Roboto-Regular',fontWeight:'400', fontSize:14, textAlign:'justify',color:'#373737'}}>ID: 
+                                        <Text style={{fontFamily:'Roboto-Regular',fontWeight:'400', fontSize:14, textAlign:'justify',color:'#373737'}}>Oportunidade: 
                                           <Text style={{fontFamily:'Roboto-Regular',fontWeight:'400', fontSize:14, textAlign:'justify',color:'#838892'}}> {item.idOpinion}</Text>
                                         </Text>
                                         <View style={{width:10}}></View>
