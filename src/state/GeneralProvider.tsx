@@ -130,13 +130,46 @@ class GeneralProvider extends React.Component{
                 justificacion:'',
                 estatusGO:0
             },
-            exigencias:{
+            exigenciasIndex:1,
+            tabsContador:0,
+            exigencias:[
+                {
                 descripcion: '',
                 oportunidad:'',
                 qtededias:'',
                 tipoUsuario:'',
                 observaciones:'',
-            },
+                },
+                {
+                descripcion: '',
+                oportunidad:'',
+                qtededias:'',
+                tipoUsuario:'',
+                observaciones:'',
+                },
+                {
+                descripcion: '',
+                oportunidad:'',
+                qtededias:'',
+                tipoUsuario:'',
+                observaciones:'',
+                },
+                {
+                descripcion: '',
+                oportunidad:'',
+                qtededias:'',
+                tipoUsuario:'',
+                observaciones:'',
+                },
+                {
+                descripcion: '',
+                oportunidad:'',
+                qtededias:'',
+                tipoUsuario:'',
+                observaciones:'',
+                }
+
+            ],
             valores:[{
                 id:0,
                 go: false,
@@ -178,7 +211,8 @@ class GeneralProvider extends React.Component{
                 valorFinal:'',
                 justificativa:'',
                 colapsado:true,
-            }]
+            }],
+            catTipoExigencia:[]
         },
         agendafiltro:{
             filtroHorario: 'Seleccione una horario',
@@ -190,33 +224,34 @@ class GeneralProvider extends React.Component{
         },
         menuOpiniones:[
             {
-              id:1,
-              opcion:'Parecer',
-              icon:'icomoon-free_hammer2',
-              estatus:1,
-              visible:true
+            id:1,
+            opcion:'Exigencias',
+            icon:'ic_baseline-lightbulb',
+            estatus:1,
+            visible:true
             },
             {
               id:2,
+              opcion:'Parecer',
+              icon:'icomoon-free_hammer2',
+              estatus:0,
+              visible:true
+            },
+            {
+              id:3,
               opcion:'Pareceres realizados',
               icon:'ant-design_check-circle-filled',
               estatus:0,
               visible:true
             },
             {
-              id:3,
+              id:4,
               opcion:'Valores',
               icon:'ic_round-monetization-on',
               estatus:0,
               visible:true
             },
-            {
-              id:4,
-              opcion:'Exigencias',
-              icon:'ic_baseline-lightbulb',
-              estatus:0,
-              visible:true
-            },
+            
         ],
         search:{
           oportunidade:{
@@ -316,7 +351,8 @@ class GeneralProvider extends React.Component{
                     ubicacion:'No data',
                     estatus:0,
                }
-            ]
+            ],
+            parecerSeleccionado:{}
         }
         
         

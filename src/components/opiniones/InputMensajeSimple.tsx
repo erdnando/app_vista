@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { KeyboardType, KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 import { colores } from '../../theme/appTheme';
 import { GeneralContext } from '../../state/GeneralProvider';
 
@@ -9,10 +9,11 @@ interface Props{
   campo:string;
   width?:string,
   maxLength?:number,
+  keyboardType?:KeyboardType,
   onChangeMensaje: (msg:string) =>void;
 }
 
-export const InputMensajeSimple = ( { placeholder,campo,width='90%',maxLength=8,onChangeMensaje}: Props ) => {
+export const InputMensajeSimple = ( { placeholder,campo,width='90%',maxLength=8,keyboardType='default' ,onChangeMensaje}: Props ) => {
 
   let colorIcono = colores.primary;
   
@@ -36,7 +37,7 @@ export const InputMensajeSimple = ( { placeholder,campo,width='90%',maxLength=8,
                   }}
                   onChangeText={ onChangeMensaje }
                   placeholder={placeholder}
-                  keyboardType='default'
+                  keyboardType= {keyboardType}
                   autoCapitalize='none'
                   autoCorrect = {false}
                   multiline= {false}

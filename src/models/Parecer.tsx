@@ -5,6 +5,6 @@ import { ListaParecerAux } from './response/ListaParecerAux';
 export interface Parecer{
     
     listaParecer:ListaParecerAux[],
-   
+    parecerSeleccionado:ListaParecerAux,
 
 }

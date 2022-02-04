@@ -48,21 +48,19 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
           />
 
           <TouchableOpacity style={{ right:35, top:20}} onPress={() =>{ 
-                //call search engine api
-                // const payload= flags;
-                // payload.isLoading=true;
-                // payload.resultadosBusquedaVisible=true;
-                // setFlags(payload);
+               
                 console.log('searching...1')
               
-                setTimeout(
-                  () => { 
+                // setTimeout(
+                //   () => { 
                    
-                   usuario.tipo==TipoUsuario.COLABORADOR?
-                   getListParecerColaborador():getListParecerTerciario()
-                  },
-                  3000
-                )   
+                  
+                //   },
+                //   3000
+                // )   
+
+                usuario.tipo==TipoUsuario.COLABORADOR?
+                getListParecerColaborador():getListParecerTerciario()
             }}>
               
              <Text style={{right:10,}}>

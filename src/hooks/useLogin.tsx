@@ -81,7 +81,7 @@ export const useLogin =  () => {
                   )   
 
                 //TODO to map menues
-                
+                console.log(resp.data.token);
                 const payloads= sesion;
                 payloads.token=resp.data.token;
                 payloads.clienteId=resp.data.info.clienteId,//148,//112; //resp.data.info.clienteId; //XXX
@@ -100,7 +100,7 @@ export const useLogin =  () => {
                     setUsuario(payload);
     
                     const payload1= menuOpiniones;
-                    payload1[2].visible = true;//valores visible
+                    payload1[3].visible = true;//valores visible
                     setMenuOpiniones(payload1);
     
                     return true;
@@ -111,7 +111,8 @@ export const useLogin =  () => {
                     setUsuario(payload);
     
                     const payload1= menuOpiniones;
-                    payload1[2].visible = false;//valores hidden
+                    payload1[3].visible = false;//valores hidden
+                    payload1[2].visible = false;//pareceres realizado hidden
                     setMenuOpiniones(payload1);
                     return true;
                 }

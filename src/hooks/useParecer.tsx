@@ -3,13 +3,14 @@ import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
 import { ListaParecerAux } from '../models/response/ListaParecerAux';
 import { ListaParecer } from '../models/response/ListaParecer';
+import { TipoExigencia } from '../models/response/TipoExigencia';
 
 
 
 
 export const useParecer =  () => {
 
-        const { ids ,setIds, flags,setFlags, sesion, parecer,setParecer} = useContext( GeneralContext );
+        const { ids ,setIds, flags,setFlags, sesion, parecer,setParecer,opiniones,setOpiniones } = useContext( GeneralContext );
 
        
 
@@ -145,6 +146,8 @@ export const useParecer =  () => {
                     payload.listaParecer= [];
                     setParecer(payload);
                 }
+
+                
            
                 floading(false)
             } catch (error) {
@@ -154,7 +157,54 @@ export const useParecer =  () => {
             }
         }
 
-      
+        const cargaComoboTipo = async () =>{
+            
+            try {
+                console.log(sesion.token )
+                const resp = await vistaApi.get<TipoExigencia[]>('services/requirement/listAllTypeGoals?charter=2',{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token
+                    },
+                }, 
+                );
+
+                console.log('op combo tipo:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length > 0){
+
+                    let arrAux=opiniones.catTipoExigencia;//get reference
+                    arrAux=[];
+                  
+                      resp.data.forEach(function(item,index){
+                        arrAux.push({
+                                   value:item.id.toString(),
+                                   label:item.descricao
+                               });
+                       });
+
+
+                    console.log("asignando datos");
+                    const payload = opiniones;
+                    payload.catTipoExigencia = arrAux;
+                    setOpiniones(payload);
+
+                }else{
+                    const payload = opiniones;
+                    payload.catTipoExigencia = [];
+                    setOpiniones(payload);
+                }
+           
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar listaParecer')
+                console.log(error);
+                floading(false)
+            }
+        }
 
         const onChangeSearch = async (idParecer:string) =>{
            
@@ -167,7 +217,7 @@ export const useParecer =  () => {
   
         //exposed objets 
         return {
-            getListParecerColaborador,getListParecerTerciario,onChangeSearch
+            getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo
         }
 }
         

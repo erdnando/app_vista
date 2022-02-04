@@ -16,13 +16,13 @@ export const DetalleContentOpinion = ( ) => {
 
   switch (ids.idMenuOpinionSelected) {
     case 1:
-      return  <CardParecer></CardParecer>
+      return  <CardParecerExigencias></CardParecerExigencias>   
     case 2:
-      return  <CardParecerRealizados></CardParecerRealizados>
+      return  <CardParecer></CardParecer>    
     case 3:
-      return  <CardParecerValores></CardParecerValores>
+      return  <CardParecerRealizados></CardParecerRealizados>    
     case 4:
-      return  <CardParecerExigencias></CardParecerExigencias>
+      return  <CardParecerValores></CardParecerValores>
     default:
       return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
                  <Text>Opcion no valida</Text>

@@ -10,14 +10,12 @@ import { useParecer } from '../../hooks/useParecer';
 export const ListOpiniones = () => {
 
   //invoke global state
-  const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected, parecer } = useContext( GeneralContext )
-
+  const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected, parecer,setParecer} = useContext( GeneralContext )
+  const { cargaComoboTipo } = useParecer();
  
 
 
 const renderUpdateItem = (item:ListaParecerAux) =>{
-
-  
 
     {/* alerta */}
     return (  <TouchableOpacity style={{ borderRadius: 100,  }} 
@@ -28,8 +26,16 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
                                   payload.idOpinionSeleccionado=item.idOpinion;
                                   setIds(payload);
 
+                                  const payload1= parecer;
+                                  payload1.parecerSeleccionado=item;
+                                  setParecer(payload1);
+
                                   setTabSelectedOld(tabSelected)
                                   setTabSelected(item.idOpinion);
+
+                                  cargaComoboTipo();
+
+                                  
 
                                 }}>
                       <View style={{height:135, flexDirection:'row', width:'98%',borderLeftColor:(item.estatus==1 ? '#83AE69':'#FF9029'),borderLeftWidth:5,
