@@ -131,40 +131,40 @@ class GeneralProvider extends React.Component{
                 estatusGO:0
             },
             exigenciasIndex:1,
-            tabsContador:0,
+            tabsContador:1,
             exigencias:[
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'',
+                qtededias:'1',
                 tipoUsuario:'',
                 observaciones:'',
                 },
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'',
+                qtededias:'2',
                 tipoUsuario:'',
                 observaciones:'',
                 },
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'',
+                qtededias:'3',
                 tipoUsuario:'',
                 observaciones:'',
                 },
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'',
+                qtededias:'4',
                 tipoUsuario:'',
                 observaciones:'',
                 },
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'',
+                qtededias:'5',
                 tipoUsuario:'',
                 observaciones:'',
                 }

@@ -13,11 +13,12 @@ interface Props{
   label:string,
   index:number,
   icono:string,
+  selected:boolean,
   onPress:()=>void
 }
 
 
-export const SelectorTabParecerExigencias = ( { visible,label,index,icono,onPress}: Props ) => {
+export const SelectorTabParecerExigencias = ( { visible,label,index,selected,icono,onPress}: Props ) => {
 
   const { opiniones,setOpiniones} = useContext(GeneralContext);
 
@@ -54,7 +55,7 @@ export const SelectorTabParecerExigencias = ( { visible,label,index,icono,onPres
                             <View style={{height:40, flexDirection:'row', width:45,
                                             backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,marginRight:0,marginLeft:6,
                                             borderColor:'#E2E5EA',borderWidth:2,
-                                            shadowColor: 'orange', shadowOpacity: 0.8,shadowOffset: {
+                                            shadowColor: (selected ? 'orange':'grey'), shadowOpacity: 0.8,shadowOffset: {
                                                 height: 1, width: 3, }               
                                             }}>
 
@@ -66,7 +67,7 @@ export const SelectorTabParecerExigencias = ( { visible,label,index,icono,onPres
                                                   {
                                                     label==='Salvar' ? <Text style={{fontSize:25, fontWeight:'bold'}}>+</Text> :
                                                     <Text > 
-                                                    <CustomIcon  name={icono} size={26} color='orange' ></CustomIcon>
+                                                    <CustomIcon  name={icono} size={26} color={selected ? 'orange':'grey'} ></CustomIcon>
                                                     </Text>
                                                   }
                                                     

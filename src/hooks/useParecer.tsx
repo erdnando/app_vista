@@ -213,11 +213,39 @@ export const useParecer =  () => {
             setIds(payload);
             console.log('searching...')
         }
+ 
+        const ajustaBorrado=(index:number)=>{
 
+             const payload= opiniones;
+            let arrAux =payload.exigencias
+
+            //logic to controll tabs and selectors, by swap among them
+            var b = arrAux[index];
+            arrAux[index] = arrAux[payload.exigenciasIndex-1];
+            arrAux[payload.exigenciasIndex-1] = b;
+
+           
+            
+
+
+
+            payload.tabsContador--;
+            payload.exigenciasIndex--;
+
+            if(payload.tabsContador ==0){
+                payload.tabsContador=1;
+     
+            }
+            if(payload.exigenciasIndex ==0){
+           
+                payload.exigenciasIndex=1;
+            }
+            setOpiniones(payload);
+        }
   
         //exposed objets 
         return {
-            getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo
+            getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado
         }
 }
         
