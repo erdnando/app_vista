@@ -92,6 +92,8 @@ export const TabParecerExigencias = ( { visible,indexTab}: Props ) => {
                                         } } ></InputMensaje>
                         </View> 
 
+
+                       {/* Eliminar card */}
                         <View style={{ backgroundColor:'red',position:'absolute', top:-15,right:5, 
                                                                borderWidth:1,borderColor:'red', borderRadius:50, height:30, width:30, 
                                                                justifyContent:'center',  alignItems:'center' }}>

@@ -1,16 +1,17 @@
 import { useContext } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
-import { ListaParecerAux } from '../models/response/ListaParecerAux';
 import { ListaParecer } from '../models/response/ListaParecer';
 import { TipoExigencia } from '../models/response/TipoExigencia';
+import { Exigencias } from '../models/Exigencias';
 
 
 
 
 export const useParecer =  () => {
 
-        const { ids ,setIds, flags,setFlags, sesion, parecer,setParecer,opiniones,setOpiniones } = useContext( GeneralContext );
+        const { ids ,setIds, flags,setFlags, sesion, parecer,setParecer,
+            opiniones,setOpiniones,usuario } = useContext( GeneralContext );
 
        
 
@@ -111,8 +112,6 @@ export const useParecer =  () => {
                 console.log('op lista parecer:::::::::::::::::::::x');
                 console.log(resp.data);
 
-               
-
                 if(resp.data.length > 0){
 
                     let arrAux=parecer.listaParecer;//get reference
@@ -147,8 +146,6 @@ export const useParecer =  () => {
                     setParecer(payload);
                 }
 
-                
-           
                 floading(false)
             } catch (error) {
                 console.log('error al consultar listaParecer')
@@ -216,19 +213,26 @@ export const useParecer =  () => {
  
         const ajustaBorrado=(index:number)=>{
 
-             const payload= opiniones;
-            let arrAux =payload.exigencias
+            const payload = opiniones;
+            let arrAux = payload.exigencias//todas las cards
 
             //logic to controll tabs and selectors, by swap among them
-            var b = arrAux[index];
-            arrAux[index] = arrAux[payload.exigenciasIndex-1];
-            arrAux[payload.exigenciasIndex-1] = b;
-
-           
+            arrAux[index].visible=false;
             
+            var b = arrAux[index];//card q se va a eliminar
+
+            arrAux[payload.exigenciasIndex-1].visible=true;
+            arrAux[index] = arrAux[payload.exigenciasIndex-1];//intercambio swap
+            //arrAux[index].visible=true;
+
+            arrAux[payload.exigenciasIndex-1] = b;//intercambio swap
 
 
-
+            console.log('borrando card::::'+index)
+            console.log(arrAux)
+            console.log('-----------------------')
+            payload.exigencias=arrAux;
+           
             payload.tabsContador--;
             payload.exigenciasIndex--;
 
@@ -242,10 +246,71 @@ export const useParecer =  () => {
             }
             setOpiniones(payload);
         }
+
+        const saveExigencias = async () =>{
+
+            try {
+
+                const payload = opiniones;
+                let arrExigenciasAux= [{}];
+                //arrExigenciasAux.cl
+                console.log('---------------------------')
+                console.log(payload.exigencias);
+                console.log('---------------------------')
+
+
+                payload.exigencias.forEach(function(item,index){
+                    if(item.visible){
+                        arrExigenciasAux.push({
+                            "id": index+1, 
+                            "metaDias": item.qtededias, 
+                            "observacao": item.observaciones, 
+                            "oportunidadeId": parecer.parecerSeleccionado.idOpinion, 
+                            "status": "1", 
+                            "tipoDataMeta": 0, 
+                            "tipoExigenciaId": 0, 
+                            "tipoUsuarioClienteId": 0, 
+                            "titulo": item.descripcion 
+                        });
+                    }
+
+                  })
+                console.log('salvar')
+
+                var arr=arrExigenciasAux.splice(1,arrExigenciasAux.length);
+                console.log(arr);
+          
+
+                const resp = await vistaApi.post<any>('/services/exigency/saveExigency',{ arr }, {
+                                    headers:{
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    "X-Auth-Token": sesion.token
+                                }
+                });
+
+                console.log('exigencias guardadas');
+                console.log(resp.data);
+
+            } catch (error) {
+                console.log(error);
+
+                const payloadx= flags;
+                payloadx.isLoading=false;
+                setFlags(payloadx);
+                console.log('error al guardar exigencias');
+
+                return false;
+            }
+        }
   
+
+
+
         //exposed objets 
         return {
-            getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado
+            getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado,
+            saveExigencias
         }
 }
         

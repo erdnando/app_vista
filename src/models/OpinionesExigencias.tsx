@@ -6,4 +6,5 @@ export interface OpinionesExigencias{
     qtededias:string,
     tipoUsuario:string,
     observaciones:string,
+    visible:boolean
 }

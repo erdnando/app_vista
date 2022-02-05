@@ -139,6 +139,7 @@ class GeneralProvider extends React.Component{
                 qtededias:'1',
                 tipoUsuario:'',
                 observaciones:'',
+                visible:true
                 },
                 {
                 descripcion: '',
@@ -146,6 +147,7 @@ class GeneralProvider extends React.Component{
                 qtededias:'2',
                 tipoUsuario:'',
                 observaciones:'',
+                visible:true
                 },
                 {
                 descripcion: '',
@@ -153,6 +155,7 @@ class GeneralProvider extends React.Component{
                 qtededias:'3',
                 tipoUsuario:'',
                 observaciones:'',
+                visible:true
                 },
                 {
                 descripcion: '',
@@ -160,6 +163,7 @@ class GeneralProvider extends React.Component{
                 qtededias:'4',
                 tipoUsuario:'',
                 observaciones:'',
+                visible:true
                 },
                 {
                 descripcion: '',
@@ -167,6 +171,7 @@ class GeneralProvider extends React.Component{
                 qtededias:'5',
                 tipoUsuario:'',
                 observaciones:'',
+                visible:true
                 }
 
             ],

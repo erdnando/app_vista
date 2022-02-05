@@ -2,13 +2,6 @@ import React, { useState,useContext } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { colores } from '../../theme/appTheme';
-import { TextOportunidadIcono } from '../oportunidad/TextOportunidadIcono';
-import { Select } from '../Select';
-import { Spacer } from '../Spacer';
-import { InputMensaje } from './InputMensaje';
-import { LabelTexto } from './LabelTexto';
-import { RoundedSelectors } from './RoundedSelectors';
-import { InputMensajeSimple } from './InputMensajeSimple';
 import { TabParecerExigencias } from './TabParecerExigencia';
 import { SelectorTabParecerExigencias } from './SelectorTabParecerExigencia';
 import { useParecer } from '../../hooks/useParecer';
@@ -17,6 +10,7 @@ import { useParecer } from '../../hooks/useParecer';
 export const CardParecerExigencias = ( ) => {
 
   const { opiniones,setOpiniones} = useContext(GeneralContext);
+  const { saveExigencias } = useParecer();
   const [hasData] = useState(false)
 
 
@@ -57,6 +51,8 @@ export const CardParecerExigencias = ( ) => {
                       payload.exigenciasIndex=5;
                       payload.tabsContador=payload.exigenciasIndex;
                     }
+console.log(payload.exigenciasIndex-1)
+                    payload.exigencias[payload.exigenciasIndex-1].visible=true;
                     setOpiniones(payload);
 
                   }} icono='ic_baseline-lightbulb'></SelectorTabParecerExigencias>
@@ -115,8 +111,7 @@ export const CardParecerExigencias = ( ) => {
                         height:48, justifyContent:'center',  }} 
                           onPress= {()=>{
                             //TODO add logic to add nova exigencia
-
-
+                            saveExigencias();
 
                             //clear arrExigencias
                             // const payload = opiniones;
