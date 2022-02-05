@@ -51,7 +51,7 @@ export const CardParecerExigencias = ( ) => {
                       payload.exigenciasIndex=5;
                       payload.tabsContador=payload.exigenciasIndex;
                     }
-console.log(payload.exigenciasIndex-1)
+                    console.log(payload.exigenciasIndex-1)
                     payload.exigencias[payload.exigenciasIndex-1].visible=true;
                     setOpiniones(payload);
 
