@@ -17,7 +17,7 @@ export const useParecer =  () => {
 
         const floading=(valor:boolean)=>{
             const payload= flags;
-            payload.isLoading= valor;
+            payload.isLoadingParecer= valor;
             
             setFlags(payload);
         }
@@ -28,8 +28,8 @@ export const useParecer =  () => {
         }
 
         const getListParecerColaborador = async () =>{
-
-
+            floading(true)
+            
             try {
                 console.log('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'?collaboratorUser=N&filialId=2' )
                 const resp = await vistaApi.get<ListaParecer[]>('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'?collaboratorUser=N&filialId=2',{
@@ -46,7 +46,7 @@ export const useParecer =  () => {
                 );
 
                 console.log('op lista parecer:::::::::::::::::::::x');
-                console.log(resp.data);
+                //console.log(resp.data);
 
                
 
@@ -94,6 +94,7 @@ export const useParecer =  () => {
 
         const getListParecerTerciario = async () =>{
             //TODO implement terciario call
+            floading(true)
             try {
                 console.log(sesion.token )
                 const resp = await vistaApi.get<ListaParecer[]>('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'collaboratorUser=N&filialId=2',{
@@ -155,7 +156,7 @@ export const useParecer =  () => {
         }
 
         const cargaComoboTipo = async () =>{
-            
+            floading(true)
             try {
                 console.log(sesion.token )
                 const resp = await vistaApi.get<TipoExigencia[]>('services/requirement/listAllTypeGoals?charter=2',{
@@ -212,7 +213,7 @@ export const useParecer =  () => {
         }
  
         const ajustaBorrado=(index:number)=>{
-
+            floading(true)
             const payload = opiniones;
             let arrAux = payload.exigencias//todas las cards
 
@@ -245,12 +246,13 @@ export const useParecer =  () => {
                 payload.exigenciasIndex=1;
             }
             setOpiniones(payload);
+            floading(false)
         }
 
         const saveExigencias = async () =>{
 
             try {
-
+                floading(true)
                 const payload = opiniones;
                 let arrExigenciasAux= [{}];
                 //arrExigenciasAux.cl
@@ -275,7 +277,12 @@ export const useParecer =  () => {
                     }
 
                   })
-                console.log('salvar')
+                console.log('paquete enviando...')
+
+                console.log('---------------------------')
+                console.log(arrExigenciasAux);
+                console.log('---------------------------')
+
 
                 var arr=arrExigenciasAux.splice(1,arrExigenciasAux.length);
                 console.log(arr);
@@ -291,6 +298,7 @@ export const useParecer =  () => {
 
                 console.log('exigencias guardadas');
                 console.log(resp.data);
+                floading(false)
 
             } catch (error) {
                 console.log(error);
@@ -299,7 +307,7 @@ export const useParecer =  () => {
                 payloadx.isLoading=false;
                 setFlags(payloadx);
                 console.log('error al guardar exigencias');
-
+                floading(false)
                 return false;
             }
         }

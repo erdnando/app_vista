@@ -6,119 +6,17 @@ import { GeneralContext } from '../../state/GeneralProvider';
 import { Loading } from '../Loading';
 import { Spacer } from '../Spacer';
 import { IconoActualizacion } from '../ultimasActualizaciones/IconoActualizacion';
-// import { IconoActualizacion } from './IconoActualizacion';
-
 
 
 
 export const ListNotificaciones = ( ) => {
 
-//   interface LastUpdates{
-//     id:string,
-//     tipo:string,
-//     dia:string;
-//     hora:string;
-//     descripcion:string;
-//     color:string;
-//     background:string;
-//     icon:string;
-//     diaVisible:boolean;
-//     }
+
 
     const { arrNotificaciones, } = useNotificaciones(); 
     const {flags  } = useContext( GeneralContext );
 
-    // const Data:LastUpdates[] = [
-    //     {
-    //         id:'1',
-    //         tipo:'SIMPLE',
-    //         dia:'Hoy',
-    //         hora: 'Hoje. 00:00',
-    //         descripcion:'Lorem ipsum dolor sit amet adipis',
-    //         color: 'red',
-    //         background:'#F8BBBB',
-    //         icon:'bx_bxs-message-alt-error',
-    //         diaVisible:true
 
-    //     },
-    //     {
-    //         id:'2',
-    //         tipo:'SIMPLE',
-    //         dia:'Hoy',
-    //         hora: 'Hoje. 00:00',
-    //         descripcion:'Se ha habierto la posicion A32x. Y la opcion 45',
-    //         color: 'red',
-    //         background:'#F8BBBB',
-    //         icon:'bx_bxs-message-alt-error',
-    //         diaVisible:false
-    //     },
-    //     {
-    //         id:'3',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: 'Hoje. 00:00',
-    //         descripcion:'Se ha habierto la posicion 89.',
-    //         color: 'grey',
-    //         background:'#BCC1CB',
-    //         icon:'ic_baseline-lightbulb',
-    //         diaVisible:true
-    //     },
-    //     {
-    //         id:'4',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: 'Hoje. 00:00',
-    //         descripcion:'Se ha habierto la posicion W321.',
-    //         color: 'grey',
-    //         background:'#BCC1CB',
-    //         icon:'icomoon-free_hammer2',
-    //         diaVisible:false
-    //     },
-    //     {
-    //         id:'5',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: 'Hoje. 00:00',
-    //         descripcion:'Se ha habierto la posicion W321.',
-    //         color: 'grey',
-    //         background:'#BCC1CB',
-    //         icon:'ic_baseline-lightbulb',
-    //         diaVisible:false
-    //     },
-    //     {
-    //         id:'6',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: 'Hoje. 00:00',
-    //         descripcion:'Se ha habierto la posicion W321.',
-    //         color: 'grey',
-    //         background:'#BCC1CB',
-    //         icon:'icomoon-free_hammer2',
-    //         diaVisible:false
-    //     },
-    //     {
-    //         id:'7',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: 'Hoje. 00:00',
-    //         descripcion:'Se ha habierto la posicion W321.',
-    //         color: 'grey',
-    //         background:'#BCC1CB',
-    //         icon:'icomoon-free_hammer2',
-    //         diaVisible:false
-    //     },
-    //     {
-    //     id:'8',
-    //     tipo:'EVENT',
-    //     dia:'Ayer',
-    //     hora: 'Hoje. 00:00',
-    //     descripcion:'Se ha habierto la posicion 8.',
-    //     color: 'grey',
-    //     background:'#BCC1CB',
-    //     icon:'icomoon-free_hammer2',
-    //     diaVisible:false
-    // },
-    // ]
 
     const renderUpdateItem = (updateItem:NotificacionByLoginAux) =>{
         return (
@@ -181,7 +79,7 @@ export const ListNotificaciones = ( ) => {
 
   
     if(flags.isLoading){
-       return <Loading color='green'></Loading>
+       return <Loading color='orange'></Loading>
     }else{
             return (
             <Animated.View  style={{...transformStyle,opacity:fadeValue}}>

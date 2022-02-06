@@ -17,7 +17,7 @@ export const AgendaScreen = () => {
     //call global state
     const { flags,ids} = useContext(GeneralContext);
     //call service to get data
-    const { isLoading } = useMovies();
+   // const { isLoading } = useMovies();
 
      if(flags?.resultadosBusquedaVisible){
         return <SafeAreaProvider>
@@ -33,8 +33,8 @@ export const AgendaScreen = () => {
         return <DetalleAgenda></DetalleAgenda>
     }
 
-    if(isLoading){
-        return <Loading color='green'></Loading>
+    if(flags.isLoadingAgenda){
+        return <Loading color='orange'></Loading>
     }
     
         return(

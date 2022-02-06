@@ -26,7 +26,7 @@ export const HomeScreen = () => {
         return  <ListNotificaciones></ListNotificaciones>
     }
     if(isLoading){
-        return <Loading color='green'></Loading>
+        return <Loading color='orange'></Loading>
     }
     //render view after getting data
     if(usuario.tipo === 1){//terciario

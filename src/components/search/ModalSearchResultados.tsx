@@ -23,7 +23,7 @@ export const ModalSearchResultados = ( { iconClose,color, label }: Props ) => {
     return <Modal animationType='slide' transparent={true}  visible={ flags.resultadosBusquedaVisible }>
               <View style={{ flex:1,backgroundColor:'white',paddingTop:50 }}>
                   <HeaderResultados iconClose={iconClose} color={color} label={label}></HeaderResultados>
-                  <Loading color='red'></Loading>
+                  <Loading color='orange'></Loading>
               </View>
           </Modal>
   }

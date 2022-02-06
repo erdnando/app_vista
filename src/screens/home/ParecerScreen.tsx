@@ -32,8 +32,8 @@ export const ParecerScreen = () => {
         return  <ListNotificaciones></ListNotificaciones>
     }
 
-    if(flags.isLoading){
-        return <Loading color='green'></Loading>
+    if(flags.isLoadingParecer){
+        return <Loading color='orange'></Loading>
     }
 
     //vista detalle d euna opinion

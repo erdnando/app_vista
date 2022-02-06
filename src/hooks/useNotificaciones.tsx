@@ -26,7 +26,7 @@ export const useNotificaciones =  () => {
 
         const floading=(valor:boolean)=>{
             const payload= flags;
-            payload.isLoading= valor;
+            payload.isLoadingAgenda= valor;
             
             setFlags(payload);
         }

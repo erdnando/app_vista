@@ -44,7 +44,7 @@ export const NavigationLateral = ( { navigation }:Props) => {
 
  
       if(flags.isLoading){
-        return <Loading color='red'></Loading>
+        return <Loading color='orange'></Loading>
       }
       return (
                 <Drawer.Navigator 

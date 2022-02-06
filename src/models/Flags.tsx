@@ -4,6 +4,8 @@ export interface Flags{
     isLogedIn: boolean,
     isAlertLoginVisible:boolean,
     isLoading:boolean,
+    isLoadingParecer:boolean,
+    isLoadingAgenda:boolean,
     isNotificaciones:boolean,
     verDetalleAgenda:boolean,
     resultadosBusquedaVisible:boolean,
