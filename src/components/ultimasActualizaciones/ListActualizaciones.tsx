@@ -27,7 +27,7 @@ const Data:LastUpdates[] = [
         tipo:'ALERT',
         dia:'Hoy',
         hora: '13:01:45',
-        descripcion:'Se ha habierto la posicion 345.',
+        descripcion:'Se ha abierto la posicion 345.',
         color: 'red',
         icon:'bx_bxs-message-alt-error',
         diaVisible:true
@@ -38,7 +38,7 @@ const Data:LastUpdates[] = [
         tipo:'SIMPLE',
         dia:'Hoy',
         hora: '13:11:25',
-        descripcion:'Se ha habierto la posicion A32. Y la opcion 45',
+        descripcion:'Se ha abierto la posicion A32. Y la opcion 45',
         color: 'red',
         icon:'bx_bxs-message-alt-error',
         diaVisible:false
@@ -48,7 +48,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '13:23:45',
-        descripcion:'Se ha habierto la posicion 89.',
+        descripcion:'Se ha abierto la posicion 89.',
         color: 'red',
         icon:'icomoon-free_hammer2',
         diaVisible:true
@@ -58,7 +58,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '13:23:45',
-        descripcion:'Se ha habierto la posicion W321.',
+        descripcion:'Se ha abierto la posicion W321.',
         color: 'red',
         icon:'icomoon-free_hammer2',
         diaVisible:false
@@ -68,7 +68,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '13:23:45',
-        descripcion:'Se ha habierto la posicion W321.',
+        descripcion:'Se ha abierto la posicion W321.',
         color: 'red',
         icon:'icomoon-free_hammer2',
         diaVisible:false
@@ -78,7 +78,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '13:23:45',
-        descripcion:'Se ha habierto la posicion W321.',
+        descripcion:'Se ha abierto la posicion W321.',
         color: 'red',
         icon:'icomoon-free_hammer2',
         diaVisible:false
@@ -88,7 +88,7 @@ const Data:LastUpdates[] = [
         tipo:'EVENT',
         dia:'Ayer',
         hora: '13:23:45',
-        descripcion:'Se ha habierto la posicion W321.',
+        descripcion:'Se ha abierto la posicion W321.',
         color: 'red',
         icon:'icomoon-free_hammer2',
         diaVisible:false
@@ -98,7 +98,7 @@ const Data:LastUpdates[] = [
       tipo:'EVENT',
       dia:'Ayer',
       hora: '13:23:45',
-      descripcion:'Se ha habierto la posicion 8.',
+      descripcion:'Se ha abierto la posicion 8.',
       color: 'red',
       icon:'icomoon-free_hammer2',
       diaVisible:false

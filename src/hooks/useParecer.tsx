@@ -3,10 +3,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
 import { ListaParecer } from '../models/response/ListaParecer';
 import { TipoExigencia } from '../models/response/TipoExigencia';
-import { Exigencias } from '../models/Exigencias';
-
-
-
+import Toast from 'react-native-toast-message';
 
 export const useParecer =  () => {
 
@@ -46,9 +43,7 @@ export const useParecer =  () => {
                 );
 
                 console.log('op lista parecer:::::::::::::::::::::x');
-                //console.log(resp.data);
-
-               
+              
 
                 if(resp.data.length > 0){
 
@@ -83,11 +78,13 @@ export const useParecer =  () => {
                     payload.listaParecer= [];
                     setParecer(payload);
                 }
-           
+            
+                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados ok' }});
                 floading(false)
             } catch (error) {
                 console.log('error al consultar listaParecer')
                 console.log(error);
+                Toast.show({type: 'ko',props: { mensaje: error}});
                 floading(false)
             }
         }
@@ -146,7 +143,7 @@ export const useParecer =  () => {
                     payload.listaParecer= [];
                     setParecer(payload);
                 }
-
+                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados ok' }});
                 floading(false)
             } catch (error) {
                 console.log('error al consultar listaParecer')
@@ -215,6 +212,7 @@ export const useParecer =  () => {
         const ajustaBorrado=(index:number)=>{
             floading(true)
             const payload = opiniones;
+            let flagBorrado=true;
             let arrAux = payload.exigencias//todas las cards
 
             //logic to controll tabs and selectors, by swap among them
@@ -239,13 +237,18 @@ export const useParecer =  () => {
 
             if(payload.tabsContador ==0){
                 payload.tabsContador=1;
+                flagBorrado=false;
      
             }
             if(payload.exigenciasIndex ==0){
            
                 payload.exigenciasIndex=1;
+                flagBorrado=false;
             }
             setOpiniones(payload);
+            if(flagBorrado) {
+                Toast.show({type: 'ok',props: { mensaje: 'Exigencia removida' }});
+            }
             floading(false)
         }
 

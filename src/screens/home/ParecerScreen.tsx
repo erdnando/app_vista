@@ -3,7 +3,6 @@ import { View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Loading } from '../../components/Loading';
 import { ListNotificaciones } from '../../components/notificaciones/ListNotificaciones';
-import { useMovies } from '../../hooks/useMovies';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { Spacer } from '../../components/Spacer';
 import { Search } from '../../components/opiniones/Search';
@@ -13,7 +12,6 @@ import { ModalSearchResultados } from '../../components/opiniones/ModalSearchRes
 import { useParecer } from '../../hooks/useParecer';
 import { TipoUsuario } from '../../models/Usuario';
 
-
 export const ParecerScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
@@ -21,13 +19,15 @@ export const ParecerScreen = () => {
     
     const { getListParecerColaborador,getListParecerTerciario } = useParecer();
 
+
     useEffect(() => {
              usuario.tipo==TipoUsuario.COLABORADOR?
             getListParecerColaborador():getListParecerTerciario()
+           
           }, [])
 
   
-    
+    //notificaciones generales
     if(flags.isNotificaciones){
         return  <ListNotificaciones></ListNotificaciones>
     }
