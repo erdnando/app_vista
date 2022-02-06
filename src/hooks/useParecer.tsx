@@ -247,7 +247,7 @@ export const useParecer =  () => {
             }
             setOpiniones(payload);
             if(flagBorrado) {
-                Toast.show({type: 'ok',props: { mensaje: 'Exigencia removida' }});
+                Toast.show({type: 'ko',props: { mensaje: 'Exigencia removida' }});
             }
             floading(false)
         }

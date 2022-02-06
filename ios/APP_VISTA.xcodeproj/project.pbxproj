@@ -27,6 +27,7 @@
 		87064654277BCBD10037A96F /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87064648277BC82A0037A96F /* Roboto-Thin.ttf */; };
 		87064655277BCBD10037A96F /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87064649277BC82A0037A96F /* Roboto-ThinItalic.ttf */; };
 		87064656277BEA740037A96F /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 873AA3422778F386002E6519 /* icomoon.ttf */; };
+		879FE25F27B047E40002233E /* vertical-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 879FE25D27B047E40002233E /* vertical-logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		873AA3402778E925002E6519 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		873AA3422778F386002E6519 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = icomoon.ttf; path = ../../resources/fonts/icomoon.ttf; sourceTree = "<group>"; };
 		87945ADF2794A56F0009EA73 /* Restart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Restart.xcodeproj; path = "../node_modules/react-native-restart/ios/Restart.xcodeproj"; sourceTree = "<group>"; };
+		879FE25D27B047E40002233E /* vertical-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vertical-logo.png"; path = "../src/assets/vertical-logo.png"; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-APP_VISTA-APP_VISTATests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-APP_VISTA-APP_VISTATests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A881CF5CF3F2B244570E2A /* Pods-APP_VISTA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APP_VISTA.debug.xcconfig"; path = "Target Support Files/Pods-APP_VISTA/Pods-APP_VISTA.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-APP_VISTA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-APP_VISTA.release.xcconfig"; path = "Target Support Files/Pods-APP_VISTA/Pods-APP_VISTA.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		13B07FAE1A68108700A75B9A /* APP_VISTA */ = {
 			isa = PBXGroup;
 			children = (
+				879FE25D27B047E40002233E /* vertical-logo.png */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -336,6 +339,7 @@
 				87064652277BCBD10037A96F /* Roboto-MediumItalic.ttf in Resources */,
 				87064653277BCBD10037A96F /* Roboto-Regular.ttf in Resources */,
 				87064654277BCBD10037A96F /* Roboto-Thin.ttf in Resources */,
+				879FE25F27B047E40002233E /* vertical-logo.png in Resources */,
 				87064655277BCBD10037A96F /* Roboto-ThinItalic.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

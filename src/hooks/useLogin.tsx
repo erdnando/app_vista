@@ -4,6 +4,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 //import { tipoUsuario } from '../models/enums';
 import vistaApi from '../api/vista';
 import { AuthLogin } from '../models/response/AuthLogin';
+import Toast from 'react-native-toast-message';
 
 
 export const useLogin =  () => {
@@ -102,7 +103,7 @@ export const useLogin =  () => {
                     const payload1= menuOpiniones;
                     payload1[3].visible = true;//valores visible
                     setMenuOpiniones(payload1);
-    
+                    Toast.show({type: 'ok',props: { mensaje: 'Bienvenido operador' }});
                     return true;
                 }else if(resp.data.tipoUsuario==='COLABORADOR'){
                    
@@ -114,6 +115,7 @@ export const useLogin =  () => {
                     payload1[3].visible = false;//valores hidden
                     payload1[2].visible = false;//pareceres realizado hidden
                     setMenuOpiniones(payload1);
+                    Toast.show({type: 'ok',props: { mensaje: 'Bienvenido terciario' }});
                     return true;
                 }
     
