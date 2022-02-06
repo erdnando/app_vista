@@ -10,6 +10,7 @@ import { useLogin } from '../../hooks/useLogin';
 import { AlertNotif } from '../../components/login/AlertNotif';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
 interface Props extends StackScreenProps<any, any>{};
 
@@ -52,11 +53,7 @@ export const LoginScreen = ({ navigation }:Props) => {
                            let resp = await validarLogin();
                             if(resp){
                                 console.log('login correcto')
-                                // const payload= flags;
-                                // payload.isAlertLoginVisible=false;
-                                // //payload.leftMenuAccesible=true;
-                                // setFlags(payload);
-                                
+                             
                                 navigation.replace('NavigationLateral');  
                             }
                             else{
@@ -67,6 +64,7 @@ export const LoginScreen = ({ navigation }:Props) => {
                                 // //payload.leftMenuAccesible=false;
                                 // setFlags(payload);
                                 console.log('error al autenticarse');
+                                Toast.show({type: 'ko', props: { mensaje: 'Error al autenticarse' }});
                             }     
                         }} />
                 </View>
@@ -75,7 +73,7 @@ export const LoginScreen = ({ navigation }:Props) => {
 
             <Spacer height={30} ></Spacer>
 
-            {(flags.isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>}
+            {/* {(flags.isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>} */}
 
           </View>
             </View>

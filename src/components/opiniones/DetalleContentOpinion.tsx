@@ -6,13 +6,17 @@ import { CardParecer } from './CardParecer';
 import { CardParecerRealizados } from './CardParecerRealizados';
 import { CardParecerExigencias } from './CardParecerExigencias';
 import { CardParecerValores } from './CardParecerValores';
+import { Loading } from '../Loading';
 
 
 
 export const DetalleContentOpinion = ( ) => {
 
-  const { ids } = useContext(GeneralContext);
+  const { ids,flags } = useContext(GeneralContext);
                      
+  if(flags.isLoadingParecer){
+    return <Loading  color='orange'></Loading>
+}
 
   switch (ids.idMenuOpinionSelected) {
     case 1:

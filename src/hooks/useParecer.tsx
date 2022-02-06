@@ -301,6 +301,7 @@ export const useParecer =  () => {
 
                 console.log('exigencias guardadas');
                 console.log(resp.data);
+                Toast.show({type: 'ok', props: { mensaje: 'Exigencia guardada' }});
                 floading(false)
 
             } catch (error) {
@@ -310,6 +311,7 @@ export const useParecer =  () => {
                 payloadx.isLoading=false;
                 setFlags(payloadx);
                 console.log('error al guardar exigencias');
+                Toast.show({type: 'ko',props: { mensaje: error }});
                 floading(false)
                 return false;
             }

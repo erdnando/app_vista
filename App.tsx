@@ -29,7 +29,7 @@ const AppState = ({ children }: any) =>{
 }
 
 
-
+//https://github.com/calintamas/react-native-toast-message/
 const toastConfig = {
   ko: ({ props }) => (
     <AlertFail mensaje={props.mensaje}></AlertFail>
