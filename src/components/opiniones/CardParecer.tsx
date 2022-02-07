@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, TouchableOpacity, Text } from 'react-native';
 import { useDownloadFile } from '../../hooks/useDownloadFile';
 import { TipoUsuario } from '../../models/Usuario';
 import { GeneralContext } from '../../state/GeneralProvider';
@@ -52,17 +52,21 @@ export const CardParecer = ( ) => {
 
                           <Spacer height={15}></Spacer>
                           <TextOportunidadIcono icono='ic_round-date-range' colorIcono='#838892' label='Data Certame' colorValor='#838892' valor={parecer.parecerSeleccionado.fechaOpinion} size={15} ></TextOportunidadIcono>
+                          <Spacer height={5}></Spacer>
                           <TextOportunidadIcono icono='ic_baseline-place' colorIcono='#838892' label='Data Certame' colorValor='#838892' valor={parecer.parecerSeleccionado.fechaOpinion}  size={15} ></TextOportunidadIcono>
                           
-                          {/* <TextOportunidadIcono icono='ic_baseline-cloud-download' colorIcono='#838892' label='' colorValor='#838892' valor='Download do Edital'  size={15} ></TextOportunidadIcono> */}
-                          <View style={{ flexDirection:'row', alignContent:'center', alignItems:'center' ,marginLeft:3, marginTop:-10}}>
-                                  <CustomIcon name='ic_baseline-cloud-download' size={25} color='#838892'></CustomIcon>
-                                  <Button title='Download do Edital'  onPress={()=>{
-                                          // checkPermission(search.oportunidade..arquivo,'pdf','application/pdf');
-                                          checkPermission('https://www.mysu.org.uy/haceclick/folletos/02-el-deseo-sexual.pdf','pdf','application/pdf');
-                                  }}></Button>
-                          </View>
                         
+                              <TouchableOpacity onPress={()=>{
+                                checkPermission('https://www.mysu.org.uy/haceclick/folletos/02-el-deseo-sexual.pdf','pdf','application/pdf');
+                              }} style={{justifyContent:'center',alignContent:'center',alignItems:'center',height:20}}>
+                                
+                                <View style={{flex:1,flexDirection:'row',marginLeft:2, justifyContent:'center',alignContent:'center',alignItems:'center'}}>
+                                  <CustomIcon  name='ic_baseline-cloud-download' size={25} color='#838892'></CustomIcon>
+                                  <Text style={{fontFamily:'Roboto-Regular', fontSize:15,fontWeight:'400', textAlign:'justify',color:'#838892'}}>  Download do Edital</Text>
+                                </View>
+                            </TouchableOpacity>
+                        
+                            <Spacer height={20}></Spacer>
                           <RoundedSelectors label1='GO' label2='NO GO' 
                           onPress1={()=>{
                             console.log('go')
@@ -89,14 +93,15 @@ export const CardParecer = ( ) => {
                             }} 
                           />}
                           {/* <Spacer height={0}></Spacer> */}
-                          <InputMensaje placeholder='Justificativa' campo={opiniones.parecer.justificacion}
+                          <View style={{marginLeft:-10,paddingHorizontal:3}}>
+                          <InputMensaje placeholder='Justificativa' width='95%' campo={opiniones.parecer.justificacion}
                           longitud={opiniones.parecer.justificacion.length} 
                           onChangeMensaje={(msg:string)=>{
                               const payload = opiniones;
                               opiniones.parecer.justificacion=msg;
                               setOpiniones(payload);
                           }}></InputMensaje>
-
+</View>
 
                     </View>
 

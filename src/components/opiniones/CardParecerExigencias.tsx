@@ -5,6 +5,7 @@ import { colores } from '../../theme/appTheme';
 import { TabParecerExigencias } from './TabParecerExigencia';
 import { SelectorTabParecerExigencias } from './SelectorTabParecerExigencia';
 import { useParecer } from '../../hooks/useParecer';
+import { Spacer } from '../Spacer';
 
 
 export const CardParecerExigencias = ( ) => {
@@ -24,16 +25,16 @@ export const CardParecerExigencias = ( ) => {
 
   
 
-      return <View style={{flex:1,width:'100%',flexDirection:'column', backgroundColor:'transparent',}}>
-                
+      return <View style={{flex:1,width:'100%',flexDirection:'column', backgroundColor:'transparent',alignItems:'flex-start'}}>
+                <View style={{height:350}}>
                   <TabParecerExigencias visible={opiniones.tabsContador===1?true:false} indexTab={0} ></TabParecerExigencias>
                   <TabParecerExigencias visible={opiniones.tabsContador===2?true:false} indexTab={1} ></TabParecerExigencias>
                   <TabParecerExigencias visible={opiniones.tabsContador===3?true:false} indexTab={2} ></TabParecerExigencias>
                   <TabParecerExigencias visible={opiniones.tabsContador===4?true:false} indexTab={3} ></TabParecerExigencias>
                   <TabParecerExigencias visible={opiniones.tabsContador===5?true:false} indexTab={4} ></TabParecerExigencias>  
-                
-
-                <View style={{flex:0, flexDirection:'row', justifyContent:'flex-start', marginLeft:0}}>
+                  </View>
+                <Spacer height={10}></Spacer>
+                <View style={{flex:1, flexDirection:'row',}}>
 
                   {/* ------------------Incrementar---------------------------------------------------- */}
                   <SelectorTabParecerExigencias visible={true} label='Salvar' index={6} selected={false}

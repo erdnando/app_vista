@@ -81,7 +81,6 @@ class GeneralProvider extends React.Component{
             isSelectorParecer:true,},
         flags:{
             isLogedIn: false,
-            isAlertLoginVisible:false,
             isLoading:false,
             isLoadingParecer:false,
             isLoadingAgenda:false,
@@ -395,7 +394,7 @@ class GeneralProvider extends React.Component{
 
         const payload2= this.state.flags;
             payload2.isLogedIn=false;
-            payload2.isAlertLoginVisible=false;
+            //payload2.isAlertLoginVisible=false;
 
             this.setState({payload2})
 

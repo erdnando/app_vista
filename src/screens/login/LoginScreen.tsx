@@ -11,6 +11,7 @@ import { AlertNotif } from '../../components/login/AlertNotif';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
+import { Loading } from '../../components/Loading';
 
 interface Props extends StackScreenProps<any, any>{};
 
@@ -32,7 +33,7 @@ export const LoginScreen = ({ navigation }:Props) => {
             )
     }, [])
     
-    return (
+    return (!flags.isLoading) ? (
         <View style={{...styles.container, marginTop:top-50, marginHorizontal:left-5}}>
          <ImageBackground style={styles.background} resizeMode='cover' source={require('../../assets/Background.png')}>
            <Spacer height={100} ></Spacer>
@@ -47,33 +48,25 @@ export const LoginScreen = ({ navigation }:Props) => {
                 <InputPassword modo='normal' campo={usuario.password} width='78%' placeHolder='Senha' label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPassword>
                 <Spacer height={40} ></Spacer>
 
-                <View>
-                <ButtonRounded  label='ACCESAR' 
-                        onPress={ async() =>  { 
-                           let resp = await validarLogin();
-                            if(resp){
-                                console.log('login correcto')
-                             
-                                navigation.replace('NavigationLateral');  
-                            }
-                            else{
-                                //show alert
-                                //const payload= flags;
-                                // payload.isAlertLoginVisible=true;
-                                // payload.isLoading=false;
-                                // //payload.leftMenuAccesible=false;
-                                // setFlags(payload);
-                                console.log('error al autenticarse');
-                                Toast.show({type: 'ko', props: { mensaje: 'Error al autenticarse' }});
-                            }     
-                        }} />
+                <View style={{width:'100%',height:50}}>
+                    <ButtonRounded  label='ACCESAR' 
+                            onPress={ async() =>  { 
+                            let resp = await validarLogin();
+                                if(resp){
+                                    console.log('login correcto')
+                                
+                                    navigation.replace('NavigationLateral');  
+                                }
+                                else{
+                                    console.log('error al autenticarse');
+                                    Toast.show({type: 'ko', props: { mensaje: 'Error al autenticarse' }});
+                                }     
+                            }} />
                 </View>
 
             <View style={{  alignItems:'center',height:40}}>
 
             <Spacer height={30} ></Spacer>
-
-            {/* {(flags.isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>} */}
 
           </View>
             </View>
@@ -83,7 +76,7 @@ export const LoginScreen = ({ navigation }:Props) => {
                         }} ></ButtonTextGoTo>
           </ImageBackground>
         </View>
-    )
+    ): (<Loading color='orange'></Loading>)
 }
 
 const styles = StyleSheet.create({

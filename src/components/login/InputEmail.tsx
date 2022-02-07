@@ -58,7 +58,7 @@ export const InputEmail = ( { modo, label, iconLeft ,iconRight}: Props ) => {
           
            
             const payload2= flags;
-            payload2.isAlertLoginVisible=false;
+            //payload2.isAlertLoginVisible=false;
             setFlags(payload2);
 
 

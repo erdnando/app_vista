@@ -80,7 +80,7 @@ export const ChangePasswordScreen = ({ navigation }:Props) => {
 
                         <Spacer height={30} ></Spacer>
 
-                        {(flags.isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>}
+                        {/* {(flags.isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>} */}
 
                     </View>
 
@@ -136,7 +136,7 @@ export const ChangePasswordScreen = ({ navigation }:Props) => {
 
                         <Spacer height={30} ></Spacer>
 
-                        {(flags.isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>}
+                        {/* {(flags.isAlertLoginVisible) ? (<AlertNotif label='error' color='#B85050' iconName='ic_round-warning' ></AlertNotif>) : <View></View>} */}
 
                         </View>
 

@@ -42,7 +42,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op lista parecer:::::::::::::::::::::x');
+                console.log('op lista parecer:::::::::::::::::::::');
               
 
                 if(resp.data.length > 0){
@@ -107,7 +107,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op lista parecer:::::::::::::::::::::x');
+                console.log('op lista parecer:::::::::::::::::::::');
                 console.log(resp.data);
 
                 if(resp.data.length > 0){
@@ -230,12 +230,12 @@ export const useParecer =  () => {
             console.log('borrando card::::'+index)
             console.log(arrAux)
             console.log('-----------------------')
-            payload.exigencias=arrAux;
+            payload.exigencias = arrAux;
            
             payload.tabsContador--;
             payload.exigenciasIndex--;
 
-            if(payload.tabsContador ==0){
+            if(payload.tabsContador == 0){
                 payload.tabsContador=1;
                 flagBorrado=false;
      

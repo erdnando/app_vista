@@ -14,10 +14,18 @@ export const useLogin =  () => {
         const { flags, usuario,setUsuario,setFlags,menuOpiniones,setMenuOpiniones,sesion,setSesion } = useContext( GeneralContext );
 
         const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
+
+        const floading=(valor:boolean)=>{
+            const payload= flags;
+            payload.isLoading= valor;
+            
+            setFlags(payload);
+        }
+
         const onChangeEmail = async (email:string) =>{
             
             const payloadx= flags;
-            payloadx.isAlertLoginVisible=false;
+            //payloadx.isAlertLoginVisible=false;
             setFlags(payloadx);
 
             const payload= usuario;
@@ -28,7 +36,7 @@ export const useLogin =  () => {
         const onChangePassword = async (password:string) =>{
             
             const payloadx= flags;
-            payloadx.isAlertLoginVisible=false;
+            //payloadx.isAlertLoginVisible=false;
             setFlags(payloadx);
 
             const payload= usuario;
@@ -57,7 +65,7 @@ export const useLogin =  () => {
 
             try {
 
-
+                floading(true)
                 const resp = await vistaApi.post<AuthLogin>('/auth/login',{}, {
                                     headers:{
                                     'Content-Type': 'application/json',
@@ -74,7 +82,7 @@ export const useLogin =  () => {
                     () => { 
                         const payloadx= flags;
                         payloadx.isLogedIn=true;
-                        payloadx.isAlertLoginVisible=false;
+                        //payloadx.isAlertLoginVisible=false;
                         payloadx.isLoading=false;
                         setFlags(payloadx);
                     },
@@ -103,6 +111,7 @@ export const useLogin =  () => {
                     const payload1= menuOpiniones;
                     payload1[3].visible = true;//valores visible
                     setMenuOpiniones(payload1);
+                    floading(false)
                     Toast.show({type: 'ok',props: { mensaje: 'Bienvenido operador' }});
                     return true;
                 }else if(resp.data.tipoUsuario==='COLABORADOR'){
@@ -115,8 +124,12 @@ export const useLogin =  () => {
                     payload1[3].visible = false;//valores hidden
                     payload1[2].visible = false;//pareceres realizado hidden
                     setMenuOpiniones(payload1);
+                    floading(false)
                     Toast.show({type: 'ok',props: { mensaje: 'Bienvenido terciario' }});
+
                     return true;
+                }else{
+                    floading(false)
                 }
     
                 console.log(resp);
@@ -126,12 +139,15 @@ export const useLogin =  () => {
 
                 const payloadx= flags;
                 payloadx.isLogedIn=false;
-                payloadx.isAlertLoginVisible=true;
-                payloadx.isLoading=false;
                 setFlags(payloadx);
+                //payloadx.isAlertLoginVisible=true;
+                floading(false)
+                Toast.show({type: 'ko',props: { mensaje: error }});
+                //payloadx.isLoading=false;
+               
 
                 console.log('credenciales invalidas');
-
+                
                 return false;
             }
            

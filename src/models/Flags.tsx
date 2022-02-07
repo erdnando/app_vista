@@ -2,7 +2,6 @@ import React from 'react'
 
 export interface Flags{
     isLogedIn: boolean,
-    isAlertLoginVisible:boolean,
     isLoading:boolean,
     isLoadingParecer:boolean,
     isLoadingAgenda:boolean,

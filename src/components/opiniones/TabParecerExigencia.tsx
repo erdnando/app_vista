@@ -35,14 +35,14 @@ export const TabParecerExigencias = ( { visible,indexTab}: Props ) => {
         
                        
 
-                        <View  style={{ width:'100%', height:340, backgroundColor: 'white',borderRadius:10,padding:15,elevation:6,
+                        <View  style={{ width:'100%', height:350, backgroundColor: 'white',borderRadius:10,padding:15,elevation:6,
                         justifyContent:'flex-start',alignItems:'flex-start',
                                         shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {
                                         height: 3, width: 3 }
                                         }}>
                                                
                            
-                                      <Spacer height={10}></Spacer>
+                                      <Spacer height={5}></Spacer>
                                       <Select placeholder='Descripcion' campo={opiniones.exigencias[indexTab].descripcion} width='91%' items={items}
                                         onValueChange={function (value: string, index: number): void {
                                           console.log('-----------')
@@ -52,7 +52,7 @@ export const TabParecerExigencias = ( { visible,indexTab}: Props ) => {
                                                setOpiniones(payload);
                                         }} 
                                       />
-                                      <Spacer height={30}></Spacer>
+                                      <Spacer height={20}></Spacer>
 
                                        <Select placeholder='Tipo' campo={opiniones.exigencias[indexTab].oportunidad}  width='91%' items={opiniones.catTipoExigencia}
                                         onValueChange={function (value: any, index: number): void {
@@ -72,7 +72,7 @@ export const TabParecerExigencias = ( { visible,indexTab}: Props ) => {
                                         }}></InputMensajeSimple>
                                       </View>
 
-                                      <Spacer height={20}></Spacer>
+                                      <Spacer height={10}></Spacer>
 
                                       <Select placeholder='Tipo de usuario' campo={opiniones.exigencias[indexTab].tipoUsuario}  width='91%' items={items}
                                       onValueChange={function (value: any, index: number): void {
@@ -94,7 +94,7 @@ export const TabParecerExigencias = ( { visible,indexTab}: Props ) => {
 
 
                        {/* Eliminar card */}
-                       { opiniones.tabsContador >1 ? <View style={{ backgroundColor:'red',position:'absolute', top:-15,right:5, 
+                       { opiniones.tabsContador >1 ? <View style={{ position:'absolute', top:-15,right:5, 
                                                                borderWidth:1,borderColor:'red', borderRadius:50, height:30, width:30, 
                                                                justifyContent:'center',  alignItems:'center' }}>
                             <TouchableOpacity onPress={()=>{
