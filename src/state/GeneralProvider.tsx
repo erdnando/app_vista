@@ -10,11 +10,9 @@ import { AgendaFiltro } from '../models/AgendaFiltro';
 import { IDs } from '../models/IDs';
 import { MenuOpiniones } from '../models/MenuOpiniones';
 import { Opiniones } from '../models/Opiniones';
-import { SearchResultados } from '../models/SearchResultados';
-import { OpportunityCustomFindById } from '../models/response/OpportunityCustomFindById';
-import { OpportunityCustomListOpinionsByIdAux } from '../models/response/OpportunityCustomListOpinionsByIdAux';
 import { Search } from '../models/Search';
 import { Parecer } from '../models/Parecer';
+import { Notificaciones } from '../models/Notificaciones';
 
 
 interface GeneralState{
@@ -27,6 +25,7 @@ interface GeneralState{
     sesion:Sesion,
     agendaFiltro:AgendaFiltro,
     menuOpiniones:MenuOpiniones[],
+    notificaciones:Notificaciones[],
     ids:IDs,
     tabSelected:string,
     tabSelectedOld:string,
@@ -51,6 +50,7 @@ interface GeneralState{
     setOpiniones:(opiniones:Opiniones)=>void;
     setSearch:(search:Search)=>void;
     setParecer:(parecer:Parecer)=>void;
+    setNotificaciones:(notificaciones:Notificaciones[])=>void;
 }
 
 const GeneralContext = React.createContext({} as GeneralState);
@@ -84,6 +84,7 @@ class GeneralProvider extends React.Component{
             isLoading:false,
             isLoadingParecer:false,
             isLoadingAgenda:false,
+            isLoadingNotificaciones:false,
             isNotificaciones:false,
             verDetalleAgenda:false,
             resultadosBusquedaVisible:false,
@@ -92,6 +93,7 @@ class GeneralProvider extends React.Component{
             modalFechaHorarioVisible:false,
             isPasswordReseted:false,
             isDownloadingFile:0,
+            existsNotification:false,
         },
         ids:{
             idOpinionBusqueda: '',
@@ -359,7 +361,20 @@ class GeneralProvider extends React.Component{
                }
             ],
             parecerSeleccionado:{}
-        }
+        },
+        notificaciones:[
+            {
+                "id": "1",
+                "tipo": "VACIO",
+                "dia": "",
+                "hora": "",
+                "descripcion": "Sin notificaciones",
+                "color": "red",
+                "background": "#F8BBBB",
+                "icon": "bx_bxs-message-alt-error",
+                "diaVisible": true   
+            }
+        ]
         
         
     }
@@ -379,6 +394,7 @@ class GeneralProvider extends React.Component{
     setOpiniones= (opiniones:Opiniones)=>this.setState({opiniones});
     setSearch= (search:Search)=>this.setState({search});
     setParecer= (parecer:Parecer)=>this.setState({parecer});
+    setNotificaciones= (notificaciones:Notificaciones[])=>this.setState({notificaciones});
     logOut = () =>{
 
         const payload0 = this.state.sesion;
@@ -424,6 +440,7 @@ class GeneralProvider extends React.Component{
                     opiniones:this.state.opiniones,
                     search:this.state.search,
                     parecer:this.state.parecer,
+                    notificaciones:this.state.notificaciones,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
@@ -441,6 +458,7 @@ class GeneralProvider extends React.Component{
                     setOpiniones:this.setOpiniones,
                     setSearch:this.setSearch,
                     setParecer:this.setParecer,
+                    setNotificaciones:this.setNotificaciones,
                     }}
                 >
                {this.props.children}

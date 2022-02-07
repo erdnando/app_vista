@@ -5,6 +5,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
 import { AuthLogin } from '../models/response/AuthLogin';
 import Toast from 'react-native-toast-message';
+import { useNotificaciones } from './useNotificaciones';
 
 
 export const useLogin =  () => {
@@ -12,7 +13,7 @@ export const useLogin =  () => {
   
 
         const { flags, usuario,setUsuario,setFlags,menuOpiniones,setMenuOpiniones,sesion,setSesion } = useContext( GeneralContext );
-
+        const { existsNotification } = useNotificaciones(); 
         const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
 
         const floading=(valor:boolean)=>{
@@ -99,7 +100,8 @@ export const useLogin =  () => {
 
                 //payloads.menu=resp.data.info.menuSistema;
                 setSesion(payloads);
-
+               
+                existsNotification()
                 if(resp.data.tipoUsuario==='USUARIO_TERCEIRO'){
                    
     
@@ -131,7 +133,9 @@ export const useLogin =  () => {
                 }else{
                     floading(false)
                 }
-    
+
+
+                
                 console.log(resp);
                 console.log(resp.data.tipoUsuario);
             } catch (error) {

@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';  
-import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import React, { useContext, useEffect } from 'react';  
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colores, gstyles } from '../theme/appTheme';
 import { AgendaScreen } from '../screens/home/AgendaScreen';
@@ -15,6 +15,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 import { ContactoScreen } from '../screens/home/ContactoScreen';
 import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
+import { useNotificaciones } from '../hooks/useNotificaciones';
 
 
 const Tab = createBottomTabNavigator();
@@ -28,7 +29,7 @@ export const NavigationHome = ( { navigation }:Props) => {
   const { usuario,flags,setFlags,setTabSelected,setTabSelectedOld,tabSelectedOld, tabSelected,ids, 
           setIds, tabModule,setTabModule,menuOpiniones,setMenuOpiniones} = useContext(GeneralContext);
   const { getResultadoBusqueda } = useSearch(); 
-
+ 
 
 
   //terciario
@@ -108,6 +109,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                 <View style={{ flexDirection:'row',alignSelf:'flex-end', top:-20   }} >  
                                       {/* notificaciones */}
                                       <TouchableOpacity onPress={() =>{  
+                                            notificationListByLogin();
                                             ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
                                             //setTabSelectedOld(tabSelected);//aux
                                             //setTabSelected('Notificaciones');
@@ -126,10 +128,15 @@ export const NavigationHome = ( { navigation }:Props) => {
                                             
                                       }}>
                                         
-                                          {/* <Text><CustomIcon name='clarity_notification-solid-badged' size={30} color='white' style={{padding:150}} ></CustomIcon></Text> */}
-                                          <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
-                                              source={require('../assets/clarity_notification-solid-badged.png')}  >
-                                          </Image>
+                                         
+                                            {/* dot notification */}
+                                            <View style={{flex:1, flexDirection:'row',height:30}}>
+                                            <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
+                                                source={require('../assets/clarity_notification-solid-badged.png')}  >
+                                            </Image>
+                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:  'orange',marginTop:-61,  right:11}}>.</Text>
+                                            : <Text style={{ fontSize:75,color:  'white',marginTop:-61,  right:11}}>.</Text>}
+                                          </View>
 
                                       </TouchableOpacity>
 
@@ -164,7 +171,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                               //   },
                                               //   3000
                                               // )   
-                                              getResultadoBusqueda(true);//consume api
+                                              getResultadoBusqueda();//consume api
 
 
                                           }}>
@@ -329,20 +336,16 @@ export const NavigationHome = ( { navigation }:Props) => {
                                     {/* logo app */}
                                     <View style={{flex:1, left:24,top:15 }}>
                                           <TitleApp></TitleApp>
-                                            {/* <Image style={{...gstyles.avatar,height:24*1.15,width:79.89*1.15, top:3}} 
-                                               source={require('../assets/horizontal-logo.png')}  >
-                                            </Image> */}
-                                        
                                     </View>
                                   
                                   
                                     <View style={{ flexDirection:'row',alignSelf:'flex-end', top:-20   }} >  
                                         {/* notificaciones */}
-                                        <TouchableOpacity onPress={() =>{  
+                                        <TouchableOpacity 
+                                        onPress={() =>{  
+                                              notificationListByLogin();
                                               ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
-                                              //setTabSelectedOld(tabSelected);//aux
-
-                                             // setTabSelected('Notificaciones');
+                                            
                                               const payload= flags;
                                               payload.isNotificaciones=!flags.isNotificaciones;
                                               payload.verDetalleAgenda=false;
@@ -355,11 +358,18 @@ export const NavigationHome = ( { navigation }:Props) => {
                                               setIds(payload1);
                                              
                                               flags.isNotificaciones ? setTabSelected('Notificaciones'): setTabSelected(tabSelectedOld);
+
+                                              
                                         }}>
-                                          {/* <Text><CustomIcon name='clarity_tasks-solid' size={30} color='white' style={{padding:150}} ></CustomIcon></Text> */}
-                                          <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
-                                              source={require('../assets/clarity_notification-solid-badged.png')}  >
-                                          </Image>
+                                          
+                                         {/* dot notification */}
+                                          <View style={{flex:1, flexDirection:'row',height:30}}>
+                                            <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
+                                                source={require('../assets/clarity_notification-solid-badged.png')}  >
+                                            </Image>
+                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:  'orange',marginTop:-61,  right:11}}>.</Text>
+                                            : <Text style={{ fontSize:75,color:  'white',marginTop:-61,  right:11}}>.</Text>}
+                                          </View>
                                         </TouchableOpacity>
 
                                         {/* perfil */}
@@ -389,7 +399,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                               console.log('searching...5')
                                               
                                             
-                                              getResultadoBusqueda(true);//consume api
+                                              getResultadoBusqueda();//consume api
 
                                               
                                           }}>
@@ -479,3 +489,11 @@ export const NavigationHome = ( { navigation }:Props) => {
 }
 
 
+const styles = StyleSheet.create({
+  dotNotification:{
+    fontSize:75,
+    color:  'orange',
+    marginTop:-61, 
+    right:11
+  },
+});

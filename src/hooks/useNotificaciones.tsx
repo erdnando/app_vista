@@ -3,45 +3,71 @@ import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
 import { NotificationListByLogin } from '../models/response/NotificationListByLogin';
 import { NotificacionByLoginAux } from '../models/response/NotificacionesByLoginAux';
+import { NotificationListByLoginAux } from '../models/response/NotificationListByLoginaux';
+import Toast from 'react-native-toast-message';
 
 
 export const useNotificaciones =  () => {
 
-        const {flags,setFlags,sesion  } = useContext( GeneralContext );
-        const [arrNotificaciones, setArrNotificaciones] = useState<NotificacionByLoginAux[]>(
-            [ {
-                "id": "1",
-                "tipo": "VACIO",
-                "dia": "",
-                "hora": "",
-                "descripcion": "Sin notificaciones",
-                "color": "red",
-                "background": "#F8BBBB",
-                "icon": "bx_bxs-message-alt-error",
-                "diaVisible": true   
-              }]
-            );
-
-        //const [totalPareceres, settotalPareceres] = useState(0)
+        const {flags,setFlags,sesion,notificaciones,setNotificaciones  } = useContext( GeneralContext );
+      
 
         const floading=(valor:boolean)=>{
             const payload= flags;
-            payload.isLoadingAgenda= valor;
+            payload.isLoadingNotificaciones= valor;
             
             setFlags(payload);
+        }
+
+        const existsNotification = async () =>{
+
+            try {
+               
+                const resp = await vistaApi.get<any>('/notification/existsNotification?login=eder.goncalves@gmail.com&charter=2',{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                //    params:{ 
+                //        "login" : 'eder.goncalves@gmail.com',//sesion.clienteId,
+                //        "charter" : 2,//sesion.charter
+                //     }
+                }, 
+                );
+
+                console.log('op notification/existsNotification:::::::::::::::::::::');
+                console.log(resp.data);
+
+                if(resp.data===true){
+                    const payload= flags;
+                    payload.existsNotification= true;
+                    setFlags(payload);
+                }else{
+                    const payload= flags;
+                    payload.existsNotification= false;
+                    setFlags(payload);
+                }
+
+            } catch (error) {
+                console.log(error);
+                Toast.show({type: 'ko',props: { mensaje: error }});
+                floading(false)
+            }
         }
 
         const notificationListByLogin = async () =>{
 
             try {
-                const resp = await vistaApi.get<NotificationListByLogin[]>('/notification/listByLogin',{
+                floading(true)
+                const resp = await vistaApi.get<NotificationListByLoginAux[]>('/notification/listByLogin',{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token 
                     },
                    params:{ 
-                       "login" : sesion.clienteId,
+                       "login" : 'eder.goncalves@gmail.com',//sesion.clienteId,
                        "charter" : sesion.charter
                     }
                 }, 
@@ -50,50 +76,67 @@ export const useNotificaciones =  () => {
                 console.log('op notification/listByLogin:::::::::::::::::::::');
                 console.log(resp.data);
 
-                
+               
                 if(resp.data.length>0){
 
+                    const payload= flags;
+                    payload.existsNotification= true;
+                    setFlags(payload);
 
-                    setArrNotificaciones([]);
-
-                    let arrNotificacionesAux=arrNotificaciones;//get reference
-
+                    let arrNotificacionesAux=notificaciones;//get reference
+                    arrNotificacionesAux=[];
                     resp.data.forEach(function(notif,index){
 
                         arrNotificacionesAux.push({
                             id:notif.id.toString(),
                             tipo:notif.importante != ""?'SIMPLE' : 'EVENT',
                             dia:'Hoy',
-                            hora: 'Hoje. 00:00',
-                            descripcion:notif.tipoMensagem.descricao,
-                            color: notif.importante != ""? 'red' : 'grey',
-                            background:'#F8BBBB',
-                            icon:notif.importante != "" ? 'bx_bxs-message-alt-error' : 'ic_baseline-lightbulb',  //icomoon-free_hammer2
+                            hora:'Fecha: '+notif.dataCadastro,
+                            descripcion: notif.mensagem.length>65 ? notif.mensagem.length.toString().substring(65)+'...'+notif.id.toString() : notif.mensagem,
+                            color: notif.tipoMensagem.id == 1 ? 'red' : '#838892',
+                            background:notif.tipoMensagem.id == 1 ?'#F8BBBB' : '#EDF0F5',
+                            icon:notif.tipoMensagem.id == 1 ? 'bx_bxs-message-alt-error' : 'ic_baseline-lightbulb',  //icomoon-free_hammer2
                             diaVisible:true
                         });
                         
                         
                       })
 
-                    setArrNotificaciones(arrNotificacionesAux);
+                      let lastId = Math.max.apply(Math, arrNotificacionesAux.map(function(o) { return parseInt(o.id); }))
+                      arrNotificacionesAux.push({
+                        id:(lastId+1).toString(),
+                        tipo: "checkAll",
+                        dia:'',
+                        hora:'Marcar Todos los mensajes',
+                        descripcion:'Desea marcar todos los mensajes como leidos?',
+                        color: 'black',
+                        background:'white',
+                        icon:'icomoon-free_hammer2',
+                        diaVisible:true
+                    });
+
+                    setNotificaciones(arrNotificacionesAux);
                     
+                }else{
+                    let arrNotificacionesAux=notificaciones;//get reference
+                    arrNotificacionesAux=[];
+                    setNotificaciones(arrNotificacionesAux);
                 }
+
+                floading(false)
                 
             } catch (error) {
                 console.log(error);
-
+                Toast.show({type: 'ko',props: { mensaje: error }});
+                floading(false)
             }
         }
 
-        useEffect(() => {
-            console.log('obteniendo notificaciones');
-            floading(true)
-            notificationListByLogin();
-            floading(false)
-           
-          }, [])
+        //  useEffect(() => {
+        //     notificationListByLogin();
+        //    }, [])
 
        
         //exposed objets 
-        return {  arrNotificaciones, notificationListByLogin ,floading,   }
+        return {  notificationListByLogin ,floading,existsNotification   }
 }

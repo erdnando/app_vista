@@ -1,13 +1,16 @@
 import 'react-native-gesture-handler';
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { NavigationLogin } from './src/navigation/NavigationLogin';
 import { GeneralProvider } from './src/state/GeneralProvider';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { AlertOk } from './src/components/AlertOk';
 import { AlertFail } from './src/components/AlertFail';
+import { useNotificaciones } from './src/hooks/useNotificaciones';
 
 const App = () => {
+
+ 
 
   return (
     <AppState>
@@ -38,5 +41,10 @@ const toastConfig = {
     <AlertOk mensaje={props.mensaje}></AlertOk>
   )
 };
+
+
+
+
+
 
 export default App;
