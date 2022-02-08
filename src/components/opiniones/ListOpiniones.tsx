@@ -82,7 +82,7 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
 
 const renderSeparator = () =>{
     return (
-         <Spacer height={17} ></Spacer>
+         <Spacer height={6} ></Spacer>
     )
 }
 

@@ -22,10 +22,7 @@ export const UltimasActualizaciones = ( ) => {
 
                    
 
-                    <View style={{height:Platform.OS=='ios' ? '63%': '72%' }}>
-
-                
-
+                    <View style={{height:Platform.OS=='ios' ? '68%': '73%' }}>
                         <ListActualizaciones></ListActualizaciones>
                     </View>
                     </View>

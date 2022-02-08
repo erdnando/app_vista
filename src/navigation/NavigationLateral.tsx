@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import { Image, useWindowDimensions, View, NativeModules } from 'react-native';
+import { Image, useWindowDimensions, View } from 'react-native';
 import { gstyles } from '../theme/appTheme';
 import { NavigationHome } from './NavigationHome';
 import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
@@ -9,8 +9,6 @@ import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
 import RNRestart from 'react-native-restart';
 import { Loading } from '../components/Loading';
- //import CodePush from 'react-native-code-push';
-
 
 const Drawer = createDrawerNavigator();
 

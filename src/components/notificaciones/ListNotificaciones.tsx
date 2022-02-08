@@ -10,12 +10,13 @@ import { IconoActualizacion } from '../ultimasActualizaciones/IconoActualizacion
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { Notificaciones } from '../../models/Notificaciones';
 import Toast from 'react-native-toast-message';
+import { useNotificaciones } from '../../hooks/useNotificaciones';
 
 export const ListNotificaciones = ( ) => {
 
     const {flags,notificaciones,setNotificaciones  } = useContext( GeneralContext );
     const [checked, setchecked] = useState(false);
-
+    const { existsNotification } = useNotificaciones(); 
 
 
     const renderUpdateItem = (updateItem:NotificacionByLoginAux) =>{
@@ -62,7 +63,7 @@ export const ListNotificaciones = ( ) => {
        
         if(updateItem.tipo=='checkAll')
         return (
-            <View style={{}}>
+            <View>
                 <Animated.View style={{flex:1,flexDirection:'row', height:70, alignItems:'center',borderBottomWidth:1,backgroundColor:'white'}}>
                 <View style={{flex:1, flexDirection:'row',justifyContent:'flex-end'}}>
                 {/* alerta check all*/}
@@ -100,6 +101,7 @@ export const ListNotificaciones = ( ) => {
                                         let payload= notificaciones;
                                         payload=[]
                                         setNotificaciones(payload)
+                                        existsNotification()
                                     },
                                     1000
                                   )   
@@ -166,7 +168,7 @@ export const ListNotificaciones = ( ) => {
     }else{
         if(notificaciones.length>0)
             return (
-            <View style={{marginTop:51}}>
+            <View style={{marginTop:Platform.OS==='ios' ? 51 : 5}}>
                 
                 <FlatList data={notificaciones} 
                 renderItem={ ({ item,index }) =>renderUpdateItem(item) } 

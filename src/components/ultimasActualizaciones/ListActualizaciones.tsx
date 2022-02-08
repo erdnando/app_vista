@@ -123,7 +123,8 @@ const renderUpdateItem = (updateItem:LastUpdates) =>{
                     borderWidth: 0,backgroundColor: (updateItem.tipo==='ALERT') ?'#B85050' : 'white', borderRadius:7,padding:5,elevation:6,
                     shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                     height: 1, width: 1
-                }}}>
+                     }
+                   }}>
 
                 <View style={{ flexDirection:'column', width:'82%',height:50,left:8,top:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
                 <Text style={{fontFamily:'Roboto-Bold', fontSize:14, color:(updateItem.tipo==='ALERT') ?'#F8BBBB' : 'grey'}}>{updateItem.hora}</Text>

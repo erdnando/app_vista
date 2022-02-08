@@ -16,6 +16,7 @@ import { ContactoScreen } from '../screens/home/ContactoScreen';
 import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
 import { useNotificaciones } from '../hooks/useNotificaciones';
+import Elevations from 'react-native-elevation'
 
 const Tab = createBottomTabNavigator();
 interface Props extends DrawerScreenProps<any, any>{};
@@ -269,7 +270,7 @@ export const NavigationHome = ( { navigation }:Props) => {
   if( usuario.tipo === 2){
      
       return (
-        <Tab.Navigator  sceneContainerStyle={{ backgroundColor:'transparent',  }}  
+        <Tab.Navigator  sceneContainerStyle={{ backgroundColor:'transparent', }}  
             
             screenOptions={({route}) => ({
                     tabBarActiveTintColor:colores.primary,
@@ -277,13 +278,14 @@ export const NavigationHome = ( { navigation }:Props) => {
                     tabBarStyle:{
                         backgroundColor: colores.bottomBar,
                         borderTopColor: colores.bottomBar,
-                        borderTopWidth:1,
+                        borderTopWidth:8,
                         borderBottomWidth:1,
-                        elevation:0,
-                        height:Platform.OS === 'ios' ? 72 : 60
+                        height:Platform.OS === 'ios' ? 72 : 60,
+                        ...Elevations[10], 
                     },
                     tabBarLabelStyle:{
                     fontSize:13,
+                    ...Elevations[22], 
                     },
                     headerShown:true,
                     tabBarIcon: ({color, focused, size }) =>{
@@ -292,7 +294,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                     header:
                       () => {
                         return <View style={{alignSelf:'flex-start',alignContent:'center',justifyContent:'center', 
-                                            flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66}}>
+                                            flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66,...Elevations[10], }}>
                                    
                                    { flags.verDetalleAgenda || ids.idOpinionSeleccionado!='' ?   
                                       <OpcionHeader iconName='ic_round-arrow-back' color={colores.primary}  // back option 
@@ -325,15 +327,16 @@ export const NavigationHome = ( { navigation }:Props) => {
                                         
 
                                           }} /> : 
-                                        
-                                        <OpcionHeader iconName='ic_baseline-menu' color={colores.primary}  //menu hamburguesa
-                                          onPress={() =>{ 
-                                            navigation.toggleDrawer(); 
-                                          }} />
+                                        <View style={{marginTop:Platform.OS==='ios' ? 0 : 3, }}>
+                                          <OpcionHeader iconName='ic_baseline-menu' color={colores.primary}  //menu hamburguesa
+                                            onPress={() =>{ 
+                                              navigation.toggleDrawer(); 
+                                            }} />
+                                         </View>
                                    }
 
                                     {/* logo app */}
-                                    <View style={{flex:1, left:24,top:15 }}>
+                                    <View style={{flex:1, left:24,top:15,...Elevations[24], }}>
                                           <TitleApp></TitleApp>
                                     </View>
                                   
@@ -366,8 +369,8 @@ export const NavigationHome = ( { navigation }:Props) => {
                                             <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
                                                 source={require('../assets/clarity_notification-solid-badged.png')}  >
                                             </Image>
-                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:  'orange',marginTop:-61,  right:11}}>.</Text>
-                                            : <Text style={{ fontSize:75,color:  'white',marginTop:-61,  right:11}}>.</Text>}
+                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:'orange',marginTop:Platform.OS=='ios' ? -64 : -70,  right:11}}>.</Text>
+                                            : <Text style={{ fontSize:75,color:  'white',marginTop:Platform.OS=='ios' ? -61 : -70,  right:11}}>.</Text>}
                                           </View>
                                         </TouchableOpacity>
 
