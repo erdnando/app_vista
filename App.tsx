@@ -6,10 +6,11 @@ import { GeneralProvider } from './src/state/GeneralProvider';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { AlertOk } from './src/components/AlertOk';
 import { AlertFail } from './src/components/AlertFail';
-import { useNotificaciones } from './src/hooks/useNotificaciones';
+
+
 
 const App = () => {
-
+  
  
 
   return (
@@ -41,7 +42,6 @@ const toastConfig = {
     <AlertOk mensaje={props.mensaje}></AlertOk>
   )
 };
-
 
 
 

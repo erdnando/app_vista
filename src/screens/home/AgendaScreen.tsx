@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useMovies } from '../../hooks/useMovies';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { Loading } from '../../components/Loading';
 import { ListNotificaciones } from '../../components/notificaciones/ListNotificaciones';
@@ -16,8 +15,7 @@ export const AgendaScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
     const { flags,ids} = useContext(GeneralContext);
-    //call service to get data
-   // const { isLoading } = useMovies();
+
 
      if(flags?.resultadosBusquedaVisible){
         return <SafeAreaProvider>

@@ -53,42 +53,105 @@ export const Calendario = ( {  }: Props ) => {
     }
   }
 
+  const armaMesString = (month:string) => {
+
+    switch (month) {
+      case '01':
+        return 'Enero'
+        case '02':
+        return 'Febrero'
+        case  '03':
+        return 'Marzo'
+        case  '04':
+        return 'Abril'
+        case  '05':
+        return 'Mayo'
+        case  '06':
+        return 'Junio'
+        case  '07':
+        return 'Julio'
+        case  '08':
+        return 'Agosto'
+        case  '09':
+        return 'Septiembre'
+        case  '10':
+        return 'Octubre'
+        case  '11':
+        return 'Noviembre'
+        case  '12':
+        return 'Diciembre'  
+        case  '13':
+        return 'Diciembre'
+      default:
+        return '';
+        break;
+    }
+  }
+
+  const add0AlMes =(messs :number) =>{
+    switch (messs) {
+    case 1:
+      return '01'
+      case 2:
+      return '02'
+      case  3:
+      return '03'
+      case  4:
+      return '04'
+      case  5:
+      return '05'
+      case  6:
+      return '06'
+      case  7:
+      return '07'
+      case  8:
+      return '08'
+      case  9:
+      return '09'
+    default:
+      return messs.toString();
+      break;
+    }
+  }
+
+
   
   var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = armaMes( today.getMonth() + 1); //January is 0!
+  var dd = String(today.getDate());
+  let mesn =  parseInt(today.getMonth().toString()) + 1;
+  var mm = armaMes( mesn); //January is 0!
   var yyyy = today.getFullYear();
 
   const [mes, setmes] = useState(mm+' '+yyyy.toString() );
 
   useEffect(() => {
 
-
     const payload= agenda;
     
     if(agenda.selectedDate===''){
         var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = armaMes( today.getMonth() + 1); //January is 0!
+        var dd = String(today.getDate());
+        let mesn =  parseInt(today.getMonth().toString()) + 1;
+        var mm =  add0AlMes(mesn); //January is 0!
         var yyyy = today.getFullYear();
 
-        payload. selectedDate = yyyy+'-'+today.getMonth() + 1+'-'+dd;
+        console.log('-------------xxx----------');
+        console.log(yyyy+'-'+ (armaMesString( mesn.toString()) )+'-'+dd);
+        payload.selectedDate = yyyy+'-'+mm +'-'+dd;
     }
    
-
     //TODO get appointments day from service
-
-   
-    
     payload.markedDates={
-      '2022-01-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
-      '2022-01-12': {dots: [vacation, eventox], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-      '2022-01-21': {dots: [vacation, eventox,massage,workout], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
+      '2022-02-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
+      '2022-02-12': {dots: [vacation, eventox], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
+      '2022-02-21': {dots: [vacation, eventox,massage,workout], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
     }
     setAgenda(payload)
     
     
   }, [])
+
+  let maxYear = new Date().getFullYear()+1
 
 
   return (
@@ -96,9 +159,9 @@ export const Calendario = ( {  }: Props ) => {
 
             <Calendar ref={ref=>this.calendar=ref}
                       // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-                      minDate={'2021-01-01'}
+                      minDate={maxYear-1+'-01-01'}
                       // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-                      maxDate={'2022-12-31'}
+                      maxDate={maxYear+'-12-31'}
                       dayComponent={({date, state}) => {
                         
                         const dateString = date.dateString;
@@ -141,27 +204,27 @@ export const Calendario = ( {  }: Props ) => {
                           <>
                            <View style={{flex:1,flexDirection:'row',justifyContent:'space-between'}}> 
 
-                                <View style={{flex:1,flexDirection:'row',justifyContent:'center'}}> 
-                                      <TouchableOpacity style={{left:-20, top:-4}} onPress={() =>{ 
-                                        this.calendar.addMonth(-1)
-                                      }}>
-                                            <Text style={{fontFamily:'Roboto-Bold'}}>
-                                                <CustomIcon  name='ic_round-keyboard-arrow-left' size={28} color='#000000'  ></CustomIcon>
-                                            </Text>
-                                      </TouchableOpacity>
+                                  <View style={{flex:1,flexDirection:'row',justifyContent:'center'}}> 
+                                        <TouchableOpacity style={{left:-20, top:-4}} onPress={() =>{ 
+                                          this.calendar.addMonth(-1)
+                                        }}>
+                                              <Text style={{fontFamily:'Roboto-Bold'}}>
+                                                  <CustomIcon  name='ic_round-keyboard-arrow-left' size={28} color='#000000'  ></CustomIcon>
+                                              </Text>
+                                        </TouchableOpacity>
 
 
-                                      <Text style={{fontFamily:'Roboto-Bold', fontSize:17}}>{ mes } </Text>
-                                      
+                                        <Text style={{fontFamily:'Roboto-Bold', fontSize:17}}>{ mes } </Text>
+                                        
 
 
-                                      <TouchableOpacity style={{right:-20, top:-4}} onPress={() =>{ 
-                                        this.calendar.addMonth(1)
-                                      }}>
-                                            <Text style={{fontFamily:'Roboto-Bold'}}>
-                                                <CustomIcon  name='ic_round-keyboard-arrow-right' size={28} color='#000000'  ></CustomIcon>
-                                            </Text>
-                                      </TouchableOpacity>
+                                        <TouchableOpacity style={{right:-20, top:-4}} onPress={() =>{ 
+                                          this.calendar.addMonth(1)
+                                        }}>
+                                              <Text style={{fontFamily:'Roboto-Bold'}}>
+                                                  <CustomIcon  name='ic_round-keyboard-arrow-right' size={28} color='#000000'  ></CustomIcon>
+                                              </Text>
+                                        </TouchableOpacity>
                                   </View>
 
                                    {/* filtros agenda */}

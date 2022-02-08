@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
-import { NotificationListByLogin } from '../models/response/NotificationListByLogin';
-import { NotificacionByLoginAux } from '../models/response/NotificacionesByLoginAux';
 import { NotificationListByLoginAux } from '../models/response/NotificationListByLoginaux';
 import Toast from 'react-native-toast-message';
 
@@ -29,10 +27,6 @@ export const useNotificaciones =  () => {
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token 
                     },
-                //    params:{ 
-                //        "login" : 'eder.goncalves@gmail.com',//sesion.clienteId,
-                //        "charter" : 2,//sesion.charter
-                //     }
                 }, 
                 );
 
@@ -52,7 +46,7 @@ export const useNotificaciones =  () => {
             } catch (error) {
                 console.log(error);
                 Toast.show({type: 'ko',props: { mensaje: error }});
-                floading(false)
+               // floading(false)
             }
         }
 
@@ -131,11 +125,6 @@ export const useNotificaciones =  () => {
                 floading(false)
             }
         }
-
-        //  useEffect(() => {
-        //     notificationListByLogin();
-        //    }, [])
-
        
         //exposed objets 
         return {  notificationListByLogin ,floading,existsNotification   }

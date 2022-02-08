@@ -17,7 +17,6 @@ import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
 import { useNotificaciones } from '../hooks/useNotificaciones';
 
-
 const Tab = createBottomTabNavigator();
 interface Props extends DrawerScreenProps<any, any>{};
 
@@ -29,7 +28,7 @@ export const NavigationHome = ( { navigation }:Props) => {
   const { usuario,flags,setFlags,setTabSelected,setTabSelectedOld,tabSelectedOld, tabSelected,ids, 
           setIds, tabModule,setTabModule,menuOpiniones,setMenuOpiniones} = useContext(GeneralContext);
   const { getResultadoBusqueda } = useSearch(); 
- 
+  const { notificationListByLogin } = useNotificaciones(); 
 
 
   //terciario

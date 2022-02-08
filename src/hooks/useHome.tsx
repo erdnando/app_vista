@@ -4,7 +4,9 @@ import vistaApi from '../api/vista';
 import { GraphMotiveGoNoGo } from '../models/response/GraphMotiveGoNoGo';
 
 
+
 export const useHome =  () => {
+   
 
         const {flags,setFlags,sesion  } = useContext( GeneralContext );
         const [graphData, setgraphData] = useState<GraphMotiveGoNoGo[]>([

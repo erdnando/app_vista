@@ -14,6 +14,8 @@ export const DetalleAgenda = ( ) => {
   const { agenda} = useContext(GeneralContext);
 
   const armaFecha = (fecha:string) => {
+    console.log('------------------>>>>>')
+    console.log(fecha)
     let arrFecha= fecha.split('-');
     return arrFecha[2] +' de '+ armaMes(arrFecha[1])+ ' de '+ arrFecha[0] ;//'08 de enero de 2022';
   }
@@ -158,14 +160,7 @@ export const DetalleAgenda = ( ) => {
   }
 
     return (
-    //   <View style={{flexGrow:1,backgroundColor:'#BCC1CB', justifyContent:'center',alignItems:'flex-start',
-    //                 alignContent:'flex-end', top:50, width:'100%',}}> 
-    //     <FlatList data={Data} 
-    //     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
-    //     keyExtractor={(item,index) => item.id + index} 
-    //     ItemSeparatorComponent={ () => renderSeparator()}
-    //     />
-    // </View>
+
         <View style={{flex:1, backgroundColor:'#BCC1CB', top:40,  
                         width:'100%',   alignItems:'center',alignContent:'flex-start'}}>
                     <HeaderTitle label={armaFecha(agenda.selectedDate)} top={20} fontSize={18}></HeaderTitle>

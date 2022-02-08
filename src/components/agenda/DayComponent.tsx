@@ -1,15 +1,9 @@
 
 import React, { useContext } from 'react';
-import { Platform, Text, TouchableOpacity, View } from 'react-native';
-import { DayState } from 'react-native-calendars/src/types';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
-import { HeaderTitle } from '../HeaderTitle';
-import { Spacer } from '../Spacer';
 import { Dots } from './Dots';
-import { ListOportunidades } from './ListOportunidades';
 
-
-// import { HeaderTitle } from '../HeaderTitle';
 
 
 interface Props{

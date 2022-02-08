@@ -11,6 +11,7 @@ import { ResultadoParecer } from '../../components/home_chart/ResultadoParecer';
 import { UltimasActualizaciones } from '../../components/ultimasActualizaciones/UltimasActualizaciones';
 import { ListNotificaciones } from '../../components/notificaciones/ListNotificaciones';
 
+
 export const HomeScreen = () => {
     const { top } = useSafeAreaInsets();
     //call global state
@@ -20,7 +21,7 @@ export const HomeScreen = () => {
     //https://github.com/osdnk/react-native-reanimated-bottom-sheet/issues/243#issuecomment-644091552
     //https://github.com/osdnk/react-native-reanimated-bottom-sheet
   
-    
+   
 
     if(flags.isNotificaciones){
         return  <ListNotificaciones></ListNotificaciones>

@@ -1,14 +1,10 @@
 
 import React, { useContext } from 'react';
-import { Platform, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { HeaderTitle } from '../HeaderTitle';
 import { Spacer } from '../Spacer';
 import { ListOportunidades } from './ListOportunidades';
-
-
-// import { HeaderTitle } from '../HeaderTitle';
-
 
 interface Props{
     height:number
@@ -19,6 +15,10 @@ export const OportunidadesDia = ( ) => {
   const { agenda,setAgenda } = useContext( GeneralContext )
 
   const armaFecha = (fecha:string) => {
+    console.log('............')
+   console.log(fecha)
+
+
     let arrFecha= fecha.split('-');
     return arrFecha[2] +' de '+ armaMes(arrFecha[1])+ ' de '+ arrFecha[0] ;//'08 de enero de 2022';
   }
@@ -58,6 +58,13 @@ export const OportunidadesDia = ( ) => {
     }
   }
 
+    console.log('---------------------------')
+    console.log(agenda.selectedDate)
+
+    
+
+    console.log('---------------------------')
+    
     return  (<View style={{flex:1, backgroundColor:'#BCC1CB', top:40,  
                         width:'100%',   alignItems:'center',alignContent:'flex-start'}}>
                     <HeaderTitle label={armaFecha(agenda.selectedDate)} top={20} fontSize={18}></HeaderTitle>
@@ -71,9 +78,9 @@ export const OportunidadesDia = ( ) => {
                     : (<View style={{flex:1,justifyContent:'flex-start',alignContent:'flex-start',marginTop:50,}}>
                       {/* <Spacer height={40}></Spacer> */}
                        <Text style={{fontFamily:'Roboto-Bold', fontSize:18,color:'#838892'}}>Sin eventos</Text>
-                    </View>)
+                      </View>)
                     }
                    
-                    </View>
+              </View>
            )
 }

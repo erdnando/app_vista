@@ -31,5 +31,4 @@ target 'APP_VISTA' do
   # The following line uses react-native-restart, linking with
   # the library and setting the Header Search Paths for you
   pod 'react-native-restart', :path => '../node_modules/react-native-restart'
-
 end
