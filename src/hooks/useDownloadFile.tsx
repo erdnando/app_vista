@@ -2,13 +2,24 @@ import { useContext } from "react";
 import { PermissionsAndroid, Platform } from "react-native";
 import RNFetchBlob, { RNFetchBlobConfig } from "rn-fetch-blob";
 import FileViewer from "react-native-file-viewer";
+import { GeneralContext } from "../state/GeneralProvider";
 
 export const useDownloadFile = () => {
    
+  const { flags,setFlags } = useContext( GeneralContext );
 
+  const floading=(valor:boolean)=>{
+    const payload= flags;
+    payload.isLoadingAgenda= valor;
+    
+    setFlags(payload);
+}
 
   const downloadAndroidFile = (fileUrl:string,extension:string,mime:string) => {
    
+ 
+
+
     // Get today's date to add the time suffix in filename
     let date = new Date();
     // File URL which we want to download
@@ -83,6 +94,7 @@ export const useDownloadFile = () => {
             showOpenWithDialog: true,
             onDismiss: () => {
                   console.log('ventana cerrada...')
+                  floading(false)
             },
         }).catch((error) => {
           
@@ -99,6 +111,7 @@ export const useDownloadFile = () => {
 
   const checkPermission = async (urlResource:string,extension:string, mime:string) => {
   
+    floading(true)
       // Function to check the platform
       // If Platform is Android then check for permissions.
   
@@ -123,9 +136,11 @@ export const useDownloadFile = () => {
             // If permission denied then show alert
            // Alert.alert('Error','Storage Permission Not Granted');
           }
+          floading(false)
         } catch (err) {
           // To handle permission related exception
           console.log("++++"+err);
+          floading(false)
         }
       }
     };

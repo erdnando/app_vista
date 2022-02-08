@@ -94,7 +94,7 @@ export const TabParecerExigencias = ( { visible,indexTab}: Props ) => {
 
 
                        {/* Eliminar card */}
-                       { opiniones.tabsContador >1 ? <View style={{ position:'absolute', top:-15,right:5, 
+                       { opiniones.tabsContador >1 ? <View style={{ position:'absolute', top:-15,right:5, backgroundColor:'red',
                                                                borderWidth:1,borderColor:'red', borderRadius:50, height:30, width:30, 
                                                                justifyContent:'center',  alignItems:'center' }}>
                             <TouchableOpacity onPress={()=>{

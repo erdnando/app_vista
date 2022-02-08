@@ -6,8 +6,10 @@ import { GeneralProvider } from './src/state/GeneralProvider';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { AlertOk } from './src/components/AlertOk';
 import { AlertFail } from './src/components/AlertFail';
+import { LogBox } from 'react-native';
 
-
+LogBox.ignoreLogs(['Task orphaned for request']); // Ignore log notification by message
+LogBox.ignoreLogs(['Require cycles']); 
 
 const App = () => {
   

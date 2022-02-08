@@ -255,10 +255,9 @@ export const useSearch =  () => {
                 console.log(resp.data);
 
                   
+               // if(resp.data.itensOportunidadeDto !=undefined)
+                if(resp.data.itensOportunidadeDto !=undefined && resp.data.itensOportunidadeDto.length>0){
 
-                if(resp.data.itensOportunidadeDto.length>0){
-
-                   
                      let arrResultadosTabAux=search.resultados;//get reference
                      arrResultadosTabAux=[];
                    

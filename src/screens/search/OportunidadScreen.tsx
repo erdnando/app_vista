@@ -37,6 +37,7 @@ export const OportunidadScreen = () => {
                 <View style={{ flexDirection:'row', alignContent:'center', alignItems:'center' ,marginLeft:3}}>
                         <CustomIcon name='ic_baseline-cloud-download' size={25} color='black'></CustomIcon>
                         <Button title='Download do Edital'  onPress={()=>{
+                                
                                 // checkPermission(search.oportunidade..arquivo,'pdf','application/pdf');
                                  checkPermission('https://www.mysu.org.uy/haceclick/folletos/02-el-deseo-sexual.pdf','pdf','application/pdf');
                         }}></Button>

@@ -20,7 +20,7 @@ export const AlertFail = ( {mensaje}:Props ) => {
             </Text>
 
             <View style={{ flexDirection:'column', width:'82%',height:50,left:15,top:3, justifyContent:'flex-start',  alignItems:'flex-start'}}>
-              <Text style={{fontFamily:'Roboto-Regular', fontSize:14, color:'#FFFFFF',marginTop:8,width:'89%'}}>{mensaje}</Text>
+              <Text style={{fontFamily:'Roboto-Regular', fontSize:14, color:'#FFFFFF',marginTop:8,width:'99%'}}>{mensaje}</Text>
             </View>
             </View> 
 }

@@ -86,7 +86,7 @@ export const useNotificaciones =  () => {
                             tipo:notif.importante != ""?'SIMPLE' : 'EVENT',
                             dia:'Hoy',
                             hora:'Fecha: '+notif.dataCadastro,
-                            descripcion: notif.mensagem.length>65 ? notif.mensagem.length.toString().substring(65)+'...'+notif.id.toString() : notif.mensagem,
+                            descripcion: notif.mensagem.length>65 ? notif.mensagem.toString().substring(0,57)+'...': notif.mensagem,
                             color: notif.tipoMensagem.id == 1 ? 'red' : '#838892',
                             background:notif.tipoMensagem.id == 1 ?'#F8BBBB' : '#EDF0F5',
                             icon:notif.tipoMensagem.id == 1 ? 'bx_bxs-message-alt-error' : 'ic_baseline-lightbulb',  //icomoon-free_hammer2

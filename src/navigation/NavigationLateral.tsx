@@ -60,6 +60,7 @@ export const NavigationLateral = ( { navigation }:Props) => {
                   <Drawer.Screen name="NavigationHome" component={ NavigationHome } options={{ title:'', }} initialParams={{screen:'HomeScreen'}}/>      
                   <Drawer.Screen name="NavigationHomeagenda" component={ NavigationHome } initialParams={{screen:'AgendaScreen'}}/>
                   <Drawer.Screen name="NavigationHomeParecer" component={ NavigationHome } initialParams={{screen:'ParecerScreen'}}/>
+                  <Drawer.Screen name="NavigationHomeContacto" component={ NavigationHome } initialParams={{screen:'ContactoScreen'}}/>
                   <Drawer.Screen name="NavigationHomeRelatorio" component={ NavigationHome } initialParams={{screen:'RelatorioScreen'}}/>
                   <Drawer.Screen name="ChangePasswordScreen"  component={ ChangePasswordScreen } />
                   <Drawer.Screen name="NavigationLogin"  component={ NavigationLogin } />
@@ -70,7 +71,7 @@ export const NavigationLateral = ( { navigation }:Props) => {
 }
 
 const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
-  const { logOut, flags,setFlags,setTabSelected,ids,setIds,setTabModule} = useContext( GeneralContext )
+  const { logOut, flags,setFlags,setTabSelected,ids,setIds,setTabModule, usuario} = useContext( GeneralContext )
   return (
      <DrawerContentScrollView>
 
@@ -137,6 +138,24 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
             navigation.navigate('ParecerScreen'); 
             }}></OpcionMenuLateral>
+
+           {usuario.tipo===1 && <OpcionMenuLateral iconName='ic_baseline-lightbulb' color='black' label='Contacto' onPress={() =>{
+            setTabSelected('Contacto');
+            setTabModule('Contacto');
+            const payload= flags;
+                  payload.isNotificaciones=false;
+                  payload.verDetalleAgenda=false;
+                  setFlags(payload);
+
+                  const payload1 = ids;
+                  payload1.idOpinionBusqueda= '';
+                  payload1.idOpinionSeleccionado='';
+                  payload1.codigoBusqueda='';
+                  setIds(payload1);
+
+            navigation.navigate('ContactoScreen'); 
+            }}></OpcionMenuLateral>}
+                    
 
           <OpcionMenuLateral iconName='bi_bar-chart-line-fill' color='black' label='Relatorio' onPress={() =>{
             setTabSelected('Relatorio');

@@ -114,7 +114,7 @@ export const useLogin =  () => {
                     payload1[3].visible = true;//valores visible
                     setMenuOpiniones(payload1);
                     floading(false)
-                    Toast.show({type: 'ok',props: { mensaje: 'Bienvenido operador' }});
+                    Toast.show({type: 'ok',props: { mensaje: 'Bienvenido terciario' }});
                     return true;
                 }else if(resp.data.tipoUsuario==='COLABORADOR'){
                    
@@ -127,7 +127,7 @@ export const useLogin =  () => {
                     payload1[2].visible = false;//pareceres realizado hidden
                     setMenuOpiniones(payload1);
                     floading(false)
-                    Toast.show({type: 'ok',props: { mensaje: 'Bienvenido terciario' }});
+                    Toast.show({type: 'ok',props: { mensaje: 'Bienvenido colaborador' }});
 
                     return true;
                 }else{
