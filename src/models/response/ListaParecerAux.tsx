@@ -9,4 +9,7 @@ export interface ListaParecerAux {
     fechaOpinion:string,
     ubicacion:string,
     estatus:number,
+    clienteId:number,
+    modalidade:string,
+    plataforma:string
 }

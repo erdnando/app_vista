@@ -1,16 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
 import { ListaParecer } from '../models/response/ListaParecer';
 import { TipoExigencia } from '../models/response/TipoExigencia';
 import Toast from 'react-native-toast-message';
+import { ComboDescripcion } from '../models/response/ComboDescripcion';
+import { TipoUsuario } from '../models/TipoUsuario';
+import { Exigencia } from '../models/Exigencia';
+import { TabRouter } from '@react-navigation/native';
 
 export const useParecer =  () => {
 
         const { ids ,setIds, flags,setFlags, sesion, parecer,setParecer,
-            opiniones,setOpiniones,usuario } = useContext( GeneralContext );
-
-       
+                opiniones,setOpiniones,usuario } = useContext( GeneralContext );
 
         const floading=(valor:boolean)=>{
             const payload= flags;
@@ -43,13 +45,13 @@ export const useParecer =  () => {
                 );
 
                 console.log('op lista parecer:::::::::::::::::::::');
-              
+                console.log(resp.data);
 
                 if(resp.data.length > 0){
 
                     let arrAux=parecer.listaParecer;//get reference
                     arrAux=[];
-                  
+                  //clienteId
 
                       resp.data.forEach(function(item,index){
                         arrAux.push({
@@ -61,6 +63,9 @@ export const useParecer =  () => {
                                     fechaOpinion:item.dataCertame,
                                     ubicacion: (item.localidade.length>13? item.localidade.substring(0,13)+'...' :item.localidade) +' - '+ item.estado,
                                     estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
+                                    clienteId:sesion.clienteId,
+                                    modalidade:item.descricaoModalidade,
+                                    plataforma:'NA'
                                });
 
                        });
@@ -126,6 +131,9 @@ export const useParecer =  () => {
                                     fechaOpinion:item.dataCertame,
                                     ubicacion:item.localidade+' - '+ item.estado,
                                     estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
+                                    clienteId:sesion.clienteId,
+                                    modalidade:item.descricaoModalidade,
+                                    plataforma:'NA'
                                });
 
                        });
@@ -137,8 +145,6 @@ export const useParecer =  () => {
                     setParecer(payload);
 
                 }else{
-
-
                     const payload= parecer;
                     payload.listaParecer= [];
                     setParecer(payload);
@@ -201,6 +207,104 @@ export const useParecer =  () => {
             }
         }
 
+        const cargaComoboDescripcion = async () =>{
+            floading(true)
+            try {
+                console.log(sesion.token )
+                const resp = await vistaApi.get<ComboDescripcion[]>('services/requirementType/listByClient?charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId+'&clienteId='+sesion.clienteId,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token
+                    },
+                }, 
+                );
+
+                console.log('op combo descripcion:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length > 0){
+
+                    let arrAux=opiniones.catTipoDescripcion;//get reference
+                    arrAux=[];
+                  
+                      resp.data.forEach(function(item,index){
+                        arrAux.push({
+                                   value:item.id.toString(),
+                                   label:item.descricao
+                               });
+                       });
+
+
+                    console.log("asignando datos");
+                    const payload = opiniones;
+                    payload.catTipoDescripcion = arrAux;
+                    setOpiniones(payload);
+
+                }else{
+                    const payload = opiniones;
+                    payload.catTipoDescripcion = [];
+                    setOpiniones(payload);
+                }
+           
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar combo descripcion')
+                console.log(error);
+                floading(false)
+            }
+        }
+
+        const cargaComoboTipoUsuario = async () =>{
+            floading(true)
+            try {
+                console.log(sesion.token )
+                const resp = await vistaApi.get<TipoUsuario[]>('services/clientUserType/listActiveByClient/'+sesion.clienteId+'?charter='+sesion.charter,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token
+                    },
+                }, 
+                );
+
+                console.log('op combo tipo usuario:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length > 0){
+
+                    let arrAux=opiniones.catTipoUsuario;//get reference
+                    arrAux=[];
+                  
+                      resp.data.forEach(function(item,index){
+                        arrAux.push({
+                                   value:item.id.toString(),
+                                   label:item.descricao
+                               });
+                       });
+
+
+                    console.log("asignando datos");
+                    const payload = opiniones;
+                    payload.catTipoUsuario = arrAux;
+                    setOpiniones(payload);
+
+                }else{
+                    const payload = opiniones;
+                    payload.catTipoUsuario = [];
+                    setOpiniones(payload);
+                }
+           
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar combo descripcion')
+                console.log(error);
+                floading(false)
+            }
+        }
+
         const onChangeSearch = async (idParecer:string) =>{
            
             const payload= ids;
@@ -257,12 +361,12 @@ export const useParecer =  () => {
             try {
                 floading(true)
                 const payload = opiniones;
-                let arrExigenciasAux= [{}];
-                //arrExigenciasAux.cl
+                //let arrExigenciasAux= [{}];
+                let arrExigenciasAux: Array<Exigencia> = [];
+   
                 console.log('---------------------------')
                 console.log(payload.exigencias);
                 console.log('---------------------------')
-
 
                 payload.exigencias.forEach(function(item,index){
                     if(item.visible){
@@ -270,7 +374,7 @@ export const useParecer =  () => {
                             "id": index+1, 
                             "metaDias": item.qtededias, 
                             "observacao": item.observaciones, 
-                            "oportunidadeId": parecer.parecerSeleccionado.idOpinion, 
+                            "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
                             "status": "1", 
                             "tipoDataMeta": 0, 
                             "tipoExigenciaId": 0, 
@@ -278,8 +382,7 @@ export const useParecer =  () => {
                             "titulo": item.descripcion 
                         });
                     }
-
-                  })
+                  });
                 console.log('paquete enviando...')
 
                 console.log('---------------------------')
@@ -316,14 +419,193 @@ export const useParecer =  () => {
                 return false;
             }
         }
+
+        const saveParecer = async () =>{
+            try {
+                floading(true)
+                const payload = opiniones;
+                
+                let arrExigenciasAux: Array<Exigencia> = [];
+   
+                console.log('---------------------------')
+                console.log(payload.exigencias);
+                console.log('---------------------------')
+
+                payload.exigencias.forEach(function(item,index){
+                    if(item.visible){
+                        arrExigenciasAux.push({
+                            "id": index+1, 
+                            "metaDias": item.qtededias, 
+                            "observacao": item.observaciones, 
+                            "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
+                            "status": "1", 
+                            "tipoDataMeta": 0, 
+                            "tipoExigenciaId": 0, 
+                            "tipoUsuarioClienteId": 0, 
+                            "titulo": item.descripcion 
+                        });
+                    }
+                  });
+                console.log('paquete enviando...')
+
+                console.log('---------------------------')
+                console.log(arrExigenciasAux);
+                console.log('---------------------------')
+
+
+                var arr=arrExigenciasAux.splice(1,arrExigenciasAux.length);
+                console.log(arr);
+          
+                      
+                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',{ arr }, {
+                                    headers:{
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    "X-Auth-Token": sesion.token
+                                }
+                });
+
+                console.log('parecer guardado');
+                console.log(resp.data);
+                Toast.show({type: 'ok', props: { mensaje: 'Parecer guardada' }});
+                floading(false)
+
+            } catch (error) {
+                console.log(error);
+
+                const payloadx= flags;
+                payloadx.isLoading=false;
+                setFlags(payloadx);
+                console.log('error al guardar Parecer');
+                Toast.show({type: 'ko',props: { mensaje: error }});
+                floading(false)
+                return false;
+            }
+        }
   
+        const isFormParecerValid=()=>{
+           
+          //TODO add validation to combo opinion
+           if (opiniones.parecer.justificacion.trim() ==='') {
+                console.log('saliendo por justificativa')   
+                return false;
+            }
+           if (opiniones.parecer.estatusGO == 0) {
+            console.log('saliendo por estatusGO 0')   
+              return false;
+            }
+
+            console.log('formulario valido')   
+           return true;
+           
+        }
+
+        const formExigenciasValid=()=>{
+
+             
+            const payload = opiniones;
+            let arrExigenciasAux: Array<Exigencia> = [];
+            payload.exigenciasAllValid=true;
+            payload.exigencias.forEach(function(item,index){
+                //toma todas las exigencias abiertas o visibles
+                if(item.visible){
+                    //valid form
+                    let refForm = {
+                        "id": index+1, 
+                        "metaDias": item.qtededias, //qtdias
+                        "observacao": item.observaciones, //observaciones
+                        "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
+                        "status": "1", 
+                        "tipoDataMeta": 0, 
+                        "tipoExigenciaId": parseInt(item.tipoExigencia), //tipoexigencia  ok
+                        "tipoUsuarioClienteId":  parseInt(item.tipoUsuario), //tipoUsuario 
+                        "titulo": payload.catTipoDescripcion.filter(elem => elem.value == item.descripcion)[0]?.label,//descripcio  ok                    });
+                    }
+
+                    item.valid=true;
+                    
+
+                    if ( refForm.titulo === undefined) {
+                        console.log('saliendo por descripcion '+ refForm.titulo)   
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }else if (isNaN(refForm.tipoExigenciaId)) {
+                        console.log('saliendo por tipo exigencia')   
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }else if (refForm.metaDias === '') {
+                        console.log('saliendo por meta dias')  
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }else if (isNaN(refForm.tipoUsuarioClienteId)) {
+                        console.log('saliendo por tipo usuario')   
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }else  if (refForm.observacao === '') {
+                        console.log('saliendo por observaciones')   
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }
+
+                    arrExigenciasAux.push(refForm)
+                    setOpiniones(payload)
+                }
+            })
+
+              
+ 
+
+           // var arrExigenciasOpened=arrExigenciasAux.splice(1,arrExigenciasAux.length);
+            //console.log(arrExigenciasAux)
+           
+            // arrExigenciasAux.forEach(function(item,index){
+            //     console.log('looping....')
+            //     console.log(item)
+
+
+            //     if ( item.titulo === undefined) {
+            //         console.log('saliendo por descripcion -->'+ item.titulo+'<--')   
+            //         console.log(item)  
+
+            //         setFrmExigenciaValid(false)
+            //        return ;
+            //     }else if (isNaN(item.tipoExigenciaId)) {
+            //         console.log('saliendo por tipo exigencia')   
+            //         setFrmExigenciaValid(false)
+            //         return ;
+            //     }else if (item.metaDias === '') {
+            //         console.log('saliendo por meta dias')  
+            //         setFrmExigenciaValid(false) 
+            //         return ;
+            //     }else if (isNaN(item.tipoUsuarioClienteId)) {
+            //         console.log('saliendo por tipo usuario')   
+            //         setFrmExigenciaValid(false)
+            //         return ;
+            //     }else  if (item.observacao === '') {
+            //         console.log('saliendo por observaciones')   
+            //         setFrmExigenciaValid(false)
+            //         return ;
+            //     }
+
+                
+               
+            //    })
+           
+             
+             //if(frmExigenciaValid==false) return;
+
+             
+             // setFrmExigenciaValid(true)
+             
+          }
 
 
 
         //exposed objets 
         return {
             getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado,
-            saveExigencias
+            saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
+            saveParecer
         }
 }
         

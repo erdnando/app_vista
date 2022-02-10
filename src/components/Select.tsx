@@ -9,7 +9,7 @@ interface Props{
   onValueChange: (value: any, index: number) => void,
   items:Item[],
   campo:string,
-  width?:string
+  width?:string,
 }
 
 export const Select = ( { onValueChange,items,placeholder,campo,width='87%'}: Props ) => {
@@ -17,7 +17,8 @@ export const Select = ( { onValueChange,items,placeholder,campo,width='87%'}: Pr
   const windowWidth = Dimensions.get('window').width;
 
     return (
-      <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:width,borderBottomColor: campo !=null ? 'orange' : 'grey' }}>
+      <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:width,
+                     borderBottomColor: campo !=null ? 'orange' : 'grey' }}>
 
               <RNPickerSelect 
               style={pickerSelectStyles}

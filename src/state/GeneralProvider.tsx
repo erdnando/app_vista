@@ -65,8 +65,8 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'erdnandovr@algartech.com',//'erdnando@gmail.com',
-                password:'044482',//'248854',
+                email:'erdnandovr@algartech.com',//'erdnando@gmail.com
+                password:'044482',//'',248854
                 whatsapp:'(34) 99830-0082',
                 telefono:'(34) 99830-0082',
                 direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'
@@ -135,46 +135,52 @@ class GeneralProvider extends React.Component{
             },
             exigenciasIndex:1,
             tabsContador:1,
+            exigenciasAllValid:false,
             exigencias:[
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'1',
+                qtededias:'',
                 tipoUsuario:'',
                 observaciones:'',
-                visible:true
+                visible:true,
+                valid:false
                 },
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'2',
+                qtededias:'',
                 tipoUsuario:'',
                 observaciones:'',
-                visible:true
+                visible:false,
+                valid:false
                 },
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'3',
+                qtededias:'',
                 tipoUsuario:'',
                 observaciones:'',
-                visible:true
+                visible:false,
+                valid:false
                 },
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'4',
+                qtededias:'',
                 tipoUsuario:'',
                 observaciones:'',
-                visible:true
+                visible:false,
+                valid:false
                 },
                 {
                 descripcion: '',
                 oportunidad:'',
-                qtededias:'5',
+                qtededias:'',
                 tipoUsuario:'',
                 observaciones:'',
-                visible:true
+                visible:false,
+                valid:false
                 }
 
             ],
@@ -220,7 +226,9 @@ class GeneralProvider extends React.Component{
                 justificativa:'',
                 colapsado:true,
             }],
-            catTipoExigencia:[]
+            catTipoExigencia:[],
+            catTipoDescripcion:[],
+            catTipoUsuario:[],
         },
         agendafiltro:{
             filtroHorario: 'Seleccione una horario',
@@ -358,6 +366,9 @@ class GeneralProvider extends React.Component{
                     fechaOpinion:'No data',
                     ubicacion:'No data',
                     estatus:0,
+                    clienteId:0,
+                    modalidade:'',
+                    plataforma:''
                }
             ],
             parecerSeleccionado:{}

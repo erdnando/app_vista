@@ -12,7 +12,7 @@ export const CardParecerExigencias = ( ) => {
 
   const { opiniones,setOpiniones} = useContext(GeneralContext);
   const { saveExigencias } = useParecer();
-  const [hasData] = useState(false)
+  //const [hasData] = useState(false)
 
 
   const items=[   { label: "JavaScript", value: "JavaScript" },
@@ -37,13 +37,13 @@ export const CardParecerExigencias = ( ) => {
                 <View style={{flex:1, flexDirection:'row',}}>
 
                   {/* ------------------Incrementar---------------------------------------------------- */}
-                  <SelectorTabParecerExigencias visible={true} label='Salvar' index={6} selected={false}
+                  <SelectorTabParecerExigencias visible={true} validItem={false} label='Salvar' index={6} selected={false}
                   onPress={()=>{ console.log('+')  
                     //incrementando los tabs
                     const payload= opiniones;
                     console.log(payload.exigenciasIndex)
 
-
+                    payload.exigenciasAllValid=false;
                    // let arrAux =payload.exigencias
                     payload.exigenciasIndex++;
 
@@ -59,7 +59,7 @@ export const CardParecerExigencias = ( ) => {
                   }} icono='ic_baseline-lightbulb'></SelectorTabParecerExigencias>
                   {/* --------------------------------------------------------------------------------- */}
 
-                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>0?true:false} selected={opiniones.tabsContador==1?true:false} label='1' index={0}  
+                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>0?true:false}  validItem={opiniones.exigencias[0].valid} selected={opiniones.tabsContador==1?true:false} label='1' index={0}  
                   onPress={()=>{ console.log('0')  
 
                     const payload= opiniones;
@@ -67,7 +67,7 @@ export const CardParecerExigencias = ( ) => {
                     setOpiniones(payload); 
                   }} icono='ic_baseline-lightbulb'></SelectorTabParecerExigencias>
 
-                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>1?true:false} selected={opiniones.tabsContador==2?true:false} label='2' index={1}  
+                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>1?true:false}  validItem={opiniones.exigencias[1].valid} selected={opiniones.tabsContador==2?true:false} label='2' index={1}  
                   onPress={()=>{ console.log('1')  
 
                     const payload= opiniones;
@@ -75,7 +75,7 @@ export const CardParecerExigencias = ( ) => {
                     setOpiniones(payload); 
                   }} icono='ic_baseline-lightbulb'></SelectorTabParecerExigencias>
 
-                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>2?true:false} selected={opiniones.tabsContador==3?true:false} label='3' index={4}  
+                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>2?true:false}  validItem={opiniones.exigencias[2].valid} selected={opiniones.tabsContador==3?true:false} label='3' index={2}  
                   onPress={()=>{ console.log('2') 
                   
                     const payload= opiniones;
@@ -83,14 +83,14 @@ export const CardParecerExigencias = ( ) => {
                     setOpiniones(payload); 
                   }} icono='ic_baseline-lightbulb'></SelectorTabParecerExigencias>
 
-                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>3?true:false} selected={opiniones.tabsContador==4?true:false} label='4' index={3}  
+                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>3?true:false}  validItem={opiniones.exigencias[3].valid} selected={opiniones.tabsContador==4?true:false} label='4' index={3}  
                   onPress={()=>{ console.log('3')  
 
                     const payload= opiniones;
                     payload.tabsContador=4;
                     setOpiniones(payload); 
                   }} icono='ic_baseline-lightbulb'></SelectorTabParecerExigencias>
-                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>4?true:false} selected={opiniones.tabsContador==5?true:false} label='5' index={4}  
+                  <SelectorTabParecerExigencias visible={opiniones.exigenciasIndex>4?true:false}  validItem={opiniones.exigencias[4].valid} selected={opiniones.tabsContador==5?true:false} label='5' index={4}  
                   onPress={()=>{ console.log('4')  
 
                     const payload= opiniones;
@@ -106,9 +106,9 @@ export const CardParecerExigencias = ( ) => {
                   {/* boton salvar*/}
                   <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',  justifyContent:'flex-start', alignContent:'center', marginBottom:20,marginTop:30}}>
                       <TouchableOpacity 
-                        disabled={ hasData ? true : false} 
+                        disabled={ !opiniones.exigenciasAllValid ? true : false} //true deshabilita
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
-                        backgroundColor:hasData ? '#BCC1CB' :  colores.primary, 
+                        backgroundColor: !opiniones.exigenciasAllValid  ? '#BCC1CB' :  colores.primary, 
                         height:48, justifyContent:'center',  }} 
                           onPress= {()=>{
                             //TODO add logic to add nova exigencia
@@ -126,7 +126,7 @@ export const CardParecerExigencias = ( ) => {
                             // setOpiniones(payload);
 
                           }}>
-                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: !hasData ? 'black' : 'white'}}>SALVAR</Text>
+                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: opiniones.exigenciasAllValid  ? 'black' : 'white'}}>SALVAR</Text>
                       </TouchableOpacity>
                   </View>
 

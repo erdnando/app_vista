@@ -14,11 +14,12 @@ interface Props{
   index:number,
   icono:string,
   selected:boolean,
+  validItem:boolean,
   onPress:()=>void
 }
 
 
-export const SelectorTabParecerExigencias = ( { visible,label,index,selected,icono,onPress}: Props ) => {
+export const SelectorTabParecerExigencias = ( { visible,label,index,selected,icono,validItem,onPress}: Props ) => {
 
   const { opiniones,setOpiniones} = useContext(GeneralContext);
 
@@ -50,11 +51,12 @@ export const SelectorTabParecerExigencias = ( { visible,label,index,selected,ico
                                             </View>
                                             </View>)
 
-      return   <TouchableOpacity style={{ borderRadius: 100,  }} 
+                    return   <TouchableOpacity style={{ borderRadius: 100,  }} 
                                 onPress={onPress}>
                             <View style={{height:40, flexDirection:'row', width:45,
-                                            backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,marginRight:0,marginLeft:6,
-                                            borderColor:'#E2E5EA',borderWidth:2,
+                                            backgroundColor: validItem ? '#83AE69':'white', 
+                                            borderRadius:7,padding:5,elevation:6,marginRight:0,marginLeft:6,
+                                            borderColor: '#E2E5EA',borderWidth:0,
                                             shadowColor: (selected ? 'orange':'grey'), shadowOpacity: 0.8,shadowOffset: {
                                                 height: 1, width: 3, }               
                                             }}>
@@ -62,7 +64,8 @@ export const SelectorTabParecerExigencias = ( { visible,label,index,selected,ico
                                         <View style={{ justifyContent:'flex-start',width:'100%',  alignItems:'center',alignContent:'flex-start',}}>
                                             <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
                                                 {/* icon */}
-                                                <View style={{ backgroundColor:('#E2E5EA'), borderWidth:0, borderRadius:50,margin:6, height:36, width:36, 
+                                                <View style={{ backgroundColor:('#E2E5EA'), 
+                                                borderWidth:0,borderColor:'#83AE69', borderRadius:50,margin:6, height:36, width:36, 
                                                 justifyContent:'center', alignContent:'center', alignItems:'center' }}>
                                                   {
                                                     label==='Salvar' ? <Text style={{fontSize:25, fontWeight:'bold'}}>+</Text> :

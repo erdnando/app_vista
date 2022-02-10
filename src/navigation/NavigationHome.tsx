@@ -336,7 +336,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                    }
 
                                     {/* logo app */}
-                                    <View style={{flex:1, left:24,top:15,...Elevations[24], }}>
+                                    <View style={{flex:1, left:24,top:15, }}>
                                           <TitleApp></TitleApp>
                                     </View>
                                   
