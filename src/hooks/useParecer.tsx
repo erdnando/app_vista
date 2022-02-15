@@ -85,7 +85,7 @@ export const useParecer =  () => {
                     setParecer(payload);
                 }
             
-                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados ok' }});
+                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados' }});
                 floading(false)
             } catch (error) {
                 console.log('error al consultar listaParecer')
@@ -127,6 +127,7 @@ export const useParecer =  () => {
                                     id:index,
                                     opinion:item.descricao,
                                     idOpinion:item.oportunidadeId.toString(),
+                                    parecerId:item.parecerId.toString(),
                                     edital:item.numeroEdital,
                                     oragao:item.nomeOrgao,
                                     fechaOpinion:item.dataCertame,
