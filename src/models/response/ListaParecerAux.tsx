@@ -4,6 +4,7 @@ export interface ListaParecerAux {
     id:number,
     opinion:string,
     idOpinion:string,
+    parecerId:string,
     edital:string,
     oragao:string,
     fechaOpinion:string,

@@ -361,6 +361,7 @@ class GeneralProvider extends React.Component{
                     id:0,
                     opinion:'No data',
                     idOpinion:'No data',
+                    parecerId:'No data',
                     edital:'No data',
                     oragao:'No data',
                     fechaOpinion:'No data',

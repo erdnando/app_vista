@@ -48,7 +48,7 @@ export const useSearch =  () => {
                     },
                    params:{ "oportunidadeId" : ids.codigoBusqueda,
                     "clienteId" : sesion.clienteId,
-                    "charter" : '2',
+                    "charter" : sesion.charter,
                     "colaboradorId" : '0',
                     }
                 }, 
@@ -191,7 +191,7 @@ export const useSearch =  () => {
                         "X-Auth-Token": sesion.token 
                     },
                    params:{ "oportunidadeId" : ids.codigoBusqueda,
-                    "charter" : 2,
+                    "charter" : sesion.charter,
                     }
                 }, 
                 );
@@ -305,7 +305,7 @@ export const useSearch =  () => {
                         "X-Auth-Token": sesion.token 
                     },
                    params:{ "oportunidadeId" : ids.codigoBusqueda,
-                    "charter" : 1,
+                    "charter" : sesion.charter,
                     }
                 }, 
                 );

@@ -121,7 +121,7 @@ export const CardParecer = ( ) => {
                           onPress= {()=>{
                             //TODO add logic to save parecer
                             console.log('saving parecer..')
-                            //saveParecer();
+                            saveParecer();
                             //clear parecer
                           }}>
                           <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isFormParecerValid() ? 'black' : 'white'}}>SALVAR</Text>

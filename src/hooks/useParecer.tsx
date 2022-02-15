@@ -58,6 +58,7 @@ export const useParecer =  () => {
                                     id:index,
                                     opinion:item.descricao,
                                     idOpinion:item.oportunidadeId.toString(),
+                                    parecerId:item.parecerId.toString(),
                                     edital:item.numeroEdital,
                                     oragao:item.nomeOrgao,
                                     fechaOpinion:item.dataCertame,
@@ -324,7 +325,7 @@ export const useParecer =  () => {
             
             var b = arrAux[index];//card q se va a eliminar
 
-            arrAux[payload.exigenciasIndex-1].visible=true;
+            //arrAux[payload.exigenciasIndex-1].visible=true;
             arrAux[index] = arrAux[payload.exigenciasIndex-1];//intercambio swap
             //arrAux[index].visible=true;
 
@@ -428,36 +429,25 @@ export const useParecer =  () => {
                 let arrExigenciasAux: Array<Exigencia> = [];
    
                 console.log('---------------------------')
-                console.log(payload.exigencias);
+                console.log(payload.parecer);
+                console.log(parecer.parecerSeleccionado);
                 console.log('---------------------------')
-
-                payload.exigencias.forEach(function(item,index){
-                    if(item.visible){
-                        arrExigenciasAux.push({
-                            "id": index+1, 
-                            "metaDias": item.qtededias, 
-                            "observacao": item.observaciones, 
-                            "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
-                            "status": "1", 
-                            "tipoDataMeta": 0, 
-                            "tipoExigenciaId": 0, 
-                            "tipoUsuarioClienteId": 0, 
-                            "titulo": item.descripcion 
-                        });
-                    }
-                  });
-                console.log('paquete enviando...')
-
-                console.log('---------------------------')
-                console.log(arrExigenciasAux);
-                console.log('---------------------------')
-
-
-                var arr=arrExigenciasAux.splice(1,arrExigenciasAux.length);
-                console.log(arr);
-          
                       
-                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',{ arr }, {
+                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',{ 
+                        "motivoParecerId": null,
+                        "justificativa": "ok",
+                        "parecer":payload.parecer.estatusGO===1 ? "GO" : "NO GO",
+                        "valores": [],
+                        "importExportInput": null,
+                        "exibeAbaValor": null,
+                        "collaboratorUser": "N",
+                        "oportunidadeExigencia": [],
+                        "colaboradorId": sesion.colaboradorId,
+                        "parecerId": parecer.parecerSeleccionado.parecerId,
+                        "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
+                        "charter": sesion.charter
+                      
+                 }, {
                                     headers:{
                                     'Content-Type': 'application/json',
                                     'Accept': 'application/json',
@@ -472,12 +462,12 @@ export const useParecer =  () => {
 
             } catch (error) {
                 console.log(error);
-
+                
                 const payloadx= flags;
                 payloadx.isLoading=false;
                 setFlags(payloadx);
                 console.log('error al guardar Parecer');
-                Toast.show({type: 'ko',props: { mensaje: error }});
+                Toast.show({type: 'ko',props: { mensaje: 'Error al guardar Parecer' }});
                 floading(false)
                 return false;
             }
@@ -506,6 +496,7 @@ export const useParecer =  () => {
             const payload = opiniones;
             let arrExigenciasAux: Array<Exigencia> = [];
             payload.exigenciasAllValid=true;
+            
             payload.exigencias.forEach(function(item,index){
                 //toma todas las exigencias abiertas o visibles
                 if(item.visible){
@@ -523,6 +514,7 @@ export const useParecer =  () => {
                     }
 
                     item.valid=true;
+                    
                     
 
                     if ( refForm.titulo === undefined) {

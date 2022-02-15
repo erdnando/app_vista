@@ -41,6 +41,7 @@ export const TabParecerExigencias = ( { visible,indexTab}: Props ) => {
                                        
                                                const payload = opiniones;
                                                payload.exigencias[indexTab].descripcion = value;
+                                               console.log(value)
                                                setOpiniones(payload);
                                                formExigenciasValid()
                                         }} 
