@@ -30,7 +30,6 @@ export const useParecer =  () => {
             floading(true)
             
             try {
-                console.log('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'?collaboratorUser=N&filialId=2' )
                 const resp = await vistaApi.get<ListaParecer[]>('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'?collaboratorUser=N&filialId=2',{
                     headers:{
                         'Content-Type': 'application/json',
@@ -51,7 +50,6 @@ export const useParecer =  () => {
 
                     let arrAux=parecer.listaParecer;//get reference
                     arrAux=[];
-                  //clienteId
 
                       resp.data.forEach(function(item,index){
                         arrAux.push({
@@ -78,8 +76,6 @@ export const useParecer =  () => {
                     setParecer(payload);
 
                 }else{
-
-
                     const payload= parecer;
                     payload.listaParecer= [];
                     setParecer(payload);
@@ -96,11 +92,10 @@ export const useParecer =  () => {
         }
 
         const getListParecerTerciario = async () =>{
-            //TODO implement terciario call
             floading(true)
+
             try {
-                console.log(sesion.token )
-                const resp = await vistaApi.get<ListaParecer[]>('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'collaboratorUser=N&filialId=2',{
+                const resp = await vistaApi.get<ListaParecer[]>('services/opportunity/findOpinionByUser/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0'),{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -113,7 +108,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op lista parecer:::::::::::::::::::::');
+                console.log('op lista parecer terciario:::::::::::::::::::::');
                 console.log(resp.data);
 
                 if(resp.data.length > 0){
@@ -121,8 +116,7 @@ export const useParecer =  () => {
                     let arrAux=parecer.listaParecer;//get reference
                     arrAux=[];
                   
-
-                      resp.data.forEach(function(item,index){
+                    resp.data.forEach(function(item,index){
                         arrAux.push({
                                     id:index,
                                     opinion:item.descricao,
@@ -131,7 +125,7 @@ export const useParecer =  () => {
                                     edital:item.numeroEdital,
                                     oragao:item.nomeOrgao,
                                     fechaOpinion:item.dataCertame,
-                                    ubicacion:item.localidade+' - '+ item.estado,
+                                    ubicacion: (item.localidade.length>13? item.localidade.substring(0,13)+'...' :item.localidade) +' - '+ item.estado,
                                     estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
                                     clienteId:sesion.clienteId,
                                     modalidade:item.descricaoModalidade,
@@ -154,8 +148,9 @@ export const useParecer =  () => {
                 Toast.show({type: 'ok',props: { mensaje: 'Datos cargados ok' }});
                 floading(false)
             } catch (error) {
-                console.log('error al consultar listaParecer')
+                console.log('error al consultar listaParecer terciario')
                 console.log(error);
+                Toast.show({type: 'ko',props: { mensaje: error}});
                 floading(false)
             }
         }

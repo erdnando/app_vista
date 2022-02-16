@@ -52,12 +52,12 @@ export const CardParecerValores = () => {
                                   
                                     </View>
                                
-                                 {opiniones.valores[item.id].colapsado && <Select placeholder='Producto / Servicio' campo={item.productoServicio} width='88%' items={items}
+                                    {opiniones.valores[item.id].colapsado && <Select placeholder='Producto / Servicio' campo={item.productoServicio} width='88%' items={items}
                                       onValueChange={function (value: any, index: number): void {
                                         const payload= opiniones;
                                         payload.valores[item.id].productoServicio =value;
                                         setOpiniones(payload)
-                                      }} />}
+                                    }} />}
 
                                 
                                      {/* marginBottom:Platform.OS==='ios'? 20: 70 */}

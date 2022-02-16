@@ -50,17 +50,7 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
           <TouchableOpacity style={{ right:35, top:20}} onPress={() =>{ 
                
                 console.log('searching...1')
-              
-                // setTimeout(
-                //   () => { 
-                   
-                  
-                //   },
-                //   3000
-                // )   
-
-                usuario.tipo==TipoUsuario.COLABORADOR?
-                getListParecerColaborador():getListParecerTerciario()
+                usuario.tipo==TipoUsuario.COLABORADOR?getListParecerColaborador():getListParecerTerciario()
             }}>
               
              <Text style={{right:10,}}>

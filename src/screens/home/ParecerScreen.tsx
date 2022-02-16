@@ -21,10 +21,8 @@ export const ParecerScreen = () => {
 
 
     useEffect(() => {
-             usuario.tipo==TipoUsuario.COLABORADOR?
-            getListParecerColaborador():getListParecerTerciario()
-           
-          }, [])
+       usuario.tipo==TipoUsuario.COLABORADOR?getListParecerColaborador():getListParecerTerciario()
+    }, [])
 
   
     //notificaciones generales

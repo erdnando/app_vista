@@ -5,14 +5,16 @@ import { GeneralContext } from '../../state/GeneralProvider';
 import { CardParecer } from './CardParecer';
 import { CardParecerRealizados } from './CardParecerRealizados';
 import { CardParecerExigencias } from './CardParecerExigencias';
+import {CardParecerExigenciasTerciario} from './CardParecerExigenciasTerciario';
 import { CardParecerValores } from './CardParecerValores';
 import { Loading } from '../Loading';
+import { TipoUsuario } from '../../models/Usuario';
 
 
 
 export const DetalleContentOpinion = ( ) => {
 
-  const { ids,flags } = useContext(GeneralContext);
+  const { ids,flags,usuario } = useContext(GeneralContext);
                      
   if(flags.isLoadingParecer){
     return <Loading  color='orange'></Loading>
@@ -20,7 +22,7 @@ export const DetalleContentOpinion = ( ) => {
 
   switch (ids.idMenuOpinionSelected) {
     case 1:
-      return  <CardParecerExigencias></CardParecerExigencias>   
+      return   usuario.tipo==TipoUsuario.COLABORADOR ? <CardParecerExigencias/>  : <CardParecerExigenciasTerciario/>
     case 2:
       return  <CardParecer></CardParecer>    
     case 3:

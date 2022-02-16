@@ -7,11 +7,12 @@ import { TextOportunidadIcono } from '../oportunidad/TextOportunidadIcono';
 interface Props{
   label1:string,
   label2:string,
+  width?:string,
   onPress1:()=>void;
   onPress2:()=>void;
 }
 
-export const RoundedSelectors =  ( { label1, label2,onPress1, onPress2 }: Props ) => {
+export const RoundedSelectors =  ( { label1, label2,width='100%',onPress1, onPress2 }: Props ) => {
 
 const { opiniones,setOpiniones } = useContext( GeneralContext )
 
@@ -50,7 +51,7 @@ if(opiniones.parecer.estatusGO===2){
 }
 
 
-    return    <View style={{backgroundColor:'transparent',width:'100%', paddingBottom:16, paddingTop:28}}>
+    return    <View style={{backgroundColor:'transparent',width:width, paddingBottom:16, paddingTop:28}}>
                       <View style={{ flex:1,flexDirection:'row', alignItems:'center',  justifyContent:'center', alignContent:'center', }}>
                       
                         <TouchableOpacity  
