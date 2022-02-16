@@ -139,7 +139,7 @@ export const CardParecerExigenciasTerciario = ( ) => {
  
  
                </View>
-             //  <TouchableOpacity style={{ borderRadius: 100,  }}    onPress={()=>{ }}></TouchableOpacity>
+            
      )
  }
  

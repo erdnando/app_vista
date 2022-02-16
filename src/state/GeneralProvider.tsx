@@ -187,6 +187,17 @@ class GeneralProvider extends React.Component{
                 }
 
             ],
+            exigenciasTerciario:[{
+                producto:'',
+                valorInicial:'',
+                valorFinal:'',
+                lote:'',
+                item:'',
+                quota:'',
+                motivo:'',
+                justificacion:'',
+                goNoGo:0,
+            }],
             valores:[{
                 id:0,
                 go: false,
