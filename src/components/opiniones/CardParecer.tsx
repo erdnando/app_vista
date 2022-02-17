@@ -18,7 +18,7 @@ export const CardParecer = ( ) => {
 
   const { opiniones,setOpiniones,parecer,usuario} = useContext(GeneralContext);
   const { checkPermission} = useDownloadFile()
-  const { isFormParecerValid,saveParecer } = useParecer()
+  const { isFormParecerValid,saveParecer,cargaComboMotivo } = useParecer()
   //const [hasData] = useState(false)
 
   const items=[   { label: "JavaScript", value: "JavaScript" },
@@ -87,7 +87,7 @@ export const CardParecer = ( ) => {
                           <Spacer height={15}></Spacer>
 
                           {usuario.tipo===TipoUsuario.USER_TERCEIRO && 
-                          <Select placeholder='Motivo' campo={opiniones.parecer.motivo} items={items}
+                          <Select placeholder='Motivo' campo={opiniones.parecer.motivo} items={opiniones.catMotivo}
                             onValueChange={function (value: any, index: number): void {
 
                                   const payload = opiniones;

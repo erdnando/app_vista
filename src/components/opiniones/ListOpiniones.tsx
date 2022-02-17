@@ -11,7 +11,7 @@ export const ListOpiniones = () => {
 
   //invoke global state
   const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected, parecer,setParecer} = useContext( GeneralContext )
-  const { cargaComoboTipo,cargaComoboDescripcion,cargaComoboTipoUsuario } = useParecer();
+  const { cargaComoboTipo,cargaComoboDescripcion,cargaComoboTipoUsuario,cargaExigenciasTerciario,cargaComboMotivo } = useParecer();
  
 
 
@@ -35,7 +35,10 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
 
                                   cargaComoboTipo();
                                   cargaComoboDescripcion();
+                                  cargaComboMotivo();
+
                                   cargaComoboTipoUsuario();
+                                  cargaExigenciasTerciario();
                                   
 
                                 }}>

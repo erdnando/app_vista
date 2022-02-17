@@ -5,9 +5,12 @@ import { ListaParecer } from '../models/response/ListaParecer';
 import { TipoExigencia } from '../models/response/TipoExigencia';
 import Toast from 'react-native-toast-message';
 import { ComboDescripcion } from '../models/response/ComboDescripcion';
-import { TipoUsuario } from '../models/TipoUsuario';
+import { TipoUsuario } from '../models/Usuario';
 import { Exigencia } from '../models/Exigencia';
 import { TabRouter } from '@react-navigation/native';
+import { ExigenciasOportunityTerciario } from '../models/response/ExigenciasOportunityTerciario';
+import { TipoUsuarioResponse } from '../models/TipoUsuarioResponse';
+import { ComboMotivo } from '../models/ComboMotivo';
 
 export const useParecer =  () => {
 
@@ -92,6 +95,9 @@ export const useParecer =  () => {
         }
 
         const getListParecerTerciario = async () =>{
+
+            if(usuario.tipo!=TipoUsuario.USER_TERCEIRO)return;
+
             floading(true)
 
             try {
@@ -253,11 +259,60 @@ export const useParecer =  () => {
             }
         }
 
+        const cargaComboMotivo = async () =>{
+            floading(true)
+            try {
+                console.log(sesion.token )
+                const resp = await vistaApi.get<ComboMotivo[]>('services/purportMotive/listByClienteId/'+sesion.clienteId,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token
+                    },
+                }, 
+                );
+
+                console.log('op combo motivo:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length > 0){
+
+                    let arrAux=opiniones.catMotivo;//get reference
+                    arrAux=[];
+                  
+                      resp.data.forEach(function(item,index){
+                        arrAux.push({
+                                   value:item.id.toString(),
+                                   label:item.descricao
+                               });
+                       });
+
+
+                    console.log("asignando datos");
+                    const payload = opiniones;
+                    payload.catMotivo = arrAux;
+                    setOpiniones(payload);
+
+                }else{
+                    const payload = opiniones;
+                    payload.catMotivo = [];
+                    setOpiniones(payload);
+                }
+           
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar combo motivo')
+                console.log(error);
+                floading(false)
+            }
+        }
+
         const cargaComoboTipoUsuario = async () =>{
             floading(true)
             try {
                 console.log(sesion.token )
-                const resp = await vistaApi.get<TipoUsuario[]>('services/clientUserType/listActiveByClient/'+sesion.clienteId+'?charter='+sesion.charter,{
+                const resp = await vistaApi.get<TipoUsuarioResponse[]>('services/clientUserType/listActiveByClient/'+sesion.clienteId+'?charter='+sesion.charter,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -473,15 +528,15 @@ export const useParecer =  () => {
            
           //TODO add validation to combo opinion
            if (opiniones.parecer.justificacion.trim() ==='') {
-                console.log('saliendo por justificativa')   
+               // console.log('saliendo por justificativa')   
                 return false;
             }
            if (opiniones.parecer.estatusGO == 0) {
-            console.log('saliendo por estatusGO 0')   
+           // console.log('saliendo por estatusGO 0')   
               return false;
             }
 
-            console.log('formulario valido')   
+           // console.log('formulario valido')   
            return true;
            
         }
@@ -587,13 +642,109 @@ export const useParecer =  () => {
              
           }
 
+        const cargaExigenciasTerciario= async()=>{
+
+           if(usuario.tipo!=TipoUsuario.USER_TERCEIRO)return;
+            
+            floading(true)
+            try {
+                console.log(sesion.token )
+                //TEST parecer.parecerSeleccionado.idOpinion  -->2691
+                const resp = await vistaApi.get<ExigenciasOportunityTerciario[]>('services/exigencias/list/opportunity/2691/typeUserCli/'+sesion.tipoClientId,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token
+                    },
+                }, 
+                );
+
+                console.log('op exigencias terciario:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length > 0){
+
+                    let arrAux=opiniones.exigenciasTerciario;//get reference
+                    arrAux=[];
+                  
+                      resp.data.forEach(function(item,index){
+                        arrAux.push({
+                            id:index,
+                            exigencia:item.titulo,
+                            observacion:item.observacao,
+                            tipo:item.tipoUsuarioCliente.descricao,
+                            dias:item.metaDias,
+                            goNoGo:item.status==='P' ? 1 : 0,
+                        });
+                       });
+
+
+
+                    //TEST
+                        arrAux.push({
+                            id:1,
+                            exigencia:'item.titulo',
+                            observacion:'item.observacao',
+                            tipo:'item.tipoUsuarioCliente.descricao',
+                            dias:'item.metaDias',
+                            goNoGo: 0 ,
+                        });
+                  
+
+                        arrAux.push({
+                            id:2,
+                            exigencia:'item.titulo',
+                            observacion:'item.observacao',
+                            tipo:'item.tipoUsuarioCliente.descricao',
+                            dias:'item.metaDias',
+                            goNoGo: 0 ,
+                        });
+
+
+                    console.log("asignando datos");
+                    const payload = opiniones;
+                    payload.exigenciasTerciario = arrAux;
+                    setOpiniones(payload);
+
+                }else{
+                    const payload = opiniones;
+                    payload.exigenciasTerciario = [];
+                    setOpiniones(payload);
+                }
+           
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar exigencias terciario')
+                console.log(error);
+                floading(false)
+            }
+        }
+
+        const isFormExigenciasTerciarioValid=()=>{
+
+ 
+                    let bFlag=true;
+                    opiniones.exigenciasTerciario.forEach(function(item,index){
+                        if(item.goNoGo===0){
+                            bFlag=false;
+                        }
+                        
+                       });
+            return bFlag;
+        }
+
+        const saveExigenciaTerciario = async()=>{
+
+        }
 
 
         //exposed objets 
         return {
             getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado,
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
-            saveParecer
+            saveParecer,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
+            cargaComboMotivo
         }
 }
         

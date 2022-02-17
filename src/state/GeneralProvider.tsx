@@ -111,6 +111,7 @@ class GeneralProvider extends React.Component{
         sesion:{
             usuario:{
                 tipo: TipoUsuario.NONE,
+                tipoClientId:0,
                 email:'',
                 password:'',
                 whatsapp:'(34) 99830-0082',
@@ -188,14 +189,11 @@ class GeneralProvider extends React.Component{
 
             ],
             exigenciasTerciario:[{
-                producto:'',
-                valorInicial:'',
-                valorFinal:'',
-                lote:'',
-                item:'',
-                quota:'',
-                motivo:'',
-                justificacion:'',
+                id:0,
+                exigencia:'',
+                observacion:'',
+                tipo:'',
+                dias:'',
                 goNoGo:0,
             }],
             valores:[{
@@ -243,6 +241,7 @@ class GeneralProvider extends React.Component{
             catTipoExigencia:[],
             catTipoDescripcion:[],
             catTipoUsuario:[],
+            catMotivo:[],
         },
         agendafiltro:{
             filtroHorario: 'Seleccione una horario',
