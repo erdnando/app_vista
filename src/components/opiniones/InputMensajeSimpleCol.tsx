@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { KeyboardType, KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 import { colores } from '../../theme/appTheme';
 import { GeneralContext } from '../../state/GeneralProvider';
+import { LabelTexto } from './LabelTexto';
 
 
 interface Props{
@@ -13,11 +14,14 @@ interface Props{
   onChangeMensaje: (msg:string) =>void;
 }
 
-export const InputMensajeSimple = ( { placeholder,campo,width='90%',maxLength=8,keyboardType='default' ,onChangeMensaje}: Props ) => {
+export const InputMensajeSimpleCol = ( { placeholder,campo,width='90%',maxLength=8,keyboardType='default' ,onChangeMensaje}: Props ) => {
 
   let colorIcono = colores.primary;
   
     return (<View style={{flex:1,width:'100%',}}>
+              <View style={{marginLeft:15}}>
+                 <LabelTexto  fontSize={12} color='#838892' label='' value={placeholder}></LabelTexto>
+              </View>
               <TextInput
                   style={{
                       textAlign:'justify',
@@ -25,11 +29,11 @@ export const InputMensajeSimple = ( { placeholder,campo,width='90%',maxLength=8,
                       fontSize:14,
                       maxHeight:50,
                       width:width,
-                      paddingLeft:12,
+                      paddingLeft:14,
                       left:0,
-                      margin: 8,
+                      margin: 2,
                       borderWidth: 1,
-                      paddingBottom:10,
+                      paddingBottom:5,
                       borderLeftWidth:0,
                       borderRightWidth:0,
                       borderTopWidth:0,

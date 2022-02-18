@@ -242,6 +242,7 @@ class GeneralProvider extends React.Component{
             catTipoDescripcion:[],
             catTipoUsuario:[],
             catMotivo:[],
+            catFamilia:[],
         },
         agendafiltro:{
             filtroHorario: 'Seleccione una horario',
@@ -385,6 +386,13 @@ class GeneralProvider extends React.Component{
                     plataforma:''
                }
             ],
+            listaParecerRealizado:[{
+                id:0,
+                usuario:'',
+                parecer:'',
+                motivo:'',
+                justificativa:''
+            }],
             parecerSeleccionado:{}
         },
         notificaciones:[

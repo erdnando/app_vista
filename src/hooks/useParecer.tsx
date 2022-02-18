@@ -11,6 +11,8 @@ import { TabRouter } from '@react-navigation/native';
 import { ExigenciasOportunityTerciario } from '../models/response/ExigenciasOportunityTerciario';
 import { TipoUsuarioResponse } from '../models/TipoUsuarioResponse';
 import { ComboMotivo } from '../models/ComboMotivo';
+import { ParecerRealizado } from '../models/ParecerRealizado';
+import { ComboFamilia } from '../models/ComboFamilia';
 
 export const useParecer =  () => {
 
@@ -161,6 +163,65 @@ export const useParecer =  () => {
             }
         }
 
+        const getListParecerRealizadoTerciario = async () =>{
+
+            if(usuario.tipo!=TipoUsuario.USER_TERCEIRO)return;
+
+            floading(true)
+
+            try {
+
+                //TEST
+                //'+ parecer.parecerSeleccionado.parecerId+'
+                const resp = await vistaApi.get<ParecerRealizado[]>('services/opportunity/listOtherUserOpinions/5156/0',{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token
+                    },
+                }, 
+                );
+
+                console.log('op lista parecer realizado terciario:::::::::::::::::::::');
+                console.log(resp.data);
+
+                if(resp.data.length > 0){
+
+                    let arrAux=parecer.listaParecerRealizado;//get reference
+                    arrAux=[];
+                  
+                    resp.data.forEach(function(item,index){
+                        arrAux.push({
+                            id:index,
+                            usuario:item.nomeColaborador,
+                            parecer:item.parecer,
+                            motivo:'',
+                            justificativa:item.justificativa
+                        });
+
+                       });
+
+
+                    console.log("asignando datos");
+                    const payload= parecer;
+                    payload.listaParecerRealizado= arrAux;
+                    setParecer(payload);
+
+                }else{
+                    const payload= parecer;
+                    payload.listaParecerRealizado= [];
+                    setParecer(payload);
+                }
+                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados ok' }});
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar listaParecer realizado terciario')
+                console.log(error);
+                Toast.show({type: 'ko',props: { mensaje: error}});
+                floading(false)
+            }
+        }
+
         const cargaComoboTipo = async () =>{
             floading(true)
             try {
@@ -303,6 +364,55 @@ export const useParecer =  () => {
                 floading(false)
             } catch (error) {
                 console.log('error al consultar combo motivo')
+                console.log(error);
+                floading(false)
+            }
+        }
+
+        const cargaComboFamilia = async () =>{
+            floading(true)
+            try {
+                console.log(sesion.token )
+                const resp = await vistaApi.get<ComboFamilia[]>('services/productService/family/'+sesion.clienteId+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token
+                    },
+                }, 
+                );
+
+                console.log('op combo familia:::::::::::::::::::::x');
+                console.log(resp.data);
+
+               
+                if(resp.data.length > 0){
+
+                    let arrAux=opiniones.catFamilia;//get reference
+                    arrAux=[];
+                  
+                      resp.data.forEach(function(item,index){
+                        arrAux.push({
+                                   value:item.id.toString(),
+                                   label:item.descricao
+                               });
+                       });
+
+
+                    console.log("asignando datos");
+                    const payload = opiniones;
+                    payload.catFamilia = arrAux;
+                    setOpiniones(payload);
+
+                }else{
+                    const payload = opiniones;
+                    payload.catFamilia = [];
+                    setOpiniones(payload);
+                }
+           
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar combo familia')
                 console.log(error);
                 floading(false)
             }
@@ -738,13 +848,17 @@ export const useParecer =  () => {
 
         }
 
+        const isFormValoresValid = async()=>{
+          return true;
+        }
+
 
         //exposed objets 
         return {
             getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado,
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
             saveParecer,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
-            cargaComboMotivo
+            cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia
         }
 }
         

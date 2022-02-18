@@ -16,6 +16,7 @@ export interface Opiniones{
     catTipoDescripcion:ComboLista[],
     catTipoUsuario:ComboLista[],
     catMotivo:ComboLista[],
+    catFamilia:ComboLista[],
     exigenciasIndex:number,
     tabsContador:number,
     exigenciasAllValid:boolean

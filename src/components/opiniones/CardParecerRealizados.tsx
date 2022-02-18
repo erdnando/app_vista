@@ -5,11 +5,14 @@ import { gstyles } from '../../theme/appTheme';
 import { TextOportunidadIcono } from '../oportunidad/TextOportunidadIcono';
 import { Spacer } from '../Spacer';
 import { LabelTexto } from './LabelTexto';
+import { useParecer } from '../../hooks/useParecer';
+import { ParecerRealizadoAux } from '../../models/ParecerRealizadoAux';
 
 export const CardParecerRealizados = () => {
 
   //invoke global state
-  const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected } = useContext( GeneralContext )
+  const { parecer,ids,setIds,setTabSelected,setTabSelectedOld,tabSelected } = useContext( GeneralContext )
+  const {} = useParecer()
 
   interface Opiniones{
     id:number,
@@ -125,7 +128,7 @@ const Data:Opiniones[] = [
   },
 ]
 
-const renderUpdateItem = (item:Opiniones) =>{
+const renderUpdateItem = (item:ParecerRealizadoAux) =>{
 
     {/* tarjeta */}
     return (  <TouchableOpacity style={{ borderRadius: 100,  }} 
@@ -142,19 +145,19 @@ const renderUpdateItem = (item:Opiniones) =>{
                                   <View style={{ flexDirection:'column', margin:16, justifyContent:'flex-start',  alignItems:'flex-start'}}>
 
                                      {/* usuario */}
-                                     <TextOportunidadIcono icono='gridicons_user' colorIcono='#838892' label='Usuario' colorValor='#838892' valor='Lorem ispum dolor'  size={15} ></TextOportunidadIcono>
+                                     <TextOportunidadIcono icono='gridicons_user' colorIcono='#838892' label='Usuario' colorValor='#838892' valor={item.usuario}  size={15} ></TextOportunidadIcono>
                                       {/* line */}
                                       <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
                                        {/* usuario */}
-                                     <TextOportunidadIcono icono='icomoon-free_hammer2' colorIcono='#838892' label='Parecer' colorValor='#838892' valor='Lorem ispum dolor'  size={15} ></TextOportunidadIcono>
+                                     <TextOportunidadIcono icono='icomoon-free_hammer2' colorIcono='#838892' label='Parecer' colorValor='#838892' valor={item.parecer}  size={15} ></TextOportunidadIcono>
                                       {/* line */}
                                       <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
                                        {/* usuario */}
-                                     <TextOportunidadIcono icono='ic_round-pin' colorIcono='#838892' label='Motivo' colorValor='#838892' valor='Lorem ispum dolor'  size={15} ></TextOportunidadIcono>
+                                     <TextOportunidadIcono icono='ic_round-pin' colorIcono='#838892' label='Motivo' colorValor='#838892' valor={item.motivo}  size={15} ></TextOportunidadIcono>
                                       {/* line */}
                                       <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
                                        {/* usuario */}
-                                       <LabelTexto  fontSize={14} color='#454A53' label='Justificativa:' value=' Lorem ispum dolor sit amet consectetur adipiscing elit. Nulla vehicula vetibulum laoreet. Vestibulum vitae.'></LabelTexto>
+                                       <LabelTexto  fontSize={14} color='#454A53' label='Justificativa:' value={item.justificativa}></LabelTexto>
                                       
                                     
                                   </View>
@@ -175,10 +178,10 @@ return (
          <Spacer height={10}></Spacer>
          <View style={{flex:1,width:'100%',justifyContent:'center',}}>
     
-            <FlatList data={Data} 
+            <FlatList data={parecer.listaParecerRealizado} 
                 scrollEnabled={true}
                 renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
-                keyExtractor={(item) => item.id+item.idOpinion} 
+                keyExtractor={(item) => item.id+item.usuario} 
                 ItemSeparatorComponent={ () => renderSeparator()}
             />
         </View>
