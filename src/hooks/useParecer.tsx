@@ -14,6 +14,7 @@ import { ComboMotivo } from '../models/ComboMotivo';
 import { ParecerRealizado } from '../models/ParecerRealizado';
 import { ComboFamilia } from '../models/ComboFamilia';
 import { OpinionesValores } from '../models/OpinionesValores';
+import { ValoresResponse } from '../models/response/ValoresResponse';
 
 export const useParecer =  () => {
 
@@ -832,6 +833,72 @@ export const useParecer =  () => {
             }
         }
 
+        const cargaValores = async()=>{
+
+            if(usuario.tipo!=TipoUsuario.USER_TERCEIRO)return;
+             
+             floading(true)
+             try {
+                 console.log(sesion.token )
+                 //TEST parecer.parecerSeleccionado.idOpinion  -->2691
+                 const resp = await vistaApi.get<ValoresResponse[]>('services/oportunityProductService/list/2691/'+sesion.contratoId,{
+                     headers:{
+                         'Content-Type': 'application/json',
+                         'Accept': 'application/json',
+                         "X-Auth-Token": sesion.token
+                     },
+                 }, 
+                 );
+ 
+                 console.log('op valores list:::::::::::::::::::::');
+                 console.log(resp.data);
+ 
+                
+                 if(resp.data.length > 0){
+ 
+                     let arrAux=opiniones.valores;//get reference
+                     arrAux=[];
+                   
+                       resp.data.forEach(function(item,index){
+                         arrAux.push({
+                            id:index,
+                            go: false,
+                            motivo:item.motivoParecer===null ? '' : item.motivoParecer.toString(),
+                            lote:item.lote.toString(),
+                            item:item.item.toString(),
+                            qtde:item.quantidade.toString(),
+                            familia:item.familia.id.toString(),
+                            productoServicio:item.produtoServico.descricao,
+                            valorinicial:item.valorInicial.toString(),
+                            valorFinal:item.valorFinal===null ? '0' : item.valorFinal.toString(),
+                            justificativa:'',
+                            colapsado:true,
+                         });
+                        });
+ 
+ 
+ 
+ 
+ 
+                     console.log("asignando datos");
+                     const payload = opiniones;
+                     payload.valores = arrAux;
+                     setOpiniones(payload);
+ 
+                 }else{
+                     const payload = opiniones;
+                     payload.valores = [];
+                     setOpiniones(payload);
+                 }
+            
+                 floading(false)
+             } catch (error) {
+                 console.log('error al consultar valores list terciario')
+                 console.log(error);
+                 floading(false)
+             }
+         }
+
         const isFormExigenciasTerciarioValid=()=>{
             
                     let bFlag=true;
@@ -889,7 +956,7 @@ export const useParecer =  () => {
             getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado,
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
             saveParecer,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
-            cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia
+            cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores
         }
 }
         
