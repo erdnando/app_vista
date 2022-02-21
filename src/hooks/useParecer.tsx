@@ -13,6 +13,7 @@ import { TipoUsuarioResponse } from '../models/TipoUsuarioResponse';
 import { ComboMotivo } from '../models/ComboMotivo';
 import { ParecerRealizado } from '../models/ParecerRealizado';
 import { ComboFamilia } from '../models/ComboFamilia';
+import { OpinionesValores } from '../models/OpinionesValores';
 
 export const useParecer =  () => {
 
@@ -91,7 +92,7 @@ export const useParecer =  () => {
             } catch (error) {
                 console.log('error al consultar listaParecer')
                 console.log(error);
-                Toast.show({type: 'ko',props: { mensaje: error}});
+                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/findOpinionByCollaborator]'}});
                 floading(false)
             }
         }
@@ -158,7 +159,7 @@ export const useParecer =  () => {
             } catch (error) {
                 console.log('error al consultar listaParecer terciario')
                 console.log(error);
-                Toast.show({type: 'ko',props: { mensaje: error}});
+                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/findOpinionByUser]'}});
                 floading(false)
             }
         }
@@ -217,7 +218,7 @@ export const useParecer =  () => {
             } catch (error) {
                 console.log('error al consultar listaParecer realizado terciario')
                 console.log(error);
-                Toast.show({type: 'ko',props: { mensaje: error}});
+                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/listOtherUserOpinions]'}});
                 floading(false)
             }
         }
@@ -576,7 +577,7 @@ export const useParecer =  () => {
                 payloadx.isLoading=false;
                 setFlags(payloadx);
                 console.log('error al guardar exigencias');
-                Toast.show({type: 'ko',props: { mensaje: error }});
+                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/saveExigency]' }});
                 floading(false)
                 return false;
             }
@@ -832,8 +833,7 @@ export const useParecer =  () => {
         }
 
         const isFormExigenciasTerciarioValid=()=>{
-
- 
+            
                     let bFlag=true;
                     opiniones.exigenciasTerciario.forEach(function(item,index){
                         if(item.goNoGo===0){
@@ -848,8 +848,39 @@ export const useParecer =  () => {
 
         }
 
-        const isFormValoresValid = async()=>{
-          return true;
+        const isFormValoresValid = ()=>{
+            console.log('validando form valores...')
+
+            let bFlag=true;
+            opiniones.valores.forEach(function(item:OpinionesValores,index){
+
+                if(item.motivo === null) bFlag = false;
+                if(item.lote === null) bFlag = false;
+                if(item.item === null) bFlag = false;
+                if(item.familia === null) bFlag = false;
+                if(item.productoServicio === null) bFlag = false;
+                if(item.valorinicial === null) bFlag = false;
+                if(item.valorFinal === null) bFlag = false;
+                if(item.justificativa === null) bFlag = false;
+                if(item.go === null) bFlag = false;
+
+                if(item.motivo.trim() ==='') bFlag = false;
+                if(item.lote.trim() ==='') bFlag = false;
+                if(item.item.trim() ==='') bFlag = false;
+                if(item.familia.trim() ==='') bFlag = false;
+                if(item.productoServicio.trim() ==='') bFlag = false;
+                if(item.valorinicial.trim() ==='') bFlag = false;
+                if(item.valorFinal.trim() ==='') bFlag = false;
+                if(item.justificativa.trim() ==='') bFlag = false;
+
+            });
+
+           
+           
+            const payload= opiniones;
+            opiniones.valoresAllValid=bFlag;
+            setOpiniones(opiniones);
+
         }
 
 

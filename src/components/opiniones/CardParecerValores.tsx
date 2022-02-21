@@ -18,15 +18,22 @@ export const CardParecerValores = () => {
   const { opiniones,setOpiniones } = useContext( GeneralContext )
   const { isFormValoresValid } = useParecer()
 
-  const items=[   { label: "JavaScript", value: "JavaScript" },
-  { label: "TypeStript", value: "TypeStript" },
-  { label: "Python", value: "Python" },
-  { label: "Java", value: "Java" },
-  { label: "C++", value: "C++" },
-  { label: "C", value: "C" },
-  ];
+  // const items=[   { label: "JavaScript", value: "JavaScript" },
+  // { label: "TypeStript", value: "TypeStript" },
+  // { label: "Python", value: "Python" },
+  // { label: "Java", value: "Java" },
+  // { label: "C++", value: "C++" },
+  // { label: "C", value: "C" },
+  // ];
+
+  useEffect(() => {
+    isFormValoresValid();
+  }, [])
+  
 
   const renderUpdateItem = (item:OpinionesValores) =>{
+
+
 
     {/* tarjeta */}
     return (  <View style={{height:item.colapsado?160:390, width:'100%',justifyContent:'center',
@@ -62,6 +69,7 @@ export const CardParecerValores = () => {
                                                       const payload= opiniones;
                                                       payload.valores[item.id].productoServicio = msg;
                                                       setOpiniones(payload)
+                                                      isFormValoresValid()
                                                     }}></InputMensajeSimpleCol>
                                                 </View>
                                             </View>
@@ -81,6 +89,8 @@ export const CardParecerValores = () => {
                                                 const payload= opiniones;
                                                 payload.valores[item.id].motivo =msg;
                                                 setOpiniones(payload)
+
+                                                isFormValoresValid()
                                               }}></InputMensajeSimple>
                                             </View>
                                            
@@ -93,6 +103,7 @@ export const CardParecerValores = () => {
                                                     const payload= opiniones;
                                                     payload.valores[item.id].lote = msg;
                                                     setOpiniones(payload)
+                                                    isFormValoresValid()
                                                   }}></InputMensajeSimpleCol>
                                               
 
@@ -101,6 +112,7 @@ export const CardParecerValores = () => {
                                                   const payload= opiniones;
                                                   payload.valores[item.id].item = msg;
                                                   setOpiniones(payload)
+                                                  isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
 
                                                 <InputMensajeSimpleCol placeholder='Qtde' width='88%' campo={item.qtde}
@@ -108,6 +120,7 @@ export const CardParecerValores = () => {
                                                   const payload= opiniones;
                                                   payload.valores[item.id].qtde = msg;
                                                   setOpiniones(payload)
+                                                  isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
 
                                             </View>
@@ -116,11 +129,12 @@ export const CardParecerValores = () => {
 
                                             {/* familia */}
                                             <View style={{flex:0,width:'90%',height:40,left:4,top:-20}}>
-                                              <Select placeholder='Familia' campo={item.familia} width='96%' items={items}
+                                              <Select placeholder='Familia' campo={item.familia} width='96%' items={opiniones.catFamilia}
                                                 onValueChange={function (value: any, index: number): void {
                                                   const payload= opiniones;
                                                   payload.valores[item.id].familia =value;
                                                   setOpiniones(payload)
+                                                  isFormValoresValid()
                                                 }} />
                                               </View>
 
@@ -132,6 +146,7 @@ export const CardParecerValores = () => {
                                                   const payload= opiniones;
                                                   payload.valores[item.id].productoServicio =msg;
                                                   setOpiniones(payload)
+                                                  isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
                                             </View>
                                             
@@ -146,6 +161,7 @@ export const CardParecerValores = () => {
                                                   const payload= opiniones;
                                                   payload.valores[item.id].valorinicial =msg;
                                                   setOpiniones(payload)
+                                                  isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
 
                                                 <InputMensajeSimpleCol placeholder='Valor final' width='92%' campo={item.valorFinal}
@@ -153,6 +169,7 @@ export const CardParecerValores = () => {
                                                   const payload= opiniones;
                                                   payload.valores[item.id].valorFinal =msg;
                                                   setOpiniones(payload)
+                                                  isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
                                             </View>
                                             <Spacer height={2}></Spacer>
@@ -164,6 +181,7 @@ export const CardParecerValores = () => {
                                                   const payload= opiniones;
                                                   payload.valores[item.id].justificativa =msg;
                                                   setOpiniones(payload)
+                                                  isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
                                             </View>
 
@@ -221,9 +239,9 @@ return (
              <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',
                                 justifyContent:'flex-start', alignContent:'center', bottom:-5}}>
                       <TouchableOpacity 
-                        disabled={ !isFormValoresValid() ? true : false} 
+                        disabled={ opiniones.valoresAllValid ? false : true} 
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
-                        backgroundColor: !isFormValoresValid() ? '#BCC1CB' :  colores.primary, 
+                        backgroundColor: !opiniones.valoresAllValid ? '#BCC1CB' :  colores.primary, 
                         height:48, justifyContent:'center',  }} 
                           onPress= {()=>{
                             //TODO add logic to save parecer
@@ -231,7 +249,7 @@ return (
                             isFormValoresValid();
                             //clear parecer
                           }}>
-                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isFormValoresValid() ? 'black' : 'white'}}>SALVAR</Text>
+                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: opiniones.valoresAllValid ? 'black' : 'white'}}>SALVAR</Text>
                       </TouchableOpacity>
                   </View>
         </View>

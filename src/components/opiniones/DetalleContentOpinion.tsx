@@ -20,20 +20,43 @@ export const DetalleContentOpinion = ( ) => {
     return <Loading  color='orange'></Loading>
 }
 
-  switch (ids.idMenuOpinionSelected) {
-    case 1:
-      return   usuario.tipo==TipoUsuario.COLABORADOR ? <CardParecerExigencias/>  : <CardParecerExigenciasTerciario/>
-    case 2:
-      return  <CardParecer></CardParecer>    
-    case 3:
-      return  <CardParecerRealizados></CardParecerRealizados>    
-    case 4:
-      return  <CardParecerValores></CardParecerValores>
-    default:
-      return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
-                 <Text>Opcion no valida</Text>
-              </View> 
-  }
+if(usuario.tipo===TipoUsuario.COLABORADOR){
+        switch (ids.idMenuOpinionSelected) {
+          case 1:
+            return   <CardParecerExigencias/>
+          case 2:
+            return  <CardParecer></CardParecer>    
+          case 3:
+            return  <CardParecerRealizados></CardParecerRealizados>    
+          case 4:
+            return  <CardParecerValores></CardParecerValores>
+          default:
+            return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
+                      <Text>Opcion no valida</Text>
+                    </View> 
+        }
+
+}else{
+        switch (ids.idMenuOpinionSelected) {
+          case 1:
+            return  <CardParecerRealizados></CardParecerRealizados>  
+          case 2:
+            return  <CardParecerExigencias/>
+          case 3:
+            return  <CardParecerExigenciasTerciario/>   
+          case 4:
+            return  <CardParecerValores></CardParecerValores>
+          default:
+            return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
+                      <Text>Opcion no valida</Text>
+                    </View> 
+
+                    //<CardParecerExigenciasTerciario/>
+                    //<CardParecer></CardParecer>    
+        }
+
+}
+ 
      
 
              

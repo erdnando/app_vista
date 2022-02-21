@@ -6,6 +6,7 @@ import vistaApi from '../api/vista';
 import { AuthLogin } from '../models/response/AuthLogin';
 import Toast from 'react-native-toast-message';
 import { useNotificaciones } from './useNotificaciones';
+import { ErrorResponse } from '../models/ErrorResponse';
 
 
 export const useLogin =  () => {
@@ -67,6 +68,7 @@ export const useLogin =  () => {
             try {
 
                 floading(true)
+                console.log('login..')
                 const resp = await vistaApi.post<AuthLogin>('/auth/login',{}, {
                                     headers:{
                                     'Content-Type': 'application/json',
@@ -74,7 +76,7 @@ export const useLogin =  () => {
                                 },auth:{
                                     username : usuario.email.trim().toLowerCase(),
                                     password : usuario.password.trim()
-                                }
+                                },
                 });
 
                 console.log(resp);
@@ -83,7 +85,6 @@ export const useLogin =  () => {
                     () => { 
                         const payloadx= flags;
                         payloadx.isLogedIn=true;
-                        //payloadx.isAlertLoginVisible=false;
                         payloadx.isLoading=false;
                         setFlags(payloadx);
                     },
@@ -141,35 +142,28 @@ export const useLogin =  () => {
                 console.log(resp);
                 console.log(resp.data.tipoUsuario);
             } catch (error) {
+                console.log('login error..')
                 console.log(error);
 
                 const payloadx= flags;
                 payloadx.isLogedIn=false;
                 setFlags(payloadx);
-                //payloadx.isAlertLoginVisible=true;
+                
                 floading(false)
-                Toast.show({type: 'ko',props: { mensaje: error }});
-                //payloadx.isLoading=false;
+                //let errorx: ErrorResponse;
+                //let errorx = JSON.stringify(error);
+                //let obj = await JSON.parse(JSON.stringify(error));
+                // console.log('------------------------')
+                // console.log(obj.message);
+                //  var msg = obj.message
+                // console.log('------------------------')
+                Toast.show({type: 'ko',props: {mensaje:'Error al comunicarse con el servidor. [/auth/login]'} });
                
-
-                console.log('credenciales invalidas');
+               
                 
                 return false;
             }
-           
-
-        //    if(resp.data !=undefined){
-
-        //         const payload= sesion;
-        //         payload.token =resp.data.token;
-        //         payload.usuario.tipo =resp.data.tipoUsuario=='USUARIO_TERCEIRO' ? TipoUsuario.USER_TERCEIRO : TipoUsuario.COLABORADOR;
-        //         payload.menu =resp.data.info.menuSistema;
-        //         setSesion(payload)
-
-        //    }
             
-
-          
         }
 
         const validarLogin = () =>{
@@ -190,7 +184,7 @@ export const useLogin =  () => {
             return true;
         }
 
-         const setPassVisible = (valor:boolean) =>{
+        const setPassVisible = (valor:boolean) =>{
             setPasswordVisible(valor);
         }
 

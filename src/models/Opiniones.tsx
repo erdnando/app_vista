@@ -19,5 +19,6 @@ export interface Opiniones{
     catFamilia:ComboLista[],
     exigenciasIndex:number,
     tabsContador:number,
-    exigenciasAllValid:boolean
+    exigenciasAllValid:boolean,
+    valoresAllValid:boolean
 }

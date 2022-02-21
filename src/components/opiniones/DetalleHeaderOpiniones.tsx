@@ -4,11 +4,13 @@ import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
 import { Spacer } from '../Spacer';
 import { MenuOpiniones } from '../../models/MenuOpiniones';
+import { TipoUsuario } from '../../models/Usuario';
 
 export const DetallHeaderOpiniones = () => {
 
   //invoke global state
-  const { menuOpiniones,setMenuOpiniones ,ids,setIds} = useContext( GeneralContext )
+  const { menuOpiniones,setMenuOpiniones, menuOpinionesTerciario, 
+          setMenuOpinionesTerciario ,ids,setIds,usuario} = useContext( GeneralContext )
 
 
   const renderUpdateItem = (item:MenuOpiniones) =>{
@@ -17,9 +19,10 @@ export const DetallHeaderOpiniones = () => {
     {/* opcion */}
     return ( item.visible ? <TouchableOpacity style={{ borderRadius: 100,  }} 
                                 onPress={()=>{
-                                  console.log('menu opiniones click..');
+                                  console.log('menu opiniones click..'+item.id);
+                                  
                                  //TODO logic to load component view, based in selected option
-                                 const payload = menuOpiniones;
+                                 const payload =  usuario.tipo===TipoUsuario.COLABORADOR ? menuOpiniones: menuOpinionesTerciario;
                                  const payload1 = ids;
                                 
                                  payload.forEach(function(part, index) {
@@ -33,7 +36,10 @@ export const DetallHeaderOpiniones = () => {
                                     } 
                                 });
 
-                                setMenuOpiniones(payload);
+
+                                usuario.tipo===TipoUsuario.COLABORADOR ?  setMenuOpiniones(payload) :  setMenuOpinionesTerciario(payload)
+                               
+                                console.log(menuOpiniones)
 
                                 }}>
                             <View style={{height:124, flexDirection:'row', width:122,
@@ -85,7 +91,7 @@ return (
          
          <View style={{flex:1,width:'100%',justifyContent:'center', }}>
     
-            <FlatList data={menuOpiniones} 
+            <FlatList data={usuario.tipo===TipoUsuario.COLABORADOR ? menuOpiniones : menuOpinionesTerciario} 
                 scrollEnabled={true}
                 horizontal={true}
                 renderItem={ ({ item,index }) =>renderUpdateItem(item) } 

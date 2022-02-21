@@ -45,7 +45,7 @@ export const useNotificaciones =  () => {
 
             } catch (error) {
                 console.log(error);
-                Toast.show({type: 'ko',props: { mensaje: error }});
+                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/existsNotification]' }});
                // floading(false)
             }
         }
@@ -121,7 +121,7 @@ export const useNotificaciones =  () => {
                 
             } catch (error) {
                 console.log(error);
-                Toast.show({type: 'ko',props: { mensaje: error }});
+                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/listByLogin]' }});
                 floading(false)
             }
         }

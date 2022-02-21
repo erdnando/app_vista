@@ -25,6 +25,7 @@ interface GeneralState{
     sesion:Sesion,
     agendaFiltro:AgendaFiltro,
     menuOpiniones:MenuOpiniones[],
+    menuOpinionesTerciario:MenuOpiniones[],
     notificaciones:Notificaciones[],
     ids:IDs,
     tabSelected:string,
@@ -47,6 +48,7 @@ interface GeneralState{
     setSesion:(sesion:Sesion)=>void;
     setAgendaFiltro:(agendaFiltro:AgendaFiltro)=>void;
     setMenuOpiniones:(menuOpiniones:MenuOpiniones[])=>void;
+    setMenuOpinionesTerciario:(menuOpinionesTerciario:MenuOpiniones[])=>void;
     setOpiniones:(opiniones:Opiniones)=>void;
     setSearch:(search:Search)=>void;
     setParecer:(parecer:Parecer)=>void;
@@ -196,7 +198,8 @@ class GeneralProvider extends React.Component{
                 dias:'',
                 goNoGo:0,
             }],
-            valores:[{
+            valores:[
+                {
                 id:0,
                 go: false,
                 motivo:'',
@@ -238,6 +241,7 @@ class GeneralProvider extends React.Component{
                 justificativa:'',
                 colapsado:true,
             }],
+            valoresAllValid:false,
             catTipoExigencia:[],
             catTipoDescripcion:[],
             catTipoUsuario:[],
@@ -282,6 +286,37 @@ class GeneralProvider extends React.Component{
               visible:true
             },
             
+        ],
+        menuOpinionesTerciario:[
+            {
+                id:1,
+                opcion:'Pareceres realizados',
+                icon:'ant-design_check-circle-filled',
+                estatus:1,
+                visible:true
+            },
+            {
+                id:2,
+                opcion:'Exigencias',
+                icon:'ic_baseline-lightbulb',
+                estatus:0,
+                visible:true
+            },
+            {
+                id:3,
+                opcion:'Parecer',
+                icon:'icomoon-free_hammer2',
+                estatus:0,
+                visible:true
+            },
+            
+            {
+                id:4,
+                opcion:'Valores',
+                icon:'ic_round-monetization-on',
+                estatus:0,
+                visible:true
+            },
         ],
         search:{
           oportunidade:{
@@ -423,7 +458,8 @@ class GeneralProvider extends React.Component{
     setAgenda= (agenda:Agenda)=> this.setState({agenda});
     setSesion= (sesion:Sesion)=> this.setState({sesion});
     setAgendaFiltro= (agendaFiltro:AgendaFiltro)=> this.setState({agendaFiltro});
-    setMenuOpiniones= (menuopiniones:MenuOpiniones[])=>this.setState({menuopiniones});
+    setMenuOpiniones= (menuOpiniones:MenuOpiniones[])=>this.setState({menuOpiniones});
+    setMenuOpinionesTerciario= (menuopinionesTerciario:MenuOpiniones[])=>this.setState({menuopinionesTerciario});
     setOpiniones= (opiniones:Opiniones)=>this.setState({opiniones});
     setSearch= (search:Search)=>this.setState({search});
     setParecer= (parecer:Parecer)=>this.setState({parecer});
@@ -470,6 +506,7 @@ class GeneralProvider extends React.Component{
                     tabSelectedOld: this.state.tabSelectedOld,
                     tabModule: this.state.tabModule,
                     menuOpiniones:this.state.menuOpiniones,
+                    menuOpinionesTerciario:this.state.menuOpinionesTerciario,
                     opiniones:this.state.opiniones,
                     search:this.state.search,
                     parecer:this.state.parecer,
@@ -488,6 +525,7 @@ class GeneralProvider extends React.Component{
                     setTabSelectedOld: this.setTabSelectedOld,
                     setTabModule:this.setTabModule,
                     setMenuOpiniones:this.setMenuOpiniones,
+                    setMenuOpinionesTerciario:this.setMenuOpinionesTerciario,
                     setOpiniones:this.setOpiniones,
                     setSearch:this.setSearch,
                     setParecer:this.setParecer,
