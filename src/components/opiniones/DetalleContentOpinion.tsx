@@ -41,9 +41,9 @@ if(usuario.tipo===TipoUsuario.COLABORADOR){
           case 1:
             return  <CardParecerRealizados></CardParecerRealizados>  
           case 2:
-            return  <CardParecerExigencias/>
+            return  <CardParecerExigenciasTerciario/>  
           case 3:
-            return  <CardParecerExigenciasTerciario/>   
+            return   <CardParecer></CardParecer>  
           case 4:
             return  <CardParecerValores></CardParecerValores>
           default:
