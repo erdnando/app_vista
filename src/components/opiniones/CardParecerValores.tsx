@@ -16,15 +16,7 @@ export const CardParecerValores = () => {
 
   //invoke global state
   const { opiniones,setOpiniones } = useContext( GeneralContext )
-  const { isFormValoresValid } = useParecer()
-
-  // const items=[   { label: "JavaScript", value: "JavaScript" },
-  // { label: "TypeStript", value: "TypeStript" },
-  // { label: "Python", value: "Python" },
-  // { label: "Java", value: "Java" },
-  // { label: "C++", value: "C++" },
-  // { label: "C", value: "C" },
-  // ];
+  const { isFormValoresValid,saveValores } = useParecer()
 
   useEffect(() => {
     isFormValoresValid();
@@ -132,6 +124,7 @@ export const CardParecerValores = () => {
                                               <Select placeholder='Familia' campo={item.familia} width='96%' items={opiniones.catFamilia}
                                                 onValueChange={function (value: any, index: number): void {
                                                   const payload= opiniones;
+                                                  console.log(value)
                                                   payload.valores[item.id].familia =value;
                                                   setOpiniones(payload)
                                                   isFormValoresValid()
@@ -245,8 +238,8 @@ return (
                         height:48, justifyContent:'center',  }} 
                           onPress= {()=>{
                             //TODO add logic to save parecer
-                            console.log('saving exigencias terciario..')
-                            isFormValoresValid();
+                            console.log('saving valores terciario..')
+                            saveValores();
                             //clear parecer
                           }}>
                           <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: opiniones.valoresAllValid ? 'black' : 'white'}}>SALVAR</Text>

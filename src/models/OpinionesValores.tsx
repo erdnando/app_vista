@@ -9,6 +9,7 @@ export interface OpinionesValores{
     qtde:string,
     familia:string,
     productoServicio:string,
+    productoServicioId:string
     valorinicial:string,
     valorFinal:string,
     justificativa:string

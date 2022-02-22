@@ -209,6 +209,7 @@ class GeneralProvider extends React.Component{
                 qtde:'001',
                 familia:'',
                 productoServicio:'',
+                productoServicioId:'',
                 valorinicial:'',
                 valorFinal:'',
                 justificativa:'',

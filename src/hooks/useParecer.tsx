@@ -15,6 +15,8 @@ import { ParecerRealizado } from '../models/ParecerRealizado';
 import { ComboFamilia } from '../models/ComboFamilia';
 import { OpinionesValores } from '../models/OpinionesValores';
 import { ValoresResponse } from '../models/response/ValoresResponse';
+import { OpinionesRequest } from '../models/OpinionesRequest';
+import { RNFetchBlobSession } from 'rn-fetch-blob';
 
 export const useParecer =  () => {
 
@@ -869,6 +871,7 @@ export const useParecer =  () => {
                             qtde:item.quantidade.toString(),
                             familia:item.familia.id.toString(),
                             productoServicio:item.produtoServico.descricao,
+                            productoServicioId: item.produtoServico.id.toString(),
                             valorinicial:item.valorInicial.toString(),
                             valorFinal:item.valorFinal===null ? '0' : item.valorFinal.toString(),
                             justificativa:'',
@@ -915,6 +918,137 @@ export const useParecer =  () => {
 
         }
 
+        const saveValores = async () =>{
+
+            try {
+                floading(true)
+                const payload = opiniones;
+           
+                //let arrValoresAux: Array<OpinionesRequest> = [];
+                let valoresAux:OpinionesRequest;
+                
+   
+                console.log('---------------------------')
+                console.log(payload.valores);
+                console.log('---------------------------')
+
+                payload.valores.forEach(function(item,index){
+                  
+                    valoresAux={
+                            "motivoParecerId": "8",
+                            "justificativa": item.justificativa,
+                            "parecer": item.go ? "GO" : "NO_GO",
+                            "valores": [
+                              {
+                                "id": item.id,
+                                "motivoParecerId": null,
+                                "familiaId": parseInt(item.familia),
+                                "produtoId": parseInt(item.productoServicioId),
+                                "observacao": "teste bon jovi",
+                                "valorInicial": parseInt(item.valorinicial),
+                                "valorFinal": parseInt(item.valorFinal),
+                                "parecerItem": null,
+                                "kitId": null
+                              }
+                            ],
+                            "importExportInput": null,
+                            "exibeAbaValor": "S",
+                            "collaboratorUser": null,
+                            "oportunidadeExigencia": [],
+                            "usuarioId": sesion.clienteId,
+                            "parecerId": parseInt(parecer.parecerSeleccionado.parecerId),
+                            "oportunidadesProdutosServicos": [
+                              {
+                                "id": item.id,
+                                "motivoParecerId": null,
+                                "familiaId": parseInt(item.familia),
+                                "produtoId": parseInt(item.productoServicioId),
+                                "observacao": "teste bon jovi",
+                                "valorInicial": parseInt(item.valorinicial),
+                                "valorFinal": parseInt(item.valorFinal),
+                                "parecerItem": null,
+                                "kitId": null
+                              }
+                            ],
+                            "lote": [],
+                            "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion),
+                            "charter": sesion.charter
+                          };
+                    
+                          console.log('paquete enviando...')
+
+                          console.log('---------------------------')
+                          console.log(valoresAux);
+                          console.log('---------------------------')
+          
+                    
+                         callValoresWs(valoresAux)
+                        //   const resp = await vistaApi.post<OpinionesRequest>('/services/opportunity/userOpinion/save',valoresAux, {
+                        //                       headers:{
+                        //                       'Content-Type': 'application/json',
+                        //                       'Accept': 'application/json',
+                        //                       "X-Auth-Token": sesion.token
+                        //                   }
+                        //   });
+          
+                        //   console.log('valores guardadas');
+                        //   console.log(resp.data);
+
+
+
+
+
+                  });
+                
+               // Toast.show({type: 'ok', props: { mensaje: 'Valores guardado' }});
+                floading(false)
+
+            } catch (error) {
+                // console.log(error);
+
+                // const payloadx= flags;
+                // payloadx.isLoading=false;
+                // setFlags(payloadx);
+                // console.log('error al guardar valores');
+                // Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/saveExigency]' }});
+                 floading(false)
+                return false;
+            }
+        }
+
+        const callValoresWs= async(valoresAux:OpinionesRequest)=>{
+            try{
+                console.log('enviando real::::');
+                console.log(valoresAux)
+                const resp = await vistaApi.post<OpinionesRequest>('/services/opportunity/userOpinion/save',valoresAux, {
+                    headers:{
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    "X-Auth-Token": sesion.token
+                }
+                });
+
+                console.log('valores guardadas');
+                console.log(resp.data);
+
+                Toast.show({type: 'ok', props: { mensaje: 'Valores guardado' }});
+                floading(false)
+
+            }catch(error){
+                console.log(JSON.stringify(error));
+
+                const payloadx= flags;
+                payloadx.isLoading=false;
+                setFlags(payloadx);
+                console.log('error al guardar valores');
+                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/userOpinion/save]' }});
+                floading(false)
+
+            }
+        }
+
+        
+
         const isFormValoresValid = ()=>{
             console.log('validando form valores...')
 
@@ -922,23 +1056,39 @@ export const useParecer =  () => {
             opiniones.valores.forEach(function(item:OpinionesValores,index){
 
                 if(item.motivo === null) bFlag = false;
+                else if(item.motivo.trim() ==='') bFlag = false;
+
                 if(item.lote === null) bFlag = false;
+                else if(item.lote.trim() ==='') bFlag = false;
+
                 if(item.item === null) bFlag = false;
+                else if(item.item.trim() ==='') bFlag = false;
+
                 if(item.familia === null) bFlag = false;
+                else if(item.familia.trim() ==='') bFlag = false;
+
                 if(item.productoServicio === null) bFlag = false;
+                else if(item.productoServicio.trim() ==='') bFlag = false;
+
                 if(item.valorinicial === null) bFlag = false;
+                else if(item.valorinicial.trim() ==='') bFlag = false;
+
                 if(item.valorFinal === null) bFlag = false;
+                else if(item.valorFinal.trim() ==='') bFlag = false;
+
                 if(item.justificativa === null) bFlag = false;
+                else if(item.justificativa.trim() ==='') bFlag = false;
+
                 if(item.go === null) bFlag = false;
 
-                if(item.motivo.trim() ==='') bFlag = false;
-                if(item.lote.trim() ==='') bFlag = false;
-                if(item.item.trim() ==='') bFlag = false;
-                if(item.familia.trim() ==='') bFlag = false;
-                if(item.productoServicio.trim() ==='') bFlag = false;
-                if(item.valorinicial.trim() ==='') bFlag = false;
-                if(item.valorFinal.trim() ==='') bFlag = false;
-                if(item.justificativa.trim() ==='') bFlag = false;
+                
+               
+                
+                
+                
+                
+                
+                
 
             });
 
@@ -956,7 +1106,8 @@ export const useParecer =  () => {
             getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado,
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
             saveParecer,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
-            cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores
+            cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores,
+            saveValores
         }
 }
         
