@@ -144,18 +144,19 @@ const renderUpdateItem = (item:ParecerRealizadoAux) =>{
 
                                   <View style={{ flexDirection:'column', margin:16, justifyContent:'flex-start',  alignItems:'flex-start'}}>
 
+                                     <Spacer height={4}></Spacer>
                                      {/* usuario */}
                                      <TextOportunidadIcono icono='gridicons_user' colorIcono='#838892' label='Usuario' colorValor='#838892' valor={item.usuario}  size={15} ></TextOportunidadIcono>
                                       {/* line */}
-                                      <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
+                                      <View style={{width:'100%', marginBottom:12, height:2,backgroundColor:'#BCC1CB'}}></View>
                                        {/* usuario */}
                                      <TextOportunidadIcono icono='icomoon-free_hammer2' colorIcono='#838892' label='Parecer' colorValor='#838892' valor={item.parecer}  size={15} ></TextOportunidadIcono>
                                       {/* line */}
-                                      <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
+                                      <View style={{width:'100%', marginBottom:12, height:2,backgroundColor:'#BCC1CB'}}></View>
                                        {/* usuario */}
                                      <TextOportunidadIcono icono='ic_round-pin' colorIcono='#838892' label='Motivo' colorValor='#838892' valor={item.motivo}  size={15} ></TextOportunidadIcono>
                                       {/* line */}
-                                      <View style={{width:'100%', marginBottom:8, height:2,backgroundColor:'#BCC1CB'}}></View>
+                                      <View style={{width:'100%', marginBottom:14, height:2,backgroundColor:'#BCC1CB'}}></View>
                                        {/* usuario */}
                                        <LabelTexto  fontSize={14} color='#454A53' label='Justificativa:' value={item.justificativa}></LabelTexto>
                                       
