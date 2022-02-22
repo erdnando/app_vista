@@ -202,6 +202,7 @@ class GeneralProvider extends React.Component{
             valores:[
                 {
                 id:0,
+                idValor:'0',
                 go: false,
                 motivo:'',
                 lote:'001',

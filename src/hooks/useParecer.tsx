@@ -864,6 +864,7 @@ export const useParecer =  () => {
                        resp.data.forEach(function(item,index){
                          arrAux.push({
                             id:index,
+                            idValor:item.id.toString(),
                             go: false,
                             motivo:item.motivoParecer===null ? '' : item.motivoParecer.toString(),
                             lote:item.lote.toString(),
@@ -940,7 +941,7 @@ export const useParecer =  () => {
                             "parecer": item.go ? "GO" : "NO_GO",
                             "valores": [
                               {
-                                "id": item.id,
+                                "id": parseInt(item.idValor),
                                 "motivoParecerId": null,
                                 "familiaId": parseInt(item.familia),
                                 "produtoId": parseInt(item.productoServicioId),
@@ -959,7 +960,7 @@ export const useParecer =  () => {
                             "parecerId": parseInt(parecer.parecerSeleccionado.parecerId),
                             "oportunidadesProdutosServicos": [
                               {
-                                "id": item.id,
+                                "id": parseInt(item.idValor),
                                 "motivoParecerId": null,
                                 "familiaId": parseInt(item.familia),
                                 "produtoId": parseInt(item.productoServicioId),
