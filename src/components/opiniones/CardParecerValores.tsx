@@ -85,7 +85,7 @@ export const CardParecerValores = () => {
                                                 isFormValoresValid()
                                               }}></InputMensajeSimple>
                                             </View>
-                                            {/* motivo */}
+                                            {/* cbo motivo */}
                                             {/* <View style={{flex:0,width:'90%',height:50,left:4,top:0}}>
                                               <Select placeholder='Motivo' campo={item.familia} width='96%' items={opiniones.catMotivo}
                                                 onValueChange={function (value: any, index: number): void {
@@ -153,6 +153,17 @@ export const CardParecerValores = () => {
                                                   isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
                                             </View>
+                                             {/*  producto servicio */}
+                                            {/* <View style={{flex:0,width:'90%',height:50,left:4,top:0}}>
+                                              <Select placeholder='Producto servicio' campo={item.familia} width='96%' items={opiniones.catProductoServicio}
+                                                onValueChange={function (value: any, index: number): void {
+                                                  const payload= opiniones;
+                                                  console.log(value)
+                                                  payload.valores[item.id].productoServicio =value;
+                                                  setOpiniones(payload)
+                                                  isFormValoresValid()
+                                                }} />
+                                              </View> */}
                                             
 
                                             <Spacer height={10}></Spacer>

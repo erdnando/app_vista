@@ -442,7 +442,7 @@ export const useParecer =  () => {
                
                 if(resp.data.length > 0){
 
-                    let arrAux=opiniones.catFamilia;//get reference
+                    let arrAux=opiniones.catProductoServicio;//get reference
                     arrAux=[];
                   
                       resp.data[0].produtos.forEach(function(item,index){
@@ -455,12 +455,12 @@ export const useParecer =  () => {
 
                     console.log("asignando datos");
                     const payload = opiniones;
-                    payload.catFamilia = arrAux;
+                    payload.catProductoServicio = arrAux;
                     setOpiniones(payload);
 
                 }else{
                     const payload = opiniones;
-                    payload.catFamilia = [];
+                    payload.catProductoServicio = [];
                     setOpiniones(payload);
                 }
            
@@ -571,240 +571,6 @@ export const useParecer =  () => {
             }
             floading(false)
         }
-
-        const saveExigencias = async () =>{
-
-            try {
-                floading(true)
-                const payload = opiniones;
-                //let arrExigenciasAux= [{}];
-                let arrExigenciasAux: Array<Exigencia> = [];
-   
-                console.log('---------------------------')
-                console.log(payload.exigencias);
-                console.log('---------------------------')
-
-                payload.exigencias.forEach(function(item,index){
-                    if(item.visible){
-                        arrExigenciasAux.push({
-                            "id": index+1, 
-                            "metaDias": item.qtededias, 
-                            "observacao": item.observaciones, 
-                            "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
-                            "status": "1", 
-                            "tipoDataMeta": 0, 
-                            "tipoExigenciaId": 0, 
-                            "tipoUsuarioClienteId": 0, 
-                            "titulo": item.descripcion 
-                        });
-                    }
-                  });
-                console.log('paquete enviando...')
-
-                console.log('---------------------------')
-                console.log(arrExigenciasAux);
-                console.log('---------------------------')
-
-
-                var arr=arrExigenciasAux.splice(1,arrExigenciasAux.length);
-                console.log(arr);
-          
-
-                const resp = await vistaApi.post<any>('/services/exigency/saveExigency',{ arr }, {
-                                    headers:{
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    "X-Auth-Token": sesion.token
-                                }
-                });
-
-                console.log('exigencias guardadas');
-                console.log(resp.data);
-                Toast.show({type: 'ok', props: { mensaje: 'Exigencia guardada' }});
-                floading(false)
-
-            } catch (error) {
-                console.log(error);
-
-                const payloadx= flags;
-                payloadx.isLoading=false;
-                setFlags(payloadx);
-                console.log('error al guardar exigencias');
-                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/saveExigency]' }});
-                floading(false)
-                return false;
-            }
-        }
-
-        const saveParecer = async () =>{
-            try {
-                floading(true)
-                const payload = opiniones;
-                
-                let arrExigenciasAux: Array<Exigencia> = [];
-   
-                console.log('---------------------------')
-                console.log(payload.parecer);
-                console.log(parecer.parecerSeleccionado);
-                console.log('---------------------------')
-                      
-                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',{ 
-                        "motivoParecerId": null,
-                        "justificativa": "ok",
-                        "parecer":payload.parecer.estatusGO===1 ? "GO" : "NO GO",
-                        "valores": [],
-                        "importExportInput": null,
-                        "exibeAbaValor": null,
-                        "collaboratorUser": "N",
-                        "oportunidadeExigencia": [],
-                        "colaboradorId": sesion.colaboradorId,
-                        "parecerId": parecer.parecerSeleccionado.parecerId,
-                        "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
-                        "charter": sesion.charter
-                      
-                 }, {
-                                    headers:{
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    "X-Auth-Token": sesion.token
-                                }
-                });
-
-                console.log('parecer guardado');
-                console.log(resp.data);
-                Toast.show({type: 'ok', props: { mensaje: 'Parecer guardada' }});
-                floading(false)
-
-            } catch (error) {
-                console.log(error);
-                
-                const payloadx= flags;
-                payloadx.isLoading=false;
-                setFlags(payloadx);
-                console.log('error al guardar Parecer');
-                Toast.show({type: 'ko',props: { mensaje: 'Error al guardar Parecer' }});
-                floading(false)
-                return false;
-            }
-        }
-  
-        const isFormParecerValid=()=>{
-           
-          //TODO add validation to combo opinion
-           if (opiniones.parecer.justificacion.trim() ==='') {
-               // console.log('saliendo por justificativa')   
-                return false;
-            }
-           if (opiniones.parecer.estatusGO == 0) {
-           // console.log('saliendo por estatusGO 0')   
-              return false;
-            }
-
-           // console.log('formulario valido')   
-           return true;
-           
-        }
-
-        const formExigenciasValid=()=>{
-
-             
-            const payload = opiniones;
-            let arrExigenciasAux: Array<Exigencia> = [];
-            payload.exigenciasAllValid=true;
-            
-            payload.exigencias.forEach(function(item,index){
-                //toma todas las exigencias abiertas o visibles
-                if(item.visible){
-                    //valid form
-                    let refForm = {
-                        "id": index+1, 
-                        "metaDias": item.qtededias, //qtdias
-                        "observacao": item.observaciones, //observaciones
-                        "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
-                        "status": "1", 
-                        "tipoDataMeta": 0, 
-                        "tipoExigenciaId": parseInt(item.tipoExigencia), //tipoexigencia  ok
-                        "tipoUsuarioClienteId":  parseInt(item.tipoUsuario), //tipoUsuario 
-                        "titulo": payload.catTipoDescripcion.filter(elem => elem.value == item.descripcion)[0]?.label,//descripcio  ok                    });
-                    }
-
-                    item.valid=true;
-                    
-                    
-
-                    if ( refForm.titulo === undefined) {
-                        console.log('saliendo por descripcion '+ refForm.titulo)   
-                        item.valid=false;
-                        payload.exigenciasAllValid=false;
-                    }else if (isNaN(refForm.tipoExigenciaId)) {
-                        console.log('saliendo por tipo exigencia')   
-                        item.valid=false;
-                        payload.exigenciasAllValid=false;
-                    }else if (refForm.metaDias === '') {
-                        console.log('saliendo por meta dias')  
-                        item.valid=false;
-                        payload.exigenciasAllValid=false;
-                    }else if (isNaN(refForm.tipoUsuarioClienteId)) {
-                        console.log('saliendo por tipo usuario')   
-                        item.valid=false;
-                        payload.exigenciasAllValid=false;
-                    }else  if (refForm.observacao === '') {
-                        console.log('saliendo por observaciones')   
-                        item.valid=false;
-                        payload.exigenciasAllValid=false;
-                    }
-
-                    arrExigenciasAux.push(refForm)
-                    setOpiniones(payload)
-                }
-            })
-
-              
- 
-
-           // var arrExigenciasOpened=arrExigenciasAux.splice(1,arrExigenciasAux.length);
-            //console.log(arrExigenciasAux)
-           
-            // arrExigenciasAux.forEach(function(item,index){
-            //     console.log('looping....')
-            //     console.log(item)
-
-
-            //     if ( item.titulo === undefined) {
-            //         console.log('saliendo por descripcion -->'+ item.titulo+'<--')   
-            //         console.log(item)  
-
-            //         setFrmExigenciaValid(false)
-            //        return ;
-            //     }else if (isNaN(item.tipoExigenciaId)) {
-            //         console.log('saliendo por tipo exigencia')   
-            //         setFrmExigenciaValid(false)
-            //         return ;
-            //     }else if (item.metaDias === '') {
-            //         console.log('saliendo por meta dias')  
-            //         setFrmExigenciaValid(false) 
-            //         return ;
-            //     }else if (isNaN(item.tipoUsuarioClienteId)) {
-            //         console.log('saliendo por tipo usuario')   
-            //         setFrmExigenciaValid(false)
-            //         return ;
-            //     }else  if (item.observacao === '') {
-            //         console.log('saliendo por observaciones')   
-            //         setFrmExigenciaValid(false)
-            //         return ;
-            //     }
-
-                
-               
-            //    })
-           
-             
-             //if(frmExigenciaValid==false) return;
-
-             
-             // setFrmExigenciaValid(true)
-             
-          }
 
         const cargaExigenciasTerciario= async()=>{
 
@@ -953,6 +719,84 @@ export const useParecer =  () => {
              }
          }
 
+         const formExigenciasValid=()=>{
+
+             
+            const payload = opiniones;
+            let arrExigenciasAux: Array<Exigencia> = [];
+            payload.exigenciasAllValid=true;
+            
+            payload.exigencias.forEach(function(item,index){
+                //toma todas las exigencias abiertas o visibles
+                if(item.visible){
+                    //valid form
+                    let refForm = {
+                        "id": index+1, 
+                        "metaDias": item.qtededias, //qtdias
+                        "observacao": item.observaciones, //observaciones
+                        "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
+                        "status": "1", 
+                        "tipoDataMeta": 0, 
+                        "tipoExigenciaId": parseInt(item.tipoExigencia), //tipoexigencia  ok
+                        "tipoUsuarioClienteId":  parseInt(item.tipoUsuario), //tipoUsuario 
+                        "titulo": payload.catTipoDescripcion.filter(elem => elem.value == item.descripcion)[0]?.label,//descripcio  ok                    });
+                    }
+
+                    item.valid=true;
+                    
+                    
+
+                    if ( refForm.titulo === undefined) {
+                        console.log('saliendo por descripcion '+ refForm.titulo)   
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }else if (isNaN(refForm.tipoExigenciaId)) {
+                        console.log('saliendo por tipo exigencia')   
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }else if (refForm.metaDias === '') {
+                        console.log('saliendo por meta dias')  
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }else if (isNaN(refForm.tipoUsuarioClienteId)) {
+                        console.log('saliendo por tipo usuario')   
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }else  if (refForm.observacao === '') {
+                        console.log('saliendo por observaciones')   
+                        item.valid=false;
+                        payload.exigenciasAllValid=false;
+                    }
+
+                    arrExigenciasAux.push(refForm)
+                    setOpiniones(payload)
+                }
+            })
+
+              
+ 
+
+          
+             
+          }
+
+        const isFormParecerValid=()=>{
+           
+            //TODO add validation to combo opinion
+             if (opiniones.parecer.justificacion.trim() ==='') {
+                 // console.log('saliendo por justificativa')   
+                  return false;
+              }
+             if (opiniones.parecer.estatusGO == 0) {
+             // console.log('saliendo por estatusGO 0')   
+                return false;
+              }
+  
+             // console.log('formulario valido')   
+             return true;
+             
+          }
+  
         const isFormExigenciasTerciarioValid=()=>{
             
                     let bFlag=true;
@@ -965,8 +809,165 @@ export const useParecer =  () => {
             return bFlag;
         }
 
+        const isFormValoresValid = ()=>{
+            console.log('validando form valores...')
+
+            let bFlag=true;
+            opiniones.valores.forEach(function(item:OpinionesValores,index){
+
+                if(item.motivo === null) bFlag = false;
+                else if(item.motivo.trim() ==='') bFlag = false;
+
+                if(item.lote === null) bFlag = false;
+                else if(item.lote.trim() ==='') bFlag = false;
+
+                if(item.item === null) bFlag = false;
+                else if(item.item.trim() ==='') bFlag = false;
+
+                if(item.familia === null) bFlag = false;
+                else if(item.familia.trim() ==='') bFlag = false;
+
+                if(item.productoServicio === null) bFlag = false;
+                else if(item.productoServicio.trim() ==='') bFlag = false;
+
+                if(item.valorinicial === null) bFlag = false;
+                else if(item.valorinicial.trim() ==='') bFlag = false;
+
+                if(item.valorFinal === null) bFlag = false;
+                else if(item.valorFinal.trim() ==='') bFlag = false;
+
+                if(item.justificativa === null) bFlag = false;
+                else if(item.justificativa.trim() ==='') bFlag = false;
+
+                if(item.go === null) bFlag = false;
+            });
+
+           
+           
+            const payload= opiniones;
+            opiniones.valoresAllValid=bFlag;
+            setOpiniones(opiniones);
+
+        }
+
+        const saveExigencias = async () =>{
+
+            try {
+                floading(true)
+                const payload = opiniones;
+                //let arrExigenciasAux= [{}];
+                let arrExigenciasAux: Array<Exigencia> = [];
+   
+                console.log('---------------------------')
+                console.log(payload.exigencias);
+                console.log('---------------------------')
+
+                payload.exigencias.forEach(function(item,index){
+                    if(item.visible){
+                        arrExigenciasAux.push({
+                            "id": index+1, 
+                            "metaDias": item.qtededias, 
+                            "observacao": item.observaciones, 
+                            "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
+                            "status": "1", 
+                            "tipoDataMeta": 0, 
+                            "tipoExigenciaId": 0, 
+                            "tipoUsuarioClienteId": 0, 
+                            "titulo": item.descripcion 
+                        });
+                    }
+                  });
+                console.log('paquete enviando...')
+
+                console.log('---------------------------')
+                console.log(arrExigenciasAux);
+                console.log('---------------------------')
+
+
+                var arr=arrExigenciasAux.splice(1,arrExigenciasAux.length);
+                console.log(arr);
+          
+
+                const resp = await vistaApi.post<any>('/services/exigency/saveExigency',{ arr }, {
+                                    headers:{
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    "X-Auth-Token": sesion.token
+                                }
+                });
+
+                console.log('exigencias guardadas');
+                console.log(resp.data);
+                Toast.show({type: 'ok', props: { mensaje: 'Exigencia guardada' }});
+                floading(false)
+
+            } catch (error) {
+                console.log(error);
+
+                const payloadx= flags;
+                payloadx.isLoading=false;
+                setFlags(payloadx);
+                console.log('error al guardar exigencias');
+                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/saveExigency]' }});
+                floading(false)
+                return false;
+            }
+        }
+
         const saveExigenciaTerciario = async()=>{
 
+        }
+
+        const saveParecer = async () =>{
+            try {
+                floading(true)
+                const payload = opiniones;
+                
+                let arrExigenciasAux: Array<Exigencia> = [];
+   
+                console.log('---------------------------')
+                console.log(payload.parecer);
+                console.log(parecer.parecerSeleccionado);
+                console.log('---------------------------')
+                      
+                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',{ 
+                        "motivoParecerId": null,
+                        "justificativa": "ok",
+                        "parecer":payload.parecer.estatusGO===1 ? "GO" : "NO GO",
+                        "valores": [],
+                        "importExportInput": null,
+                        "exibeAbaValor": null,
+                        "collaboratorUser": "N",
+                        "oportunidadeExigencia": [],
+                        "colaboradorId": sesion.colaboradorId,
+                        "parecerId": parecer.parecerSeleccionado.parecerId,
+                        "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
+                        "charter": sesion.charter
+                      
+                 }, {
+                                    headers:{
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    "X-Auth-Token": sesion.token
+                                }
+                });
+
+                console.log('parecer guardado');
+                console.log(resp.data);
+                Toast.show({type: 'ok', props: { mensaje: 'Parecer guardada' }});
+                floading(false)
+
+            } catch (error) {
+                console.log(error);
+                
+                const payloadx= flags;
+                payloadx.isLoading=false;
+                setFlags(payloadx);
+                console.log('error al guardar Parecer');
+                Toast.show({type: 'ko',props: { mensaje: 'Error al guardar Parecer' }});
+                floading(false)
+                return false;
+            }
         }
 
         const saveValores = async () =>{
@@ -975,7 +976,6 @@ export const useParecer =  () => {
                 floading(true)
                 const payload = opiniones;
            
-                //let arrValoresAux: Array<OpinionesRequest> = [];
                 let valoresAux:OpinionesRequest;
                 
    
@@ -995,7 +995,7 @@ export const useParecer =  () => {
                                 "motivoParecerId": null,
                                 "familiaId": parseInt(item.familia),
                                 "produtoId": parseInt(item.productoServicioId),
-                                "observacao": "teste bon jovi",
+                                "observacao": item.justificativa,
                                 "valorInicial": parseInt(item.valorinicial),
                                 "valorFinal": parseInt(item.valorFinal),
                                 "parecerItem": null,
@@ -1034,28 +1034,12 @@ export const useParecer =  () => {
           
                     
                          callValoresWs(valoresAux)
-                        //   const resp = await vistaApi.post<OpinionesRequest>('/services/opportunity/userOpinion/save',valoresAux, {
-                        //                       headers:{
-                        //                       'Content-Type': 'application/json',
-                        //                       'Accept': 'application/json',
-                        //                       "X-Auth-Token": sesion.token
-                        //                   }
-                        //   });
-          
-                        //   console.log('valores guardadas');
-                        //   console.log(resp.data);
-
-
-
-
-
+                        
                   });
-                
-               // Toast.show({type: 'ok', props: { mensaje: 'Valores guardado' }});
                 floading(false)
 
             } catch (error) {
-                // console.log(error);
+                 console.log(error);
 
                 // const payloadx= flags;
                 // payloadx.isLoading=false;
@@ -1098,58 +1082,7 @@ export const useParecer =  () => {
             }
         }
 
-        
-
-        const isFormValoresValid = ()=>{
-            console.log('validando form valores...')
-
-            let bFlag=true;
-            opiniones.valores.forEach(function(item:OpinionesValores,index){
-
-                if(item.motivo === null) bFlag = false;
-                else if(item.motivo.trim() ==='') bFlag = false;
-
-                if(item.lote === null) bFlag = false;
-                else if(item.lote.trim() ==='') bFlag = false;
-
-                if(item.item === null) bFlag = false;
-                else if(item.item.trim() ==='') bFlag = false;
-
-                if(item.familia === null) bFlag = false;
-                else if(item.familia.trim() ==='') bFlag = false;
-
-                if(item.productoServicio === null) bFlag = false;
-                else if(item.productoServicio.trim() ==='') bFlag = false;
-
-                if(item.valorinicial === null) bFlag = false;
-                else if(item.valorinicial.trim() ==='') bFlag = false;
-
-                if(item.valorFinal === null) bFlag = false;
-                else if(item.valorFinal.trim() ==='') bFlag = false;
-
-                if(item.justificativa === null) bFlag = false;
-                else if(item.justificativa.trim() ==='') bFlag = false;
-
-                if(item.go === null) bFlag = false;
-
-                
-               
-                
-                
-                
-                
-                
-                
-
-            });
-
-           
-           
-            const payload= opiniones;
-            opiniones.valoresAllValid=bFlag;
-            setOpiniones(opiniones);
-
-        }
+       
 
 
         //exposed objets 
