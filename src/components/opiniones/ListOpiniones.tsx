@@ -13,7 +13,7 @@ export const ListOpiniones = () => {
   const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected, parecer,setParecer} = useContext( GeneralContext )
   const { cargaComoboTipo,cargaComoboDescripcion,cargaComoboTipoUsuario,
     cargaExigenciasTerciario,cargaComboMotivo,getListParecerRealizadoTerciario,cargaComboFamilia,
-    cargaValores } = useParecer();
+    cargaValores,cargaComboProductoServicio } = useParecer();
  
 
 
@@ -43,7 +43,9 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
                                   cargaComoboTipoUsuario();
                                   cargaExigenciasTerciario();
                                   getListParecerRealizadoTerciario();
+                                  cargaComboProductoServicio();
                                   cargaValores();
+
                                   
 
                                 }}>

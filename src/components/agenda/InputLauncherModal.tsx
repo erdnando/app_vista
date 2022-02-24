@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import {  Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useContext } from 'react';
+import {  Text, TouchableOpacity, View } from 'react-native';
 import { colores } from '../../theme/appTheme';
 import CustomIcon from '../../theme/CustomIcon';
 import { GeneralContext } from '../../state/GeneralProvider';

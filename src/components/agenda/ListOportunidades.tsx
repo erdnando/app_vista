@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { FlatList,  Text, TouchableOpacity, View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { Spacer } from '../Spacer';

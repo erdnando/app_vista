@@ -7,7 +7,6 @@ import Toast from 'react-native-toast-message';
 import { ComboDescripcion } from '../models/response/ComboDescripcion';
 import { TipoUsuario } from '../models/Usuario';
 import { Exigencia } from '../models/Exigencia';
-import { TabRouter } from '@react-navigation/native';
 import { ExigenciasOportunityTerciario } from '../models/response/ExigenciasOportunityTerciario';
 import { TipoUsuarioResponse } from '../models/TipoUsuarioResponse';
 import { ComboMotivo } from '../models/ComboMotivo';
@@ -230,7 +229,7 @@ export const useParecer =  () => {
         const cargaComoboTipo = async () =>{
             floading(true)
             try {
-                console.log(sesion.token )
+                //console.log(sesion.token )
                 const resp = await vistaApi.get<TipoExigencia[]>('services/requirement/listAllTypeGoals?charter=2',{
                     headers:{
                         'Content-Type': 'application/json',
@@ -279,7 +278,7 @@ export const useParecer =  () => {
         const cargaComoboDescripcion = async () =>{
             floading(true)
             try {
-                console.log(sesion.token )
+                //console.log(sesion.token )
                 const resp = await vistaApi.get<ComboDescripcion[]>('services/requirementType/listByClient?charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId+'&clienteId='+sesion.clienteId,{
                     headers:{
                         'Content-Type': 'application/json',
@@ -328,7 +327,7 @@ export const useParecer =  () => {
         const cargaComboMotivo = async () =>{
             floading(true)
             try {
-                console.log(sesion.token )
+                //console.log(sesion.token )
                 const resp = await vistaApi.get<ComboMotivo[]>('services/purportMotive/listByClienteId/'+sesion.clienteId,{
                     headers:{
                         'Content-Type': 'application/json',
@@ -377,7 +376,7 @@ export const useParecer =  () => {
         const cargaComboFamilia = async () =>{
             floading(true)
             try {
-                console.log(sesion.token )
+                //console.log(sesion.token )
                 const resp = await vistaApi.get<ComboFamilia[]>('services/productService/family/'+sesion.clienteId+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion,{
                     headers:{
                         'Content-Type': 'application/json',
@@ -426,7 +425,8 @@ export const useParecer =  () => {
         const cargaComboProductoServicio = async () =>{
             floading(true)
             try {
-                console.log(sesion.token )
+                console.log('Peticion enviada combo producto servicio')
+                console.log('services/productService/familyWithProducts/'+sesion.clienteId+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion )
                 const resp = await vistaApi.get<ComboProductoServicio[]>('services/productService/familyWithProducts/'+sesion.clienteId+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion,{
                     headers:{
                         'Content-Type': 'application/json',
@@ -475,7 +475,7 @@ export const useParecer =  () => {
         const cargaComoboTipoUsuario = async () =>{
             floading(true)
             try {
-                console.log(sesion.token )
+                //console.log(sesion.token )
                 const resp = await vistaApi.get<TipoUsuarioResponse[]>('services/clientUserType/listActiveByClient/'+sesion.clienteId+'?charter='+sesion.charter,{
                     headers:{
                         'Content-Type': 'application/json',
@@ -578,7 +578,7 @@ export const useParecer =  () => {
             
             floading(true)
             try {
-                console.log(sesion.token )
+                //console.log(sesion.token )
                 //TEST parecer.parecerSeleccionado.idOpinion  -->2691
                 const resp = await vistaApi.get<ExigenciasOportunityTerciario[]>('services/exigencias/list/opportunity/2691/typeUserCli/'+sesion.tipoClientId,{
                     headers:{
@@ -657,7 +657,7 @@ export const useParecer =  () => {
              
              floading(true)
              try {
-                 console.log(sesion.token )
+                 //console.log(sesion.token )
                  //TEST parecer.parecerSeleccionado.idOpinion  -->2691
                  const resp = await vistaApi.get<ValoresResponse[]>('services/oportunityProductService/list/2691/'+sesion.contratoId,{
                      headers:{
@@ -871,13 +871,13 @@ export const useParecer =  () => {
                             "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion), 
                             "status": "1", 
                             "tipoDataMeta": 0, 
-                            "tipoExigenciaId": 0, 
-                            "tipoUsuarioClienteId": 0, 
+                            "tipoExigenciaId": parseInt(item.tipoExigencia), 
+                            "tipoUsuarioClienteId":parseInt(item.tipoUsuario),
                             "titulo": item.descripcion 
                         });
                     }
                   });
-                console.log('paquete enviando...')
+                console.log('paquete enviando...saveExigencias')
 
                 console.log('---------------------------')
                 console.log(arrExigenciasAux);
@@ -927,24 +927,27 @@ export const useParecer =  () => {
    
                 console.log('---------------------------')
                 console.log(payload.parecer);
-                console.log(parecer.parecerSeleccionado);
+                
                 console.log('---------------------------')
+                let payloadParecer = { 
+                    "motivoParecerId": null,
+                    "justificativa": "ok",
+                    "parecer":payload.parecer.estatusGO===1 ? "GO" : "NO GO",
+                    "valores": [],
+                    "importExportInput": null,
+                    "exibeAbaValor": null,
+                    "collaboratorUser": "N",
+                    "oportunidadeExigencia": [],
+                    "colaboradorId": sesion.colaboradorId,
+                    "parecerId": parecer.parecerSeleccionado.parecerId,
+                    "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
+                    "charter": sesion.charter
+                  
+             }
+             console.log('Paquete enviado parecer save');
+             console.log(payloadParecer)
                       
-                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',{ 
-                        "motivoParecerId": null,
-                        "justificativa": "ok",
-                        "parecer":payload.parecer.estatusGO===1 ? "GO" : "NO GO",
-                        "valores": [],
-                        "importExportInput": null,
-                        "exibeAbaValor": null,
-                        "collaboratorUser": "N",
-                        "oportunidadeExigencia": [],
-                        "colaboradorId": sesion.colaboradorId,
-                        "parecerId": parecer.parecerSeleccionado.parecerId,
-                        "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
-                        "charter": sesion.charter
-                      
-                 }, {
+                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',payloadParecer, {
                                     headers:{
                                     'Content-Type': 'application/json',
                                     'Accept': 'application/json',
@@ -1026,7 +1029,7 @@ export const useParecer =  () => {
                             "charter": sesion.charter
                           };
                     
-                          console.log('paquete enviando...')
+                          console.log('paquete enviando valores save...')
 
                           console.log('---------------------------')
                           console.log(valoresAux);

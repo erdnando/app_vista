@@ -70,8 +70,8 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'erdnandovr@algartech.com',
-                password:'044482',
+                email:'erdnando@gmail.com',
+                password:'248854',
                 whatsapp:'(34) 99830-0082',
                 telefono:'(34) 99830-0082',
                 direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'

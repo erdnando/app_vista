@@ -1,9 +1,6 @@
 import React, { useContext, useState } from 'react';
-import {  Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { colores } from '../../theme/appTheme';
-import CustomIcon from '../../theme/CustomIcon';
+import {  View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
-import CheckBox from '@react-native-community/checkbox';
 import { CheckBoxFiltro } from './CheckBoxFiltro';
 
 

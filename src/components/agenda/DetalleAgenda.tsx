@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-import { FlatList, SectionList, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text,View } from 'react-native';
 import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { GeneralContext } from '../../state/GeneralProvider';
-import CustomIcon from '../../theme/CustomIcon';
 import { HeaderTitle } from '../HeaderTitle';
 import { Spacer } from '../Spacer';
 import { IconoActualizacion } from '../ultimasActualizaciones/IconoActualizacion';

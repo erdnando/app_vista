@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Modal, TouchableHighlight, View, TextStyle, Text, Platform, Button } from 'react-native';
+import { Modal, View, Text, Platform, Button } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
 import DateTimePicker from '@react-native-community/datetimepicker';
