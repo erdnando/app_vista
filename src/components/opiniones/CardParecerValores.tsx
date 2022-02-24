@@ -28,7 +28,7 @@ export const CardParecerValores = () => {
 
 
     {/* tarjeta */}
-    return (  <View style={{height:item.colapsado?160:390, width:'100%',justifyContent:'center',
+    return (  <View style={{height:item.colapsado?160:410, width:'100%',justifyContent:'center',
                                       alignContent:'center',alignItems:'flex-start',paddingLeft:4,paddingTop:5,
                                       backgroundColor: 'white', borderRadius:7,padding:0,elevation:6,
                                       shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {
@@ -72,9 +72,9 @@ export const CardParecerValores = () => {
                                     <View style={{flex:1,width:'100%'}}>
                                     <Collapsible collapsed={item.colapsado}  style={{justifyContent:'flex-start',alignContent:'flex-start',
                                                                                      alignItems:'flex-start'}} >
-                                        <View style={{flex:0,width:'100%', height:330, }} >
+                                        <View style={{flex:0,width:'100%', height:340, }} >
                                        
-                                            {/* motivo */}
+                                           
                                             <View style={{flex:0,width:'90%',height:50,left:11,top:-10}}>
                                               <InputMensajeSimple placeholder='Motivo' width='96%' campo={item.motivo} maxLength={50}
                                               onChangeMensaje={(msg:string)=>{
@@ -85,10 +85,21 @@ export const CardParecerValores = () => {
                                                 isFormValoresValid()
                                               }}></InputMensajeSimple>
                                             </View>
+                                            {/* motivo */}
+                                            {/* <View style={{flex:0,width:'90%',height:50,left:4,top:0}}>
+                                              <Select placeholder='Motivo' campo={item.familia} width='96%' items={opiniones.catMotivo}
+                                                onValueChange={function (value: any, index: number): void {
+                                                  const payload= opiniones;
+                                                  console.log(value)
+                                                  payload.valores[item.id].motivo =value;
+                                                  setOpiniones(payload)
+                                                  isFormValoresValid()
+                                                }} />
+                                              </View> */}
                                            
 
                                              {/* lotes, item and qtde */}
-                                             <View style={{flex:0,width:'90%',height:55,flexDirection:'row',left:16,top:-18}}>
+                                             <View style={{flex:0,width:'90%',height:55,flexDirection:'row',left:16,top:-8}}>
 
                                                   <InputMensajeSimpleCol placeholder='Lote' width='90%' campo={item.lote}
                                                   onChangeMensaje={(msg:string)=>{
@@ -120,7 +131,7 @@ export const CardParecerValores = () => {
                                               <Spacer height={0}></Spacer>
 
                                             {/* familia */}
-                                            <View style={{flex:0,width:'90%',height:40,left:4,top:-20}}>
+                                            <View style={{flex:0,width:'90%',height:40,left:4,top:-10}}>
                                               <Select placeholder='Familia' campo={item.familia} width='96%' items={opiniones.catFamilia}
                                                 onValueChange={function (value: any, index: number): void {
                                                   const payload= opiniones;
@@ -133,7 +144,7 @@ export const CardParecerValores = () => {
 
                                             <Spacer height={14}></Spacer>
                                             {/* producto servicio */}
-                                            <View style={{flex:0,width:'90%',left:16,height:50,top:-28}}>
+                                            <View style={{flex:0,width:'90%',left:16,height:50,top:-18}}>
                                                 <InputMensajeSimpleCol placeholder='Produto' width='96%' campo={item.productoServicio} maxLength={50}
                                                 onChangeMensaje={(msg:string)=>{
                                                   const payload= opiniones;
@@ -148,7 +159,7 @@ export const CardParecerValores = () => {
 
 
                                             {/* valor inicial and final */}
-                                            <View style={{flex:0,width:'90%',flexDirection:'row',left:16,top:-34}}>
+                                            <View style={{flex:0,width:'90%',flexDirection:'row',left:16,top:-24}}>
                                                 <InputMensajeSimpleCol placeholder='Valor inicial' width='90%' campo={item.valorinicial}
                                                 onChangeMensaje={(msg:string)=>{
                                                   const payload= opiniones;
@@ -168,7 +179,7 @@ export const CardParecerValores = () => {
                                             <Spacer height={2}></Spacer>
 
                                             {/* justificativa */}
-                                            <View style={{flex:0,width:'90%',left:16,height:50,top:-28}}>
+                                            <View style={{flex:0,width:'90%',left:16,height:50,top:-18}}>
                                                 <InputMensajeSimpleCol placeholder='Justificativa' width='96%' campo={item.justificativa} maxLength={50}
                                                 onChangeMensaje={(msg:string)=>{
                                                   const payload= opiniones;

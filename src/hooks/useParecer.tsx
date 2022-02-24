@@ -17,6 +17,7 @@ import { OpinionesValores } from '../models/OpinionesValores';
 import { ValoresResponse } from '../models/response/ValoresResponse';
 import { OpinionesRequest } from '../models/OpinionesRequest';
 import { RNFetchBlobSession } from 'rn-fetch-blob';
+import { ComboProductoServicio } from '../models/ComboProductoServicio';
 
 export const useParecer =  () => {
 
@@ -386,7 +387,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op combo familia:::::::::::::::::::::x');
+                console.log('op combo familia:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -417,6 +418,55 @@ export const useParecer =  () => {
                 floading(false)
             } catch (error) {
                 console.log('error al consultar combo familia')
+                console.log(error);
+                floading(false)
+            }
+        }
+
+        const cargaComboProductoServicio = async () =>{
+            floading(true)
+            try {
+                console.log(sesion.token )
+                const resp = await vistaApi.get<ComboProductoServicio[]>('services/productService/familyWithProducts/'+sesion.clienteId+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token
+                    },
+                }, 
+                );
+
+                console.log('op ProductoServicio:::::::::::::::::::::');
+                console.log(resp.data);
+
+               
+                if(resp.data.length > 0){
+
+                    let arrAux=opiniones.catFamilia;//get reference
+                    arrAux=[];
+                  
+                      resp.data[0].produtos.forEach(function(item,index){
+                        arrAux.push({
+                                   value:item.id.toString(),
+                                   label:item.descricao
+                               });
+                       });
+
+
+                    console.log("asignando datos");
+                    const payload = opiniones;
+                    payload.catFamilia = arrAux;
+                    setOpiniones(payload);
+
+                }else{
+                    const payload = opiniones;
+                    payload.catFamilia = [];
+                    setOpiniones(payload);
+                }
+           
+                floading(false)
+            } catch (error) {
+                console.log('error al consultar combo producto servicio')
                 console.log(error);
                 floading(false)
             }
@@ -1108,7 +1158,7 @@ export const useParecer =  () => {
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
             saveParecer,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
             cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores,
-            saveValores
+            saveValores,cargaComboProductoServicio
         }
 }
         
