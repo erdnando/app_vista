@@ -54,7 +54,7 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op oportunidade:::::::::::::::::::::x');
+                console.log('op oportunidade:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -88,7 +88,7 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op parecer:::::::::::::::::::::x');
+                console.log('op parecer:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -144,7 +144,7 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op demanda juridica:::::::::::::::::::::x');
+                console.log('op demanda juridica:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -196,7 +196,7 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op plan accion:::::::::::::::::::::x');
+                console.log('op plan accion:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -251,7 +251,7 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op resultados:::::::::::::::::::::x');
+                console.log('op resultados:::::::::::::::::::::');
                 console.log(resp.data);
 
                   

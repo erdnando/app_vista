@@ -107,6 +107,8 @@ export const useParecer =  () => {
             floading(true)
 
             try {
+                console.log('services/opportunity/findOpinionByUser/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0'))
+
                 const resp = await vistaApi.get<ListaParecer[]>('services/opportunity/findOpinionByUser/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0'),{
                     headers:{
                         'Content-Type': 'application/json',
@@ -239,7 +241,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op combo tipo:::::::::::::::::::::x');
+                console.log('op combo tipo:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -288,7 +290,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op combo descripcion:::::::::::::::::::::x');
+                console.log('op combo descripcion:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -337,7 +339,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op combo motivo:::::::::::::::::::::x');
+                console.log('op combo motivo:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -485,7 +487,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op combo tipo usuario:::::::::::::::::::::x');
+                console.log('op combo tipo usuario:::::::::::::::::::::');
                 console.log(resp.data);
 
                
@@ -589,7 +591,7 @@ export const useParecer =  () => {
                 }, 
                 );
 
-                console.log('op exigencias terciario:::::::::::::::::::::x');
+                console.log('op exigencias terciario:::::::::::::::::::::');
                 console.log(resp.data);
 
                
