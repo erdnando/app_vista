@@ -129,7 +129,7 @@ export const CardParecerValores = () => {
                                                   setOpiniones(payload)
                                                   isFormValoresValid()
 
-                                                  asignaProductoServicio(value)
+                                                  asignaProductoServicio(value,item.id)
                                                 }} />
                                               </View>
 
@@ -137,7 +137,7 @@ export const CardParecerValores = () => {
                        
                                              {/*  producto servicio */}
                                             <View style={{flex:0,width:'90%',height:50,left:4,top:-18}}>
-                                              <Select placeholder='Producto servicio' campo={item.productoServicio} width='96%' items={opiniones.catProductoServicio}
+                                              <Select placeholder='Producto servicio' campo={item.productoServicio} width='96%' items={opiniones.valores[item.id].arrProductox}
                                                 onValueChange={function (value: any, index: number): void {
                                                   const payload= opiniones;
                                                   console.log(value)

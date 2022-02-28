@@ -23,5 +23,6 @@ export interface Opiniones{
     exigenciasIndex:number,
     tabsContador:number,
     exigenciasAllValid:boolean,
-    valoresAllValid:boolean
+    valoresAllValid:boolean,
+    
 }

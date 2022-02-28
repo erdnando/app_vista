@@ -222,6 +222,7 @@ class GeneralProvider extends React.Component{
                 valorFinal:'',
                 justificativa:'',
                 colapsado:true,
+                arrProductox:[]
             }],
             valoresAllValid:false,
             catTipoExigencia:[],

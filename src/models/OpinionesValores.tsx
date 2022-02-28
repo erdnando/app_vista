@@ -15,4 +15,5 @@ export interface OpinionesValores{
     valorFinal:string,
     justificativa:string
     colapsado:boolean,
+    arrProductox:ComboLista[]
 }

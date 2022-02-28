@@ -422,7 +422,7 @@ export const useParecer =  () => {
             }
         }
 
-        const cargaComboProductoServicio = async () =>{
+        const cargaComboProductoServicioUniverse = async () =>{
             floading(true)
             try {
                 console.log('Peticion enviada combo producto servicio')
@@ -484,15 +484,16 @@ export const useParecer =  () => {
             }
         }
 
-        const asignaProductoServicio = async(familia:string)=>{
+        const asignaProductoServicio = async(familia:string, id:number)=>{
             console.log('Recargando producto servicio:::::::::..')
               console.log(familia)
 
               console.log(opiniones.catProductoServicioUniverse)
+              //get family products filtered by family id
               const listProductoServicio = opiniones.catProductoServicioUniverse.filter(item => item.familiaId === familia)   //.find(element => element.familiaId = familia);
             
             
-              let arrAux=opiniones.catProductoServicio;//get reference
+              let arrAux=opiniones.valores[id].arrProductox;//get reference
 
                arrAux=[];
  
@@ -508,7 +509,7 @@ export const useParecer =  () => {
               });
  
                const payloadU = opiniones;
-               payloadU.catProductoServicio = arrAux;
+               payloadU.valores[id].arrProductox = arrAux;
                setOpiniones(payloadU);
 
         }
@@ -718,6 +719,29 @@ export const useParecer =  () => {
                      arrAux=[];
                    
                        resp.data.forEach(function(item,index){
+
+
+                        //get family products filtered by family id
+                        const listProductoServicio = opiniones.catProductoServicioUniverse.filter(itemx => itemx.familiaId === item.familia.id.toString());
+                        let arrAuxxx=opiniones.catProductoServicio;//get reference
+                        arrAuxxx=[];
+            
+                        listProductoServicio.forEach(function(itemy,index){
+
+                            if(   !arrAuxxx.find(x => x.value === itemy.value)   ){
+                                arrAuxxx.push({
+                                    value:itemy.value,
+                                    label:itemy.label
+                                });
+                            }
+                            
+                        });
+
+
+
+
+
+
                          arrAux.push({
                             id:index,
                             idValor:item.id.toString(),
@@ -727,12 +751,13 @@ export const useParecer =  () => {
                             item:item.item.toString(),
                             qtde:item.quantidade.toString(),
                             familia:item.familia.id.toString(),
-                            productoServicio:item.produtoServico.descricao,
+                            productoServicio:item.produtoServico.id.toString(),
                             productoServicioId: item.produtoServico.id.toString(),
                             valorinicial:item.valorInicial.toString(),
                             valorFinal:item.valorFinal===null ? '0' : item.valorFinal.toString(),
                             justificativa:'',
                             colapsado:true,
+                            arrProductox:arrAuxxx
                          });
                         });
  
@@ -1131,7 +1156,7 @@ export const useParecer =  () => {
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
             saveParecer,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
             cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores,
-            saveValores,cargaComboProductoServicio,asignaProductoServicio
+            saveValores,cargaComboProductoServicioUniverse,asignaProductoServicio
         }
 }
         

@@ -13,7 +13,7 @@ export const ListOpiniones = () => {
   const { ids,setIds,setTabSelected,setTabSelectedOld,tabSelected, parecer,setParecer} = useContext( GeneralContext )
   const { cargaComoboTipo,cargaComoboDescripcion,cargaComoboTipoUsuario,
     cargaExigenciasTerciario,cargaComboMotivo,getListParecerRealizadoTerciario,cargaComboFamilia,
-    cargaValores,cargaComboProductoServicio } = useParecer();
+    cargaValores,cargaComboProductoServicioUniverse } = useParecer();
  
 
 
@@ -35,7 +35,7 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
 
                                   setTabSelectedOld(tabSelected)
                                   setTabSelected(item.idOpinion);
-
+                                  cargaComboProductoServicioUniverse();
                                   cargaComoboTipo();
                                   cargaComoboDescripcion();
                                   cargaComboMotivo();
@@ -44,7 +44,7 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
                                   cargaComoboTipoUsuario();
                                   cargaExigenciasTerciario();
                                   getListParecerRealizadoTerciario();
-                                  cargaComboProductoServicio();
+                                  
                                   cargaValores();
 
                                   
