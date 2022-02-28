@@ -39,16 +39,14 @@ export const useParecer =  () => {
             floading(true)
             
             try {
-                const resp = await vistaApi.get<ListaParecer[]>('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'?collaboratorUser=N&filialId=2',{
+                console.log('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'?collaboratorUser=N&filialId=1')
+                const resp = await vistaApi.get<ListaParecer[]>('services/opportunity/findOpinionByCollaborator/'+sesion.colaboradorId+'/'+ (ids.idOpinionBusqueda!=''?ids.idOpinionBusqueda:'0')  +'?collaboratorUser=N&filialId=1',{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token
                     },
-                   params:{ 
-                       "collaboratorUser" : "N",
-                       "filialId" : "2"
-                    }
+                   
                 }, 
                 );
 
@@ -71,7 +69,7 @@ export const useParecer =  () => {
                                     fechaOpinion:item.dataCertame,
                                     ubicacion: (item.localidade.length>13? item.localidade.substring(0,13)+'...' :item.localidade) +' - '+ item.estado,
                                     estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
-                                    clienteId:sesion.clienteId,
+                                    clienteId:item.clienteId,//  sesion.clienteId,
                                     modalidade:item.descricaoModalidade,
                                     plataforma:'NA'
                                });
@@ -114,10 +112,6 @@ export const useParecer =  () => {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token
-                    },
-                   params:{ 
-                       "collaboratorUser" : "N",
-                       "filialId" : "2"
                     }
                 }, 
                 );
@@ -133,15 +127,15 @@ export const useParecer =  () => {
                     resp.data.forEach(function(item,index){
                         arrAux.push({
                                     id:index,
-                                    opinion:item.descricao,
+                                    opinion:item.nomeCliente,
                                     idOpinion:item.oportunidadeId.toString(),
                                     parecerId:item.parecerId.toString(),
                                     edital:item.numeroEdital,
                                     oragao:item.nomeOrgao,
-                                    fechaOpinion:item.dataCertame,
+                                    fechaOpinion:item.dataCertame+' - '+ item.horaCertame.substring(0,2)+':'+item.horaCertame.substring(2),
                                     ubicacion: (item.localidade.length>13? item.localidade.substring(0,13)+'...' :item.localidade) +' - '+ item.estado,
                                     estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
-                                    clienteId:sesion.clienteId,
+                                    clienteId:item.clienteId,// sesion.clienteId,
                                     modalidade:item.descricaoModalidade,
                                     plataforma:'NA'
                                });
@@ -179,7 +173,7 @@ export const useParecer =  () => {
 
                 //TEST
                 //'+ parecer.parecerSeleccionado.parecerId+'
-                const resp = await vistaApi.get<ParecerRealizado[]>('services/opportunity/listOtherUserOpinions/5156/0',{
+                const resp = await vistaApi.get<ParecerRealizado[]>('services/opportunity/listOtherUserOpinions/'+ parecer.parecerSeleccionado.parecerId+'/0',{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -231,8 +225,8 @@ export const useParecer =  () => {
         const cargaComoboTipo = async () =>{
             floading(true)
             try {
-                //console.log(sesion.token )
-                const resp = await vistaApi.get<TipoExigencia[]>('services/requirement/listAllTypeGoals?charter=2',{
+                console.log('services/requirement/listAllTypeGoals?charter='+sesion.charter )
+                const resp = await vistaApi.get<TipoExigencia[]>('services/requirement/listAllTypeGoals?charter='+sesion.charter,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -281,7 +275,7 @@ export const useParecer =  () => {
             floading(true)
             try {
                 //console.log(sesion.token )
-                const resp = await vistaApi.get<ComboDescripcion[]>('services/requirementType/listByClient?charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId+'&clienteId='+sesion.clienteId,{
+                const resp = await vistaApi.get<ComboDescripcion[]>('services/requirementType/listByClient?charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId+'&clienteId='+ids.clienteIdSeleccionado,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -330,7 +324,7 @@ export const useParecer =  () => {
             floading(true)
             try {
                 //console.log(sesion.token )
-                const resp = await vistaApi.get<ComboMotivo[]>('services/purportMotive/listByClienteId/'+sesion.clienteId,{
+                const resp = await vistaApi.get<ComboMotivo[]>('services/purportMotive/listByClienteId/'+ids.clienteIdSeleccionado,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -379,7 +373,7 @@ export const useParecer =  () => {
             floading(true)
             try {
                 //console.log(sesion.token )
-                const resp = await vistaApi.get<ComboFamilia[]>('services/productService/family/'+sesion.clienteId+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion,{
+                const resp = await vistaApi.get<ComboFamilia[]>('services/productService/family/'+ids.clienteIdSeleccionado+'?filialId=1&oportunidadeId='+parecer.parecerSeleccionado.idOpinion,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -398,10 +392,14 @@ export const useParecer =  () => {
                     arrAux=[];
                   
                       resp.data.forEach(function(item,index){
-                        arrAux.push({
-                                   value:item.id.toString(),
-                                   label:item.descricao
-                               });
+
+                          if(   !arrAux.find(x => x.value === item.id.toString())) {
+                                arrAux.push({
+                                        value:item.id.toString(),
+                                        label:item.descricao
+                                    });
+                         }
+
                        });
 
 
@@ -428,8 +426,8 @@ export const useParecer =  () => {
             floading(true)
             try {
                 console.log('Peticion enviada combo producto servicio')
-                console.log('services/productService/familyWithProducts/'+sesion.clienteId+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion )
-                const resp = await vistaApi.get<ComboProductoServicio[]>('services/productService/familyWithProducts/'+sesion.clienteId+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion,{
+                console.log('services/productService/familyWithProducts/'+ids.clienteIdSeleccionado+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion )
+                const resp = await vistaApi.get<ComboProductoServicio[]>('services/productService/familyWithProducts/'+ids.clienteIdSeleccionado+'?filialId=2&oportunidadeId='+parecer.parecerSeleccionado.idOpinion,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -443,21 +441,33 @@ export const useParecer =  () => {
 
                
                 if(resp.data.length > 0){
+                   
+                   let arrAux=opiniones.catProductoServicioUniverse;//get reference
+                   arrAux=[];
+                    //--------------------------
+                    for(var i=0;i<(resp.data.length-1);i++){
 
-                    let arrAux=opiniones.catProductoServicio;//get reference
-                    arrAux=[];
-                  
-                      resp.data[0].produtos.forEach(function(item,index){
-                        arrAux.push({
-                                   value:item.id.toString(),
-                                   label:item.descricao
-                               });
-                       });
+                        
+                        resp.data[i].produtos.forEach(function(item,index){
+                           
+                            arrAux.push({
+                                    value:item.id.toString(),
+                                    label:item.descricao,
+                                    familiaId: resp.data[i].familiaId.toString()
+                                    
+                                });
+                        });
+                        
+                        const payloadU = opiniones;
+                        payloadU.catProductoServicioUniverse = arrAux;
+                        setOpiniones(payloadU);
+                    }
+                    console.log("datos universe");
+                    console.log(opiniones.catProductoServicioUniverse);
+                    //------------------------------
 
-
-                    console.log("asignando datos");
                     const payload = opiniones;
-                    payload.catProductoServicio = arrAux;
+                    payload.catProductoServicio = [];
                     setOpiniones(payload);
 
                 }else{
@@ -474,11 +484,39 @@ export const useParecer =  () => {
             }
         }
 
+        const asignaProductoServicio = async(familia:string)=>{
+            console.log('Recargando producto servicio:::::::::..')
+              console.log(familia)
+
+              console.log(opiniones.catProductoServicioUniverse)
+              const listProductoServicio = opiniones.catProductoServicioUniverse.filter(item => item.familiaId === familia)   //.find(element => element.familiaId = familia);
+            
+            
+              let arrAux=opiniones.catProductoServicio;//get reference
+
+               arrAux=[];
+ 
+               listProductoServicio.forEach(function(item,index){
+
+                if(   !arrAux.find(x => x.value === item.value)   ){
+                    arrAux.push({
+                        value:item.value,
+                        label:item.label
+                    });
+                }
+                 
+              });
+ 
+               const payloadU = opiniones;
+               payloadU.catProductoServicio = arrAux;
+               setOpiniones(payloadU);
+
+        }
         const cargaComoboTipoUsuario = async () =>{
             floading(true)
             try {
-                //console.log(sesion.token )
-                const resp = await vistaApi.get<TipoUsuarioResponse[]>('services/clientUserType/listActiveByClient/'+sesion.clienteId+'?charter='+sesion.charter,{
+                //console.log(sesion.token )  75?
+                const resp = await vistaApi.get<TipoUsuarioResponse[]>('services/clientUserType/listActiveByClient/'+ids.clienteIdSeleccionado+'?charter='+sesion.charter,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -582,7 +620,7 @@ export const useParecer =  () => {
             try {
                 //console.log(sesion.token )
                 //TEST parecer.parecerSeleccionado.idOpinion  -->2691
-                const resp = await vistaApi.get<ExigenciasOportunityTerciario[]>('services/exigencias/list/opportunity/2691/typeUserCli/'+sesion.tipoClientId,{
+                const resp = await vistaApi.get<ExigenciasOportunityTerciario[]>('services/exigencias/list/opportunity/'+parecer.parecerSeleccionado.idOpinion+'/typeUserCli/'+sesion.tipoClientId,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -604,34 +642,34 @@ export const useParecer =  () => {
                         arrAux.push({
                             id:index,
                             exigencia:item.titulo,
-                            observacion:item.observacao,
+                            observacion:item.observacao.toUpperCase(),
                             tipo:item.tipoUsuarioCliente.descricao,
                             dias:item.metaDias,
-                            goNoGo:item.status==='P' ? 1 : 0,
+                            goNoGo:0,
                         });
                        });
 
 
 
                     //TEST
-                        arrAux.push({
-                            id:1,
-                            exigencia:'item.titulo',
-                            observacion:'item.observacao',
-                            tipo:'item.tipoUsuarioCliente.descricao',
-                            dias:'item.metaDias',
-                            goNoGo: 0 ,
-                        });
+                        // arrAux.push({
+                        //     id:1,
+                        //     exigencia:'item.titulo',
+                        //     observacion:'item.observacao',
+                        //     tipo:'item.tipoUsuarioCliente.descricao',
+                        //     dias:'item.metaDias',
+                        //     goNoGo: 0 ,
+                        // });
                   
 
-                        arrAux.push({
-                            id:2,
-                            exigencia:'item.titulo',
-                            observacion:'item.observacao',
-                            tipo:'item.tipoUsuarioCliente.descricao',
-                            dias:'item.metaDias',
-                            goNoGo: 0 ,
-                        });
+                        // arrAux.push({
+                        //     id:2,
+                        //     exigencia:'item.titulo',
+                        //     observacion:'item.observacao',
+                        //     tipo:'item.tipoUsuarioCliente.descricao',
+                        //     dias:'item.metaDias',
+                        //     goNoGo: 0 ,
+                        // });
 
 
                     console.log("asignando datos");
@@ -660,8 +698,8 @@ export const useParecer =  () => {
              floading(true)
              try {
                  //console.log(sesion.token )
-                 //TEST parecer.parecerSeleccionado.idOpinion  -->2691
-                 const resp = await vistaApi.get<ValoresResponse[]>('services/oportunityProductService/list/2691/'+sesion.contratoId,{
+                 //TEST   -->2691
+                 const resp = await vistaApi.get<ValoresResponse[]>('services/oportunityProductService/list/'+parecer.parecerSeleccionado.idOpinion+'/'+sesion.contratoId,{
                      headers:{
                          'Content-Type': 'application/json',
                          'Accept': 'application/json',
@@ -698,10 +736,7 @@ export const useParecer =  () => {
                          });
                         });
  
- 
- 
- 
- 
+
                      console.log("asignando datos");
                      const payload = opiniones;
                      payload.valores = arrAux;
@@ -1096,7 +1131,7 @@ export const useParecer =  () => {
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
             saveParecer,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
             cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores,
-            saveValores,cargaComboProductoServicio
+            saveValores,cargaComboProductoServicio,asignaProductoServicio
         }
 }
         

@@ -61,6 +61,8 @@ class GeneralProvider extends React.Component{
 
 // erdnando@gmail.com       <---terciario.      248854
 // erdnandovr@algartech.com <----colaborador    044482
+//livia.paula@sejavista.com.br <----colaborador 11111 
+//proper@gmail.com           <---terciario.     11111
 
     state = {
         resultadosBusquedaVisible:false,
@@ -70,8 +72,8 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'erdnando@gmail.com',
-                password:'248854',
+                email:'proper@gmail.com',
+                password:'11111',
                 whatsapp:'(34) 99830-0082',
                 telefono:'(34) 99830-0082',
                 direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'
@@ -105,6 +107,7 @@ class GeneralProvider extends React.Component{
             idOpinionSeleccionado:'',
             codigoBusqueda:'',
             idMenuOpinionSelected:1,
+            clienteIdSeleccionado:'',
         },
         agenda:{
             selectedDate:'',
@@ -121,7 +124,6 @@ class GeneralProvider extends React.Component{
                 direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia',
             },
             token:'',
-            clienteId:0,
             charter:0,
             colaboradorId:0,
             contratoId:0,
@@ -151,7 +153,8 @@ class GeneralProvider extends React.Component{
                 tipoUsuario:'',
                 observaciones:'',
                 visible:true,
-                valid:false
+                valid:false,
+                tipoExigencia:''
                 },
                 {
                 descripcion: '',
@@ -160,7 +163,8 @@ class GeneralProvider extends React.Component{
                 tipoUsuario:'',
                 observaciones:'',
                 visible:false,
-                valid:false
+                valid:false,
+                tipoExigencia:''
                 },
                 {
                 descripcion: '',
@@ -169,7 +173,8 @@ class GeneralProvider extends React.Component{
                 tipoUsuario:'',
                 observaciones:'',
                 visible:false,
-                valid:false
+                valid:false,
+                tipoExigencia:''
                 },
                 {
                 descripcion: '',
@@ -178,7 +183,8 @@ class GeneralProvider extends React.Component{
                 tipoUsuario:'',
                 observaciones:'',
                 visible:false,
-                valid:false
+                valid:false,
+                tipoExigencia:''
                 },
                 {
                 descripcion: '',
@@ -187,7 +193,8 @@ class GeneralProvider extends React.Component{
                 tipoUsuario:'',
                 observaciones:'',
                 visible:false,
-                valid:false
+                valid:false,
+                tipoExigencia:''
                 }
 
             ],
@@ -223,6 +230,7 @@ class GeneralProvider extends React.Component{
             catMotivo:[],
             catFamilia:[],
             catProductoServicio:[],
+            catProductoServicioUniverse:[]
         },
         agendafiltro:{
             filtroHorario: 'Seleccione una horario',

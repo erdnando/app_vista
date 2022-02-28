@@ -5,4 +5,5 @@ export interface IDs{
     idOpinionSeleccionado:string,
     codigoBusqueda:string,
     idMenuOpinionSelected:number,
+    clienteIdSeleccionado:string
 }

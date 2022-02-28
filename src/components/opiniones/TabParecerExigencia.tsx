@@ -1,5 +1,5 @@
 import React, { useState,useContext } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, TextStyle } from 'react-native';
 import { useParecer } from '../../hooks/useParecer';
 import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
@@ -92,20 +92,36 @@ export const TabParecerExigencias = ( { visible,indexTab}: Props ) => {
 
 
                        {/* Eliminar card */}
-                       { opiniones.tabsContador >1 ? <View style={{ position:'absolute', top:-15,right:5, backgroundColor:'red',
-                                                               borderWidth:1,borderColor:'red', borderRadius:50, height:30, width:30, 
-                                                               justifyContent:'center',  alignItems:'center' }}>
+                      <View style={{ position:'absolute', top:-15,right:5, backgroundColor:'red',
+                                    borderWidth:1,borderColor:'red', borderRadius:50, height:30, width:30, 
+                                    justifyContent:'center',  alignItems:'center' }}>
                             <TouchableOpacity onPress={()=>{
-                              console.log('closing tab...'+indexTab)
-                              ajustaBorrado(indexTab)
-                              formExigenciasValid()
+
+                              if(opiniones.tabsContador>1){
+                                  console.log('closing tab...'+indexTab)
+                                  ajustaBorrado(indexTab)
+                                  formExigenciasValid()
+                              }else{
+                                console.log('cleaning tab...'+indexTab)
+                                const payload= opiniones;
+                                payload.exigencias[indexTab].descripcion='';
+                                payload.exigencias[indexTab].oportunidad='';
+                                payload.exigencias[indexTab].qtededias='';
+                                payload.exigencias[indexTab].tipoUsuario='';
+                                payload.exigencias[indexTab].observaciones='';
+                                payload.exigencias[indexTab].valid=false;
+                                payload.exigencias[indexTab].tipoExigencia='';
+                                setOpiniones(payload);
+                                
+                              }
+                              
                             }}>
                             <Text> 
                               <CustomIcon  name='ic_round-close' size={22} color='white' ></CustomIcon>
                             </Text>
                             </TouchableOpacity>
-                           
-                        </View> : <View></View>}
+                          
+                        </View> 
 
                        
 

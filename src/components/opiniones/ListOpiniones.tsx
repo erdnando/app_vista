@@ -26,6 +26,7 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
                                   const payload= ids;
                                   payload.idOpinionBusqueda= '';
                                   payload.idOpinionSeleccionado=item.idOpinion;
+                                  payload.clienteIdSeleccionado=item.clienteId.toString();
                                   setIds(payload);
 
                                   const payload1= parecer;
@@ -58,7 +59,7 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
                                   <View style={{ flexDirection:'column', margin:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
 
                                     {/* titulo */}
-                                      <View style={{width:'85%', justifyContent:'space-evenly', marginBottom:10}}>
+                                      <View style={{width:'99%', justifyContent:'space-evenly', marginBottom:10}}>
                                           <Text style={{fontFamily:'Roboto-Regular',fontWeight:'400', fontSize:18,color:'#373737', textAlign:'justify'}}>{item.opinion}</Text>
                                       </View>
                                       {/* id, edital */}

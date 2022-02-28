@@ -47,7 +47,7 @@ export const InputEmail = ( { modo, label, iconLeft ,iconRight}: Props ) => {
               keyboardType='email-address'
               autoCapitalize='none'
               autoCorrect = {false}
-              maxLength={27}
+              maxLength={33}
               value={usuario.email}
           />
           <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ 

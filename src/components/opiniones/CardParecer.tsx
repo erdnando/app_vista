@@ -84,9 +84,9 @@ export const CardParecer = ( ) => {
                               setOpiniones(payload);}}
                           ></RoundedSelectors>
 
-                          <Spacer height={15}></Spacer>
+                          <Spacer height={20}></Spacer>
 
-                          {usuario.tipo===TipoUsuario.USER_TERCEIRO && 
+                          {opiniones.parecer.estatusGO===2 ?  
                           <Select placeholder='Motivo' campo={opiniones.parecer.motivo} items={opiniones.catMotivo}
                             onValueChange={function (value: any, index: number): void {
 
@@ -94,7 +94,7 @@ export const CardParecer = ( ) => {
                                   opiniones.parecer.motivo=value;
                                   setOpiniones(payload);
                             }} 
-                          />
+                          /> : <View style={{height:34}}></View>
                             } 
                  
                           <View style={{marginLeft:-10,paddingHorizontal:3}}>
@@ -108,11 +108,11 @@ export const CardParecer = ( ) => {
                           </View>
 
 
-
+                 {/* <Spacer height={5}></Spacer> */}
 
                   {/* boton salvar*/}
-                  <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',
-                                justifyContent:'flex-start', alignContent:'center', bottom:-5}}>
+                  <View style={{flex:0, width:'100%',  alignItems:'center',height:30,backgroundColor:'transparent',
+                                justifyContent:'flex-start', alignContent:'center'}}>
                       <TouchableOpacity 
                         disabled={ !isFormParecerValid() ? true : false} 
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',

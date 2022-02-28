@@ -6,6 +6,7 @@ import { TipoExigencia } from './response/TipoExigencia';
 import { ComboLista } from './ComboLista';
 import { ComboDescripcion } from './response/ComboDescripcion';
 import { OpinionesExigenciasTerciario } from './OpinionesExigenciasTerciario';
+import { ComboListaExtendido } from './ComboListaExtendido';
 
 export interface Opiniones{
     parecer: OpinionesParecer,
@@ -18,6 +19,7 @@ export interface Opiniones{
     catMotivo:ComboLista[],
     catFamilia:ComboLista[],
     catProductoServicio:ComboLista[],
+    catProductoServicioUniverse:ComboListaExtendido[],
     exigenciasIndex:number,
     tabsContador:number,
     exigenciasAllValid:boolean,

@@ -6,22 +6,13 @@ import { TabParecerExigencias } from './TabParecerExigencia';
 import { SelectorTabParecerExigencias } from './SelectorTabParecerExigencia';
 import { useParecer } from '../../hooks/useParecer';
 import { Spacer } from '../Spacer';
+import Toast from 'react-native-toast-message';
 
 
 export const CardParecerExigencias = ( ) => {
 
   const { opiniones,setOpiniones} = useContext(GeneralContext);
-  const { saveExigencias } = useParecer();
-  //const [hasData] = useState(false)
-
-
-  // const items=[   { label: "JavaScript", value: "JavaScript" },
-  // { label: "TypeStript", value: "TypeStript" },
-  // { label: "Python", value: "Python" },
-  // { label: "Java", value: "Java" },
-  // { label: "C++", value: "C++" },
-  // { label: "C", value: "C" },
-  // ];
+  const { saveExigencias,formExigenciasValid } = useParecer();
 
       return <View style={{flex:1,width:'100%',flexDirection:'column', backgroundColor:'transparent',alignItems:'flex-start'}}>
                {/* <> */}
@@ -33,11 +24,19 @@ export const CardParecerExigencias = ( ) => {
                       <TabParecerExigencias visible={opiniones.tabsContador===5?true:false} indexTab={4} ></TabParecerExigencias>  
                       </View>
                     <Spacer height={10}></Spacer>
+                    {/* Incrementar */}
                     <View style={{flex:1, flexDirection:'row',}}>
-
                         {/* ------------------Incrementar---------------------------------------------------- */}
                         <SelectorTabParecerExigencias visible={true} validItem={false} label='Salvar' index={6} selected={false}
-                        onPress={()=>{ console.log('+')  
+                        onPress={()=>{ 
+                          if(!opiniones.exigenciasAllValid){
+                            console.log('no se puede agregar')
+                            Toast.show({type: 'ko',props: { mensaje: 'Antes de agregar otra exigencia, capture todos los datos' }});
+                            return;
+                          }
+                          
+                          console.log('incrementando   +');
+
                           //incrementando los tabs
                           const payload= opiniones;
                           console.log(payload.exigenciasIndex)
@@ -53,6 +52,15 @@ export const CardParecerExigencias = ( ) => {
                           }
                           console.log(payload.exigenciasIndex-1)
                           payload.exigencias[payload.exigenciasIndex-1].visible=true;
+
+                          //cleaning item
+                          payload.exigencias[payload.exigenciasIndex-1].descripcion='';
+                          payload.exigencias[payload.exigenciasIndex-1].oportunidad='';
+                          payload.exigencias[payload.exigenciasIndex-1].qtededias='';
+                          payload.exigencias[payload.exigenciasIndex-1].tipoUsuario='';
+                          payload.exigencias[payload.exigenciasIndex-1].observaciones='';
+                          payload.exigencias[payload.exigenciasIndex-1].valid=false;
+                          payload.exigencias[payload.exigenciasIndex-1].tipoExigencia='';
                           setOpiniones(payload);
 
                         }} icono='ic_baseline-lightbulb'></SelectorTabParecerExigencias>

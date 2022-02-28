@@ -7,7 +7,6 @@ import { Usuario } from './Usuario';
 export interface Sesion{
     usuario:Usuario,
     token:string,
-    clienteId:number,
     tipoClientId:number,
     charter:number,
     colaboradorId:number,

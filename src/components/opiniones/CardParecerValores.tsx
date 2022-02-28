@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {  FlatList, Platform, Switch, Text, TouchableOpacity, View } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { colores, gstyles } from '../../theme/appTheme';
 import CustomIcon from '../../theme/CustomIcon';
 import { Spacer } from '../Spacer';
-import { LabelTexto } from './LabelTexto';
 import { OpinionesValores } from '../../models/OpinionesValores';
 import { Select } from '../Select';
-import { InputMensajeSimple } from './InputMensajeSimple';
 import { InputMensajeSimpleCol } from './InputMensajeSimpleCol';
 import { useParecer } from '../../hooks/useParecer';
 
@@ -16,7 +14,7 @@ export const CardParecerValores = () => {
 
   //invoke global state
   const { opiniones,setOpiniones } = useContext( GeneralContext )
-  const { isFormValoresValid,saveValores } = useParecer()
+  const { isFormValoresValid,saveValores,asignaProductoServicio } = useParecer()
 
   useEffect(() => {
     isFormValoresValid();
@@ -24,8 +22,6 @@ export const CardParecerValores = () => {
   
 
   const renderUpdateItem = (item:OpinionesValores) =>{
-
-
 
     {/* tarjeta */}
     return (  <View style={{height:item.colapsado?160:410, width:'100%',justifyContent:'center',
@@ -38,7 +34,10 @@ export const CardParecerValores = () => {
                                     {/* vista colapsada */}
                                     <View style={{flex:0,flexDirection:'row', justifyContent:'flex-end',alignContent:'center', 
                                                   width:'100%',marginVertical:16,marginTop:0,alignItems:'flex-end',height:40}}>
-                                        <Text style={{marginVertical:3,fontFamily:'Roboto-Bold',color:'#838892', fontSize:20}}>GO</Text>
+                                        <Text style={{marginVertical:3,fontFamily:'Roboto-Bold',color:'#838892', fontSize:20}}>
+                                       { opiniones.valores[item.id].go ? 'GO' : 'NO GO'}
+
+                                        </Text>
                                         <Switch 
                                           style={{ transform: (Platform.OS==='android' ? [{ scaleX: 1.3 }, { scaleY: 1.3 }] : [{ scaleX: 1 }, { scaleY: 1 }]) , marginHorizontal:16 }}
                                           trackColor={{false:'#EDF0F5', true:'#FDBE0F'}}
@@ -74,27 +73,17 @@ export const CardParecerValores = () => {
                                                                                      alignItems:'flex-start'}} >
                                         <View style={{flex:0,width:'100%', height:340, }} >
                                        
-                                           
-                                            {/* <View style={{flex:0,width:'90%',height:50,left:11,top:-10}}>
-                                              <InputMensajeSimple placeholder='Motivo' width='96%' campo={item.motivo} maxLength={50}
-                                              onChangeMensaje={(msg:string)=>{
-                                                const payload= opiniones;
-                                                payload.valores[item.id].motivo =msg;
-                                                setOpiniones(payload)
-
-                                                isFormValoresValid()
-                                              }}></InputMensajeSimple>
-                                            </View> */}
                                             {/* cbo motivo */}
-                                            <View style={{flex:0,width:'90%',height:50,left:4,top:0}}>
-                                              <Select placeholder='Motivo' campo={item.familia} width='96%' items={opiniones.catMotivo}
+                                            <View style={{flex:0,width:'90%',height:50,left:4,top:0,}}>
+                                             { !item.go && <Select placeholder='Motivo' campo={item.motivo} width='96%' items={opiniones.catMotivo}
+                                              
                                                 onValueChange={function (value: any, index: number): void {
                                                   const payload= opiniones;
-                                                  console.log(value)
-                                                  payload.valores[item.id].motivo =value;
+                                                  console.log(value +' in '+ item.id);
+                                                  payload.valores[item.id].motivo = value;
                                                   setOpiniones(payload)
                                                   isFormValoresValid()
-                                                }} />
+                                                }} />}
                                               </View>
                                            
 
@@ -139,23 +128,16 @@ export const CardParecerValores = () => {
                                                   payload.valores[item.id].familia =value;
                                                   setOpiniones(payload)
                                                   isFormValoresValid()
+
+                                                  asignaProductoServicio(value)
                                                 }} />
                                               </View>
 
                                             <Spacer height={14}></Spacer>
-                                            {/* producto servicio */}
-                                            {/* <View style={{flex:0,width:'90%',left:16,height:50,top:-18}}>
-                                                <InputMensajeSimpleCol placeholder='Produto' width='96%' campo={item.productoServicio} maxLength={50}
-                                                onChangeMensaje={(msg:string)=>{
-                                                  const payload= opiniones;
-                                                  payload.valores[item.id].productoServicio =msg;
-                                                  setOpiniones(payload)
-                                                  isFormValoresValid()
-                                                }}></InputMensajeSimpleCol>
-                                            </View> */}
+                       
                                              {/*  producto servicio */}
                                             <View style={{flex:0,width:'90%',height:50,left:4,top:-18}}>
-                                              <Select placeholder='Producto servicio' campo={item.familia} width='96%' items={opiniones.catProductoServicio}
+                                              <Select placeholder='Producto servicio' campo={item.productoServicio} width='96%' items={opiniones.catProductoServicio}
                                                 onValueChange={function (value: any, index: number): void {
                                                   const payload= opiniones;
                                                   console.log(value)
@@ -226,7 +208,7 @@ export const CardParecerValores = () => {
 
 
               </View>
-            //  <TouchableOpacity style={{ borderRadius: 100,  }}    onPress={()=>{ }}></TouchableOpacity>
+            
     )
 }
 

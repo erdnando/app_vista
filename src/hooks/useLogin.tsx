@@ -96,10 +96,10 @@ export const useLogin =  () => {
           
                 const payloads= sesion;
                 payloads.token=resp.data.token;
-                payloads.clienteId=resp.data.info.clienteId === null ? 105:resp.data.info.clienteId ,//148,//112; //resp.data.info.clienteId; //XXX
+                //payloads.clienteId=resp.data.info.clienteId === null ? 105:resp.data.info.clienteId ,//148,//112; //resp.data.info.clienteId; //XXX
                 payloads.tipoClientId=resp.data.info.tipoUsuarioCliente === null ? 105 : resp.data.info.tipoUsuarioCliente.id;
                 payloads.charter=resp.data.info.charter;
-                payloads.colaboradorId=148;//resp.data.info.clienteId === null ? 105:resp.data.info.clienteId,//resp.data.info.tipoUsuarioCliente.id
+                payloads.colaboradorId=resp.data.info.idInstancia;
                 payloads.contratoId=resp.data.info.contratoId;
                 //payloads.menu=resp.data.info.menuSistema;
                 setSesion(payloads);
