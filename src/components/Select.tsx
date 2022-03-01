@@ -10,17 +10,20 @@ interface Props{
   items:Item[],
   campo:string,
   width?:string,
+  disabled?:boolean
 }
 
-export const Select = ( { onValueChange,items,placeholder,campo,width='87%'}: Props ) => {
+export const Select = ( { onValueChange,items,placeholder,campo,width='87%',disabled=false}: Props ) => {
 
   const windowWidth = Dimensions.get('window').width;
 
     return (
       <View style={{ flexDirection: 'row',left:14, borderBottomWidth:1,width:width,
-                     borderBottomColor: campo !=null ? 'orange' : 'grey' }}>
+                     borderBottomColor: campo !=null ? 
+                    (disabled ? 'grey' : 'orange')
+                      : 'grey' }}>
 
-              <RNPickerSelect 
+              <RNPickerSelect disabled={disabled}
               style={pickerSelectStyles}
                 value={campo} 
                 placeholder={{label:placeholder, value:null}}

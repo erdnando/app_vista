@@ -499,7 +499,7 @@ export const useParecer =  () => {
  
                listProductoServicio.forEach(function(item,index){
 
-                if(   !arrAux.find(x => x.value === item.value)   ){
+                if( !arrAux.find(x => x.value === item.value)   ){
                     arrAux.push({
                         value:item.value,
                         label:item.label

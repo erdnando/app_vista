@@ -38,7 +38,7 @@ export const CardParecerValores = () => {
                                        { opiniones.valores[item.id].go ? 'GO' : 'NO GO'}
 
                                         </Text>
-                                        <Switch 
+                                        <Switch disabled={opiniones.allDisabledforNoGo}
                                           style={{ transform: (Platform.OS==='android' ? [{ scaleX: 1.3 }, { scaleY: 1.3 }] : [{ scaleX: 1 }, { scaleY: 1 }]) , marginHorizontal:16 }}
                                           trackColor={{false:'#EDF0F5', true:'#FDBE0F'}}
                                           thumbColor= {opiniones.valores[item.id].go   ? '#FF9029':'#EDF0F5'}
@@ -66,7 +66,6 @@ export const CardParecerValores = () => {
                                             </View>
                                     }
 
-                                
                                     {/* vista expandida */}
                                     <View style={{flex:1,width:'100%'}}>
                                     <Collapsible collapsed={item.colapsado}  style={{justifyContent:'flex-start',alignContent:'flex-start',
@@ -74,9 +73,9 @@ export const CardParecerValores = () => {
                                         <View style={{flex:0,width:'100%', height:340, }} >
                                        
                                             {/* cbo motivo */}
-                                            <View style={{flex:0,width:'90%',height:50,left:4,top:0,}}>
+                                            <View  style={{flex:0,width:'90%',height:50,left:4,top:0,}}>
                                              { !item.go && <Select placeholder='Motivo' campo={item.motivo} width='96%' items={opiniones.catMotivo}
-                                              
+                                                disabled={opiniones.allDisabledforNoGo}
                                                 onValueChange={function (value: any, index: number): void {
                                                   const payload= opiniones;
                                                   console.log(value +' in '+ item.id);

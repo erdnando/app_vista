@@ -225,6 +225,7 @@ class GeneralProvider extends React.Component{
                 arrProductox:[]
             }],
             valoresAllValid:false,
+            allDisabledforNoGo:false,
             catTipoExigencia:[],
             catTipoDescripcion:[],
             catTipoUsuario:[],

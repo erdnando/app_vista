@@ -70,18 +70,37 @@ export const CardParecer = ( ) => {
                           </TouchableOpacity>
                         
                           <Spacer height={8}></Spacer>
+
                           <RoundedSelectors label1='GO' label2='NO GO' 
                             onPress1={()=>{
                               console.log('go')
                               const payload = opiniones;
                               payload.parecer.estatusGO=1;
+
+                              //set all valores in go
+                              payload.valores.forEach(function(item,index){
+                                item.go=true;
+                              });
+
+                              payload.allDisabledforNoGo=false;
+
+
                               setOpiniones(payload);
                             }}
                             onPress2={()=>{
                               console.log('no go')
                               const payload = opiniones;
                               payload.parecer.estatusGO=2;
-                              setOpiniones(payload);}}
+
+                               //set all valores in no go
+                               payload.valores.forEach(function(item,index){
+                                item.go=false;
+                              });
+
+                              payload.allDisabledforNoGo=true;
+
+                              setOpiniones(payload);
+                            }}
                           ></RoundedSelectors>
 
                           <Spacer height={20}></Spacer>

@@ -24,5 +24,5 @@ export interface Opiniones{
     tabsContador:number,
     exigenciasAllValid:boolean,
     valoresAllValid:boolean,
-    
+    allDisabledforNoGo:boolean,
 }
