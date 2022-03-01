@@ -205,6 +205,7 @@ class GeneralProvider extends React.Component{
                 tipo:'',
                 dias:'',
                 goNoGo:0,
+                idExigencia:''
             }],
             valores:[
                 {

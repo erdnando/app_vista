@@ -18,7 +18,7 @@ export const CardParecer = ( ) => {
 
   const { opiniones,setOpiniones,parecer,usuario} = useContext(GeneralContext);
   const { checkPermission} = useDownloadFile()
-  const { isFormParecerValid,saveParecer,cargaComboMotivo } = useParecer()
+  const { isAllParecerOK,saveParecerTerciario,cargaComboMotivo } = useParecer()
   //const [hasData] = useState(false)
 
   const items=[   { label: "JavaScript", value: "JavaScript" },
@@ -133,17 +133,17 @@ export const CardParecer = ( ) => {
                   <View style={{flex:0, width:'100%',  alignItems:'center',height:30,backgroundColor:'transparent',
                                 justifyContent:'flex-start', alignContent:'center'}}>
                       <TouchableOpacity 
-                        disabled={ !isFormParecerValid() ? true : false} 
+                        disabled={ !isAllParecerOK() ? true : false} 
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
-                        backgroundColor: !isFormParecerValid() ? '#BCC1CB' :  colores.primary, 
+                        backgroundColor: !isAllParecerOK() ? '#BCC1CB' :  colores.primary, 
                         height:48, justifyContent:'center',  }} 
                           onPress= {()=>{
                             //TODO add logic to save parecer
                             console.log('saving parecer..')
-                            saveParecer();
+                            saveParecerTerciario();
                             //clear parecer
                           }}>
-                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isFormParecerValid() ? 'black' : 'white'}}>SALVAR</Text>
+                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isAllParecerOK() ? 'black' : 'white'}}>SALVAR</Text>
                       </TouchableOpacity>
                   </View>
 

@@ -7,4 +7,5 @@ export interface OpinionesExigenciasTerciario{
     tipo:string,
     dias:string,
     goNoGo:number,
+    idExigencia:string,
 }

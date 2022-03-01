@@ -14,7 +14,7 @@ export const CardParecerExigenciasTerciario = ( ) => {
    //invoke global state
    const { opiniones,setOpiniones } = useContext( GeneralContext )
    
-   const { isFormExigenciasTerciarioValid,saveExigenciaTerciario } = useParecer()
+   const { isAllParecerOK,saveExigenciaTerciario } = useParecer()
  
    const renderUpdateItem = (item:OpinionesExigenciasTerciario) =>{
  
@@ -108,9 +108,9 @@ export const CardParecerExigenciasTerciario = ( ) => {
              <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',
                                 justifyContent:'flex-start', alignContent:'center', bottom:-5}}>
                       <TouchableOpacity 
-                        disabled={ !isFormExigenciasTerciarioValid() ? true : false} 
+                        disabled={ !isAllParecerOK() ? true : false} 
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
-                        backgroundColor: !isFormExigenciasTerciarioValid() ? '#BCC1CB' :  colores.primary, 
+                        backgroundColor: !isAllParecerOK() ? '#BCC1CB' :  colores.primary, 
                         height:48, justifyContent:'center',  }} 
                           onPress= {()=>{
                             //TODO add logic to save parecer
@@ -118,7 +118,7 @@ export const CardParecerExigenciasTerciario = ( ) => {
                             saveExigenciaTerciario();
                             //clear parecer
                           }}>
-                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isFormExigenciasTerciarioValid() ? 'black' : 'white'}}>SALVAR</Text>
+                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isAllParecerOK() ? 'black' : 'white'}}>SALVAR</Text>
                       </TouchableOpacity>
                   </View>
          </View>

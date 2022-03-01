@@ -14,7 +14,7 @@ export const CardParecerValores = () => {
 
   //invoke global state
   const { opiniones,setOpiniones } = useContext( GeneralContext )
-  const { isFormValoresValid,saveValores,asignaProductoServicio } = useParecer()
+  const { isFormValoresValid,saveValores,asignaProductoServicio,isAllParecerOK } = useParecer()
 
   useEffect(() => {
     isFormValoresValid();
@@ -236,9 +236,9 @@ return (
              <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',
                                 justifyContent:'flex-start', alignContent:'center', bottom:-5}}>
                       <TouchableOpacity 
-                        disabled={ opiniones.valoresAllValid ? false : true} 
+                        disabled={ isAllParecerOK() ? false : true} 
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
-                        backgroundColor: !opiniones.valoresAllValid ? '#BCC1CB' :  colores.primary, 
+                        backgroundColor: !isAllParecerOK() ? '#BCC1CB' :  colores.primary, 
                         height:48, justifyContent:'center',  }} 
                           onPress= {()=>{
                             //TODO add logic to save parecer
@@ -246,7 +246,7 @@ return (
                             saveValores();
                             //clear parecer
                           }}>
-                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: opiniones.valoresAllValid ? 'black' : 'white'}}>SALVAR</Text>
+                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isAllParecerOK() ? 'black' : 'white'}}>SALVAR</Text>
                       </TouchableOpacity>
              </View>
         </View>

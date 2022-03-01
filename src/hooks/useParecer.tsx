@@ -201,6 +201,8 @@ export const useParecer =  () => {
 
                        });
 
+                      
+
 
                     console.log("asignando datos");
                     const payload= parecer;
@@ -647,30 +649,10 @@ export const useParecer =  () => {
                             tipo:item.tipoUsuarioCliente.descricao,
                             dias:item.metaDias,
                             goNoGo:0,
+                            idExigencia:item.id.toString()
                         });
                        });
 
-
-
-                    //TEST
-                        // arrAux.push({
-                        //     id:1,
-                        //     exigencia:'item.titulo',
-                        //     observacion:'item.observacao',
-                        //     tipo:'item.tipoUsuarioCliente.descricao',
-                        //     dias:'item.metaDias',
-                        //     goNoGo: 0 ,
-                        // });
-                  
-
-                        // arrAux.push({
-                        //     id:2,
-                        //     exigencia:'item.titulo',
-                        //     observacion:'item.observacao',
-                        //     tipo:'item.tipoUsuarioCliente.descricao',
-                        //     dias:'item.metaDias',
-                        //     goNoGo: 0 ,
-                        // });
 
 
                     console.log("asignando datos");
@@ -868,7 +850,14 @@ export const useParecer =  () => {
                         }
                         
                        });
+
+                      
             return bFlag;
+        }
+
+        const isAllParecerOK=()=>{
+            
+            return( isFormExigenciasTerciarioValid() &&  isFormParecerValid() &&  opiniones.valoresAllValid);
         }
 
         const isFormValoresValid = ()=>{
@@ -1006,45 +995,102 @@ export const useParecer =  () => {
 
         }
 
-        const saveParecer = async () =>{
+        const saveParecerTerciario = async () =>{
             try {
                 floading(true)
                 const payload = opiniones;
                 
-                let arrExigenciasAux: Array<Exigencia> = [];
-   
-                console.log('---------------------------')
-                console.log(payload.parecer);
-                
-                console.log('---------------------------')
-                let payloadParecer = { 
-                    "motivoParecerId": null,
-                    "justificativa": "ok",
-                    "parecer":payload.parecer.estatusGO===1 ? "GO" : "NO GO",
-                    "valores": [],
-                    "importExportInput": null,
-                    "exibeAbaValor": null,
-                    "collaboratorUser": "N",
-                    "oportunidadeExigencia": [],
-                    "colaboradorId": sesion.colaboradorId,
-                    "parecerId": parecer.parecerSeleccionado.parecerId,
-                    "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
-                    "charter": sesion.charter
-                  
-             }
-             console.log('Paquete enviado parecer save');
-             console.log(payloadParecer)
-                      
-                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',payloadParecer, {
-                                    headers:{
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    "X-Auth-Token": sesion.token
-                                }
-                });
+                console.log('payload.exigenciasTerciario---------------------------')
+                console.log(payload.exigenciasTerciario);
+                let oportunidadeExigencia=[];
+                for (const obj of payload.exigenciasTerciario) {
+                    oportunidadeExigencia.push({
+                       id:obj.idExigencia,
+                       status:obj.goNoGo===1 ? 'S' : 'N'
+                    });
+                }
 
-                console.log('parecer guardado');
-                console.log(resp.data);
+                console.log('payload.parecer---------------------------')
+                console.log(payload.parecer);
+
+
+                console.log('payload.valores---------------------------')
+                console.log(payload.valores);
+                let valores=[];
+                for (const obj of payload.valores) {
+                    valores.push({
+                        "id": obj.idValor,
+                        "motivoParecerId": null,//always null
+                        "familiaId": obj.familia,
+                        "produtoId": obj.productoServicioId,
+                        "observacao": obj.justificativa, //go --> null
+                        "valorInicial": obj.valorinicial,
+                        "valorFinal": obj.valorFinal,
+                        "parecerItem": null,//always null
+                        "kitId": null//always null
+                    });
+                }
+
+
+                let valoresLote=[];
+                for (const obj of payload.valores) {
+                    valoresLote.push({
+                        "lote": obj.lote,
+                        "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
+                        "valorInicial": obj.valorinicial,
+                        "valorFinal": obj.valorFinal
+                    });
+                }
+                console.log('---------------------------')
+            //     let payloadParecer = { 
+            //         "motivoParecerId": null,
+            //         "justificativa": "ok",
+            //         "parecer":payload.parecer.estatusGO===1 ? "GO" : "NO GO",
+            //         "valores": [],
+            //         "importExportInput": null,
+            //         "exibeAbaValor": null,
+            //         "collaboratorUser": "N",
+            //         "oportunidadeExigencia": [],
+            //         "colaboradorId": sesion.colaboradorId,
+            //         "parecerId": parecer.parecerSeleccionado.parecerId,
+            //         "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
+            //         "charter": sesion.charter
+                  
+            //  }
+
+
+            console.log(payload)
+            //GO
+            let payloadParecer={
+                "motivoParecerId": payload.parecer.motivo, //go --> null
+                "justificativa": payload.parecer.justificacion,
+                "parecer":payload.parecer.estatusGO === 1 ? 'GO': 'NO_GO', //"NO_GO",
+                "valores": valores,
+                "importExportInput": null,//always null
+                "exibeAbaValor": "S",
+                "collaboratorUser": null,//always null
+                "oportunidadeExigencia": oportunidadeExigencia,
+                "usuarioId": parecer.parecerSeleccionado.clienteId,
+                "parecerId":  parecer.parecerSeleccionado.parecerId,
+                "oportunidadesProdutosServicos": valores,
+                "lote": valoresLote,
+                "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
+                "charter": sesion.charter
+              }
+
+             console.log('Paquete enviado parecer save');
+            //  console.log(payloadParecer)
+                      
+            //     const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',payloadParecer, {
+            //                         headers:{
+            //                         'Content-Type': 'application/json',
+            //                         'Accept': 'application/json',
+            //                         "X-Auth-Token": sesion.token
+            //                     }
+            //     });
+
+            //     console.log('parecer guardado');
+            //     console.log(resp.data);
                 Toast.show({type: 'ok', props: { mensaje: 'Parecer guardada' }});
                 floading(false)
 
@@ -1180,9 +1226,9 @@ export const useParecer =  () => {
         return {
             getListParecerColaborador,getListParecerTerciario,onChangeSearch,cargaComoboTipo,ajustaBorrado,
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
-            saveParecer,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
+            saveParecerTerciario,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
             cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores,
-            saveValores,cargaComboProductoServicioUniverse,asignaProductoServicio
+            saveValores,cargaComboProductoServicioUniverse,asignaProductoServicio,isAllParecerOK
         }
 }
         

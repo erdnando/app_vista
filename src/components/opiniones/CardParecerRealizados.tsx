@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import {  FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
-import { gstyles } from '../../theme/appTheme';
+import { colores, gstyles } from '../../theme/appTheme';
 import { TextOportunidadIcono } from '../oportunidad/TextOportunidadIcono';
 import { Spacer } from '../Spacer';
 import { LabelTexto } from './LabelTexto';
@@ -11,8 +11,8 @@ import { ParecerRealizadoAux } from '../../models/ParecerRealizadoAux';
 export const CardParecerRealizados = () => {
 
   //invoke global state
-  const { parecer,ids,setIds,setTabSelected,setTabSelectedOld,tabSelected } = useContext( GeneralContext )
-  const {} = useParecer()
+  const { parecer } = useContext( GeneralContext )
+  const { isAllParecerOK,saveParecerTerciario } = useParecer()
 
   interface Opiniones{
     id:number,
@@ -185,6 +185,30 @@ return (
                 keyExtractor={(item) => item.id+item.usuario} 
                 ItemSeparatorComponent={ () => renderSeparator()}
             />
+
+
+<Spacer height={5}></Spacer>
+             {/* boton salvar*/}
+             <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',
+                                justifyContent:'flex-start', alignContent:'center', bottom:-5}}>
+                      <TouchableOpacity 
+                        disabled={ !isAllParecerOK() ? true : false} 
+                        style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
+                        backgroundColor: !isAllParecerOK() ? '#BCC1CB' :  colores.primary, 
+                        height:48, justifyContent:'center',  }} 
+                          onPress= {()=>{
+                            //TODO add logic to save parecer
+                            console.log('saving ..')
+                            saveParecerTerciario();
+                            //clear parecer
+                          }}>
+                          <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isAllParecerOK() ? 'black' : 'white'}}>SALVAR</Text>
+                      </TouchableOpacity>
+                  </View>
+
+
+
+
         </View>
     </View>
 ) 
