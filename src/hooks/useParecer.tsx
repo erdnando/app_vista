@@ -72,10 +72,9 @@ export const useParecer =  () => {
                                     clienteId:item.clienteId,
                                     modalidade:item.descricaoModalidade,
                                     plataforma:'NA',
-                                    usuarioId:item.usuarioId
-                                    
+                                    usuarioId:item.usuarioId,
+                                    arquivo:item.arquivo
                                });
-
                        });
 
 
@@ -139,7 +138,9 @@ export const useParecer =  () => {
                                     estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
                                     clienteId:item.clienteId,// sesion.clienteId,
                                     modalidade:item.descricaoModalidade,
-                                    plataforma:'NA'
+                                    plataforma:'NA',
+                                    usuarioId:item.usuarioId,
+                                    arquivo:item.arquivo
                                });
 
                        });
@@ -1007,7 +1008,7 @@ export const useParecer =  () => {
                 let oportunidadeExigencia=[];
                 for (const obj of payload.exigenciasTerciario) {
                     oportunidadeExigencia.push({
-                       id:obj.idExigencia,
+                       id: obj.idExigencia==''? 0 : parseInt(obj.idExigencia),
                        status:obj.goNoGo===1 ? 'S' : 'N'
                     });
                 }
@@ -1021,26 +1022,14 @@ export const useParecer =  () => {
                 let valores=[];
                 for (const obj of payload.valores) {
                     valores.push({
-                        "id": obj.idValor,
+                        "id": parseInt(obj.idValor),
                         "motivoParecerId": null,//always null
-                        "familiaId": obj.familia,
-                        "produtoId": obj.productoServicioId,
+                        "familiaId": parseInt(obj.familia),
+                        "produtoId": parseInt(obj.productoServicioId),
                         "observacao": obj.justificativa, //go --> null
-                        "valorInicial": obj.valorinicial,
-                        "valorFinal": obj.valorFinal,
+                        "valorInicial":parseFloat( obj.valorinicial),
+                        "valorFinal": parseFloat(obj.valorFinal),
                         "parecerItem": null,//always null
-                        "kitId": null//always null
-                    });
-                }
-
-
-                let valoresLote=[];
-                for (const obj of payload.valores) {
-                    valoresLote.push({
-                        "lote": obj.lote,
-                        "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
-                        "valorInicial": obj.valorinicial,
-                        "valorFinal": obj.valorFinal
                     });
                 }
                 console.log('---------------------------')
@@ -1049,7 +1038,7 @@ export const useParecer =  () => {
      
             
             let payloadParecer={
-                "motivoParecerId": payload.parecer.motivo, //go --> null
+                "motivoParecerId": payload.parecer.motivo =='' ? null : payload.parecer.motivo, //go --> null
                 "justificativa": payload.parecer.justificacion,
                 "parecer":payload.parecer.estatusGO === 1 ? 'GO': 'NO_GO', //"NO_GO",
                 "valores": valores,
@@ -1057,11 +1046,11 @@ export const useParecer =  () => {
                 "exibeAbaValor": "S",
                 "collaboratorUser": null,//always null
                 "oportunidadeExigencia": oportunidadeExigencia,
-                "usuarioId": parecer.parecerSeleccionado.usuarioId,
-                "parecerId":  parecer.parecerSeleccionado.parecerId,
+                "usuarioId": parseInt(parecer.parecerSeleccionado.usuarioId),
+                "parecerId":  parseInt(parecer.parecerSeleccionado.parecerId),
                 "oportunidadesProdutosServicos": valores,
-                "lote": valoresLote,
-                "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
+                "lote": [],
+                "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion),
                 "charter": sesion.charter
               }
 
@@ -1082,98 +1071,98 @@ export const useParecer =  () => {
                 floading(false)
 
             } catch (error) {
-                console.log(error);
+                console.log(JSON.stringify(error.response.data.message));
                 
                 const payloadx= flags;
                 payloadx.isLoading=false;
                 setFlags(payloadx);
                 console.log('error al guardar Parecer');
-                Toast.show({type: 'ko',props: { mensaje: 'Error al guardar Parecer' }});
+                Toast.show({type: 'ko',props: { mensaje: error.response.data.message }});
                 floading(false)
                 return false;
             }
         }
 
-        const saveValores = async () =>{
+        // const saveValores = async () =>{
 
-            try {
-                floading(true)
-                const payload = opiniones;
+        //     try {
+        //         floading(true)
+        //         const payload = opiniones;
            
-                let valoresAux:OpinionesRequest;
+        //         let valoresAux:OpinionesRequest;
                 
    
-                console.log('---------------------------')
-                console.log(payload.valores);
-                console.log('---------------------------')
+        //         console.log('---------------------------')
+        //         console.log(payload.valores);
+        //         console.log('---------------------------')
 
-                payload.valores.forEach(function(item,index){
+        //         payload.valores.forEach(function(item,index){
                   
-                    valoresAux={
-                            "motivoParecerId": "8",
-                            "justificativa": item.justificativa,
-                            "parecer": item.go ? "GO" : "NO_GO",
-                            "valores": [
-                              {
-                                "id": parseInt(item.idValor),
-                                "motivoParecerId": null,
-                                "familiaId": parseInt(item.familia),
-                                "produtoId": parseInt(item.productoServicioId),
-                                "observacao": item.justificativa,
-                                "valorInicial": parseInt(item.valorinicial),
-                                "valorFinal": parseInt(item.valorFinal),
-                                "parecerItem": null,
-                                "kitId": null
-                              }
-                            ],
-                            "importExportInput": null,
-                            "exibeAbaValor": "S",
-                            "collaboratorUser": null,
-                            "oportunidadeExigencia": [],
-                            "usuarioId": sesion.clienteId,
-                            "parecerId": parseInt(parecer.parecerSeleccionado.parecerId),
-                            "oportunidadesProdutosServicos": [
-                              {
-                                "id": parseInt(item.idValor),
-                                "motivoParecerId": null,
-                                "familiaId": parseInt(item.familia),
-                                "produtoId": parseInt(item.productoServicioId),
-                                "observacao": "teste bon jovi",
-                                "valorInicial": parseInt(item.valorinicial),
-                                "valorFinal": parseInt(item.valorFinal),
-                                "parecerItem": null,
-                                "kitId": null
-                              }
-                            ],
-                            "lote": [],
-                            "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion),
-                            "charter": sesion.charter
-                          };
+        //             valoresAux={
+        //                     "motivoParecerId": "8",
+        //                     "justificativa": item.justificativa,
+        //                     "parecer": item.go ? "GO" : "NO_GO",
+        //                     "valores": [
+        //                       {
+        //                         "id": parseInt(item.idValor),
+        //                         "motivoParecerId": null,
+        //                         "familiaId": parseInt(item.familia),
+        //                         "produtoId": parseInt(item.productoServicioId),
+        //                         "observacao": item.justificativa,
+        //                         "valorInicial": parseInt(item.valorinicial),
+        //                         "valorFinal": parseInt(item.valorFinal),
+        //                         "parecerItem": null,
+        //                         "kitId": null
+        //                       }
+        //                     ],
+        //                     "importExportInput": null,
+        //                     "exibeAbaValor": "S",
+        //                     "collaboratorUser": null,
+        //                     "oportunidadeExigencia": [],
+        //                     "usuarioId": sesion.clienteId,
+        //                     "parecerId": parseInt(parecer.parecerSeleccionado.parecerId),
+        //                     "oportunidadesProdutosServicos": [
+        //                       {
+        //                         "id": parseInt(item.idValor),
+        //                         "motivoParecerId": null,
+        //                         "familiaId": parseInt(item.familia),
+        //                         "produtoId": parseInt(item.productoServicioId),
+        //                         "observacao": "teste bon jovi",
+        //                         "valorInicial": parseInt(item.valorinicial),
+        //                         "valorFinal": parseInt(item.valorFinal),
+        //                         "parecerItem": null,
+        //                         "kitId": null
+        //                       }
+        //                     ],
+        //                     "lote": [],
+        //                     "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion),
+        //                     "charter": sesion.charter
+        //                   };
                     
-                          console.log('paquete enviando valores save...')
+        //                   console.log('paquete enviando valores save...')
 
-                          console.log('---------------------------')
-                          console.log(valoresAux);
-                          console.log('---------------------------')
+        //                   console.log('---------------------------')
+        //                   console.log(valoresAux);
+        //                   console.log('---------------------------')
           
                     
-                         callValoresWs(valoresAux)
+        //                  callValoresWs(valoresAux)
                         
-                  });
-                floading(false)
+        //           });
+        //         floading(false)
 
-            } catch (error) {
-                 console.log(error);
+        //     } catch (error) {
+        //          console.log(error);
 
-                // const payloadx= flags;
-                // payloadx.isLoading=false;
-                // setFlags(payloadx);
-                // console.log('error al guardar valores');
-                // Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/saveExigency]' }});
-                 floading(false)
-                return false;
-            }
-        }
+        //         // const payloadx= flags;
+        //         // payloadx.isLoading=false;
+        //         // setFlags(payloadx);
+        //         // console.log('error al guardar valores');
+        //         // Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/saveExigency]' }});
+        //          floading(false)
+        //         return false;
+        //     }
+        // }
 
         const callValoresWs= async(valoresAux:OpinionesRequest)=>{
             try{
@@ -1215,7 +1204,7 @@ export const useParecer =  () => {
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
             saveParecerTerciario,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
             cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores,
-            saveValores,cargaComboProductoServicioUniverse,asignaProductoServicio,isAllParecerOK
+            cargaComboProductoServicioUniverse,asignaProductoServicio,isAllParecerOK
         }
 }
         

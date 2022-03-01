@@ -19,7 +19,7 @@ export interface ListaParecer {
     dataProposta:string;
     registroPreco:string;
     colaboradorId:number;
-    arquivo:null;
+    arquivo:string;
     tipoArquivo:null;
     linkTermoReferencia:null;
     prazoEntrega:null;

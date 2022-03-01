@@ -153,7 +153,7 @@ export const CardParecerValores = () => {
 
                                             {/* valor inicial and final */}
                                             <View style={{flex:0,width:'90%',flexDirection:'row',left:16,top:-34}}>
-                                                <InputMensajeSimpleCol placeholder='Valor inicial' width='90%' campo={item.valorinicial}
+                                                <InputMensajeSimpleCol keyboardType='decimal-pad' placeholder='Valor inicial' width='90%' campo={item.valorinicial}
                                                 onChangeMensaje={(msg:string)=>{
                                                   const payload= opiniones;
                                                   payload.valores[item.id].valorinicial =msg;
@@ -161,7 +161,7 @@ export const CardParecerValores = () => {
                                                   isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
 
-                                                <InputMensajeSimpleCol placeholder='Valor final' width='92%' campo={item.valorFinal}
+                                                <InputMensajeSimpleCol keyboardType='decimal-pad' placeholder='Valor final' width='92%' campo={item.valorFinal}
                                                 onChangeMensaje={(msg:string)=>{
                                                   const payload= opiniones;
                                                   payload.valores[item.id].valorFinal =msg;

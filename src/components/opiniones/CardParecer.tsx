@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { View, Button, TouchableOpacity, Text } from 'react-native';
+import vistaApi from '../../api/vista';
 import { useDownloadFile } from '../../hooks/useDownloadFile';
 import { useParecer } from '../../hooks/useParecer';
 import { TipoUsuario } from '../../models/Usuario';
@@ -28,6 +29,16 @@ export const CardParecer = ( ) => {
   { label: "C++", value: "C++" },
   { label: "C", value: "C" },
   ];
+
+ // let urlApi = vistaApi.getUri().toString()
+  console.log('-----------------URL-----------')
+  const urlArchivo = vistaApi.defaults.baseURL+parecer.parecerSeleccionado.arquivo;
+
+  console.log(urlArchivo);
+
+
+
+
 
       return <View  style={{flex:1, width:'100%',backgroundColor: 'white', borderRadius:10,padding:15,elevation:6,
                             shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {
@@ -60,7 +71,9 @@ export const CardParecer = ( ) => {
                           <TextOportunidadIcono icono='ic_baseline-place' colorIcono='#838892' label='Localidade' colorValor='#838892' valor={parecer.parecerSeleccionado.ubicacion}  size={15} ></TextOportunidadIcono>
                           
                           <TouchableOpacity onPress={()=>{
-                              checkPermission('https://www.mysu.org.uy/haceclick/folletos/02-el-deseo-sexual.pdf','pdf','application/pdf');
+                            //http://ec2-3-86-19-112.compute-1.amazonaws.com:8080/vista-api/docs/opportunityDocument/2688.pdf
+                            ///docs/opportunityDocument/2688.pdf
+                              checkPermission( vistaApi.defaults.baseURL+parecer.parecerSeleccionado.arquivo ,'pdf','application/pdf');
                             }} style={{justifyContent:'center',alignContent:'center',alignItems:'center',height:20}}>
                               
                               <View style={{flex:1,flexDirection:'row',marginLeft:2, justifyContent:'center',alignContent:'center',alignItems:'center'}}>

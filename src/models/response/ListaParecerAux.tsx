@@ -14,4 +14,5 @@ export interface ListaParecerAux {
     modalidade:string,
     plataforma:string,
     usuarioId:string,
+    arquivo:string
 }
