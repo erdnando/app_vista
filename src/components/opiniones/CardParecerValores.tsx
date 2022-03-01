@@ -47,6 +47,7 @@ export const CardParecerValores = () => {
                                             const payload= opiniones;
                                             payload.valores[item.id].go =value;
                                             setOpiniones(payload)
+                                            isFormValoresValid()
                                           }}
                                         ></Switch>
                                     </View>

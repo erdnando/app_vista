@@ -873,42 +873,68 @@ export const useParecer =  () => {
 
         const isFormValoresValid = ()=>{
             console.log('validando form valores...')
+            var BreakException= {};
 
             let bFlag=true;
+            try{
             opiniones.valores.forEach(function(item:OpinionesValores,index){
 
-                if(item.motivo === null) bFlag = false;
-                else if(item.motivo.trim() ==='') bFlag = false;
+                if(opiniones.allDisabledforNoGo || !opiniones.allDisabledforNoGo){
+                    bFlag = true;
+                }else{
+                    if(item.motivo === null) bFlag = false;
+                    if(item.motivo != null && item.motivo.trim() ==='') bFlag = false;
+                    //else if(item.motivo.trim() ==='') bFlag = false;
+                    throw BreakException;
+                 
+                }
+                if(item.go === false && !opiniones.allDisabledforNoGo){ 
+
+                     if(item.motivo === null){ bFlag = false; throw BreakException;}
+                     if(item.motivo!= null && item.motivo.trim() ===''){ bFlag = false; throw BreakException;}
+                    //else if(item.motivo.trim() ==='') bFlag = false;
+                   
+                }
+                
 
                 if(item.lote === null) bFlag = false;
-                else if(item.lote.trim() ==='') bFlag = false;
+                if(item.lote != null && item.lote.trim() ==='') {bFlag = false;throw BreakException;}
+               // else if(item.lote.trim() ==='') bFlag = false;
 
                 if(item.item === null) bFlag = false;
-                else if(item.item.trim() ==='') bFlag = false;
+                if(item.item != null && item.item.trim() ==='') {bFlag = false;throw BreakException;}
+                //else if(item.item.trim() ==='') bFlag = false;
 
                 if(item.familia === null) bFlag = false;
-                else if(item.familia.trim() ==='') bFlag = false;
+                if(item.familia != null && item.familia.trim() ==='') {bFlag = false;throw BreakException;}
+                //else if(item.familia.trim() ==='') bFlag = false;
 
                 if(item.productoServicio === null) bFlag = false;
-                else if(item.productoServicio.trim() ==='') bFlag = false;
+                if(item.productoServicio != null && item.productoServicio.trim() ==='') {bFlag = false;throw BreakException;}
+                //else if(item.productoServicio.trim() ==='') bFlag = false;
 
                 if(item.valorinicial === null) bFlag = false;
-                else if(item.valorinicial.trim() ==='') bFlag = false;
+                if(item.valorinicial != null && item.valorinicial.trim() ==='') {bFlag = false;throw BreakException;}
+               // else if(item.valorinicial.trim() ==='') bFlag = false;
 
                 if(item.valorFinal === null) bFlag = false;
-                else if(item.valorFinal.trim() ==='') bFlag = false;
+                if(item.valorFinal != null && item.valorFinal.trim() ==='') {bFlag = false;throw BreakException;}
+                //else if(item.valorFinal.trim() ==='') bFlag = false;
 
                 if(item.justificativa === null) bFlag = false;
-                else if(item.justificativa.trim() ==='') bFlag = false;
+                if(item.justificativa != null && item.justificativa.trim() ===''){ bFlag = false;throw BreakException;}
+                //else if(item.justificativa.trim() ==='') bFlag = false;
 
-                if(item.go === null) bFlag = false;
+                //if(item.go === null) bFlag = false;
             });
-
+            }catch(e){
+                  console.log('Saliendo por catch')
+            }
            
-           
+           console.log(bFlag)
             const payload= opiniones;
-            opiniones.valoresAllValid=bFlag;
-            setOpiniones(opiniones);
+            payload.valoresAllValid=bFlag;
+            setOpiniones(payload);
 
         }
 
