@@ -12,5 +12,6 @@ export interface ListaParecerAux {
     estatus:number,
     clienteId:number,
     modalidade:string,
-    plataforma:string
+    plataforma:string,
+    usuarioId:string,
 }

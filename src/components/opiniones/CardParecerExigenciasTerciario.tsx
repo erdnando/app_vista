@@ -14,7 +14,7 @@ export const CardParecerExigenciasTerciario = ( ) => {
    //invoke global state
    const { opiniones,setOpiniones } = useContext( GeneralContext )
    
-   const { isAllParecerOK,saveExigenciaTerciario } = useParecer()
+   const { isAllParecerOK,saveParecerTerciario } = useParecer()
  
    const renderUpdateItem = (item:OpinionesExigenciasTerciario) =>{
  
@@ -115,7 +115,7 @@ export const CardParecerExigenciasTerciario = ( ) => {
                           onPress= {()=>{
                             //TODO add logic to save parecer
                             console.log('saving exigencias terciario..')
-                            saveExigenciaTerciario();
+                            saveParecerTerciario()
                             //clear parecer
                           }}>
                           <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isAllParecerOK() ? 'black' : 'white'}}>SALVAR</Text>

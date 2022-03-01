@@ -69,9 +69,11 @@ export const useParecer =  () => {
                                     fechaOpinion:item.dataCertame,
                                     ubicacion: (item.localidade.length>13? item.localidade.substring(0,13)+'...' :item.localidade) +' - '+ item.estado,
                                     estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
-                                    clienteId:item.clienteId,//  sesion.clienteId,
+                                    clienteId:item.clienteId,
                                     modalidade:item.descricaoModalidade,
-                                    plataforma:'NA'
+                                    plataforma:'NA',
+                                    usuarioId:item.usuarioId
+                                    
                                });
 
                        });
@@ -1042,25 +1044,10 @@ export const useParecer =  () => {
                     });
                 }
                 console.log('---------------------------')
-            //     let payloadParecer = { 
-            //         "motivoParecerId": null,
-            //         "justificativa": "ok",
-            //         "parecer":payload.parecer.estatusGO===1 ? "GO" : "NO GO",
-            //         "valores": [],
-            //         "importExportInput": null,
-            //         "exibeAbaValor": null,
-            //         "collaboratorUser": "N",
-            //         "oportunidadeExigencia": [],
-            //         "colaboradorId": sesion.colaboradorId,
-            //         "parecerId": parecer.parecerSeleccionado.parecerId,
-            //         "oportunidadeId": parecer.parecerSeleccionado.idOpinion,
-            //         "charter": sesion.charter
-                  
-            //  }
+      
 
-
-            console.log(payload)
-            //GO
+     
+            
             let payloadParecer={
                 "motivoParecerId": payload.parecer.motivo, //go --> null
                 "justificativa": payload.parecer.justificacion,
@@ -1070,7 +1057,7 @@ export const useParecer =  () => {
                 "exibeAbaValor": "S",
                 "collaboratorUser": null,//always null
                 "oportunidadeExigencia": oportunidadeExigencia,
-                "usuarioId": parecer.parecerSeleccionado.clienteId,
+                "usuarioId": parecer.parecerSeleccionado.usuarioId,
                 "parecerId":  parecer.parecerSeleccionado.parecerId,
                 "oportunidadesProdutosServicos": valores,
                 "lote": valoresLote,
@@ -1079,18 +1066,18 @@ export const useParecer =  () => {
               }
 
              console.log('Paquete enviado parecer save');
-            //  console.log(payloadParecer)
+             console.log(payloadParecer)
                       
-            //     const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',payloadParecer, {
-            //                         headers:{
-            //                         'Content-Type': 'application/json',
-            //                         'Accept': 'application/json',
-            //                         "X-Auth-Token": sesion.token
-            //                     }
-            //     });
+                const resp = await vistaApi.post<any>('/services/opportunity/userOpinion/save',payloadParecer, {
+                                    headers:{
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    "X-Auth-Token": sesion.token
+                                }
+                });
 
-            //     console.log('parecer guardado');
-            //     console.log(resp.data);
+                console.log('parecer guardado');
+                console.log(resp.data);
                 Toast.show({type: 'ok', props: { mensaje: 'Parecer guardada' }});
                 floading(false)
 

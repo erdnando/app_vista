@@ -26,7 +26,7 @@ export interface ListaParecer {
     prazoPagamento:null;
     enderecoEntrega:null;
     enderecoEnvioDocumentacao: null;
-    usuarioId:null;
+    usuarioId:string;
     dataImpugnacao:string;
     dataEsclarecimento:string;
     exibeExigencia:string;

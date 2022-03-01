@@ -14,7 +14,7 @@ export const CardParecerValores = () => {
 
   //invoke global state
   const { opiniones,setOpiniones } = useContext( GeneralContext )
-  const { isFormValoresValid,saveValores,asignaProductoServicio,isAllParecerOK } = useParecer()
+  const { isFormValoresValid,saveParecerTerciario,asignaProductoServicio,isAllParecerOK } = useParecer()
 
   useEffect(() => {
     isFormValoresValid();
@@ -243,7 +243,7 @@ return (
                           onPress= {()=>{
                             //TODO add logic to save parecer
                             console.log('saving valores terciario..')
-                            saveValores();
+                            saveParecerTerciario();
                             //clear parecer
                           }}>
                           <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: isAllParecerOK() ? 'black' : 'white'}}>SALVAR</Text>
