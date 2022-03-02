@@ -174,8 +174,7 @@ export const useParecer =  () => {
 
             try {
 
-                //TEST
-                //'+ parecer.parecerSeleccionado.parecerId+'
+                console.log('xxx services/opportunity/listOtherUserOpinions/'+ parecer.parecerSeleccionado.parecerId+'/0')
                 const resp = await vistaApi.get<ParecerRealizado[]>('services/opportunity/listOtherUserOpinions/'+ parecer.parecerSeleccionado.parecerId+'/0',{
                     headers:{
                         'Content-Type': 'application/json',
@@ -648,7 +647,7 @@ export const useParecer =  () => {
                         arrAux.push({
                             id:index,
                             exigencia:item.titulo,
-                            observacion:item.observacao.toUpperCase(),
+                            observacion:item.observacao === null ? '' : item.observacao.toUpperCase(),
                             tipo:item.tipoUsuarioCliente.descricao,
                             dias:item.metaDias,
                             goNoGo:0,

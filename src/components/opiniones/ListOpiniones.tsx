@@ -80,7 +80,7 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
 
                                       <View style={{flexDirection:'row', width:'80%', justifyContent:'space-between' }}>
                                           <TextOportunidadIcono icono='ic_round-date-range' colorIcono='#838892' label='' colorValor='#838892' valor={item.fechaOpinion} size={15} ></TextOportunidadIcono>
-                                          <View style={{width:20,}}></View>
+                                          <View style={{width:0,}}></View>
                                           <TextOportunidadIcono icono='ic_baseline-place'  colorIcono='#838892' colorValor='#838892' label='' valor={item.ubicacion} size={15} ></TextOportunidadIcono>
                                           {/* <View style={{width:30,}}></View> */}
                                       </View>
