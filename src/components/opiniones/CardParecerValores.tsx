@@ -54,16 +54,19 @@ export const CardParecerValores = () => {
                                
                                     {opiniones.valores[item.id].colapsado && <View style={{flex:0,width:'90%',height:50,left:16,top:-5}}>
                                          
-                                                <View style={{height:50,width:'100%'}}>
-                                                    <InputMensajeSimpleCol placeholder='Produto' width='96%' campo={item.productoServicio} maxLength={50}
-                                                    onChangeMensaje={(msg:string)=>{
-                                                      console.log(msg)
-                                                      const payload= opiniones;
-                                                      payload.valores[item.id].productoServicio = msg;
-                                                      setOpiniones(payload)
-                                                      isFormValoresValid()
-                                                    }}></InputMensajeSimpleCol>
-                                                </View>
+                                              
+                                            {/*  producto servicio */}
+                                            <View style={{flex:0,width:'90%',height:50,left:4}}>
+                                              <Select placeholder='Producto servicio' campo={item.productoServicio} width='96%' items={opiniones.valores[item.id].arrProductox}
+                                                onValueChange={function (value: any, index: number): void {
+                                                  const payload= opiniones;
+                                                  console.log(value)
+                                                  payload.valores[item.id].productoServicio =value;
+                                                  setOpiniones(payload)
+                                                  isFormValoresValid()
+                                                }} />
+                                              </View>
+                                                
                                             </View>
                                     }
 

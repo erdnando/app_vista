@@ -66,9 +66,9 @@ export const CardParecer = ( ) => {
                           <LabelTexto  fontSize={14} color='#FF9029' label='Status: ' value={parecer.parecerSeleccionado.estatus.toString()}></LabelTexto>
 
                           <Spacer height={10}></Spacer>
-                          <TextOportunidadIcono icono='ic_round-date-range' colorIcono='#838892' label='Data Certame' colorValor='#838892' valor={parecer.parecerSeleccionado.fechaOpinion} size={15} ></TextOportunidadIcono>
+                          <TextOportunidadIcono icono='ic_round-date-range' colorIcono='#838892' label='Data Certame:  ' colorValor='#838892' valor={parecer.parecerSeleccionado.fechaOpinion} size={15} ></TextOportunidadIcono>
                           <Spacer height={3}></Spacer>
-                          <TextOportunidadIcono icono='ic_baseline-place' colorIcono='#838892' label='Localidade' colorValor='#838892' valor={parecer.parecerSeleccionado.ubicacion}  size={15} ></TextOportunidadIcono>
+                          <TextOportunidadIcono icono='ic_baseline-place' colorIcono='#838892' label='Localidade:  ' colorValor='#838892' valor={parecer.parecerSeleccionado.ubicacion}  size={15} ></TextOportunidadIcono>
                           
                           <TouchableOpacity onPress={()=>{
                             //http://ec2-3-86-19-112.compute-1.amazonaws.com:8080/vista-api/docs/opportunityDocument/2688.pdf

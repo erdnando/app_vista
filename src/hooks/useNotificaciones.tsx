@@ -7,7 +7,7 @@ import Toast from 'react-native-toast-message';
 
 export const useNotificaciones =  () => {
 
-        const {flags,setFlags,sesion,notificaciones,setNotificaciones  } = useContext( GeneralContext );
+        const {flags,setFlags,sesion,notificaciones,setNotificaciones,usuario  } = useContext( GeneralContext );
       
 
         const floading=(valor:boolean)=>{
@@ -62,7 +62,7 @@ export const useNotificaciones =  () => {
                         "X-Auth-Token": sesion.token 
                     },
                    params:{ 
-                       "login" : 'eder.goncalves@gmail.com',//sesion.clienteId,
+                       "login" : usuario.email,//sesion.clienteId,
                        "charter" : sesion.charter
                     }
                 }, 
@@ -89,8 +89,8 @@ export const useNotificaciones =  () => {
                             hora:'Fecha: '+notif.dataCadastro,
                             descripcion: notif.mensagem.length>65 ? notif.mensagem.toString().substring(0,57)+'...': notif.mensagem,
                             color: notif.tipoMensagem.id == 1 ? 'red' : '#838892',
-                            background:notif.tipoMensagem.id == 1 ?'#F8BBBB' : '#EDF0F5',
-                            icon:notif.tipoMensagem.id == 1 ? 'bx_bxs-message-alt-error' : 'ic_baseline-lightbulb',  //icomoon-free_hammer2
+                            background:notif.tipoMensagem.id == 1 ?'#F8BBBB' : '#83AE69',
+                            icon:notif.tipoMensagem.id == 1 ? 'icomoon-free_hammer2' : 'bx_bxs-message-alt-error',  //icomoon-free_hammer2
                             diaVisible:true
                         });
                         
@@ -126,7 +126,39 @@ export const useNotificaciones =  () => {
                 floading(false)
             }
         }
+
+        const deleteNotification = async (idNotificacion:string) =>{
+
+            try {
+                floading(true)
+                //TEST
+                const resp = await vistaApi.post<any>('/notification/saveAllNotification?id='+idNotificacion+'&login='+usuario.email,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                   params:{ 
+                     "id" :idNotificacion,
+                     "login" : usuario.email,//sesion.clienteId,
+                    }
+                }, 
+                );
+
+                console.log('op /notification/saveAllNotification:::::::::::::::::::::');
+                console.log(resp);
+
+               
+
+                floading(false)
+                
+            } catch (error) {
+                //console.log(JSON.stringify(error.response));
+                Toast.show({type: 'ko',props: { mensaje: error.response.data.message }});
+                floading(false)
+            }
+        }
        
         //exposed objets 
-        return {  notificationListByLogin ,floading,existsNotification   }
+        return {  notificationListByLogin ,floading,existsNotification,deleteNotification   }
 }

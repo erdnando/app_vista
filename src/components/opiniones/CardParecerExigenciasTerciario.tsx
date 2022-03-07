@@ -95,6 +95,13 @@ export const CardParecerExigenciasTerciario = ( ) => {
      <View style={{...gstyles.globalTabView , width:'100%',top:-8}}>
           <Spacer height={10}></Spacer>
           <View style={{flex:1,width:'100%',justifyContent:'center',}}>
+
+          {opiniones.exigenciasTerciario.length==0 && <View style={{flex:1,width:'100%',justifyContent:'flex-start',
+                                      paddingTop:20,paddingLeft:20, height:220,backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,
+                                      shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {
+                                      height: 3, width: 3 }}}>
+              <Text>Sem exigencias</Text>
+            </View>}
      
              <FlatList data={opiniones.exigenciasTerciario} 
                  scrollEnabled={true}

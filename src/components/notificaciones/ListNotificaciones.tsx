@@ -16,7 +16,7 @@ export const ListNotificaciones = ( ) => {
 
     const {flags,notificaciones,setNotificaciones  } = useContext( GeneralContext );
     const [checked, setchecked] = useState(false);
-    const { existsNotification } = useNotificaciones(); 
+    const { existsNotification,deleteNotification } = useNotificaciones(); 
 
 
     const renderUpdateItem = (updateItem:NotificacionByLoginAux) =>{
@@ -40,6 +40,7 @@ export const ListNotificaciones = ( ) => {
             var index = arr.indexOf(value);
             if (index > -1) {
               arr.splice(index, 1);
+              console.log(value)
             }
             return arr;
           }
@@ -55,6 +56,8 @@ export const ListNotificaciones = ( ) => {
                 console.log('deleting..')
                 const payload= notificaciones;
              
+                console.log(updateItem.id)
+                deleteNotification(updateItem.id);
                 setNotificaciones(removeItemOnce(payload,updateItem))
             })
           }

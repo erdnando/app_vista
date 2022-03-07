@@ -20,6 +20,7 @@ export const useHome =  () => {
           ]);
 
         const [totalPareceres, settotalPareceres] = useState(0)
+        const [maxGrafica, setMaxGrafica] = useState(0)
 
         const floading=(valor:boolean)=>{
             const payload= flags;
@@ -31,17 +32,13 @@ export const useHome =  () => {
         const graphMotiveGoNoGo = async () =>{
 
             try {
-                const resp = await vistaApi.get<GraphMotiveGoNoGo[]>('/services/graphMotiveGoNoGo',{
+                const resp = await vistaApi.get<GraphMotiveGoNoGo[]>('/services/graphMotiveGoNoGo?charter=1&colaboradorId=0',{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token 
                     },
-                   params:{ "clienteId" : sesion.clienteId,
-                    "dataCertameInicio" : "01/01/2020",
-                    "dataCertameFim" : "01/01/2022",
-                    "charter" : sesion.charter,
-                    "colaboradorId" : sesion.colaboradorId}
+                 
                 }, 
                 );
 
@@ -51,6 +48,7 @@ export const useHome =  () => {
 
                     setgraphData(resp.data);
                     settotalPareceres(resp.data[0].go+resp.data[0].noGo+resp.data[0].analise)
+                    setMaxGrafica( Math.ceil( totalPareceres/3)*1.25 )
                 }
                 
             } catch (error) {
@@ -69,5 +67,5 @@ export const useHome =  () => {
 
        
         //exposed objets 
-        return {   graphMotiveGoNoGo ,graphData,floading,totalPareceres   }
+        return {   graphMotiveGoNoGo ,graphData,floading,totalPareceres ,maxGrafica  }
 }

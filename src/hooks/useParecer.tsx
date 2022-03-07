@@ -21,7 +21,8 @@ import { ComboProductoServicio } from '../models/ComboProductoServicio';
 export const useParecer =  () => {
 
         const { ids ,setIds, flags,setFlags, sesion, parecer,setParecer,
-                opiniones,setOpiniones,usuario } = useContext( GeneralContext );
+                opiniones,setOpiniones,usuario,setTabSelectedOld,setTabSelected,tabSelected,
+                tabModule,menuOpiniones,setMenuOpiniones } = useContext( GeneralContext );
 
         const floading=(valor:boolean)=>{
             const payload= flags;
@@ -705,21 +706,21 @@ export const useParecer =  () => {
                        resp.data.forEach(function(item,index){
 
 
-                        //get family products filtered by family id
-                        const listProductoServicio = opiniones.catProductoServicioUniverse.filter(itemx => itemx.familiaId === item.familia.id.toString());
-                        let arrAuxxx=opiniones.catProductoServicio;//get reference
-                        arrAuxxx=[];
-            
-                        listProductoServicio.forEach(function(itemy,index){
+                            //get family products filtered by family id
+                            const listProductoServicio = opiniones.catProductoServicioUniverse.filter(itemx => itemx.familiaId === item.familia.id.toString());
+                            let arrAuxxx=opiniones.catProductoServicio;//get reference
+                            arrAuxxx=[];
+                
+                            listProductoServicio.forEach(function(itemy,index){
 
-                            if(   !arrAuxxx.find(x => x.value === itemy.value)   ){
-                                arrAuxxx.push({
-                                    value:itemy.value,
-                                    label:itemy.label
-                                });
-                            }
-                            
-                        });
+                                if(   !arrAuxxx.find(x => x.value === itemy.value)   ){
+                                    arrAuxxx.push({
+                                        value:itemy.value,
+                                        label:itemy.label
+                                    });
+                                }
+                                
+                            });
 
 
 
@@ -735,8 +736,8 @@ export const useParecer =  () => {
                             item:item.item.toString(),
                             qtde:item.quantidade.toString(),
                             familia:item.familia.id.toString(),
-                            productoServicio:item.produtoServico.id.toString(),
-                            productoServicioId: item.produtoServico.id.toString(),
+                            productoServicio:item.produtoServico==null ? '' : item.produtoServico.id.toString(),
+                            productoServicioId:item.produtoServico==null ? '' :  item.produtoServico.id.toString(),
                             valorinicial:item.valorInicial.toString(),
                             valorFinal:item.valorFinal===null ? '0' : item.valorFinal.toString(),
                             justificativa:'',
@@ -1012,6 +1013,9 @@ export const useParecer =  () => {
                     });
                 }
 
+
+                
+
                 console.log('payload.parecer---------------------------')
                 console.log(payload.parecer);
 
@@ -1020,11 +1024,12 @@ export const useParecer =  () => {
                 console.log(payload.valores);
                 let valores=[];
                 for (const obj of payload.valores) {
+
                     valores.push({
                         "id": parseInt(obj.idValor),
                         "motivoParecerId": null,//always null
                         "familiaId": parseInt(obj.familia),
-                        "produtoId": parseInt(obj.productoServicioId),
+                        "produtoId": parseInt(obj.productoServicio),  //parseInt(obj.productoServicioId),
                         "observacao": obj.justificativa, //go --> null
                         "valorInicial":parseFloat( obj.valorinicial),
                         "valorFinal": parseFloat(obj.valorFinal),
@@ -1068,6 +1073,8 @@ export const useParecer =  () => {
                 console.log(resp.data);
                 Toast.show({type: 'ok', props: { mensaje: 'Parecer guardada' }});
                 floading(false)
+                //go to list parecer
+                goListParecer();
 
             } catch (error) {
                 console.log(JSON.stringify(error.response.data.message));
@@ -1081,87 +1088,6 @@ export const useParecer =  () => {
                 return false;
             }
         }
-
-        // const saveValores = async () =>{
-
-        //     try {
-        //         floading(true)
-        //         const payload = opiniones;
-           
-        //         let valoresAux:OpinionesRequest;
-                
-   
-        //         console.log('---------------------------')
-        //         console.log(payload.valores);
-        //         console.log('---------------------------')
-
-        //         payload.valores.forEach(function(item,index){
-                  
-        //             valoresAux={
-        //                     "motivoParecerId": "8",
-        //                     "justificativa": item.justificativa,
-        //                     "parecer": item.go ? "GO" : "NO_GO",
-        //                     "valores": [
-        //                       {
-        //                         "id": parseInt(item.idValor),
-        //                         "motivoParecerId": null,
-        //                         "familiaId": parseInt(item.familia),
-        //                         "produtoId": parseInt(item.productoServicioId),
-        //                         "observacao": item.justificativa,
-        //                         "valorInicial": parseInt(item.valorinicial),
-        //                         "valorFinal": parseInt(item.valorFinal),
-        //                         "parecerItem": null,
-        //                         "kitId": null
-        //                       }
-        //                     ],
-        //                     "importExportInput": null,
-        //                     "exibeAbaValor": "S",
-        //                     "collaboratorUser": null,
-        //                     "oportunidadeExigencia": [],
-        //                     "usuarioId": sesion.clienteId,
-        //                     "parecerId": parseInt(parecer.parecerSeleccionado.parecerId),
-        //                     "oportunidadesProdutosServicos": [
-        //                       {
-        //                         "id": parseInt(item.idValor),
-        //                         "motivoParecerId": null,
-        //                         "familiaId": parseInt(item.familia),
-        //                         "produtoId": parseInt(item.productoServicioId),
-        //                         "observacao": "teste bon jovi",
-        //                         "valorInicial": parseInt(item.valorinicial),
-        //                         "valorFinal": parseInt(item.valorFinal),
-        //                         "parecerItem": null,
-        //                         "kitId": null
-        //                       }
-        //                     ],
-        //                     "lote": [],
-        //                     "oportunidadeId": parseInt(parecer.parecerSeleccionado.idOpinion),
-        //                     "charter": sesion.charter
-        //                   };
-                    
-        //                   console.log('paquete enviando valores save...')
-
-        //                   console.log('---------------------------')
-        //                   console.log(valoresAux);
-        //                   console.log('---------------------------')
-          
-                    
-        //                  callValoresWs(valoresAux)
-                        
-        //           });
-        //         floading(false)
-
-        //     } catch (error) {
-        //          console.log(error);
-
-        //         // const payloadx= flags;
-        //         // payloadx.isLoading=false;
-        //         // setFlags(payloadx);
-        //         // console.log('error al guardar valores');
-        //         // Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/saveExigency]' }});
-        //          floading(false)
-        //         return false;
-        //     }
-        // }
 
         const callValoresWs= async(valoresAux:OpinionesRequest)=>{
             try{
@@ -1194,6 +1120,33 @@ export const useParecer =  () => {
             }
         }
 
+        const goListParecer= ()=>{
+
+            ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
+
+            const payload= flags;
+            payload.verDetalleAgenda=false;
+            setFlags(payload);
+
+            setTabSelected(tabModule)
+             
+            const payload1 = ids;
+            payload1.idOpinionBusqueda= '';
+            payload1.idOpinionSeleccionado='';
+            payload1.idMenuOpinionSelected=1;
+            setIds(payload1);
+
+            const payload2 = menuOpiniones;
+            payload2.forEach(function(part, index) {
+                   payload2[index].estatus=0;  
+            });
+
+            payload2[0].estatus=1;
+            setMenuOpiniones(payload2);
+
+            getListParecerTerciario();
+        }
+
        
 
 
@@ -1203,7 +1156,7 @@ export const useParecer =  () => {
             saveExigencias,cargaComoboDescripcion,cargaComoboTipoUsuario,isFormParecerValid,formExigenciasValid,
             saveParecerTerciario,cargaExigenciasTerciario,isFormExigenciasTerciarioValid,saveExigenciaTerciario,
             cargaComboMotivo,getListParecerRealizadoTerciario,isFormValoresValid,cargaComboFamilia,cargaValores,
-            cargaComboProductoServicioUniverse,asignaProductoServicio,isAllParecerOK
+            cargaComboProductoServicioUniverse,asignaProductoServicio,isAllParecerOK,goListParecer
         }
 }
         

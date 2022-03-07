@@ -16,7 +16,8 @@ import { ContactoScreen } from '../screens/home/ContactoScreen';
 import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
 import { useNotificaciones } from '../hooks/useNotificaciones';
-import Elevations from 'react-native-elevation'
+//import Elevations from 'react-native-elevation'
+import { useParecer } from '../hooks/useParecer';
 
 const Tab = createBottomTabNavigator();
 interface Props extends DrawerScreenProps<any, any>{};
@@ -30,6 +31,7 @@ export const NavigationHome = ( { navigation }:Props) => {
           setIds, tabModule,setTabModule,menuOpiniones,setMenuOpiniones} = useContext(GeneralContext);
   const { getResultadoBusqueda } = useSearch(); 
   const { notificationListByLogin } = useNotificaciones(); 
+  const { goListParecer } =useParecer();
 
 
   //terciario
@@ -63,31 +65,29 @@ export const NavigationHome = ( { navigation }:Props) => {
                                { flags.verDetalleAgenda || ids.idOpinionSeleccionado !='' ?   
                                   <OpcionHeader iconName='ic_round-arrow-back' color={colores.primary}  // back option 
                                       onPress={() =>{ 
-                                        ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
+                                        console.log('going back..')
+                                        goListParecer();
+                                        // ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
 
-                                        const payload= flags;
-                                        payload.verDetalleAgenda=false;
-                                        setFlags(payload);
+                                        // const payload= flags;
+                                        // payload.verDetalleAgenda=false;
+                                        // setFlags(payload);
 
-                                        setTabSelected(tabModule)
+                                        // setTabSelected(tabModule)
                                          
+                                        // const payload1 = ids;
+                                        // payload1.idOpinionBusqueda= '';
+                                        // payload1.idOpinionSeleccionado='';
+                                        // payload1.idMenuOpinionSelected=1;
+                                        // setIds(payload1);
 
-                                        const payload1 = ids;
-                                        payload1.idOpinionBusqueda= '';
-                                        payload1.idOpinionSeleccionado='';
-                                        payload1.idMenuOpinionSelected=1;
-                                        setIds(payload1);
+                                        // const payload2 = menuOpiniones;
+                                        // payload2.forEach(function(part, index) {
+                                        //        payload2[index].estatus=0;  
+                                        // });
 
-
-
-
-                                        const payload2 = menuOpiniones;
-                                        payload2.forEach(function(part, index) {
-                                               payload2[index].estatus=0;  
-                                        });
-
-                                        payload2[0].estatus=1;
-                                        setMenuOpiniones(payload2);
+                                        // payload2[0].estatus=1;
+                                        // setMenuOpiniones(payload2);
 
                                       
 

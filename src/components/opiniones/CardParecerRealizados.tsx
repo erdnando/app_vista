@@ -179,13 +179,19 @@ return (
          <Spacer height={10}></Spacer>
          <View style={{flex:1,width:'100%',justifyContent:'center',}}>
     
+         {parecer.listaParecerRealizado.length==0 && <View style={{flex:1,width:'100%',justifyContent:'flex-start',
+                                      paddingTop:20,paddingLeft:20, height:220,backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,
+                                      shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {
+                                      height: 3, width: 3 }}}>
+              <Text>Sem pareceres realizados</Text>
+            </View>}
+
             <FlatList data={parecer.listaParecerRealizado} 
                 scrollEnabled={true}
                 renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
                 keyExtractor={(item) => item.id+item.usuario} 
                 ItemSeparatorComponent={ () => renderSeparator()}
             />
-
 
              <Spacer height={5}></Spacer>
              {/* boton salvar*/}

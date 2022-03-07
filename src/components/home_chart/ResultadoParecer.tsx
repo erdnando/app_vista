@@ -13,7 +13,7 @@ interface Props{
 export const ResultadoParecer = ( ) => {
 
  // const [graphData, setgraphData] = useState<GraphMotiveGoNoGo[]>([]);
-  const {  graphMotiveGoNoGo,graphData,floading,totalPareceres } = useHome(); 
+  const {  graphMotiveGoNoGo,graphData,floading,totalPareceres,maxGrafica } = useHome(); 
 
   // useEffect(() => {
   //   console.log('recargando home');
@@ -58,7 +58,7 @@ export const ResultadoParecer = ( ) => {
                               showVerticalLines={true}
                               showYAxisIndices={true}
                               noOfSections={5}
-                              maxValue={500}
+                              maxValue={maxGrafica}
                               data={barData}
                               isAnimated/>
                     </View>

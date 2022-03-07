@@ -14,9 +14,7 @@ import { ListNotificaciones } from '../../components/notificaciones/ListNotifica
 
 export const HomeScreen = () => {
     const { top } = useSafeAreaInsets();
-    //call global state
     const { usuario,flags} = useContext(GeneralContext);
-    //call service to get data
     const { isLoading } = useMovies();
     //https://github.com/osdnk/react-native-reanimated-bottom-sheet/issues/243#issuecomment-644091552
     //https://github.com/osdnk/react-native-reanimated-bottom-sheet
