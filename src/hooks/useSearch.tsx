@@ -40,17 +40,17 @@ export const useSearch =  () => {
 
         const getOportunidadeTab = async () =>{
             try {
-                const resp = await vistaApi.get<OpportunityCustomFindById>('/services/opportunityCustom/findById/'+ids.codigoBusqueda+'/'+sesion.clienteId,{
+                const resp = await vistaApi.get<OpportunityCustomFindById>('/services/opportunityCustom/findById/'+ids.codigoBusqueda+'/'+sesion.clienteId+'?charter='+ sesion.charter+'&colaboradorId=0',{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token 
                     },
-                   params:{ "oportunidadeId" : ids.codigoBusqueda,
-                    "clienteId" : sesion.clienteId,
-                    "charter" : sesion.charter,
-                    "colaboradorId" : '0',
-                    }
+                //    params:{ "oportunidadeId" : ids.codigoBusqueda,
+                //     "clienteId" : sesion.clienteId,
+                //     "charter" : sesion.charter,
+                //     "colaboradorId" : '0',
+                //     }
                 }, 
                 );
 

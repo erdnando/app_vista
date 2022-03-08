@@ -127,6 +127,7 @@ class GeneralProvider extends React.Component{
             charter:0,
             colaboradorId:0,
             contratoId:0,
+            clienteId:'',
             menu:[
                 {
                     id:0,

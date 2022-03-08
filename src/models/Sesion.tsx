@@ -11,6 +11,7 @@ export interface Sesion{
     charter:number,
     colaboradorId:number,
     contratoId:number,
+    clienteId:string,
     menu:MenuSistema[],
 }
 
