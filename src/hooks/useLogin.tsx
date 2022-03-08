@@ -16,6 +16,8 @@ export const useLogin =  () => {
         const { flags, usuario,setUsuario,setFlags,menuOpiniones,setMenuOpiniones,sesion,setSesion } = useContext( GeneralContext );
         const { existsNotification } = useNotificaciones(); 
         const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
+        const [ passwordVisibleN1, setPasswordVisibleN1 ] = useState<boolean>(true);
+        const [ passwordVisibleN2, setPasswordVisibleN2 ] = useState<boolean>(true);
 
         const floading=(valor:boolean)=>{
             const payload= flags;
@@ -36,15 +38,25 @@ export const useLogin =  () => {
         }
 
         const onChangePassword = async (password:string) =>{
-            
-            const payloadx= flags;
-            //payloadx.isAlertLoginVisible=false;
-            setFlags(payloadx);
-
+            // const payloadx= flags;
+            // setFlags(payloadx);
             const payload= usuario;
             payload.password=password;
             setUsuario(payload);
-            
+        }
+
+        const onChangePasswordN1 = async (password:string) =>{
+           
+            const payload= usuario;
+            payload.nuevoPassword1=password;
+            setUsuario(payload);
+        }
+
+        const onChangePasswordN2 = async (password:string) =>{
+           
+            const payload= usuario;
+            payload.nuevoPassword2=password;
+            setUsuario(payload);
         }
         
         const setPasswordAux = (password:string)=>{
@@ -196,11 +208,65 @@ export const useLogin =  () => {
 
            // setTipoUsuario(tipo);
         }
+
+        const changePassword = async()=>{
+
+            
+
+            try {
+
+                floading(true)
+                console.log('changePassword..')
+                console.log(usuario.email)
+                console.log(usuario.password)
+                console.log(usuario.nuevoPassword1)
+                const resp = await vistaApi.post<any>('/services/changePassword',{  
+                    "login": usuario.email,
+                    "senhaAtual": usuario.password,
+                    "senhaNova": usuario.nuevoPassword1 }, {
+                                    headers:{
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    "X-Auth-Token": sesion.token
+                                },
+                });
+
+                console.log(resp);
+
+                const payloadx= usuario;
+                payloadx.password=usuario.nuevoPassword1;
+                setUsuario(payloadx);
+            
+    
+                    floading(false)
+                    Toast.show({type: 'ok',props: { mensaje: 'Contrasena actualizada' }});
+                    return true;
+                
+            } catch (error) {
+                console.log('changePassword error..')
+                console.log(JSON.stringify(error));
+
+                const payloadx= flags;
+                payloadx.isLogedIn=false;
+                setFlags(payloadx);
+                
+                floading(false)
+                Toast.show({type: 'ko',props: {mensaje:'Error al actualizar contrasena. [/changePassword]'} });
+               
+                return false;
+            }
+
+
+            
+        }
         
         
         //exposed objets 
         return {
-            onChangeEmail,onChangePassword,validarLogin,resetContrasena,setPasswordAux,
-            setEmailAux, passwordVisible, setPasswordVisible
+            onChangeEmail,validarLogin,resetContrasena,setPasswordAux,setEmailAux, 
+            onChangePassword,onChangePasswordN1,onChangePasswordN2,
+            passwordVisible, setPasswordVisible,
+            passwordVisibleN1, setPasswordVisibleN1,
+            passwordVisibleN2, setPasswordVisibleN2,changePassword,
         }
 }

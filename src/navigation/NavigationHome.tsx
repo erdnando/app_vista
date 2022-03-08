@@ -16,7 +16,7 @@ import { ContactoScreen } from '../screens/home/ContactoScreen';
 import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
 import { useNotificaciones } from '../hooks/useNotificaciones';
-//import Elevations from 'react-native-elevation'
+//import Elevations from 'react-native-elevation';
 import { useParecer } from '../hooks/useParecer';
 
 const Tab = createBottomTabNavigator();
@@ -280,12 +280,10 @@ export const NavigationHome = ( { navigation }:Props) => {
                         borderTopColor: colores.bottomBar,
                         borderTopWidth:8,
                         borderBottomWidth:1,
-                        height:Platform.OS === 'ios' ? 72 : 60,
-                        ...Elevations[10], 
+                        height:Platform.OS === 'ios' ? 72 : 60,     
                     },
                     tabBarLabelStyle:{
-                    fontSize:13,
-                    ...Elevations[22], 
+                    fontSize:13, 
                     },
                     headerShown:true,
                     tabBarIcon: ({color, focused, size }) =>{
@@ -294,7 +292,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                     header:
                       () => {
                         return <View style={{alignSelf:'flex-start',alignContent:'center',justifyContent:'center', 
-                                            flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66,...Elevations[10], }}>
+                                            flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66, }}>
                                    
                                    { flags.verDetalleAgenda || ids.idOpinionSeleccionado!='' ?   
                                       <OpcionHeader iconName='ic_round-arrow-back' color={colores.primary}  // back option 

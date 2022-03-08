@@ -62,13 +62,13 @@ export const useParecer =  () => {
                       resp.data.forEach(function(item,index){
                         arrAux.push({
                                     id:index,
-                                    opinion:item.descricao,
+                                    opinion:item.nomeCliente,
                                     idOpinion:item.oportunidadeId.toString(),
                                     parecerId:item.parecerId.toString(),
                                     edital:item.numeroEdital,
                                     oragao:item.nomeOrgao,
-                                    fechaOpinion:item.dataCertame,
-                                    ubicacion: (item.localidade.length>13? item.localidade.substring(0,13)+'...' :item.localidade) +' - '+ item.estado,
+                                    fechaOpinion:item.dataCertame+' '+ item.horaCertame.substring(0,2)+':'+item.horaCertame.substring(2),
+                                    ubicacion: (item.localidade.length>13? item.localidade.substring(0,12)+'...' :item.localidade) +' - '+ item.estado,
                                     estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
                                     clienteId:item.clienteId,
                                     modalidade:item.descricaoModalidade,

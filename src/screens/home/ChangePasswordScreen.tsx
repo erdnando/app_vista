@@ -9,6 +9,9 @@ import { AlertNotif } from '../../components/login/AlertNotif';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import RNRestart from 'react-native-restart';
+import { useLogin } from '../../hooks/useLogin';
+import { InputPasswordNuevo1 } from '../../components/login/InputPasswordNuevo1';
+import { InputPasswordNuevo2 } from '../../components/login/InputPasswordNuevo2';
 
 interface Props extends StackScreenProps<any, any>{};
 
@@ -17,8 +20,8 @@ export const ChangePasswordScreen = ({ navigation }:Props) => {
     
     const { top,left } = useSafeAreaInsets();
     
-    const { flags,setFlags,ids,setIds,logOut,usuario } = useContext( GeneralContext )
-    // const {  validarLogin, } = useLogin(); 
+    const { flags,setFlags,ids,setIds,logOut,usuario,sesion } = useContext( GeneralContext )
+    const {  changePassword,onChangePasswordN1,onChangePasswordN2 } = useLogin(); 
     
     useEffect(() => {
         
@@ -117,16 +120,17 @@ export const ChangePasswordScreen = ({ navigation }:Props) => {
 
                     <View style={{flex:1,justifyContent:'flex-start',alignContent:'center',alignItems:'center'}}>
 
-                        <InputPassword modo='normal' width='80%' placeHolder='Nueva contraseña' campo={usuario.nuevoPassword1} label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPassword>
-                        <InputPassword modo='normal' width='80%' placeHolder='Confirmar contraseña' campo={usuario.nuevoPassword2} label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPassword>
+                        <InputPasswordNuevo1 modo='normal' width='80%' placeHolder='Nueva contraseña' campo= { usuario.nuevoPassword1 } label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPasswordNuevo1>
+                        <InputPasswordNuevo2 modo='normal' width='80%' placeHolder='Confirmar contraseña' campo= { usuario.nuevoPassword2 } label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPasswordNuevo2>
                         <Spacer height={20} ></Spacer>
-
+{/* <Text>{usuario.nuevoPassword1}</Text> */}
                         <View style={{flex:0,width:'100%',height:50,justifyContent:'center',alignContent:'center'}}>
                             <ButtonRounded  label='RESETAR SENHA' 
                                     onPress={ async() =>  { 
-                                        const payload= flags;
-                                        payload.isPasswordReseted=true;
-                                        setFlags(payload);
+
+                                        changePassword()
+
+                                       
                                 
                                     }} />
                         </View>

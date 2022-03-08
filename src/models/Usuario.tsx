@@ -11,9 +11,10 @@ export interface Usuario{
     tipo:TipoUsuario,
     email:string,
     password:string,
+    nuevoPassword1:string,
+    nuevoPassword2:string,
     whatsapp:string,
     telefono:string,
     direccion:string,
-    nuevoPassword1:string,
-    nuevoPassword2:string,
+   
 }

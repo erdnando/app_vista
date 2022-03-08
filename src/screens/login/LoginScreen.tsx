@@ -1,6 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useContext, useEffect } from 'react'
-import { Image, ImageBackground, StyleSheet, View } from 'react-native'
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import { ButtonTextGoTo } from '../../components/login/ButtonTextGoTo';
 import { ButtonRounded } from '../../components/login/ButtonRounded';
 import { InputEmail } from '../../components/login/InputEmail';
@@ -47,7 +47,7 @@ export const LoginScreen = ({ navigation }:Props) => {
                 <InputEmail modo='normal' label='E-mail' iconLeft='ic_outline-email' iconRight='ic_round-close'></InputEmail>
                 <InputPassword modo='normal' campo={usuario.password} width='78%' placeHolder='Senha' label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPassword>
                 <Spacer height={40} ></Spacer>
-
+                {/* <Text>{usuario.password}</Text> */}
                 <View style={{width:'100%',height:50}}>
                     <ButtonRounded  label='ACCESAR' 
                             onPress={ async() =>  { 

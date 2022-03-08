@@ -18,13 +18,13 @@ interface Props{
   width?:string,
 }
 
-export const InputPassword = ( { modo, label,placeHolder, iconLeft ,iconRight, iconSee, IconHide,campo,width='75%'}: Props ) => {
+export const InputPasswordNuevo2 = ( { modo, label,placeHolder, iconLeft ,iconRight, iconSee, IconHide,campo,width='75%'}: Props ) => {
 
   let colorIcono = colores.primary;
 
     //invoke global state
    // const { usuario } = useContext( GeneralContext )
-    const { onChangePassword, setPasswordVisible, passwordVisible } = useLogin(); 
+    const { onChangePasswordN2, setPasswordVisibleN2, passwordVisibleN2 } = useLogin(); 
 
     
     return (
@@ -47,8 +47,8 @@ export const InputPassword = ( { modo, label,placeHolder, iconLeft ,iconRight, i
                   borderTopWidth:0,
                   borderColor:campo===''?'black':colorIcono
               }}
-              secureTextEntry={passwordVisible ? true : false}
-              onChangeText={ onChangePassword }
+              secureTextEntry={passwordVisibleN2 ? true : false}
+              onChangeText={ onChangePasswordN2 }
               placeholder={placeHolder}
               // keyboardType= {!passwordVisible ? 'default' : 'visible-password'}
               autoCapitalize='none'
@@ -56,9 +56,9 @@ export const InputPassword = ( { modo, label,placeHolder, iconLeft ,iconRight, i
               maxLength={27}
               value={ campo }
           />
-          <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ if(campo!='')setPasswordVisible(!passwordVisible)  }}>
+          <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ if(campo!='')setPasswordVisibleN2(!passwordVisibleN2)  }}>
               <Text>
-                  <CustomIcon  name={campo==='' ? iconRight : (passwordVisible ? IconHide : iconSee) } size={24} color= {campo===''? colorIcono : 'black' }  ></CustomIcon>
+                  <CustomIcon  name={campo==='' ? iconRight : (passwordVisibleN2 ? IconHide : iconSee) } size={24} color= {campo===''? colorIcono : 'black' }  ></CustomIcon>
               </Text>
           </TouchableOpacity>
      
