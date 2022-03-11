@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View,Text, TouchableOpacity } from 'react-native';
 import {Calendar} from 'react-native-calendars';
+import { useAgenda } from '../../hooks/useAgenda';
 import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
 import { DayComponent } from './DayComponent';
@@ -12,6 +13,7 @@ export const Calendario = ( {  }: Props ) => {
 
   //invoke global state
   const { agenda,setAgenda,flags,setFlags } = useContext( GeneralContext )
+  const { getMonthAgenda } = useAgenda()
 
   const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'red'};
   const massage = {key: 'massage', color: '#68AABF', selectedDotColor: '#68AABF'};
@@ -113,8 +115,6 @@ export const Calendario = ( {  }: Props ) => {
       break;
     }
   }
-
-
   
   var today = new Date();
   var dd = String(today.getDate());
@@ -141,12 +141,14 @@ export const Calendario = ( {  }: Props ) => {
     }
    
     //TODO get appointments day from service
-    payload.markedDates={
-      '2022-02-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
-      '2022-02-12': {dots: [vacation, eventox], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-      '2022-02-21': {dots: [vacation, eventox,massage,workout], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-    }
-    setAgenda(payload)
+    getMonthAgenda();
+    //services/calendar/list?clienteId=92&colaboradorId=0&dataCertameInicio=2022-03-06&dataCertameFim=2022-03-12&charter=1
+    // payload.markedDates={
+    //   '2022-03-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
+    //   '2022-03-12': {dots: [vacation, eventox], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
+    //   '2022-03-21': {dots: [vacation, eventox,massage,workout], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
+    // }
+    // setAgenda(payload)
     
     
   }, [])
