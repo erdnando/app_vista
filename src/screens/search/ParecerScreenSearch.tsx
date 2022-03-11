@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
-import { FlatList, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
+import { WithoutItems } from '../../components/search/WithoutItems';
 import { Spacer } from '../../components/Spacer';
 import { useSearch } from '../../hooks/useSearch';
 import { OpportunityCustomListOpinionsByIdAux } from '../../models/response/OpportunityCustomListOpinionsByIdAux';
@@ -46,6 +47,8 @@ export const ParecerScreenSearch = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:2 }}>
         
+               {search.parecer.length==0 && <WithoutItems label='Sem pareceres da oportunidade'></WithoutItems>}
+
                 <FlatList data={search.parecer} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 

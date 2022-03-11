@@ -132,18 +132,32 @@ export const useNotificaciones =  () => {
             try {
                 floading(true)
                 //TEST
-                const resp = await vistaApi.post<any>('/notification/saveAllNotification?id='+idNotificacion+'&login='+usuario.email,{
+                // const resp = await vistaApi.post<any>('/notification/saveAllNotification?id='+idNotificacion+'&login='+usuario.email,{
+                //     headers:{
+                //         'Content-Type': 'application/json',
+                //         'Accept': 'application/json',
+                //         "X-Auth-Token": sesion.token 
+                //     },
+                //    params:{ 
+                //      "id" :idNotificacion,
+                //      "login" : usuario.email,
+                //     }
+                // },);
+
+                const resp = await vistaApi.post<any>('/notification/saveAllNotification',{
+                    "id":idNotificacion,
+                    "login":usuario.email
+                },{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token 
                     },
-                   params:{ 
-                     "id" :idNotificacion,
-                     "login" : usuario.email,//sesion.clienteId,
-                    }
-                }, 
-                );
+                //    params:{ 
+                //      "id" :idNotificacion,
+                //      "login" : usuario.email,
+                //     }
+                },);
 
                 console.log('op /notification/saveAllNotification:::::::::::::::::::::');
                 console.log(resp);

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
+import { WithoutItems } from '../../components/search/WithoutItems';
 import { Spacer } from '../../components/Spacer';
 import { useSearch } from '../../hooks/useSearch';
 import { ListJudgeResourceByOpportunityIdAux } from '../../models/response/ListJudgeResourceByOpportunityIdAux';
@@ -41,6 +42,8 @@ export const DemandaJuridicaScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
+             {search.demandaJuridica.length==0 && <WithoutItems label='Sem demandas juridica'></WithoutItems>}
+
                 <FlatList data={search.demandaJuridica} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 

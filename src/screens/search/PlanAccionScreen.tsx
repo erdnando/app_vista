@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
+import { WithoutItems } from '../../components/search/WithoutItems';
 import { Spacer } from '../../components/Spacer';
 import { useSearch } from '../../hooks/useSearch';
 import { ListAllTaskByOpportunityIdAux } from '../../models/response/ListAllTaskByOpportunityIdAux';
@@ -44,6 +45,7 @@ export const PlanAccionScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
+             {search.planAccion.length==0 && <WithoutItems label='Sem plano de acao'></WithoutItems>}
                 <FlatList data={search.planAccion} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 

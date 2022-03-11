@@ -5,9 +5,9 @@ import { gstyles } from '../../theme/appTheme';
 import { TextOportunidad } from '../../components/oportunidad/TextOportunidad';
 import { Producto } from '../../components/oportunidad/Producto';
 import { OpportunityListitemAux } from '../../models/response/OpportunityListitemAux';
-import uuid from 'react-native-uuid';
 import Collapsible from 'react-native-collapsible';
 import { GeneralContext } from '../../state/GeneralProvider';
+import { WithoutItems } from '../../components/search/WithoutItems';
 
 export const ResultadoScreen = () => {
 
@@ -67,6 +67,7 @@ export const ResultadoScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
+             {search.resultados.length==0 && <WithoutItems label='Sem demandas juridica'></WithoutItems>}
                 <FlatList data={search.resultados} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 

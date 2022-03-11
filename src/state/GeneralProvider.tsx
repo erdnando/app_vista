@@ -59,7 +59,7 @@ const GeneralContext = React.createContext({} as GeneralState);
 
 class GeneralProvider extends React.Component{
 
-// erdnando@gmail.com       <---terciario.      248854
+// erdnando@gmail.com       <---terciario.      111111
 // erdnandovr@algartech.com <----colaborador    044482
 //livia.paula@sejavista.com.br <----colaborador 11111 
 //proper@gmail.com           <---terciario.     11111
@@ -72,8 +72,8 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'erdnando@gmail.com',
-                password:'111111',
+                email:'proper@gmail.com',
+                password:'11111',
                 nuevoPassword1:'',
                 nuevoPassword2:'',
                 whatsapp:'(34) 99830-0082',

@@ -179,11 +179,11 @@ return (
          <Spacer height={10}></Spacer>
          <View style={{flex:1,width:'100%',justifyContent:'center',}}>
     
-         {parecer.listaParecerRealizado.length==0 && <View style={{flex:1,width:'100%',justifyContent:'flex-start',
+         {parecer.listaParecerRealizado.length==0 && <View style={{flex:1,width:'100%',justifyContent:'space-around',alignContent:'center',alignItems:'center',
                                       paddingTop:20,paddingLeft:20, height:220,backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,
                                       shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {
                                       height: 3, width: 3 }}}>
-              <Text>Sem pareceres realizados</Text>
+              <Text style={{fontSize:22}}>Sem pareceres realizados</Text>
             </View>}
 
             <FlatList data={parecer.listaParecerRealizado} 

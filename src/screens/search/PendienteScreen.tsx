@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
 import { TextOportunidad } from '../../components/oportunidad/TextOportunidad';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
+import { WithoutItems } from '../../components/search/WithoutItems';
 import { Spacer } from '../../components/Spacer';
 import { useSearch } from '../../hooks/useSearch';
 import { ListAllRequirementByOpportunityAux } from '../../models/response/ListAllRequirementByOpportunityAux';
@@ -143,6 +144,8 @@ export const PendienteScreen = () => {
              <Spacer height={10}></Spacer>
              <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
         
+             {search.pendencias.length==0 && <WithoutItems label='Sem exigencias'></WithoutItems>}
+
                 <FlatList data={search.pendencias} 
                     scrollEnabled={true}
                     renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
