@@ -16,10 +16,13 @@ export const DayComponent = ({ dateString,day,dayState}:Props ) => {
 
   const { agenda,setAgenda } = useContext( GeneralContext )
 
-  
+  // console.log("agenda.markedDates")
+  // console.log(agenda)
 
 
   return (
+
+   
     <View style={{borderWidth: (agenda.selectedDate=== dateString) ? 2 : 0,borderRadius:5,borderColor:'#FF9029', padding:2}}>
 
            <TouchableOpacity  onPress={() =>{   

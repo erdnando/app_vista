@@ -18,7 +18,10 @@ export const Dots = ({ arrDots}:Props ) => {
     <View style={{ flexDirection:'row',justifyContent:'space-evenly',marginTop:0,left:2 }}>
        {arrDots.map((prop, key) => {
          return (
-          <View key={key} style={{height: 6,width: 6, borderRadius: 6, backgroundColor: prop.color,marginRight: 2, }} />
+          <View key={key} style={{height: 7,width: 7, borderRadius: 6, backgroundColor: prop.color,marginRight: 2,
+            borderColor:'white',borderWidth:0,shadowColor: "#000060", shadowOpacity: 0.7,shadowOffset: {
+            height: 1, width: 1,
+        } }} />
          );
       })}
      </View>

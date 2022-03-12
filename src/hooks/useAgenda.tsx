@@ -30,11 +30,7 @@ export const useAgenda =  () => {
             setFlags(payload);
         }
 
-        const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'red'};
-        const massage = {key: 'massage', color: '#68AABF', selectedDotColor: '#68AABF'};
-        const workout = {key: 'workout', color: '#FDBE0F', selectedDotColor: '#FDBE0F'};
-        const eventox = {key: 'eventox', color: '#FF9029', selectedDotColor: '#FF9029'};
-    
+      
 
         const getMonthAgenda = async () =>{
             floading(true)
@@ -47,29 +43,20 @@ export const useAgenda =  () => {
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token
                     },
-                   
                 }, 
                 );
 
                 console.log('op lista agenda:::::::::::::::::::::');
-               // console.log(resp.data);
+    
                 const objx = JSON.parse(JSON.stringify(resp.data));
                 
-
-                //const {  cliente } = objx;
-               // console.log(Object.getOwnPropertyNames(objx).sort());
-                //["2022-03-09", "2022-03-10", "2022-03-11", "2022-03-14", "2022-03-18"]
                 let arrResponse = [{}];
                 arrResponse=[];
 
-              
                 Object.getOwnPropertyNames(objx).forEach(function(val, idx, array) {
-                   // console.log(val + " -> " + JSON.stringify(objx[val]));
-                   // console.log("---------------")
+    
                     let arr= JSON.parse(JSON.stringify(objx[val])) as AgendaItem[];
-                    let cliente = arr
-                    //console.log(arr);
-                   // console.log('---------------------------------------');
+  
                     arr.forEach(function(item,index){
 
                         arrResponse.push( { 
@@ -86,54 +73,56 @@ export const useAgenda =  () => {
                             "statusEstrategico" : item.statusEstrategico,
                             "statusJuridico" : item.statusJuridico,
                             });
-
                     });
-
-                   
                   });
-                  console.log('---------------------------------------xxx');
-                  console.log(arrResponse);
-
 
                  if(arrResponse.length > 0){
 
                      let arrAux=agenda.markedDates;//get reference
                      arrAux={};
-                       // payload.markedDates={
-                //     '2022-02-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
-                //     '2022-02-12': {dots: [vacation, eventox], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-                //     '2022-02-21': {dots: [vacation, eventox,massage,workout], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-                //   }
+   
+                     var stringMarkedDates={};
+                     const red = {key: 'red', color: 'red', selectedDotColor: 'red'};
+                     const green = {key: 'green', color: '#48e879', selectedDotColor: '#48e879'};
+                     const yellow = {key: 'yellow', color: '#f4ff35', selectedDotColor: '#f4ff35'};
+                     const grey = {key: 'grey', color: '#838892', selectedDotColor: '#838892'};
+                     const black = {key: 'black', color: '#454A53', selectedDotColor: '#454A53'};
+                     let colorDia = {};
+                     
+                     let coloresExistentes=[{}];
+                   //  coloresExistentes=[];
 
-
-
-                     let stringMarkedDates="";
                      arrResponse.forEach(function(item,index){
-                        console.log('---------------------------------------yyy');
-                        // console.log(item)
-                         stringMarkedDates+= "'"+item.val+"'" + ": { dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}],"+ "selected: true,selectedColor: 'transparent', selectedTextColor:'black' }, "
-                      
+
+                       // console.log(item.val);
+                        
+                         if( item.parecerEstrategico=='G' && item.statusEstrategico=='F') colorDia= green;        //GG
+                         else if( item.parecerEstrategico==null && item.statusEstrategico=='P') colorDia= yellow;
+                         else if( item.parecerEstrategico=='N' && item.statusEstrategico=='P') colorDia= red;
+                         else if( item.status=='F') colorDia= grey;
+                         else  colorDia= black;
+
+                         if( stringMarkedDates[item.val]){
+                             //color existente, lo va acumulando
+                            coloresExistentes.push(colorDia)
+                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black' }
+                         }else{
+                             //si es la 1a vez, lo agrega
+                            coloresExistentes=[];
+                            coloresExistentes.push(colorDia)
+                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black' }
+                            
+                        }
+                         
                         });
-                        console.log('---------------------------------------armado');
-                       // console.log(JSON.parse(JSON.stringify({stringMarkedDates})))
-
-
-                     console.log("asignando datos");
-                   //  console.log(arrAux)
+        
+                   console.log("asignando datos");
                    const payload= agenda;
-                   payload.markedDates= JSON.parse(JSON.stringify(stringMarkedDates));
-
-                //       payload.markedDates={
-                //     '2022-03-11': {dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
-                //     '2022-03-12': {dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-                //     '2022-03-21': {dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-                //   }
-
-                //'2022-03-09': { dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}],selected: true,selectedColor: 'transparent', selectedTextColor:'black' }, '2022-03-09': { dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}],selected: true,selectedColor: 'transparent', selectedTextColor:'black' }, '2022-03-18': { dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}],selected: true,selectedColor: 'transparent', selectedTextColor:'black' }, '2022-03-14': { dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}],selected: true,selectedColor: 'transparent', selectedTextColor:'black' }, '2022-03-11': { dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}],selected: true,selectedColor: 'transparent', selectedTextColor:'black' }, '2022-03-10': { dots: [{key: 'vacation', color: 'red', selectedDotColor: 'red'}],selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
+                   payload.markedDates= stringMarkedDates;
 
                    setAgenda(payload);
                    console.log('---------------------------------------final');
-                   console.log(agenda.markedDates)
+                   console.log(agenda)
 
                 }else{
                     const payload= agenda;
