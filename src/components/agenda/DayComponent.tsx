@@ -16,21 +16,20 @@ export const DayComponent = ({ dateString,day,dayState}:Props ) => {
 
   const { agenda,setAgenda } = useContext( GeneralContext )
 
-  // console.log("agenda.markedDates")
-  // console.log(agenda)
-
-
   return (
 
    
     <View style={{borderWidth: (agenda.selectedDate=== dateString) ? 2 : 0,borderRadius:5,borderColor:'#FF9029', padding:2}}>
 
            <TouchableOpacity  onPress={() =>{   
+            
                         const payload= agenda;
                         payload.selectedDate = dateString;
                         setAgenda(payload)
 
+                        console.log('day click')
                         console.log(agenda.markedDates[agenda.selectedDate] );
+                    
                       }}>
                 <Text style={{textAlign: 'center',fontSize:16, color: dayState === 'disabled' ? '#E2E5EA' : 'black'}}>{day}</Text>
            </TouchableOpacity>

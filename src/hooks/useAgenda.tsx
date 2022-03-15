@@ -31,13 +31,28 @@ export const useAgenda =  () => {
         }
 
       
-
+        const lastday = (anio:number,month:number) =>{
+            return  new Date(anio, month, 0).getDate();
+            }
+        
         const getMonthAgenda = async () =>{
             floading(true)
+
+
+            var today = new Date();
+            let mesn =  (parseInt(today.getMonth().toString()) + 1);
+            let mess = mesn<10 ? '0'+mesn : mesn.toString()
+           
+            var yyyy = today.getFullYear();
+            let ultimodia = lastday(yyyy,mesn)
+            console.log(yyyy +'-'+mess+'-'+'01');
+            console.log(yyyy+'-'+mess+'-'+ultimodia);
+            let fechaIni = yyyy +'-'+mess+'-'+'01';
+            let fechaFin = yyyy+'-'+mess+'-'+ultimodia;
             
             try {
                 console.log('services/calendar/list')
-                const resp = await vistaApi.get<any>('services/calendar/list?dataCertameInicio=2022-03-01&dataCertameFim=2022-03-31&clienteId=92&charter=1&colaboradorId=0',{
+                const resp = await vistaApi.get<any>('services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&clienteId='+sesion.clienteId+'&charter='+sesion.charter+'&colaboradorId=0',{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
