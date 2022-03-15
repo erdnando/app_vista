@@ -18,6 +18,9 @@ import { OpinionesRequest } from '../models/OpinionesRequest';
 import { RNFetchBlobSession } from 'rn-fetch-blob';
 import { ComboProductoServicio } from '../models/ComboProductoServicio';
 import { AgendaItem } from '../models/AgendaItem';
+import { OpportunityListitem } from '../models/response/OpportunityListitem';
+import { OpportunityCustomFindById } from '../models/response/OpportunityCustomFindById';
+import { DocumentosAgendaType } from '../models/response/DocumentosAgendaType';
 
 export const useAgenda =  () => {
 
@@ -103,6 +106,7 @@ export const useAgenda =  () => {
                      const grey = {key: 'grey', color: '#838892', selectedDotColor: '#838892'};
                      const black = {key: 'black', color: '#454A53', selectedDotColor: '#454A53'};
                      let colorDia = {};
+                     let textButton=''
                      
                      let coloresExistentes=[{}];
                      let detailItem=[{}];
@@ -112,24 +116,24 @@ export const useAgenda =  () => {
 
                        // console.log(item.val);
                         
-                         if( item.parecerEstrategico=='G' && item.statusEstrategico=='F') colorDia= green;        //GG
-                         else if( item.parecerEstrategico==null && item.statusEstrategico=='P') colorDia= yellow;
-                         else if( item.parecerEstrategico=='N' && item.statusEstrategico=='P') colorDia= red;
-                         else if( item.status=='F') colorDia= grey;
-                         else  colorDia= black;
+                         if( item.parecerEstrategico=='G' && item.statusEstrategico=='F') (colorDia= green , textButton='PARECER GO');        //GG
+                         else if( item.parecerEstrategico==null && item.statusEstrategico=='P') (colorDia= yellow, textButton='AGUARDANDO PARECER');
+                         else if( item.parecerEstrategico=='N' && item.statusEstrategico=='P') (colorDia= red,  textButton='PARECER NO GO');
+                         else if( item.status=='F') (colorDia= grey, textButton='FINALIZADA');
+                         else ( colorDia= black, textButton='X');
 
                          if( stringMarkedDates[item.val]){
                              //color existente, lo va acumulando
                             coloresExistentes.push(colorDia)
                             detailItem.push(item)
-                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black',detailItem:detailItem }
+                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black',detailItem:detailItem,textButton:textButton }
                          }else{
                              //si es la 1a vez, lo agrega
                             coloresExistentes=[];
                             detailItem=[];
                             coloresExistentes.push(colorDia)
                             detailItem.push(item)
-                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black',detailItem:detailItem }
+                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black',detailItem:detailItem,textButton:textButton }
                             
                         }
                          
@@ -159,13 +163,112 @@ export const useAgenda =  () => {
             }
         }
 
+        const loadResumo=()=>{
 
+            getResumoTab();
+            getInformacionesTab();
+            getDocumentosTab();
+        }
+
+
+        const getInformacionesTab = async () =>{
+            try {
+                    //agenda.selectedOportunidadId
+                    const resp = await vistaApi.get<OpportunityCustomFindById>('/services/opportunityCustom/findById/'+agenda.selectedOportunidadId+'/'+sesion.clienteId+'?charter='+ sesion.charter+'&colaboradorId=0',{
+                        headers:{
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            "X-Auth-Token": sesion.token 
+                        },
+                    }, 
+                    );
+
+                    console.log('op resumo:::::::::::::::::::::');
+                    console.log(resp.data);
+
+                    
+                    if(resp.data.razaoSocialCliente !== undefined){
+                        console.log("asignando datos");
+                        const payload= agenda;
+                        payload.resumo= resp.data;
+                        setAgenda(payload);
+                    }
+                    floading(false)
+
+            }catch(error){
+                console.log('error al consultar OpportunityCustomFindById')
+                console.log(error);
+               // floading(false)
+            }
+        }
+
+        const getResumoTab = async () =>{
+            try {
+                    //agenda.selectedOportunidadId
+                    const resp = await vistaApi.get<OpportunityCustomFindById>('/services/opportunityCustom/findById/'+agenda.selectedOportunidadId+'/'+sesion.clienteId+'?charter='+ sesion.charter+'&colaboradorId=0',{
+                        headers:{
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            "X-Auth-Token": sesion.token 
+                        },
+                    }, 
+                    );
+
+                    console.log('op resumo:::::::::::::::::::::');
+                    console.log(resp.data);
+
+                    
+                    if(resp.data.razaoSocialCliente !== undefined){
+                        console.log("asignando datos");
+                        const payload= agenda;
+                        payload.resumo= resp.data;
+                        setAgenda(payload);
+                    }
+                    floading(false)
+
+            }catch(error){
+                console.log('error al consultar OpportunityCustomFindById')
+                console.log(error);
+               // floading(false)
+            }
+        }
+
+        const getDocumentosTab = async () =>{
+            try {
+                    //agenda.selectedOportunidadId
+                    const resp = await vistaApi.get<DocumentosAgenda[]>('/services/clientDocument/list/opportunity/'+agenda.selectedOportunidadId,{
+                        headers:{
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            "X-Auth-Token": sesion.token 
+                        },
+                    }, 
+                    );
+
+                    console.log('op documentos:::::::::::::::::::::');
+                    console.log(resp.data);
+
+                    
+                    if(resp.data.length>0){
+                        console.log("asignando datos");
+                        const payload= agenda;
+                        payload.documentos= resp.data;
+                        setAgenda(payload);
+                    }
+                    floading(false)
+
+            }catch(error){
+                console.log('error al consultar OpportunityCustomFindById')
+                console.log(error);
+               // floading(false)
+            }
+        }
        
 
 
         //exposed objets 
         return {
-            getMonthAgenda
+            getMonthAgenda,loadResumo
         }
 }
         

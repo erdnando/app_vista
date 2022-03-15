@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colores } from '../theme/appTheme';
 import { DemandaJuridicaAgenda } from '../screens/agenda/DemandaJuridicaAgenda';
 import { DocumentosAgenda } from '../screens/agenda/DocumentosAgenda';
+import { InformacionesAgenda } from '../screens/agenda/InformacionesAgenda';
 import { ResultadoAgenda } from '../screens/agenda/ResultadoAgenda';
 import { PendienteAgenda } from '../screens/agenda/PendienteAgenda';
 import { PlanAccionAgenda } from '../screens/agenda/PlanAccionAgenda';
@@ -59,12 +60,13 @@ export const NavigatorAgenda = () => {
     >
         
       <Tab.Screen name="ResumoAgenda" options={ { tabBarLabel:'RESUMO' , swipeEnabled:true} } component={ ResumoAgenda } />
+      <Tab.Screen name="InformacionesAgenda" options={ { tabBarLabel:'INFORMACIONES' , swipeEnabled:true,} } component={ InformacionesAgenda }  />
       <Tab.Screen name="DocumentosAgenda" options={ { tabBarLabel:'DOCUMENTOS' , swipeEnabled:true,} } component={ DocumentosAgenda }  />
-      <Tab.Screen name="ParecerAgenda" options={ { tabBarLabel:'PARECER' , swipeEnabled:true,} } component={ ParecerAgenda }  />
+      {/* <Tab.Screen name="ParecerAgenda" options={ { tabBarLabel:'PARECER' , swipeEnabled:true,} } component={ ParecerAgenda }  />
       <Tab.Screen name="DemandaJuridicaAgenda" options={ { tabBarLabel:'DEMANDA JURIDICA', swipeEnabled:true,} } component={ DemandaJuridicaAgenda } />
       <Tab.Screen name="ResultadoAgenda" options={ { tabBarLabel:'RESULTADO', swipeEnabled:true,} } component={ ResultadoAgenda } />
       <Tab.Screen name="PendienteAgenda" options={ { tabBarLabel:'PENDENCIAS', swipeEnabled:true,} } component={ PendienteAgenda } />
-      <Tab.Screen name="PlanAccionAgenda" options={ { tabBarLabel:'PLAN DE ACCION', swipeEnabled:true,} } component={ PlanAccionAgenda } />
+      <Tab.Screen name="PlanAccionAgenda" options={ { tabBarLabel:'PLAN DE ACCION', swipeEnabled:true,} } component={ PlanAccionAgenda } /> */}
     </Tab.Navigator>
   );
 }

@@ -8,7 +8,8 @@ import { LastUpdatesAgenda } from '../../models/LastUpdatesAgenda';
 export const ListOportunidades = ( ) => {
 
   //call global state
-  const { flags, setFlags,agenda} = useContext(GeneralContext);
+  const { flags, setFlags,agenda,setAgenda} = useContext(GeneralContext);
+  const { loadResumo, } = useAgenda();
 //   const {lastUpdates } = useAgenda();
 //   interface LastUpdates{
 //     id:string,
@@ -141,15 +142,23 @@ export const ListOportunidades = ( ) => {
                             height:33,width:100,right:60, justifyContent:'center',  }} 
                             onPress={()=>{
 
-                                console.log('ver detalle appointment..');
+                                console.log('ver detalle agenda dia..');
                      
                                 const payload= flags;
                                // payload.isLoading=true;
-                                payload.resultadosBusquedaVisible=true;//openModal
+                                payload.resultadosAgendaVisible=true;//openModal agenda
                                 setFlags(payload);
 
+                                //selected oportunidad id
+                                const payloadAgenda= agenda;
+                                payloadAgenda.selectedOportunidadId=updateItem.oportunidadId;
+                                setAgenda(payloadAgenda);
+
+                                //load agenda tabs
+                                loadResumo()
+
                             }} >
-                                <Text style={{ fontFamily:'Roboto-Bold', textAlign:'center',color:'black'}}>xxxx</Text>
+                                <Text style={{ fontFamily:'Roboto-Bold',fontSize:12,  textAlign:'center',color:'black'}}>{updateItem.textButton}</Text>
                             </TouchableOpacity>
                     </View>
                 

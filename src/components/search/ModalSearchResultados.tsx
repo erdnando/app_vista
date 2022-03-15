@@ -3,7 +3,7 @@ import { Modal, View } from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { HeaderResultados } from './HeaderResultados';
 import { Loading } from '../Loading';
-import { NavigatorAgenda } from '../../navigation/NavigatorAgenda';
+import { Navigatorsearch } from '../../navigation/NavigatorSearch';
 
 
 interface Props{
@@ -30,7 +30,7 @@ export const ModalSearchResultados = ( { iconClose,color, label }: Props ) => {
 
                 <View style={{ flex:1,backgroundColor:'white',paddingTop:50 }}>
                     <HeaderResultados iconClose={iconClose} color={color} label={label}></HeaderResultados>
-                    <NavigatorAgenda></NavigatorAgenda>
+                    <Navigatorsearch></Navigatorsearch>
                 </View>
                 
             </Modal>

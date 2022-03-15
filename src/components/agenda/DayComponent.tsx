@@ -44,6 +44,7 @@ export const DayComponent = ({ dateString,day,dayState}:Props ) => {
                                 let horaAnterior = '';
                                 let horaVisible=true;
                                 let colorBoton='black';
+                                let textButton=''
                                 arrAux.forEach(function(item,index){
 
                                   hora = item.horaCertame.substring(0,2)+':'+item.horaCertame.substring(2);
@@ -56,11 +57,13 @@ export const DayComponent = ({ dateString,day,dayState}:Props ) => {
                                   horaAnterior=hora;
 
 
-                                  if( item.parecerEstrategico=='G' && item.statusEstrategico=='F') colorBoton= '#48e879';        //GG
-                                  else if( item.parecerEstrategico==null && item.statusEstrategico=='P') colorBoton= '#f4ff35';
-                                  else if( item.parecerEstrategico=='N' && item.statusEstrategico=='P') colorBoton= 'red';
-                                  else if( item.status=='F') colorBoton= '#b2b8b7';
-                                  else  colorBoton= 'black';
+                                  if( item.parecerEstrategico=='G' && item.statusEstrategico=='F') (colorBoton= '#48e879', textButton='PARECER GO');        //GG
+                                  else if( item.parecerEstrategico==null && item.statusEstrategico=='P')( colorBoton= '#f4ff35' ,textButton='AGUARDANDO PARECER');
+                                  else if( item.parecerEstrategico=='N' && item.statusEstrategico=='P') (colorBoton= 'red',  textButton='PARECER NO GO');
+                                  else if( item.status=='F') (colorBoton= '#b2b8b7', textButton='FINALIZADA');
+                                  else ( colorBoton= 'black',textButton='X');
+                                  console.log('textButton')
+                                  console.log(textButton)
                                   
                                   payload.lastUpdates.push( { 
                                       id: index.toString(),
@@ -73,7 +76,8 @@ export const DayComponent = ({ dateString,day,dayState}:Props ) => {
                                       horaVisible:horaVisible,
                                       oportunidadId:item.oportunidadeId.toString(),
                                       plataforma:item.plataforma,
-                                      colorBoton:colorBoton
+                                      colorBoton:colorBoton,
+                                      textButton:textButton
                                       });
                                 });
                               }

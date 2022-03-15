@@ -9,6 +9,7 @@ export interface Flags{
     isNotificaciones:boolean,
     verDetalleAgenda:boolean,
     resultadosBusquedaVisible:boolean,
+    resultadosAgendaVisible:boolean,
     modalFiltrosVisible:boolean,
     modalFechaVisible:boolean,
     modalFechaHorarioVisible:boolean,

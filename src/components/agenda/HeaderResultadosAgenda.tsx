@@ -20,7 +20,7 @@ export const HeaderResultadosAgenda = ( { iconClose,color, label }: Props ) => {
               <TouchableOpacity style={{marginLeft:15, padding:5}} onPress={() =>{ 
                 
                 const payload= flags;
-                payload.resultadosBusquedaVisible =false;
+                payload.resultadosAgendaVisible =false;
                 setFlags(payload)
                 }}>
                   <Text>

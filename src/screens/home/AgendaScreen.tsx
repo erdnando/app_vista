@@ -7,19 +7,19 @@ import { ListNotificaciones } from '../../components/notificaciones/ListNotifica
 import { Calendario } from '../../components/agenda/Calendario';
 import { OportunidadesDia } from '../../components/agenda/OportunidadesDia';
 import { DetalleAgenda } from '../../components/agenda/DetalleAgenda';
-import { ModalSearchResultados } from '../../components/search/ModalSearchResultados';
 import { ModalFiltros } from '../../components/agenda/ModalFiltros';
+import { ModalAgendaDetalle } from '../../components/agenda/ModalAgendaDetalle';
 
 export const AgendaScreen = () => {
 
     const { top } = useSafeAreaInsets();
     //call global state
-    const { flags,ids} = useContext(GeneralContext);
+    const { flags,ids,agenda} = useContext(GeneralContext);
 
 
-     if(flags?.resultadosBusquedaVisible){
+     if(flags?.resultadosAgendaVisible){
         return <SafeAreaProvider>
-                <ModalSearchResultados iconClose='ic_round-close' color='black' label={`Oportunidade ${ ids.codigoBusqueda }`}></ModalSearchResultados>
+                <ModalAgendaDetalle iconClose='ic_round-close' color='black' label={`Resumo da Oportunidade ${ agenda.selectedOportunidadId }`}></ModalAgendaDetalle>
             </SafeAreaProvider> 
      }
 

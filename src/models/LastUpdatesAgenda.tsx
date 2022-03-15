@@ -11,5 +11,6 @@ export interface LastUpdatesAgenda {
     horaVisible:boolean;
     oportunidadId:string,
     plataforma:string,
-    colorBoton:string
+    colorBoton:string,
+    textButton:string,
 }
