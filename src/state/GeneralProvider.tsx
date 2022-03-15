@@ -112,7 +112,8 @@ class GeneralProvider extends React.Component{
         },
         agenda:{
             selectedDate:'',
-            markedDates:{}
+            markedDates:{},
+            lastUpdates:[],
         },
         sesion:{
             usuario:{

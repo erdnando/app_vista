@@ -22,7 +22,7 @@ import { AgendaItem } from '../models/AgendaItem';
 export const useAgenda =  () => {
 
         const { ids ,flags,setFlags, sesion, agenda ,setAgenda } = useContext( GeneralContext );
-
+   
         const floading=(valor:boolean)=>{
             const payload= flags;
             payload.isLoadingParecer= valor;
@@ -105,6 +105,7 @@ export const useAgenda =  () => {
                      let colorDia = {};
                      
                      let coloresExistentes=[{}];
+                     let detailItem=[{}];
                    //  coloresExistentes=[];
 
                      arrResponse.forEach(function(item,index){
@@ -120,12 +121,15 @@ export const useAgenda =  () => {
                          if( stringMarkedDates[item.val]){
                              //color existente, lo va acumulando
                             coloresExistentes.push(colorDia)
-                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black' }
+                            detailItem.push(item)
+                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black',detailItem:detailItem }
                          }else{
                              //si es la 1a vez, lo agrega
                             coloresExistentes=[];
+                            detailItem=[];
                             coloresExistentes.push(colorDia)
-                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black' }
+                            detailItem.push(item)
+                            stringMarkedDates[item.val] = { dots: coloresExistentes,selected: true,selectedColor: 'transparent', selectedTextColor:'black',detailItem:detailItem }
                             
                         }
                          

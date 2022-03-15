@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Modal, View } from 'react-native';
+import { Navigatorsearch } from '../../navigation/NavigatorSearch';
 import { GeneralContext } from '../../state/GeneralProvider';
-import { HeaderResultados } from './HeaderResultados';
+import { HeaderResultadosAgenda } from './HeaderResultadosAgenda';
 import { Loading } from '../Loading';
-import { NavigatorAgenda } from '../../navigation/NavigatorAgenda';
 
 
 interface Props{
@@ -12,7 +12,7 @@ interface Props{
   label:string,
 }
 
-export const ModalSearchResultados = ( { iconClose,color, label }: Props ) => {
+export const ModalAgendaDetalle = ( { iconClose,color, label }: Props ) => {
 
   //call service to get data
   
@@ -21,7 +21,7 @@ export const ModalSearchResultados = ( { iconClose,color, label }: Props ) => {
   if(flags.isLoading){
     return <Modal animationType='slide' transparent={true}  visible={ flags.resultadosBusquedaVisible }>
               <View style={{ flex:1,backgroundColor:'white',paddingTop:50 }}>
-                  <HeaderResultados iconClose={iconClose} color={color} label={label}></HeaderResultados>
+                  <HeaderResultadosAgenda iconClose={iconClose} color={color} label={label}></HeaderResultadosAgenda>
                   <Loading color='orange'></Loading>
               </View>
           </Modal>
@@ -29,8 +29,8 @@ export const ModalSearchResultados = ( { iconClose,color, label }: Props ) => {
     return   <Modal animationType='slide' transparent={true}  visible={ flags.resultadosBusquedaVisible }>
 
                 <View style={{ flex:1,backgroundColor:'white',paddingTop:50 }}>
-                    <HeaderResultados iconClose={iconClose} color={color} label={label}></HeaderResultados>
-                    <NavigatorAgenda></NavigatorAgenda>
+                    <HeaderResultadosAgenda iconClose={iconClose} color={color} label={label}></HeaderResultadosAgenda>
+                    <Navigatorsearch></Navigatorsearch>
                 </View>
                 
             </Modal>

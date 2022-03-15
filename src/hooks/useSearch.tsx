@@ -36,6 +36,8 @@ export const useSearch =  () => {
                   getResultadoTab();
                   getPlanAccionTab();
                   getPendenciasTab();
+                  floading(false)
+
         }
 
         const getOportunidadeTab = async () =>{

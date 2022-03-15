@@ -62,35 +62,12 @@ export const NavigationHome = ( { navigation }:Props) => {
                                         flexDirection:'row',top:top,backgroundColor:colores.topBar, height:66}}>
                                 
                                 {/* icono left side (hamburguer or back arrow) */}
-                               { flags.verDetalleAgenda || ids.idOpinionSeleccionado !='' ?   
+                               {  ids.idOpinionSeleccionado !='' ?   
                                   <OpcionHeader iconName='ic_round-arrow-back' color={colores.primary}  // back option 
                                       onPress={() =>{ 
                                         console.log('going back..')
                                         goListParecer();
-                                        // ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
-
-                                        // const payload= flags;
-                                        // payload.verDetalleAgenda=false;
-                                        // setFlags(payload);
-
-                                        // setTabSelected(tabModule)
-                                         
-                                        // const payload1 = ids;
-                                        // payload1.idOpinionBusqueda= '';
-                                        // payload1.idOpinionSeleccionado='';
-                                        // payload1.idMenuOpinionSelected=1;
-                                        // setIds(payload1);
-
-                                        // const payload2 = menuOpiniones;
-                                        // payload2.forEach(function(part, index) {
-                                        //        payload2[index].estatus=0;  
-                                        // });
-
-                                        // payload2[0].estatus=1;
-                                        // setMenuOpiniones(payload2);
-
-                                      
-
+                                     
                                       }} /> : 
                                     
                                     <OpcionHeader iconName='ic_baseline-menu' color={colores.primary}  //menu hamburguesa
@@ -149,7 +126,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                       </TouchableOpacity>
 
                                       {/* search just on agenda detail */}
-                                      { flags.verDetalleAgenda || ids.idOpinionSeleccionado !='' ?   
+                                      {  ids.idOpinionSeleccionado !='' ?   
                                          <TouchableOpacity style={{ marginEnd:16 }} 
                                          onPress={() =>{ 
                                               console.log('searching...3')
