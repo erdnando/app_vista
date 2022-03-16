@@ -131,18 +131,7 @@ export const useNotificaciones =  () => {
 
             try {
                 floading(true)
-                //TEST
-                // const resp = await vistaApi.post<any>('/notification/saveAllNotification?id='+idNotificacion+'&login='+usuario.email,{
-                //     headers:{
-                //         'Content-Type': 'application/json',
-                //         'Accept': 'application/json',
-                //         "X-Auth-Token": sesion.token 
-                //     },
-                //    params:{ 
-                //      "id" :idNotificacion,
-                //      "login" : usuario.email,
-                //     }
-                // },);
+
 
                 const resp = await vistaApi.post<any>('/notification/saveAllNotification',{
                     "id":idNotificacion,
@@ -153,10 +142,6 @@ export const useNotificaciones =  () => {
                         'Accept': 'application/json',
                         "X-Auth-Token": sesion.token 
                     },
-                //    params:{ 
-                //      "id" :idNotificacion,
-                //      "login" : usuario.email,
-                //     }
                 },);
 
                 console.log('op /notification/saveAllNotification:::::::::::::::::::::');
@@ -172,7 +157,37 @@ export const useNotificaciones =  () => {
                 floading(false)
             }
         }
+
+        const deleteAllNotification = async () =>{
+
+            try {
+                floading(true)
+
+
+                const resp = await vistaApi.post<any>('/notification/saveAllNotification',{
+                    "login":usuario.email
+                },{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                },);
+
+                console.log('op /notification/delete AllNotification all:::::::::::::::::::::');
+                console.log(resp);
+
+               
+
+                floading(false)
+                
+            } catch (error) {
+                //console.log(JSON.stringify(error.response));
+                Toast.show({type: 'ko',props: { mensaje: error.response.data.message }});
+                floading(false)
+            }
+        }
        
         //exposed objets 
-        return {  notificationListByLogin ,floading,existsNotification,deleteNotification   }
+        return {  notificationListByLogin ,floading,existsNotification,deleteNotification,deleteAllNotification   }
 }

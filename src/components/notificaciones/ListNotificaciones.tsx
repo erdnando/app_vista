@@ -16,7 +16,7 @@ export const ListNotificaciones = ( ) => {
 
     const {flags,notificaciones,setNotificaciones  } = useContext( GeneralContext );
     const [checked, setchecked] = useState(false);
-    const { existsNotification,deleteNotification } = useNotificaciones(); 
+    const { existsNotification,deleteNotification,deleteAllNotification } = useNotificaciones(); 
 
 
     const renderUpdateItem = (updateItem:NotificacionByLoginAux) =>{
@@ -96,7 +96,7 @@ export const ListNotificaciones = ( ) => {
                             value={checked}
                             onValueChange={(value:boolean)=>{
                                 setchecked(value)
-
+                                deleteAllNotification()
                                 console.log('deleting all..')
                                 Toast.show({type: 'ko',props: { mensaje: 'Marcando todos los mensajes como leidos' }});
                                 setTimeout(
