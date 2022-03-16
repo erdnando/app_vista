@@ -157,7 +157,7 @@ export const useParecer =  () => {
                     payload.listaParecer= [];
                     setParecer(payload);
                 }
-                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados ok' }});
+                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados' }});
                 floading(false)
             } catch (error) {
                 console.log('error al consultar listaParecer terciario')
@@ -217,7 +217,7 @@ export const useParecer =  () => {
                     payload.listaParecerRealizado= [];
                     setParecer(payload);
                 }
-                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados ok' }});
+                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados' }});
                 floading(false)
             } catch (error) {
                 console.log('error al consultar listaParecer realizado terciario')
@@ -647,7 +647,8 @@ export const useParecer =  () => {
                       resp.data.forEach(function(item,index){
                         arrAux.push({
                             id:index,
-                            exigencia:item.titulo,
+                            //exigencia:'',
+                            exigencia: item.titulo.length>29 ? item.titulo.toString().substring(0,29)+'...': item.titulo,
                             observacion:item.observacao === null ? '' : item.observacao.toUpperCase(),
                             tipo:item.tipoUsuarioCliente.descricao,
                             dias:item.metaDias,
@@ -876,7 +877,7 @@ export const useParecer =  () => {
                 }else{
                     if(item.motivo === null) bFlag = false;
                     if(item.motivo != null && item.motivo.trim() ==='') bFlag = false;
-                    //else if(item.motivo.trim() ==='') bFlag = false;
+                    
                     throw BreakException;
                  
                 }
@@ -884,40 +885,38 @@ export const useParecer =  () => {
 
                      if(item.motivo === null){ bFlag = false; throw BreakException;}
                      if(item.motivo!= null && item.motivo.trim() ===''){ bFlag = false; throw BreakException;}
-                    //else if(item.motivo.trim() ==='') bFlag = false;
+                    
                    
                 }
                 
 
                 if(item.lote === null) bFlag = false;
                 if(item.lote != null && item.lote.trim() ==='') {bFlag = false;throw BreakException;}
-               // else if(item.lote.trim() ==='') bFlag = false;
+               
 
                 if(item.item === null) bFlag = false;
                 if(item.item != null && item.item.trim() ==='') {bFlag = false;throw BreakException;}
-                //else if(item.item.trim() ==='') bFlag = false;
+                
 
                 if(item.familia === null) bFlag = false;
                 if(item.familia != null && item.familia.trim() ==='') {bFlag = false;throw BreakException;}
-                //else if(item.familia.trim() ==='') bFlag = false;
+                
 
                 if(item.productoServicio === null) bFlag = false;
                 if(item.productoServicio != null && item.productoServicio.trim() ==='') {bFlag = false;throw BreakException;}
-                //else if(item.productoServicio.trim() ==='') bFlag = false;
+                
 
                 if(item.valorinicial === null) bFlag = false;
                 if(item.valorinicial != null && item.valorinicial.trim() ==='') {bFlag = false;throw BreakException;}
-               // else if(item.valorinicial.trim() ==='') bFlag = false;
+               
 
                 if(item.valorFinal === null) bFlag = false;
                 if(item.valorFinal != null && item.valorFinal.trim() ==='') {bFlag = false;throw BreakException;}
-                //else if(item.valorFinal.trim() ==='') bFlag = false;
+                
 
-                if(item.justificativa === null) bFlag = false;
-                if(item.justificativa != null && item.justificativa.trim() ===''){ bFlag = false;throw BreakException;}
-                //else if(item.justificativa.trim() ==='') bFlag = false;
-
-                //if(item.go === null) bFlag = false;
+                // if(item.justificativa === null) bFlag = false;
+                // if(item.justificativa != null && item.justificativa.trim() ===''){ bFlag = false;throw BreakException;}
+               
             });
             }catch(e){
                   console.log('Saliendo por catch')
