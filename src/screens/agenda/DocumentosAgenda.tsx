@@ -47,7 +47,7 @@ export const DocumentosAgenda = () => {
                  <Spacer height={10}></Spacer>
                  <View style={{flex:1,width:'100%',justifyContent:'center',marginHorizontal:0,left:4 }}>
             
-                 {agenda.documentos.length==0 && <WithoutItems label='Sem plano de acao'></WithoutItems>}
+                 {agenda.documentos.length==0 && <WithoutItems label='Sem documentos'></WithoutItems>}
                     <FlatList data={agenda.documentos} 
                         scrollEnabled={true}
                         renderItem={ ({ item,index }) =>renderUpdateItem({ item }) } 

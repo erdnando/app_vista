@@ -25,8 +25,10 @@ export const Resumen = ( { colorIcono,icono,label,metrica }: Props ) => {
               </Text>
           </View>
 
-        <Text style={{fontFamily:'Roboto-Bold', fontSize:17, margin:3}}>{metrica}</Text>
-        <Text style={{fontFamily:'Roboto-Regular',color:'#838892', fontSize:15, margin:3}}>{label}</Text>
+        <Text style={{fontFamily:'Roboto-Bold', fontSize:17, margin:3,alignItems:'center',justifyContent:'center',alignContent:'center',}}>{metrica}</Text>
+        <Text style={{fontFamily:'Roboto-Regular',color:'#838892', fontSize:15, margin:3,textAlign:'center', alignItems:'center',justifyContent:'center',alignContent:'center', }}>{label}</Text>
+ 
+        
     </View>
     )
 }

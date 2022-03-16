@@ -5,6 +5,7 @@ import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
 import { colores } from '../../theme/appTheme';
 import { Resumen } from './Resumen';
+import { useHome } from '../../hooks/useHome';
 
 
 interface Props{
@@ -12,6 +13,8 @@ interface Props{
 }
 
 export const ResumenOportunidades = ( {  }: Props ) => {
+
+  const { metrics } = useHome();
 
     return (
       <View style={{height:190, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', 
@@ -26,9 +29,9 @@ export const ResumenOportunidades = ( {  }: Props ) => {
           </View>
 
           <View style={{ flexDirection:'row', flex:1}}>
-          <Resumen icono='bi_clock-fill' colorIcono={colores.primary} metrica='000' label='Aguardando' ></Resumen>
-          <Resumen icono='icomoon-free_hammer2' colorIcono='#83AE69' metrica='000' label='Parecer Ok' ></Resumen>
-          <Resumen icono='ant-design_check-circle-filled' colorIcono='#68AABF' metrica='000' label='Finalizados' ></Resumen>
+          <Resumen icono='bi_clock-fill' colorIcono={colores.primary} metrica={metrics.totalFila.toString()} label='Tarefas pendentes' ></Resumen>
+          <Resumen icono='icomoon-free_hammer2' colorIcono='#83AE69' metrica={metrics.totalParecer.toString()} label='Parecer pendente' ></Resumen>
+          <Resumen icono='ant-design_check-circle-filled' colorIcono='#68AABF' metrica={metrics.totalAgenda.toString()} label='Ceratame do dia' ></Resumen>
           </View>
 
       </View>

@@ -81,7 +81,6 @@ class GeneralProvider extends React.Component{
                 telefono:'(34) 99830-0082',
                 direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'
             },
-            
         relatorio:{ 
             filtroCliente:'',
             filtroFechaInicial:'',
