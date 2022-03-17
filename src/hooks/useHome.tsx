@@ -59,7 +59,7 @@ export const useHome =  () => {
 
                     setgraphData(resp.data);
                     settotalPareceres(resp.data[0].go+resp.data[0].noGo+resp.data[0].analise)
-                    setMaxGrafica( Math.ceil( totalPareceres/3)*1.25 )
+                   // setMaxGrafica( Math.ceil( totalPareceres/3)*1.25 )
                 }
                 
             } catch (error) {

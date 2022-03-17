@@ -18,7 +18,7 @@ export const UltimasActualizaciones = ( ) => {
 
     return  (<View style={{flex:1, flexDirection:'column',backgroundColor:'#BCC1CB', position:'absolute', bottom:0, 
                         width:'100%', height:Platform.OS=='ios' ? '73%': '78%',  alignItems:'center',}}>
-                    <HeaderTitle label='Ultimas actualizaciones' top={120} fontSize={18}></HeaderTitle>
+                    <HeaderTitle label='Ultimas atualizações' top={120} fontSize={18}></HeaderTitle>
 
                    
 

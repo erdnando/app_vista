@@ -13,6 +13,7 @@ import { Opiniones } from '../models/Opiniones';
 import { Search } from '../models/Search';
 import { Parecer } from '../models/Parecer';
 import { Notificaciones } from '../models/Notificaciones';
+import { UltimasActualizaciones } from '../components/ultimasActualizaciones/UltimasActualizaciones';
 
 
 interface GeneralState{
@@ -27,6 +28,7 @@ interface GeneralState{
     menuOpiniones:MenuOpiniones[],
     menuOpinionesTerciario:MenuOpiniones[],
     notificaciones:Notificaciones[],
+    ultimasActualizaciones:Notificaciones[],
     ids:IDs,
     tabSelected:string,
     tabSelectedOld:string,
@@ -53,6 +55,7 @@ interface GeneralState{
     setSearch:(search:Search)=>void;
     setParecer:(parecer:Parecer)=>void;
     setNotificaciones:(notificaciones:Notificaciones[])=>void;
+    setUltimasActualizaciones:(ultimasActualizaciones:Notificaciones[])=>void;
 }
 
 const GeneralContext = React.createContext({} as GeneralState);
@@ -73,7 +76,7 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'proper@gmail.com',
+                email:'livia.paula@sejavista.com.br',
                 password:'11111',
                 nuevoPassword1:'',
                 nuevoPassword2:'',
@@ -470,6 +473,19 @@ class GeneralProvider extends React.Component{
                 "icon": "bx_bxs-message-alt-error",
                 "diaVisible": true   
             }
+        ],
+        ultimasActualizaciones:[
+            {
+                "id": "1",
+                "tipo": "VACIO",
+                "dia": "",
+                "hora": "",
+                "descripcion": "Sin notificaciones",
+                "color": "red",
+                "background": "#F8BBBB",
+                "icon": "bx_bxs-message-alt-error",
+                "diaVisible": true   
+            }
         ]
         
         
@@ -492,6 +508,7 @@ class GeneralProvider extends React.Component{
     setSearch= (search:Search)=>this.setState({search});
     setParecer= (parecer:Parecer)=>this.setState({parecer});
     setNotificaciones= (notificaciones:Notificaciones[])=>this.setState({notificaciones});
+    setUltimasActualizaciones= (ultimasActualizaciones:Notificaciones[])=>this.setState({ultimasActualizaciones});
     logOut = () =>{
 
         const payload0 = this.state.sesion;
@@ -541,6 +558,7 @@ class GeneralProvider extends React.Component{
                     search:this.state.search,
                     parecer:this.state.parecer,
                     notificaciones:this.state.notificaciones,
+                    ultimasActualizaciones:this.state.ultimasActualizaciones,
                    //////////////////functions///////////////////////////
                     setMensaje:this.setMensaje,
                     setUsuario:this.setUsuario,
@@ -560,6 +578,7 @@ class GeneralProvider extends React.Component{
                     setSearch:this.setSearch,
                     setParecer:this.setParecer,
                     setNotificaciones:this.setNotificaciones,
+                    setUltimasActualizaciones:this.setUltimasActualizaciones,
                     }}
                 >
                {this.props.children}

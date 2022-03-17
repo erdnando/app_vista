@@ -7,7 +7,8 @@ import Toast from 'react-native-toast-message';
 
 export const useNotificaciones =  () => {
 
-        const {flags,setFlags,sesion,notificaciones,setNotificaciones,usuario  } = useContext( GeneralContext );
+        const {flags,setFlags,sesion,notificaciones,setNotificaciones,usuario,
+            ultimasActualizaciones,setUltimasActualizaciones  } = useContext( GeneralContext );
       
 
         const floading=(valor:boolean)=>{
@@ -95,7 +96,11 @@ export const useNotificaciones =  () => {
                         });
                         
                         
-                      })
+                      });
+
+                      arrNotificacionesAux.reverse();
+
+                      setUltimasActualizaciones(arrNotificacionesAux)
 
                       let lastId = Math.max.apply(Math, arrNotificacionesAux.map(function(o) { return parseInt(o.id); }))
                       arrNotificacionesAux.push({
@@ -116,6 +121,10 @@ export const useNotificaciones =  () => {
                     let arrNotificacionesAux=notificaciones;//get reference
                     arrNotificacionesAux=[];
                     setNotificaciones(arrNotificacionesAux);
+
+                    let arrUltimasActualizacionesAux=ultimasActualizaciones;//get reference
+                    arrUltimasActualizacionesAux=[];
+                    setUltimasActualizaciones(arrUltimasActualizacionesAux)
                 }
 
                 floading(false)
