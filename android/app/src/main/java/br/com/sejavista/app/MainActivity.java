@@ -1,4 +1,5 @@
-package com.app_vista;
+//package com.app_vista;
+package br.com.sejavista.app;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

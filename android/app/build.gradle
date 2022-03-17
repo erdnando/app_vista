@@ -140,11 +140,12 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.app_vista"
+        applicationId "br.com.sejavista.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        //inccrement or change every new upload to the googleplay store
     }
     splits {
         abi {

@@ -561,7 +561,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vista.APP-VISTA";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.sejavista.app;
 				PRODUCT_NAME = APP_VISTA;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -587,7 +587,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vista.APP-VISTA";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.sejavista.app;
 				PRODUCT_NAME = APP_VISTA;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

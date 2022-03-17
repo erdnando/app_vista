@@ -125,26 +125,26 @@ const renderUpdateItem = (updateItem:Notificaciones) =>{
 
            {/* alerta */}
             <View style={{height:88, flexDirection:'row', width:'86%',   
-                    borderWidth: 0,backgroundColor: (updateItem.tipo==='ALERT') ?'#B85050' : 'white', borderRadius:7,padding:5,elevation:6,
+                    borderWidth: 0,backgroundColor:updateItem.color, borderRadius:7,padding:5,elevation:6,
                     shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                     height: 1, width: 1
                      }
                    }}>
 
                 <View style={{ flexDirection:'column', width:'82%',height:50,left:8,top:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
-                <Text style={{fontFamily:'Roboto-Bold', fontSize:14, color:(updateItem.tipo==='ALERT') ?'#F8BBBB' : 'grey'}}>{updateItem.hora}</Text>
-                <Text style={{fontFamily:'Roboto-Regular', fontSize:14, color:(updateItem.tipo==='ALERT') ?'#FFFFFF' : 'black',marginTop:8,width:'89%'}}>{updateItem.descripcion}</Text>
+                <Text style={{fontFamily:'Roboto-Bold', fontSize:14, color: 'grey'}}>{updateItem.hora}</Text>
+                <Text style={{fontFamily:'Roboto-Regular', fontSize:14, color:'black',marginTop:8,width:'89%'}}>{updateItem.descripcion}</Text>
                 </View>
 
                 
-              {
-                (updateItem.tipo==='ALERT' || updateItem.tipo==='EVENT') ?
-                <IconoActualizacion topIcon={25} rightIcon={10} right={26} icono={updateItem.icon} size={36} color={(updateItem.tipo==='ALERT') ? 'white' : '#68AABF'} 
-                background= {(updateItem.tipo==='ALERT') ? '#F8BBBB' : '#BCC1CB'} ></IconoActualizacion>
-                : <View></View>
-              }
-                 
+              
+            
+                <IconoActualizacion topIcon={25} rightIcon={10} right={26} icono={updateItem.icon} size={36} color={updateItem.background} 
+                background= {updateItem.background} ></IconoActualizacion>
+               
+              
             </View>
+            
         </View>
         
     )

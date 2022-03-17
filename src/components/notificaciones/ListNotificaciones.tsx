@@ -62,8 +62,6 @@ export const ListNotificaciones = ( ) => {
             })
           }
 
-
-       
         if(updateItem.tipo=='checkAll')
         return (
             <View>

@@ -86,7 +86,7 @@ export const useNotificaciones =  () => {
                         arrNotificacionesAux.push({
                             id:notif.id.toString(),
                             tipo:notif.importante != ""?'SIMPLE' : 'EVENT',
-                            dia:'Hoy',
+                            dia:'Hoje',
                             hora:'Fecha: '+notif.dataCadastro,
                             descripcion: notif.mensagem.length>65 ? notif.mensagem.toString().substring(0,57)+'...': notif.mensagem,
                             color: notif.tipoMensagem.id == 1 ? 'red' : '#838892',
@@ -101,6 +101,8 @@ export const useNotificaciones =  () => {
                       arrNotificacionesAux.reverse();
 
                       setUltimasActualizaciones(arrNotificacionesAux)
+                      console.log("arrNotificacionesAux::::::::::::")
+                      console.log(arrNotificacionesAux)
 
                       let lastId = Math.max.apply(Math, arrNotificacionesAux.map(function(o) { return parseInt(o.id); }))
                       arrNotificacionesAux.push({
