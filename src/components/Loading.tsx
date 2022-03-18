@@ -4,15 +4,17 @@ import { gstyles } from '../theme/appTheme';
 
 
 interface Props{
-    color:string
+    color:string,
+    backgroundColor?:string,
+    imageSize?:number
   }
 
-export const Loading = ( {color}:Props ) => {
+export const Loading = ( {color,backgroundColor='#EDF0F5',imageSize=80}:Props ) => {
 
-    return  <View style={{ flex:1, justifyContent:'center',alignContent:'center',backgroundColor:'#EDF0F5' }}>
+    return  <View style={{ flex:1, justifyContent:'center',alignContent:'center',backgroundColor:backgroundColor }}>
 
               <View  style={gstyles.avatarContainer} >
-                <Image style={{justifyContent:'center', alignItems:'center', width:80,height:80}} source={require('../assets/vertical-logo.png')} ></Image>
+                <Image style={{justifyContent:'center', alignItems:'center', width:imageSize,height:imageSize}} source={require('../assets/vertical-logo.png')} ></Image>
               </View>
               <ActivityIndicator color={color} size={80}></ActivityIndicator>
           </View>    

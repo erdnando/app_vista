@@ -35,7 +35,7 @@ export const useHome =  () => {
 
         const floading=(valor:boolean)=>{
             const payload= flags;
-            payload.isLoading= valor;
+            payload.isLoadingResumoOportunidades= valor;
             
             setFlags(payload);
         }
@@ -73,13 +73,13 @@ export const useHome =  () => {
             floading(true)
             graphMotiveGoNoGo();
             loadResumoMetrics()
-            floading(false)
+            //floading(false)
            
           }, [])
 
           const loadResumoMetrics = async () =>{
             try {
-                
+                floading(true)
                     const resp = await vistaApi.get<ResumoMetricsResponse>('/services/mobile/listActivityColaborator?charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId,{
                     headers:{
                         'Content-Type': 'application/json',

@@ -96,6 +96,7 @@ class GeneralProvider extends React.Component{
             isLoadingParecer:false,
             isLoadingAgenda:false,
             isLoadingNotificaciones:false,
+            isLoadingResumoOportunidades:false,
             isNotificaciones:false,
             verDetalleAgenda:false,
             resultadosBusquedaVisible:false,

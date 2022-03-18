@@ -81,24 +81,55 @@ export const useNotificaciones =  () => {
 
                     let arrNotificacionesAux=notificaciones;//get reference
                     arrNotificacionesAux=[];
-                    resp.data.forEach(function(notif,index){
+                    let fechaEvento ='';
+                    let hoyArray=[{}]
+                    let ayerArray=[{}]
+                    hoyArray=[]
+                    ayerArray=[]
+                    let diaVisible=false;
+
+                    resp.data.reverse().forEach(function(notif,index){
+
+                        //var today = new Date(2022,3-1,16)
+                        var today = new Date()
+                        var dia = parseInt(notif.dataCadastro.substring(0,2))
+                        var mes = parseInt(notif.dataCadastro.substring(3,5))
+                        var anio = parseInt(notif.dataCadastro.substring(6))
+
+                        var evento = new Date(anio,mes-1,dia)
+
+                            if(+evento === +today){
+                                fechaEvento='Hoje';
+                                hoyArray.push('hoy')
+                            }else{
+                                fechaEvento ='Anterior';
+                                ayerArray.push('anterior')
+                            }
+                    
+
+                        diaVisible=false;
+                        if(hoyArray.length==1 && ayerArray.length==0)diaVisible=true
+                        if(hoyArray.length==0 && ayerArray.length==1)diaVisible=true
+                        if(hoyArray.length==1 && ayerArray.length==1)diaVisible=true
+                        
 
                         arrNotificacionesAux.push({
                             id:notif.id.toString(),
                             tipo:notif.importante != ""?'SIMPLE' : 'EVENT',
-                            dia:'Hoje',
+                            dia: fechaEvento,//hoje or anterior
                             hora:'Fecha: '+notif.dataCadastro,
                             descripcion: notif.mensagem.length>65 ? notif.mensagem.toString().substring(0,57)+'...': notif.mensagem,
                             color: notif.tipoMensagem.id == 1 ? 'red' : '#838892',
                             background:notif.tipoMensagem.id == 1 ?'#F8BBBB' : '#83AE69',
-                            icon:notif.tipoMensagem.id == 1 ? 'icomoon-free_hammer2' : 'bx_bxs-message-alt-error',  //icomoon-free_hammer2
-                            diaVisible:true
+                            icon:notif.tipoMensagem.id == 1 ? 'icomoon-free_hammer2' : 'bx_bxs-message-alt-error',
+                            diaVisible:diaVisible
                         });
                         
                         
                       });
 
-                      arrNotificacionesAux.reverse();
+                      arrNotificacionesAux;
+
 
                       setUltimasActualizaciones(arrNotificacionesAux)
                       console.log("arrNotificacionesAux::::::::::::")

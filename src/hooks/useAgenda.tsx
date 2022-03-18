@@ -29,7 +29,7 @@ export const useAgenda =  () => {
         const floading=(valor:boolean)=>{
             const payload= flags;
             payload.isLoadingParecer= valor;
-            
+            payload.isLoadingAgenda=valor;
             setFlags(payload);
         }
 
@@ -54,8 +54,9 @@ export const useAgenda =  () => {
             let fechaFin = yyyy+'-'+mess+'-'+ultimodia;
             
             try {
-                console.log('services/calendar/list')
-                const resp = await vistaApi.get<any>('services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&clienteId='+sesion.clienteId+'&charter='+sesion.charter+'&colaboradorId=0',{
+                console.log('services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&clienteId='+sesion.clienteId+'&charter='+sesion.charter+'&colaboradorId=0')
+                          ///services/calendar/list?colaboradorId=5&dataCertameInicio=2022-03-13&dataCertameFim=2022-03-19&charter=1
+                const resp = await vistaApi.get<any>('services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -65,8 +66,9 @@ export const useAgenda =  () => {
                 );
 
                 console.log('op lista agenda:::::::::::::::::::::');
-    
+                console.log(resp.data);
                 const objx = JSON.parse(JSON.stringify(resp.data));
+                
                 
                 let arrResponse = [{}];
                 arrResponse=[];
@@ -146,6 +148,7 @@ export const useAgenda =  () => {
                    setAgenda(payload);
                    console.log('---------------------------------------final');
                    console.log(agenda)
+                   floading(false)
 
                 }else{
                     const payload= agenda;
@@ -153,7 +156,7 @@ export const useAgenda =  () => {
                     setAgenda(payload);
                 }
             
-                Toast.show({type: 'ok',props: { mensaje: 'Datos cargados' }});
+               // Toast.show({type: 'ok',props: { mensaje: 'Datos cargados' }});
                 floading(false)
             } catch (error) {
                 console.log('error al consultar agenda')

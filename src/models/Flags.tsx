@@ -5,6 +5,7 @@ export interface Flags{
     isLoading:boolean,
     isLoadingParecer:boolean,
     isLoadingAgenda:boolean,
+    isLoadingResumoOportunidades:boolean,
     isLoadingNotificaciones:boolean,
     isNotificaciones:boolean,
     verDetalleAgenda:boolean,

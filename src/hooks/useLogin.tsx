@@ -14,7 +14,7 @@ export const useLogin =  () => {
   
 
         const { flags, usuario,setUsuario,setFlags,menuOpiniones,setMenuOpiniones,sesion,setSesion } = useContext( GeneralContext );
-        const { existsNotification } = useNotificaciones(); 
+        const { existsNotification,notificationListByLogin } = useNotificaciones(); 
         const [ passwordVisible, setPasswordVisible ] = useState<boolean>(true);
         const [ passwordVisibleN1, setPasswordVisibleN1 ] = useState<boolean>(true);
         const [ passwordVisibleN2, setPasswordVisibleN2 ] = useState<boolean>(true);
@@ -117,6 +117,7 @@ export const useLogin =  () => {
                 setSesion(payloads);
                
                 existsNotification()
+                notificationListByLogin();
                 if(resp.data.tipoUsuario==='USUARIO_TERCEIRO'){
                    
     

@@ -18,6 +18,7 @@ import { useSearch } from '../hooks/useSearch';
 import { useNotificaciones } from '../hooks/useNotificaciones';
 //import Elevations from 'react-native-elevation';
 import { useParecer } from '../hooks/useParecer';
+import { useAgenda } from '../hooks/useAgenda';
 
 const Tab = createBottomTabNavigator();
 interface Props extends DrawerScreenProps<any, any>{};
@@ -32,6 +33,7 @@ export const NavigationHome = ( { navigation }:Props) => {
   const { getResultadoBusqueda } = useSearch(); 
   const { notificationListByLogin } = useNotificaciones(); 
   const { goListParecer } =useParecer();
+  const {getMonthAgenda} = useAgenda()
 
 
   //terciario
@@ -88,8 +90,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                       <TouchableOpacity onPress={() =>{  
                                             notificationListByLogin();
                                             ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
-                                            //setTabSelectedOld(tabSelected);//aux
-                                            //setTabSelected('Notificaciones');
+                                           
                                             const payload= flags;
                                             payload.isNotificaciones=!flags.isNotificaciones;
                                             payload.verDetalleAgenda=false;
@@ -193,6 +194,8 @@ export const NavigationHome = ( { navigation }:Props) => {
                       payload1.idOpinionBusqueda= '';
                       payload1.idOpinionSeleccionado='';
                       setIds(payload1);
+
+                      getMonthAgenda()
                       }, })} />
         <Tab.Screen name="ParecerScreen" options={{ title:'',unmountOnBlur:true }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => { 
@@ -423,6 +426,8 @@ export const NavigationHome = ( { navigation }:Props) => {
                       payload1.idOpinionBusqueda= '';
                       payload1.idOpinionSeleccionado='';
                       setIds(payload1);
+
+                      getMonthAgenda()
 
                          }, })} />
           <Tab.Screen name="ParecerScreen" options={{ title:'',unmountOnBlur:true }} component={ ParecerScreen } listeners={({ navigation, route }) => ({

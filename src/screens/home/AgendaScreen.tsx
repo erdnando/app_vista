@@ -9,12 +9,14 @@ import { OportunidadesDia } from '../../components/agenda/OportunidadesDia';
 import { DetalleAgenda } from '../../components/agenda/DetalleAgenda';
 import { ModalFiltros } from '../../components/agenda/ModalFiltros';
 import { ModalAgendaDetalle } from '../../components/agenda/ModalAgendaDetalle';
+import { useAgenda } from '../../hooks/useAgenda';
 
 export const AgendaScreen = () => {
 
     const { top } = useSafeAreaInsets();
     //call global state
     const { flags,ids,agenda} = useContext(GeneralContext);
+    
 
 
      if(flags?.resultadosAgendaVisible){
@@ -34,7 +36,7 @@ export const AgendaScreen = () => {
     if(flags.isLoadingAgenda){
         return <Loading color='orange'></Loading>
     }
-    
+   
         return(
         <View style={ {  flexGrow:1,marginTop:top,marginBottom:20,}}>
             <Calendario></Calendario>

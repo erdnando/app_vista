@@ -138,10 +138,12 @@ export const Calendario = ( {  }: Props ) => {
         console.log('-------------xxx----------');
         console.log(yyyy+'-'+ (armaMesString( mesn.toString()) )+'-'+dd);
         payload.selectedDate = yyyy+'-'+mm +'-'+dd;
+
+       
     }
    
     //TODO get appointments day from service
-    getMonthAgenda();
+    //getMonthAgenda();
     //services/calendar/list?clienteId=92&colaboradorId=0&dataCertameInicio=2022-03-06&dataCertameFim=2022-03-12&charter=1
     // payload.markedDates={
     //   '2022-03-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
