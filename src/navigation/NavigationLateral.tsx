@@ -9,6 +9,7 @@ import { OpcionMenuLateral } from '../components/login/OpcionMenuLateral';
 import { GeneralContext } from '../state/GeneralProvider';
 import RNRestart from 'react-native-restart';
 import { Loading } from '../components/Loading';
+import { useAgenda } from '../hooks/useAgenda';
 
 const Drawer = createDrawerNavigator();
 
@@ -70,6 +71,7 @@ export const NavigationLateral = ( { navigation }:Props) => {
 
 const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
   const { logOut, flags,setFlags,setTabSelected,ids,setIds,setTabModule, usuario} = useContext( GeneralContext )
+  const { getMonthAgenda } = useAgenda()
   return (
      <DrawerContentScrollView>
 
@@ -117,6 +119,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   setIds(payload1);
 
                   setFlags(payload);
+                  getMonthAgenda()
             navigation.navigate('AgendaScreen'); 
             }}></OpcionMenuLateral>
 

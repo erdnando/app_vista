@@ -24,7 +24,7 @@ import { DocumentosAgendaType } from '../models/response/DocumentosAgendaType';
 
 export const useAgenda =  () => {
 
-        const { ids ,flags,setFlags, sesion, agenda ,setAgenda } = useContext( GeneralContext );
+        const { ids ,flags,setFlags, sesion, agenda ,setAgenda,usuario } = useContext( GeneralContext );
    
         const floading=(valor:boolean)=>{
             const payload= flags;
@@ -52,11 +52,17 @@ export const useAgenda =  () => {
             console.log(yyyy+'-'+mess+'-'+ultimodia);
             let fechaIni = yyyy +'-'+mess+'-'+'01';
             let fechaFin = yyyy+'-'+mess+'-'+ultimodia;
+            let urlString='';
             
             try {
-                console.log('services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&clienteId='+sesion.clienteId+'&charter='+sesion.charter+'&colaboradorId=0')
+                if(usuario.tipo==TipoUsuario.USER_TERCEIRO){//si es terciario
+                   urlString='services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId+'&clientId='+sesion.clienteId;
+                }else{
+                   urlString='services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId;
+                }
+                console.log('services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId+'&clientId='+sesion.clienteId)
                           ///services/calendar/list?colaboradorId=5&dataCertameInicio=2022-03-13&dataCertameFim=2022-03-19&charter=1
-                const resp = await vistaApi.get<any>('services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId,{
+                const resp = await vistaApi.get<any>(urlString,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
