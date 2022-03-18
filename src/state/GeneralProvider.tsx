@@ -76,7 +76,7 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'proper@gmail.com ',
+                email:'livia.paula@sejavista.com.br',
                 password:'11111',
                 nuevoPassword1:'',
                 nuevoPassword2:'',
