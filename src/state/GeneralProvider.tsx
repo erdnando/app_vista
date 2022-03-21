@@ -95,6 +95,7 @@ class GeneralProvider extends React.Component{
             isLoading:false,
             isLoadingParecer:false,
             isLoadingAgenda:false,
+            isLoadingSearch:false,
             isLoadingNotificaciones:false,
             isLoadingResumoOportunidades:false,
             isNotificaciones:false,
@@ -106,6 +107,7 @@ class GeneralProvider extends React.Component{
             isPasswordReseted:false,
             isDownloadingFile:0,
             existsNotification:false,
+            isLoadingMonthAgenda:false,
         },
         ids:{
             idOpinionBusqueda: '',
@@ -155,7 +157,8 @@ class GeneralProvider extends React.Component{
                 pregoeiroTelefone:'No data',
                 compulsorio:'No data'
             },
-            documentos:[]
+            documentos:[],
+            mesAnioAgenda:new Date()
         },
         sesion:{
             usuario:{

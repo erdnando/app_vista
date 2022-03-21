@@ -119,7 +119,7 @@ export const useNotificaciones =  () => {
                             dia: fechaEvento,//hoje or anterior
                             hora:'Fecha: '+notif.dataCadastro,
                             descripcion: notif.mensagem.length>65 ? notif.mensagem.toString().substring(0,57)+'...': notif.mensagem,
-                            color: notif.tipoMensagem.id == 1 ? 'red' : '#838892',
+                            color: notif.tipoMensagem.id == 1 ? '#EC4B0E' : '#838892',
                             background:notif.tipoMensagem.id == 1 ?'#F8BBBB' : '#83AE69',
                             icon:notif.tipoMensagem.id == 1 ? 'icomoon-free_hammer2' : 'bx_bxs-message-alt-error',
                             diaVisible:diaVisible

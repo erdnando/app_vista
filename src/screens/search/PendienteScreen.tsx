@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
+import { Loading } from '../../components/Loading';
 import { TextOportunidad } from '../../components/oportunidad/TextOportunidad';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { WithoutItems } from '../../components/search/WithoutItems';
@@ -11,7 +12,7 @@ import { gstyles } from '../../theme/appTheme';
 
 export const PendienteScreen = () => {
 
-    const { search } = useContext( GeneralContext );
+    const { search,flags } = useContext( GeneralContext );
     // interface Pendientes{
     //     id:number,
     //     descripcion:string,
@@ -138,6 +139,10 @@ export const PendienteScreen = () => {
              <Spacer height={10} ></Spacer>
         )
     }
+
+    if(flags.isLoadingSearch){
+        return <Loading color='orange'></Loading>       
+      }
 
     return (
         <View style={gstyles.globalTabView}>

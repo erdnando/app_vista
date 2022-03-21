@@ -12,4 +12,5 @@ export interface Agenda{
     selectedOportunidadId:string,
     resumo:OpportunityCustomFindById,
     documentos:DocumentosAgendaType[],
+    mesAnioAgenda:Date
 }

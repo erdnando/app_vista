@@ -6,7 +6,6 @@ import { Spacer } from '../Spacer';
 import { IconoActualizacion } from './IconoActualizacion';
 import { Notificaciones } from '../../models/Notificaciones';
 import { gstyles } from '../../theme/appTheme';
-import { HeaderResultadosAgenda } from '../agenda/HeaderResultadosAgenda';
 import { Loading } from '../Loading';
 
 export const ListActualizaciones = ( ) => {
@@ -31,14 +30,14 @@ const renderUpdateItem = (updateItem:Notificaciones) =>{
 
            {/* alerta */}
             <View style={{height:88, flexDirection:'row', width:'83%',   
-                    borderWidth: 0,backgroundColor:updateItem.color=='#838892' ? 'white':updateItem.color , borderRadius:7,padding:5,elevation:6,
+                    borderWidth: 0,backgroundColor:updateItem.color=='#838892' ? 'white':updateItem.color ,opacity:1, borderRadius:7,padding:5,elevation:6,
                     shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                     height: 1, width: 1
                      }
                    }}>
 
                 <View style={{ flexDirection:'column', width:'82%',height:50,left:8,top:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
-                    <Text style={{fontFamily:'Roboto-Bold', fontSize:14, color: updateItem.color=='red' ? 'white':'grey'}}>{updateItem.hora}</Text>
+                    <Text style={{fontFamily:'Roboto-Bold', fontSize:14, color: updateItem.color=='red' ? 'white':'#565353'}}>{updateItem.hora}</Text>
                     <Text style={{fontFamily:'Roboto-Regular', fontSize:13, color:'black',marginTop:8,width:'80%'}}>{updateItem.descripcion}</Text>
                 </View>
 

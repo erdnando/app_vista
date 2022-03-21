@@ -195,7 +195,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                       payload1.idOpinionSeleccionado='';
                       setIds(payload1);
 
-                      getMonthAgenda()
+                      getMonthAgenda(new Date())
                       }, })} />
         <Tab.Screen name="ParecerScreen" options={{ title:'',unmountOnBlur:true }} component={ ParecerScreen } listeners={({ navigation, route }) => ({
                     tabPress: e => { 
@@ -427,7 +427,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                       payload1.idOpinionSeleccionado='';
                       setIds(payload1);
 
-                      getMonthAgenda()
+                      getMonthAgenda(new Date())
 
                          }, })} />
           <Tab.Screen name="ParecerScreen" options={{ title:'',unmountOnBlur:true }} component={ ParecerScreen } listeners={({ navigation, route }) => ({

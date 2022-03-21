@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
+import { Loading } from '../../components/Loading';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { WithoutItems } from '../../components/search/WithoutItems';
 import { Spacer } from '../../components/Spacer';
-import { useSearch } from '../../hooks/useSearch';
 import { ListAllTaskByOpportunityIdAux } from '../../models/response/ListAllTaskByOpportunityIdAux';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { gstyles } from '../../theme/appTheme';
 
 export const PlanAccionScreen = () => {
 
-    const { search } = useContext( GeneralContext );
+    const { search,flags } = useContext( GeneralContext );
 
     function renderUpdateItem(item: ListAllTaskByOpportunityIdAux) {
 
@@ -40,6 +40,10 @@ export const PlanAccionScreen = () => {
         )
     }
 
+    if(flags.isLoadingSearch){
+        return <Loading color='orange'></Loading>       
+      }
+      
     return (
         <View style={gstyles.globalTabView}>
              <Spacer height={10}></Spacer>

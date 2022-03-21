@@ -7,11 +7,12 @@ interface Props{
     color:string,
     backgroundColor?:string,
     imageSize?:number
+    height?:number
   }
 
-export const Loading = ( {color,backgroundColor='#EDF0F5',imageSize=80}:Props ) => {
+export const Loading = ( {color,backgroundColor='#EDF0F5',imageSize=80,height=-1}:Props ) => {
 
-    return  <View style={{ flex:1, justifyContent:'center',alignContent:'center',backgroundColor:backgroundColor }}>
+    return  <View style={{ flex:1, justifyContent:'center',alignContent:'center',backgroundColor:backgroundColor,height:height }}>
 
               <View  style={gstyles.avatarContainer} >
                 <Image style={{justifyContent:'center', alignItems:'center', width:imageSize,height:imageSize}} source={require('../assets/vertical-logo.png')} ></Image>

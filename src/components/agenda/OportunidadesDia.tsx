@@ -15,10 +15,6 @@ export const OportunidadesDia = ( ) => {
   const { agenda,setAgenda } = useContext( GeneralContext )
 
   const armaFecha = (fecha:string) => {
-    console.log('............')
-   console.log(fecha)
-
-
     let arrFecha= fecha.split('-');
     return arrFecha[2] +' de '+ armaMes(arrFecha[1])+ ' de '+ arrFecha[0] ;//'08 de enero de 2022';
   }
@@ -58,12 +54,8 @@ export const OportunidadesDia = ( ) => {
     }
   }
 
-    console.log('---------------------------')
-    console.log(agenda.selectedDate)
-
-    
-
-    console.log('---------------------------')
+  
+  
     
     return  (<View style={{flex:1, backgroundColor:'#BCC1CB', top:40,  
                         width:'100%',   alignItems:'center',alignContent:'flex-start'}}>

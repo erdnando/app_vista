@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { FlatList, Text, View } from 'react-native';
+import { Loading } from '../../components/Loading';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { WithoutItems } from '../../components/search/WithoutItems';
 import { Spacer } from '../../components/Spacer';
@@ -10,7 +11,7 @@ import { gstyles } from '../../theme/appTheme';
 
 export const ParecerScreenSearch = () => {
 
-    const { search } = useContext( GeneralContext );
+    const { search,flags } = useContext( GeneralContext );
 
     const renderUpdateItem = (item:OpportunityCustomListOpinionsByIdAux) =>{
 
@@ -42,6 +43,10 @@ export const ParecerScreenSearch = () => {
         )
     }
 
+    if(flags.isLoadingSearch){
+        return <Loading color='orange'></Loading>       
+      }
+      
     return (
         <View style={gstyles.globalTabView}>
              <Spacer height={10}></Spacer>

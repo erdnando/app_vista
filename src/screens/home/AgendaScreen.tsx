@@ -10,6 +10,7 @@ import { DetalleAgenda } from '../../components/agenda/DetalleAgenda';
 import { ModalFiltros } from '../../components/agenda/ModalFiltros';
 import { ModalAgendaDetalle } from '../../components/agenda/ModalAgendaDetalle';
 import { useAgenda } from '../../hooks/useAgenda';
+import { ModalSearchResultados } from '../../components/opiniones/ModalSearchResultados';
 
 export const AgendaScreen = () => {
 
@@ -22,6 +23,7 @@ export const AgendaScreen = () => {
      if(flags?.resultadosAgendaVisible){
         return <SafeAreaProvider>
                 <ModalAgendaDetalle iconClose='ic_round-close' color='black' label={`Resumo da Oportunidade ${ agenda.selectedOportunidadId }`}></ModalAgendaDetalle>
+                {/* <ModalSearchResultados iconClose='ic_round-close' color='black' label={`Resumo da Oportunidade ${ agenda.selectedOportunidadId }`}></ModalSearchResultados> */}
             </SafeAreaProvider> 
      }
 
@@ -42,8 +44,6 @@ export const AgendaScreen = () => {
             <Calendario></Calendario>
             <OportunidadesDia></OportunidadesDia>
             <View><ModalFiltros></ModalFiltros></View>
-           
-           
         </View>
             
         )

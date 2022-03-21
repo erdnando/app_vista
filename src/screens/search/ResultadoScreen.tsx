@@ -8,10 +8,11 @@ import { OpportunityListitemAux } from '../../models/response/OpportunityListite
 import Collapsible from 'react-native-collapsible';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { WithoutItems } from '../../components/search/WithoutItems';
+import { Loading } from '../../components/Loading';
 
 export const ResultadoScreen = () => {
 
-    const { search,setSearch } = useContext( GeneralContext )
+    const { search,setSearch,flags } = useContext( GeneralContext )
     //const { resultadoTab,setResultadoTab } = useSearch();
 
     const renderUpdateItem = (item:OpportunityListitemAux) =>{
@@ -61,6 +62,10 @@ export const ResultadoScreen = () => {
              <Spacer height={10} ></Spacer>
         )
     }
+
+    if(flags.isLoadingSearch){
+        return <Loading color='orange'></Loading>       
+      }
 
     return (
         <View style={gstyles.globalTabView}>

@@ -1,26 +1,10 @@
 import { useContext, useState } from 'react';
 import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
-import { ListaParecer } from '../models/response/ListaParecer';
-import { TipoExigencia } from '../models/response/TipoExigencia';
 import Toast from 'react-native-toast-message';
-import { ComboDescripcion } from '../models/response/ComboDescripcion';
 import { TipoUsuario } from '../models/Usuario';
-import { Exigencia } from '../models/Exigencia';
-import { ExigenciasOportunityTerciario } from '../models/response/ExigenciasOportunityTerciario';
-import { TipoUsuarioResponse } from '../models/TipoUsuarioResponse';
-import { ComboMotivo } from '../models/ComboMotivo';
-import { ParecerRealizado } from '../models/ParecerRealizado';
-import { ComboFamilia } from '../models/ComboFamilia';
-import { OpinionesValores } from '../models/OpinionesValores';
-import { ValoresResponse } from '../models/response/ValoresResponse';
-import { OpinionesRequest } from '../models/OpinionesRequest';
-import { RNFetchBlobSession } from 'rn-fetch-blob';
-import { ComboProductoServicio } from '../models/ComboProductoServicio';
 import { AgendaItem } from '../models/AgendaItem';
-import { OpportunityListitem } from '../models/response/OpportunityListitem';
 import { OpportunityCustomFindById } from '../models/response/OpportunityCustomFindById';
-import { DocumentosAgendaType } from '../models/response/DocumentosAgendaType';
 
 export const useAgenda =  () => {
 
@@ -33,20 +17,95 @@ export const useAgenda =  () => {
             setFlags(payload);
         }
 
+        const floadingMonth=(valor:boolean)=>{
+            const payload= flags;
+            payload.isLoadingMonthAgenda= valor;
+            setFlags(payload);
+        }
+
+        
+
       
         const lastday = (anio:number,month:number) =>{
             return  new Date(anio, month, 0).getDate();
             }
+
+        const processCalendar = async (todayAgenda:Date) =>{
+
+               console.log('procesando mes::::::::')
+               console.log(todayAgenda)
+
+               let mesn =  (parseInt(todayAgenda.getMonth().toString())+1 );
+               let mess = mesn<10 ? '0'+mesn : mesn.toString()
+
+               console.log('mess obtenido::::::::')
+               console.log(mess)
+
+               var yyyy = todayAgenda.getFullYear();
+               let ultimodia = lastday(yyyy,mesn)
+               
+               let fechaIni = yyyy +'-'+mess+'-'+'01';
+               let fechaFin = yyyy+'-'+mess+'-'+ultimodia;
+               let urlString='';
+               console.log('fecha ini-fin obtenido::::::::')
+               console.log(fechaIni);
+               console.log(fechaFin);
+
+
+
+
+               try {
+              //  floading(true)
+                if(usuario.tipo==TipoUsuario.USER_TERCEIRO){//si es terciario
+                    console.log('terciario')
+                   urlString='services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&charter='+sesion.charter+'&colaboradorId=0'+'&clienteId='+sesion.clienteId;
+                   console.log(urlString)
+                }else{
+                   urlString='services/calendar/list?dataCertameInicio='+fechaIni+'&dataCertameFim='+fechaFin+'&charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId;
+                   console.log('colaborador')
+                   console.log(urlString)
+                }
+               
+                //           //test
+                //          // urlString='services/calendar/list?colaboradorId=5&dataCertameInicio=2022-03-20&dataCertameFim=2022-03-26&charter=1'
+               
+                    const resp = await vistaApi.get<any>(urlString,{
+                    headers:{
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            "X-Auth-Token": sesion.token
+                        },
+                    }, 
+                    );
+                     console.log('op lista agenda:::::::::::::::::::::');
+                     console.log(resp.data);
+
+               
+               // console.log(resp.data);
+                const objx = JSON.parse(JSON.stringify(resp.data));
+                
+                floading(false)
+                
+               
+            } catch (error) {
+                console.log('error al consultar agenda')
+               // console.log(error.response.data.message)
+                //Toast.show({type: 'ko',props: { mensaje: error.response.data.message}});
+                floading(false)
+            }
+            }
         
-        const getMonthAgenda = async () =>{
-            floading(true)
+        const getMonthAgenda = async (todayAgenda:Date) =>{
+            //floading(true)
+            floadingMonth(true)
 
-
-            var today = new Date();
-            let mesn =  (parseInt(today.getMonth().toString()) + 1);
+            //var today =  new Date();
+            console.log('on getMonthAgenda ::::::::::::::::::::::::')
+            console.log(todayAgenda)
+            let mesn =  (parseInt(todayAgenda.getMonth().toString())+1 );
             let mess = mesn<10 ? '0'+mesn : mesn.toString()
            
-            var yyyy = today.getFullYear();
+            var yyyy = todayAgenda.getFullYear();
             let ultimodia = lastday(yyyy,mesn)
             console.log(yyyy +'-'+mess+'-'+'01');
             console.log(yyyy+'-'+mess+'-'+ultimodia);
@@ -54,6 +113,7 @@ export const useAgenda =  () => {
             let fechaFin = yyyy+'-'+mess+'-'+ultimodia;
             let urlString='';
             
+                             //services/calendar/list?colaboradorId=5&dataCertameInicio=2022-03-20&dataCertameFim=2022-03-26&charter=1
             try {
                 if(usuario.tipo==TipoUsuario.USER_TERCEIRO){//si es terciario
                     console.log('terciario')
@@ -65,7 +125,8 @@ export const useAgenda =  () => {
                    console.log(urlString)
                 }
                
-                          ///services/calendar/list?colaboradorId=5&dataCertameInicio=2022-03-13&dataCertameFim=2022-03-19&charter=1
+                          //test
+                         // urlString='services/calendar/list?colaboradorId=5&dataCertameInicio=2022-03-20&dataCertameFim=2022-03-26&charter=1'
                 const resp = await vistaApi.get<any>(urlString,{
                     headers:{
                         'Content-Type': 'application/json',
@@ -154,11 +215,11 @@ export const useAgenda =  () => {
                    console.log("asignando datos");
                    const payload= agenda;
                    payload.markedDates= stringMarkedDates;
-
                    setAgenda(payload);
-                   console.log('---------------------------------------final');
-                   console.log(agenda)
-                   floading(false)
+                  // console.log('---------------------------------------final');
+                  // console.log(agenda)
+                  // floading(false)
+                   floadingMonth(false)
 
                 }else{
                     const payload= agenda;
@@ -167,12 +228,13 @@ export const useAgenda =  () => {
                 }
             
                // Toast.show({type: 'ok',props: { mensaje: 'Datos cargados' }});
-                floading(false)
+               floadingMonth(false)
             } catch (error) {
                 console.log('error al consultar agenda')
-                console.log(error);
-                Toast.show({type: 'ko',props: { mensaje: 'Error al comunicarse con el servidor. [/agenda]'}});
-                floading(false)
+               // console.log(error);
+                console.log(error.response.data.message)
+               // Toast.show({type: 'ko',props: { mensaje: error.response.data.message}});
+               floadingMonth(false)
             }
         }
 
@@ -281,7 +343,7 @@ export const useAgenda =  () => {
 
         //exposed objets 
         return {
-            getMonthAgenda,loadResumo
+            getMonthAgenda,loadResumo,processCalendar,floadingMonth
         }
 }
         

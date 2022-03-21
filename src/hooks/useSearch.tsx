@@ -11,6 +11,7 @@ import { ListAllTaskByOpportunityIdAux } from '../models/response/ListAllTaskByO
 import { OpportunityListitem } from '../models/response/OpportunityListitem';
 import { OpportunityListitemAux } from '../models/response/OpportunityListitemAux';
 import { OpportunityCustomListOpinionsByIdAux } from '../models/response/OpportunityCustomListOpinionsByIdAux';
+import Toast from 'react-native-toast-message';
 
 
 
@@ -22,27 +23,35 @@ export const useSearch =  () => {
 
         const floading=(valor:boolean)=>{
             const payload= flags;
-            payload.isLoading= valor;
-            
+            //payload.isLoading= valor;
+         
+            payload.isLoadingSearch= valor;
+            //payload.resultadosAgendaVisible=valor;
             setFlags(payload);
         }
         //main
         const getResultadoBusqueda = () =>{
+            console.log('searchimg....')
            // if(t){ floading(false);return;}
-              
+                  //floading(true)
                   getOportunidadeTab();
                   getParecerTab();
                   getDemandaJuridicaTab();
                   getResultadoTab();
                   getPlanAccionTab();
                   getPendenciasTab();
-                  floading(false)
+                  //floading(false)
+
+                  const payload1 = ids;
+                  payload1.codigoBusqueda='';
+                  setIds(payload1);
+                 // floading(false)
 
         }
 
         const getOportunidadeTab = async () =>{
             try {
-
+                floading(true)
                
                 const resp = await vistaApi.get<OpportunityCustomFindById>('/services/opportunityCustom/findById/'+ids.codigoBusqueda+'/'+sesion.clienteId+'?charter='+ sesion.charter+'&colaboradorId=0',{
                     headers:{
@@ -65,16 +74,17 @@ export const useSearch =  () => {
                     setSearch(payload);
                 }
            
-                floading(false)
+                //floading(false)
             } catch (error) {
                 console.log('error al consultar OpportunityCustomFindById')
                 console.log(error);
-                floading(false)
+               // floading(false)
             }
         }
 
         const getParecerTab = async () =>{
             try {
+                floading(true)
                 const resp = await vistaApi.get<OpportunityCustomListOpinionsByIdAux[]>('/services/opportunityCustom/listOpinionsById/'+ids.codigoBusqueda,{
                     headers:{
                         'Content-Type': 'application/json',
@@ -120,16 +130,17 @@ export const useSearch =  () => {
                     setSearch(payload);
                 }
 
-                floading(false)
+              //  floading(false)
             } catch (error) {
                 console.log('error al consultar opportunityCustom/listOpinionsById')
                 console.log(error);
-                floading(false)
+              //  floading(false)
             }
         }
 
         const getDemandaJuridicaTab = async () =>{
             try {
+                floading(true)
                 const resp = await vistaApi.get<ListJudgeResourceByOpportunityId[]>('/services/DemandJudge/listJudgeResourceByOpportunityId',{
                     headers:{
                         'Content-Type': 'application/json',
@@ -173,17 +184,20 @@ export const useSearch =  () => {
                     setSearch(payload);
                 }
 
-                floading(false)
+              //  floading(false)
             } catch (error) {
                 console.log('error al consultar listJudgeResourceByOpportunityId')
                 console.log(error);
-                floading(false)
+              //  floading(false)
             }
         }
 
         const getPlanAccionTab = async () =>{
             try {
-                const resp = await vistaApi.get<ListAllTaskByOpportunityId[]>('/services/plan/listAllTaskByOpportunityId',{
+                let stringUrl='/services/plan/listAllTaskByOpportunityId';
+                console.log(stringUrl)
+                floading(true)
+                const resp = await vistaApi.get<ListAllTaskByOpportunityId[]>(stringUrl,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -228,16 +242,19 @@ export const useSearch =  () => {
                       setSearch(payload);
                 }
 
-                floading(false)
+               // floading(false)
             } catch (error) {
-                console.log('error al consultar listAllTaskByOpportunityId');
-                console.log(error);
-                floading(false)
+               // floading(false)
+                console.log('error al consultar listAllTaskByOpportunityIdxxx');
+                Toast.show({type: 'ok',props: { mensaje: error.response.data.message }});
+               // console.log(error.response.data.message);
+               
             }
         }
 
         const getResultadoTab = async () =>{
             try {
+                floading(true)
                 const resp = await vistaApi.get<OpportunityListitem>('/services/opportunity/listItem/'+ids.codigoBusqueda,{
                     headers:{
                         'Content-Type': 'application/json',
@@ -288,15 +305,16 @@ export const useSearch =  () => {
                 }
 
                
-                floading(false)
+                //floading(false)
             } catch (error) {
                 console.log(error);
-                floading(false)
+               // floading(false)
             }
         }
 
         const getPendenciasTab = async () =>{
             try {
+                floading(true)
                 const resp = await vistaApi.get<ListAllRequirementByOpportunity[]>('/services/requirement/listAllRequirementByOpportunity',{
                     headers:{
                         'Content-Type': 'application/json',

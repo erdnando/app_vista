@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { FlatList, Platform, Text, View } from 'react-native';
+import { Loading } from '../../components/Loading';
 import { TextOportunidadIcono } from '../../components/oportunidad/TextOportunidadIcono';
 import { WithoutItems } from '../../components/search/WithoutItems';
 import { Spacer } from '../../components/Spacer';
@@ -10,7 +11,7 @@ import { gstyles } from '../../theme/appTheme';
 
 export const DemandaJuridicaScreen = () => {
 
-    const { search } = useContext( GeneralContext );
+    const { search,flags } = useContext( GeneralContext );
 
     const renderUpdateItem = (item:ListJudgeResourceByOpportunityIdAux) =>{
 
@@ -36,6 +37,11 @@ export const DemandaJuridicaScreen = () => {
              <Spacer height={10} ></Spacer>
         )
     }
+
+    if(flags.isLoadingSearch){
+        return <Loading color='orange'></Loading>       
+      }
+      
 
     return (
         <View style={gstyles.globalTabView}>

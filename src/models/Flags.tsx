@@ -5,6 +5,7 @@ export interface Flags{
     isLoading:boolean,
     isLoadingParecer:boolean,
     isLoadingAgenda:boolean,
+    isLoadingSearch:boolean,
     isLoadingResumoOportunidades:boolean,
     isLoadingNotificaciones:boolean,
     isNotificaciones:boolean,
@@ -17,4 +18,5 @@ export interface Flags{
     isPasswordReseted:boolean,
     isDownloadingFile:number,
     existsNotification:boolean,
+    isLoadingMonthAgenda:boolean,
 }

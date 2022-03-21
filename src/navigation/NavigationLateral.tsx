@@ -119,7 +119,7 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
                   setIds(payload1);
 
                   setFlags(payload);
-                  getMonthAgenda()
+                  getMonthAgenda(new Date())
             navigation.navigate('AgendaScreen'); 
             }}></OpcionMenuLateral>
 

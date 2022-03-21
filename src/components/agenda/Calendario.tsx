@@ -4,6 +4,7 @@ import {Calendar} from 'react-native-calendars';
 import { useAgenda } from '../../hooks/useAgenda';
 import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
+import { Loading } from '../Loading';
 import { DayComponent } from './DayComponent';
 
 
@@ -13,7 +14,7 @@ export const Calendario = ( {  }: Props ) => {
 
   //invoke global state
   const { agenda,setAgenda,flags,setFlags } = useContext( GeneralContext )
-  const { getMonthAgenda } = useAgenda()
+  const { getMonthAgenda,processCalendar,floadingMonth } = useAgenda()
 
   const vacation = {key: 'vacation', color: 'red', selectedDotColor: 'red'};
   const massage = {key: 'massage', color: '#68AABF', selectedDotColor: '#68AABF'};
@@ -116,52 +117,45 @@ export const Calendario = ( {  }: Props ) => {
     }
   }
   
-  var today = new Date();
-  var dd = String(today.getDate());
-  let mesn =  parseInt(today.getMonth().toString()) + 1;
-  var mm = armaMes( mesn); //January is 0!
-  var yyyy = today.getFullYear();
+  // console.log('fecha del calendario:::::::::::::::::')
+  // console.log(agenda.mesAnioAgenda)
+  // var today =  agenda.mesAnioAgenda;//new Date();
+  // var dd = String(today.getDate());
+  // let mesn =  parseInt(today.getMonth().toString()) + 1;
+  // var mm = armaMes( mesn); //January is 0!
+  // var yyyy = today.getFullYear();
 
-  const [mes, setmes] = useState(mm+' '+yyyy.toString() );
+ // const [mes, setmes] = useState(mm+' '+yyyy.toString() );
 
   useEffect(() => {
 
     const payload= agenda;
     
     if(agenda.selectedDate===''){
-        var today = new Date();
+        var today = agenda.mesAnioAgenda;//new Date();
         var dd = String(today.getDate());
         let mesn =  parseInt(today.getMonth().toString()) + 1;
         var mm =  add0AlMes(mesn); //January is 0!
         var yyyy = today.getFullYear();
 
-        console.log('-------------xxx----------');
+       // console.log('-------------xxx----------');
         console.log(yyyy+'-'+ (armaMesString( mesn.toString()) )+'-'+dd);
-        payload.selectedDate = yyyy+'-'+mm +'-'+dd;
-
-       
+        payload.selectedDate = yyyy+'-'+mm +'-'+dd;  
+        setAgenda(payload)
     }
-   
-    //TODO get appointments day from service
-    //getMonthAgenda();
-    //services/calendar/list?clienteId=92&colaboradorId=0&dataCertameInicio=2022-03-06&dataCertameFim=2022-03-12&charter=1
-    // payload.markedDates={
-    //   '2022-03-11': {dots: [vacation, eventox, massage], selected: true,selectedColor: 'transparent', selectedTextColor:'black' },
-    //   '2022-03-12': {dots: [vacation, eventox], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-    //   '2022-03-21': {dots: [vacation, eventox,massage,workout], selected: true,selectedColor: 'transparent', selectedTextColor:'black'},
-    // }
-    // setAgenda(payload)
     
     
   }, [])
 
   let maxYear = new Date().getFullYear()+1
 
+  
 
   return (
       <View style={{top: 10, backgroundColor:'red',marginBottom:-25}}>
 
             <Calendar ref={ref=>this.calendar=ref}
+            
                       // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
                       minDate={maxYear-1+'-01-01'}
                       // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
@@ -171,6 +165,8 @@ export const Calendario = ( {  }: Props ) => {
                         const dateString = date.dateString;
                         const day = date.day;
 
+                        if(flags.isLoadingMonthAgenda)state='disabled'
+
                         return (
                           <DayComponent dateString={dateString} day={day} dayState={state === 'disabled'? 'disabled':'enabled'} ></DayComponent>
                       
@@ -179,10 +175,21 @@ export const Calendario = ( {  }: Props ) => {
                       // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
                       monthFormat={'MMMM yyyy'}
                       // Handler which gets executed when visible month changes in calendar. Default = undefined
-                      onMonthChange={month => {
+                      onMonthChange= {async month => {
+                        console.log('=========================================================');
                         console.log('month changed', month);
-                        var mess=armaMes(month.month);
-                        setmes( mess+' '+ month.year );
+                  
+                        let todayAgenda = new Date(month.dateString)
+
+                        // var payload = agenda;
+                        // payload.mesAnioAgenda= todayAgenda
+                        // setAgenda(payload)
+
+                        console.log('enviando a processCalendar:::::::');
+                        console.log(todayAgenda)
+                        console.log('=========================================================');
+                        await getMonthAgenda(todayAgenda)
+                        //await processCalendar(todayAgenda);
                       }}
                       // Hide month navigation arrows. Default = false
                       hideArrows={true}
@@ -208,7 +215,7 @@ export const Calendario = ( {  }: Props ) => {
                           <>
                            <View style={{flex:1,flexDirection:'row',justifyContent:'space-between'}}> 
 
-                                  <View style={{flex:1,flexDirection:'row',justifyContent:'center'}}> 
+                                {!flags.isLoadingMonthAgenda && <View style={{flex:1,flexDirection:'row',justifyContent:'center'}}> 
                                         <TouchableOpacity style={{left:-20, top:-4}} onPress={() =>{ 
                                           this.calendar.addMonth(-1)
                                         }}>
@@ -218,21 +225,24 @@ export const Calendario = ( {  }: Props ) => {
                                         </TouchableOpacity>
 
 
-                                        <Text style={{fontFamily:'Roboto-Bold', fontSize:17}}>{ mes } </Text>
-                                        
-
+                                        <Text style={{fontFamily:'Roboto-Bold', fontSize:17}}>{ armaMes(date.getMonth()+1) } </Text>
+                                       
+                           
 
                                         <TouchableOpacity style={{right:-20, top:-4}} onPress={() =>{ 
                                           this.calendar.addMonth(1)
+                                         
                                         }}>
                                               <Text style={{fontFamily:'Roboto-Bold'}}>
                                                   <CustomIcon  name='ic_round-keyboard-arrow-right' size={28} color='#000000'  ></CustomIcon>
                                               </Text>
                                         </TouchableOpacity>
-                                  </View>
+                                  </View>}
+                                  
+                                  {flags.isLoadingMonthAgenda && <Loading color='orange' backgroundColor='transparent' height={30} imageSize={0}></Loading>}
 
                                    {/* filtros agenda */}
-                                  <TouchableOpacity style={{left:0, top:-4}} onPress={() =>{ 
+                                  {!flags.isLoadingMonthAgenda && <TouchableOpacity style={{left:0, top:-4}} onPress={() =>{ 
                                      const payload= flags;
                                      payload.modalFiltrosVisible =true;
                                      setFlags(payload)
@@ -240,13 +250,15 @@ export const Calendario = ( {  }: Props ) => {
                                         <Text style={{fontFamily:'Roboto-Bold'}}>
                                             <CustomIcon  name='carbon_overflow-menu-vertical' size={26} color='black'  ></CustomIcon>
                                         </Text>
-                                  </TouchableOpacity>
+                                  </TouchableOpacity>}
 
                             </View>
                           </>
                         )
                       }}
                     />
+
+                        
       </View>
     )
 }

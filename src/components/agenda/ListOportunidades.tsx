@@ -4,107 +4,15 @@ import { useAgenda } from '../../hooks/useAgenda';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { Spacer } from '../Spacer';
 import { LastUpdatesAgenda } from '../../models/LastUpdatesAgenda';
+import { useSearch } from '../../hooks/useSearch';
 
 export const ListOportunidades = ( ) => {
 
   //call global state
-  const { flags, setFlags,agenda,setAgenda} = useContext(GeneralContext);
+  const { flags, setFlags,agenda,setAgenda,ids,setIds} = useContext(GeneralContext);
   const { loadResumo, } = useAgenda();
-//   const {lastUpdates } = useAgenda();
-//   interface LastUpdates{
-//     id:string,
-//     tipo:string,
-//     dia:string;
-//     hora:string;
-//     descripcion:string;
-//     color:string;
-//     icon:string;
-//     horaVisible:boolean;
-//     }
+  const { getResultadoBusqueda } = useSearch()
 
-    // const Data:LastUpdates[] = [
-    //     {
-    //         id:'1',
-    //         tipo:'EVENT',
-    //         dia:'Hoy',
-    //         hora: '8:00',
-    //         descripcion:'Nombre dela empresa',
-    //         color: 'red',
-    //         icon:'bx_bxs-message-alt-error',
-    //         horaVisible:true
-
-    //     },
-    //     {
-    //         id:'2',
-    //         tipo:'EVENT',
-    //         dia:'Hoy',
-    //         hora: '9:00',
-    //         descripcion:'Nombre dela empresa',
-    //         color: 'red',
-    //         icon:'bx_bxs-message-alt-error',
-    //         horaVisible:true
-    //     },
-    //     {
-    //         id:'3',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: '9:00',
-    //         descripcion:'Nombre dela empresa',
-    //         color: 'red',
-    //         icon:'icomoon-free_hammer2',
-    //         horaVisible:false
-    //     },
-    //     {
-    //         id:'4',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: '9:00',
-    //         descripcion:'Nombre dela empresa',
-    //         color: 'red',
-    //         icon:'icomoon-free_hammer2',
-    //         horaVisible:false
-    //     },
-    //     {
-    //         id:'5',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: '9:00',
-    //         descripcion:'Nombre dela empresa',
-    //         color: 'red',
-    //         icon:'icomoon-free_hammer2',
-    //         horaVisible:false
-    //     },
-    //     {
-    //         id:'6',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: '13:00',
-    //         descripcion:'Nombre dela empresa',
-    //         color: 'red',
-    //         icon:'icomoon-free_hammer2',
-    //         horaVisible:true
-    //     },
-    //     {
-    //         id:'7',
-    //         tipo:'EVENT',
-    //         dia:'Ayer',
-    //         hora: '13:00',
-    //         descripcion:'Nombre dela empresa',
-    //         color: 'red',
-    //         icon:'icomoon-free_hammer2',
-    //         horaVisible:false
-    //     },
-    //     {
-    //     id:'8',
-    //     tipo:'EVENT',
-    //     dia:'Ayer',
-    //     hora: '13:00',
-    //     descripcion:'Nombre dela empresa',
-    //     color: 'red',
-    //     icon:'icomoon-free_hammer2',
-    //     horaVisible:false
-    // },
-    // ]
 
     const renderUpdateItem = (updateItem:LastUpdatesAgenda) =>{
         
@@ -145,8 +53,8 @@ export const ListOportunidades = ( ) => {
                                 console.log('ver detalle agenda dia..');
                      
                                 const payload= flags;
-                               // payload.isLoading=true;
                                 payload.resultadosAgendaVisible=true;//openModal agenda
+                                //payload.resultadosBusquedaVisible=true;//openModal agenda
                                 setFlags(payload);
 
                                 //selected oportunidad id
@@ -154,8 +62,14 @@ export const ListOportunidades = ( ) => {
                                 payloadAgenda.selectedOportunidadId=updateItem.oportunidadId;
                                 setAgenda(payloadAgenda);
 
+
+                                const payload1 = ids;
+                                payload1.codigoBusqueda=updateItem.oportunidadId;
+                                setIds(payload1);
+
                                 //load agenda tabs
-                                loadResumo()
+                              //  loadResumo()
+                                getResultadoBusqueda()
 
                             }} >
                                 <Text style={{ fontFamily:'Roboto-Bold',fontSize:12,  textAlign:'center',color:'black'}}>{updateItem.textButton}</Text>
