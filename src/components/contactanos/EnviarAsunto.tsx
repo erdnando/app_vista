@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { colores } from '../../theme/appTheme';
-import { GeneralContext } from '../../state/GeneralProvider';
 import { InputMensaje } from './InputMensaje';
 import { Spacer } from '../Spacer';
 import { ButtonRounded } from './ButtonRounded';
@@ -15,14 +14,14 @@ export const EnviarAsunto = () => {
 
   let colorIcono = colores.primary;
  //invoke global state
- const { usuario } = useContext( GeneralContext )
- const { mensaje, setMensaje } = useMensaje(); 
- const items=[   { label: "JavaScript", value: "JavaScript" },
-              { label: "TypeStript", value: "TypeStript" },
-              { label: "Python", value: "Python" },
-              { label: "Java", value: "Java" },
-              { label: "C++", value: "C++" },
-              { label: "C", value: "C" },
+ //const { usuario } = useContext( GeneralContext )
+ const { mensaje, setMensaje, sendMessage } = useMensaje(); 
+
+ const items=[  
+              { value: "1", label: "Duvidas sobre servico" },
+              { value: "2", label: "Onde estao localizados" },
+              { value: "3", label: "Quero mais informações" },
+              { value: "4", label: "Sugestão" },
               ];
  
   return (
@@ -31,7 +30,7 @@ export const EnviarAsunto = () => {
             shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: { height: 1, width: 1 }}}>
 
               <Spacer height={10}></Spacer>
-              <Select placeholder='Assunto' campo={usuario.email} 
+              <Select placeholder='Assunto' campo={mensaje.asunto} 
                  items={items}
                  onValueChange={function (value: any, index: number): void {
                     console.log(value)
@@ -45,8 +44,9 @@ export const EnviarAsunto = () => {
               <InputMensaje placeholder='Mensagem' longitud={mensaje.mensaje.length}></InputMensaje>
               <Spacer height={30}></Spacer>
               <ButtonRounded label={'ENVIAR'} onPress={function (): void {
-                  console.log(mensaje.asunto)
-                  console.log(mensaje.mensaje)
+                  // console.log(mensaje.asunto)
+                  // console.log(mensaje.mensaje)
+                  sendMessage();
                 } } ></ButtonRounded>
        
 

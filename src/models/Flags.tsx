@@ -6,6 +6,7 @@ export interface Flags{
     isLoadingParecer:boolean,
     isLoadingAgenda:boolean,
     isLoadingSearch:boolean,
+    isLoadingContacto:boolean;
     isLoadingResumoOportunidades:boolean,
     isLoadingNotificaciones:boolean,
     isNotificaciones:boolean,

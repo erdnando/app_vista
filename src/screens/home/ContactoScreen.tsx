@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DatosContacto } from '../../components/contactanos/DatosContacto';
 import { EnviarAsunto } from '../../components/contactanos/EnviarAsunto';
 import { ResultadoParecer } from '../../components/home_chart/ResultadoParecer';
+import { Loading } from '../../components/Loading';
 import { ListNotificaciones } from '../../components/notificaciones/ListNotificaciones';
 import { ResumenOportunidades } from '../../components/resumen/ResumenOportunidades';
 import { Search } from '../../components/search/Search';
@@ -18,6 +19,10 @@ export const ContactoScreen = () => {
     
     if(flags.isNotificaciones){
         return  <ListNotificaciones></ListNotificaciones>
+    }
+
+    if(flags.isLoadingContacto){
+        return <Loading color='orange'></Loading>
     }
     
     return (
