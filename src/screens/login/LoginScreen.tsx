@@ -7,7 +7,6 @@ import { InputEmail } from '../../components/login/InputEmail';
 import { InputPassword } from '../../components/login/InputPassword';
 import { Spacer } from '../../components/Spacer';
 import { useLogin } from '../../hooks/useLogin';
-import { AlertNotif } from '../../components/login/AlertNotif';
 import { GeneralContext } from '../../state/GeneralProvider';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
@@ -47,7 +46,7 @@ export const LoginScreen = ({ navigation }:Props) => {
                 <InputEmail modo='normal' label='E-mail' iconLeft='ic_outline-email' iconRight='ic_round-close'></InputEmail>
                 <InputPassword modo='normal' campo={usuario.password} width='78%' placeHolder='Senha' label='Senha' iconLeft='ic_outline-lock' iconRight='ic_baseline-fingerprint' iconSee='ic_outline-visibility' IconHide='ic_outline-visibility-off' ></InputPassword>
                 <Spacer height={40} ></Spacer>
-                {/* <Text>{usuario.password}</Text> */}
+
                 <View style={{width:'100%',height:50}}>
                     <ButtonRounded  label='ACCESAR' 
                             onPress={ async() =>  { 
@@ -57,10 +56,10 @@ export const LoginScreen = ({ navigation }:Props) => {
                                 
                                     navigation.replace('NavigationLateral');  
                                 }
-                                else{
-                                    console.log('error al autenticarse');
-                                    Toast.show({type: 'ko', props: { mensaje: 'Error al autenticarse' }});
-                                }     
+                                // else{
+                                //     console.log('error al autenticarse');
+                                //     Toast.show({type: 'ko', props: { mensaje: 'Error al autenticarse' }});
+                                // }     
                             }} />
                 </View>
 

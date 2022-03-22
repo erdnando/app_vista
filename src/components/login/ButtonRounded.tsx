@@ -22,7 +22,7 @@ export const ButtonRounded = ( { label,onPress }: Props ) => {
     
     return (
           <View style={{ flex:1,flexDirection:'column', alignItems:'center',height:40,  justifyContent:'center', alignContent:'center', }}>
-            <TouchableOpacity disabled={(usuario.email === '' && usuario.password === '') ? true : false} 
+            <TouchableOpacity disabled={(usuario.email === '' || usuario.password === '') ? true : false} 
               style={{alignSelf:'stretch', marginHorizontal:50 , borderRadius: 100, backgroundColor:(usuario.email !== '' && usuario.password !== '') ? colores.primary : '#BCC1CB', 
               height:48, justifyContent:'center',  }} 
                 onPress= {onPress}>

@@ -77,6 +77,8 @@ export const useLogin =  () => {
 
         const authLogin = async () =>{
 
+            
+
             try {
 
                 floading(true)
@@ -170,7 +172,7 @@ export const useLogin =  () => {
                 // console.log(obj.message);
                 //  var msg = obj.message
                 // console.log('------------------------')
-                Toast.show({type: 'ko',props: {mensaje:'Error al comunicarse con el servidor. [/auth/login]'} });
+                Toast.show({type: 'ko',props: {mensaje:error.response.data.message} });
                
                
                 
@@ -181,13 +183,27 @@ export const useLogin =  () => {
 
         const validarLogin = () =>{
 
-            const payloadx= flags;
-            payloadx.isLoading=true;
-            setFlags(payloadx);
-
+            // const payloadx= flags;
+            // payloadx.isLoading=true;
+            // setFlags(payloadx);
+            console.log('validando email');
             //TODO add logic to validate
+            var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+            if(!usuario.email.trim().match(mailformat)){
+                    console.log('email invalido');
+                    Toast.show({type: 'ko',props: { mensaje: 'Email no valido' }});
+                    return false;
+            }else{
+                console.log('valida email on ws');
+                return authLogin();
+            }
+
+            // if(usuario.email.trim() === '' || usuario.password.trim()=== '' ){
+            //     Toast.show({type: 'ko',props: { mensaje: 'Ingrese sus credenciales' }});
+            //     return ;
+            // }
            
-            return authLogin();
 
         }
 
