@@ -3,6 +3,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
 import { GraphMotiveGoNoGo } from '../models/response/GraphMotiveGoNoGo';
 import { ResumoMetricsResponse } from '../models/response/ResumoMetrics';
+import { GraphParticipaciones } from '../models/response/GraphParticipaciones';
 
 
 
@@ -17,6 +18,20 @@ export const useHome =  () => {
               "go": 0,
               "id": 0,
               "noGo": 0
+            }
+          ]);
+
+          const [graphDataParticipaciones, setgraphDataParticipaciones] = useState<GraphParticipaciones[]>([
+            {
+                "id": 0,
+                "fantasia": "",
+                "vencidas": 0,
+                "perdidas": 0,
+                "suspensas": 0,
+                "fracassadas": 0,
+                "andamento": 0,
+                "canceladas": 0,
+                "desertas": 0
             }
           ]);
 
@@ -68,11 +83,40 @@ export const useHome =  () => {
             }
         }
 
+        const graphParticipaciones = async () =>{
+
+            try {
+                const resp = await vistaApi.get<GraphParticipaciones[]>('/services/graphStatusOpportunityClient?charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId,{
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "X-Auth-Token": sesion.token 
+                    },
+                 
+                }, 
+                );
+
+                console.log('op graphMotiveGoNoGo:::::::::::::::::::::');
+                console.log(resp.data);
+                if(resp.data.length>0){
+
+                    setgraphDataParticipaciones(resp.data);
+                   // settotalPareceres(resp.data[0].go+resp.data[0].noGo+resp.data[0].analise)
+                   // setMaxGrafica( Math.ceil( totalPareceres/3)*1.25 )
+                }
+                
+            } catch (error) {
+                console.log(error);
+
+            }
+        }
+
         useEffect(() => {
             console.log('recargando home');
             floading(true)
             graphMotiveGoNoGo();
             loadResumoMetrics()
+            graphParticipaciones()
             //floading(false)
            
           }, [])
@@ -117,5 +161,5 @@ export const useHome =  () => {
         }
        
         //exposed objets 
-        return {   graphMotiveGoNoGo ,graphData,floading,totalPareceres ,maxGrafica ,metrics }
+        return {   graphMotiveGoNoGo ,graphData,floading,totalPareceres ,maxGrafica ,metrics,graphDataParticipaciones }
 }

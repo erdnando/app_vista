@@ -76,13 +76,13 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'proper@gmail.com ',
+                email:'livia.paula@sejavista.com.br',
                 password:'11111',
                 nuevoPassword1:'',
                 nuevoPassword2:'',
                 whatsapp:'(34) 99830-0082',
                 telefono:'(34) 99830-0082',
-                direccion:'Av. dos Vinhedos, no 20 - Cj. 4 anexo - Gravea Office - Uberlandia'
+                direccion:'Av. Getúlio Vargas, nº 275 – Sala 705 - Centro - 38400-299'
             },
         relatorio:{ 
             filtroCliente:'',

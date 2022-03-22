@@ -7,6 +7,7 @@ import { BarChart } from 'react-native-gifted-charts';
 import { IndicadorSimple } from './IndicadorSimple';
 import { IndicadorDoble } from './IndicadorDoble';
 import { TituloGrafico } from './TituloGrafico';
+import { useHome } from '../../hooks/useHome';
 
 
 export const Charts = () => {
@@ -15,31 +16,41 @@ export const Charts = () => {
   let colorIcono = colores.primary;
  //invoke global state
  const { relatorio } = useContext( GeneralContext )
+ const {  graphMotiveGoNoGo,graphData,graphDataParticipaciones,floading,totalPareceres,maxGrafica } = useHome(); 
  
  const { onChangeFiltroCliente } = useRelatorios(); 
 
- const labelTopGo = () =>{  return( <Text style={{ textAlign:'center'}}>80</Text> ) }
- const labelTopNoGo = () =>{  return( <Text style={{textAlign:'center'}}>60</Text> ) }
- const labelEnAnalisis = () =>{  return( <Text style={{textAlign:'center'}}>58</Text> ) }
+//  const labelTopGo = () =>{  return( <Text style={{ textAlign:'center'}}>80</Text> ) }
+//  const labelTopNoGo = () =>{  return( <Text style={{textAlign:'center'}}>60</Text> ) }
+//  const labelEnAnalisis = () =>{  return( <Text style={{textAlign:'center'}}>58</Text> ) }
+const labelTopGo = () =>{  return( <Text style={{width:70, textAlign:'right'}}>{graphData[0].go}</Text> ) }
+const labelTopNoGo = () =>{  return( <Text style={{width:70, textAlign:'right'}}>{graphData[0].noGo}</Text> ) }
+const labelEnAnalisis = () =>{  return( <Text style={{width:70, textAlign:'right'}}>{graphData[0].analise}</Text> ) }
 
- const labelVencidas= () =>{  return( <Text style={{textAlign:'center'}}>5</Text> ) }
- const labelPerdidas = () =>{  return( <Text style={{textAlign:'center'}}>25</Text> ) }
- const labelSuspensas = () =>{  return( <Text style={{textAlign:'center'}}>50</Text> ) }
- const labelFracasadas = () =>{  return( <Text style={{textAlign:'center'}}>23</Text> ) }
- const labelAndamento = () =>{  return( <Text style={{textAlign:'center'}}>85</Text> ) }
+ const labelVencidas= () =>{  return( <Text style={{textAlign:'center'}}>{graphDataParticipaciones[0].vencidas}</Text> ) }
+ const labelPerdidas = () =>{  return( <Text style={{textAlign:'center'}}>{graphDataParticipaciones[0].perdidas}</Text> ) }
+ const labelSuspensas = () =>{  return( <Text style={{textAlign:'center'}}>{graphDataParticipaciones[0].suspensas}</Text> ) }
+ const labelFracasadas = () =>{  return( <Text style={{textAlign:'center'}}>{graphDataParticipaciones[0].fracassadas} </Text> ) }
+ const labelAndamento = () =>{  return( <Text style={{textAlign:'center'}}>{graphDataParticipaciones[0].andamento}</Text> ) }
 
- const barDataParecer = [
-  {value: 80,label: '',frontColor: '#83AE69',topLabelComponent:labelTopGo },
-  {value: 60,label: '',frontColor: '#B85050',topLabelComponent:labelTopNoGo },
-  {value: 58,label: '',frontColor: '#F9A61A',topLabelComponent:labelEnAnalisis },
-  ];
+//  const barDataParecer = [
+//   {value: 80,label: '',frontColor: '#83AE69',topLabelComponent:labelTopGo },
+//   {value: 60,label: '',frontColor: '#B85050',topLabelComponent:labelTopNoGo },
+//   {value: 58,label: '',frontColor: '#F9A61A',topLabelComponent:labelEnAnalisis },
+//   ];
+  const barDataParecer = [
+    {value: graphData[0].go,label: 'GO',frontColor: '#83AE69',topLabelComponent:labelTopGo },
+    {value: graphData[0].noGo,label: 'NO GO',frontColor: '#B85050',topLabelComponent:labelTopNoGo },
+    {value: graphData[0].analise,label: 'EM ANALISE',frontColor: '#F9A61A',topLabelComponent:labelEnAnalisis },
+   
+    ];
 
 const barDataParticipaciones = [
-  {value: 5,label: '',frontColor: '#83AE69',topLabelComponent:labelVencidas },
-  {value: 25,label: '',frontColor: '#B85050',topLabelComponent:labelPerdidas },
-  {value: 50,label: '',frontColor: '#F9A61A',topLabelComponent:labelSuspensas },
-  {value: 23,label: '',frontColor: '#B85050',topLabelComponent:labelFracasadas },
-  {value: 85,label: '',frontColor: '#F9A61A',topLabelComponent:labelAndamento },
+  {value: graphDataParticipaciones[0].vencidas,label: '',frontColor: '#83AE69',topLabelComponent:labelVencidas },
+  {value: graphDataParticipaciones[0].perdidas,label: '',frontColor: '#B85050',topLabelComponent:labelPerdidas },
+  {value: graphDataParticipaciones[0].suspensas,label: '',frontColor: '#F9A61A',topLabelComponent:labelSuspensas },
+  {value: graphDataParticipaciones[0].fracassadas,label: '',frontColor: '#B85050',topLabelComponent:labelFracasadas },
+  {value: graphDataParticipaciones[0].andamento,label: '',frontColor: '#F9A61A',topLabelComponent:labelAndamento },
   ];
 
 
@@ -67,7 +78,7 @@ const barDataParticipaciones = [
                                     showYAxisIndices={true}
                                     noOfSections={5}
                                     width={280}
-                                    maxValue={relatorio.isSelectorParecer ? 80 : 100}
+                                    maxValue={relatorio.isSelectorParecer ? maxGrafica : 100}
                                     data={relatorio.isSelectorParecer ? barDataParecer : barDataParticipaciones}
                                     isAnimated />
                           
