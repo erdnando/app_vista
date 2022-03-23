@@ -23,9 +23,9 @@ export const DemandaJuridicaScreen = () => {
                     }}}>
     
                     <View style={{ flexDirection:'column', margin:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
-                        <TextOportunidadIcono icono='clarity_tasks-solid' label='Procedimiento: ' valor={item.procedimiento} size={15} ></TextOportunidadIcono>
-                        <TextOportunidadIcono icono='bi_calendar-week' label='Feha de protocolo: ' valor={item.fechaProtocolo} size={15} ></TextOportunidadIcono>
-                        <TextOportunidadIcono icono='icomoon-free_hammer2' label='Resultado: ' valor={item.resultado} size={15} ></TextOportunidadIcono>
+                        <TextOportunidadIcono icono='clarity_tasks-solid' label='Procedimiento:  ' valor={item.procedimiento} size={15} ></TextOportunidadIcono>
+                        <TextOportunidadIcono icono='bi_calendar-week' label='Feha de protocolo:  ' valor={item.fechaProtocolo} size={15} ></TextOportunidadIcono>
+                        <TextOportunidadIcono icono='icomoon-free_hammer2' label='Resultado:  ' valor={item.resultado} size={15} ></TextOportunidadIcono>
                     </View>
                 </View>
         )

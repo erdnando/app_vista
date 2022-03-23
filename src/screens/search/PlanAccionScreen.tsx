@@ -24,10 +24,10 @@ export const PlanAccionScreen = () => {
         }}>
 
             <View style={{ flexDirection: 'column', margin: 6, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                <TextOportunidadIcono icono='clarity_tasks-solid' label='Tarifa: ' valor={item.tarifa} size={15}></TextOportunidadIcono>
-                <TextOportunidadIcono icono='gridicons_user' label='Responsable: ' valor={item.responsable} size={15}></TextOportunidadIcono>
-                <TextOportunidadIcono icono='bi_calendar-week' label='Fecha planeada: ' valor={item.fechaPlaneada} size={15}></TextOportunidadIcono>
-                <TextOportunidadIcono icono='bi_calendar-week' label='Fecha realizada: ' valor={item.fechaPlaneada2} size={15}></TextOportunidadIcono>
+                <TextOportunidadIcono icono='clarity_tasks-solid' label='Tarifa:  ' valor={item.tarifa} size={15}></TextOportunidadIcono>
+                <TextOportunidadIcono icono='gridicons_user' label='Responsable:  ' valor={item.responsable} size={15}></TextOportunidadIcono>
+                <TextOportunidadIcono icono='bi_calendar-week' label='Fecha planeada:  ' valor={item.fechaPlaneada} size={15}></TextOportunidadIcono>
+                <TextOportunidadIcono icono='bi_calendar-week' label='Fecha realizada:  ' valor={item.fechaPlaneada2} size={15}></TextOportunidadIcono>
             </View>
         </View>
         );

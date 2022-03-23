@@ -165,17 +165,9 @@ export const useLogin =  () => {
                 setFlags(payloadx);
                 
                 floading(false)
-                //let errorx: ErrorResponse;
-                //let errorx = JSON.stringify(error);
-                //let obj = await JSON.parse(JSON.stringify(error));
-                // console.log('------------------------')
-                // console.log(obj.message);
-                //  var msg = obj.message
-                // console.log('------------------------')
+ 
                 Toast.show({type: 'ko',props: {mensaje:error.response.data.message} });
                
-               
-                
                 return false;
             }
             
@@ -183,9 +175,6 @@ export const useLogin =  () => {
 
         const validarLogin = () =>{
 
-            // const payloadx= flags;
-            // payloadx.isLoading=true;
-            // setFlags(payloadx);
             console.log('validando email');
             //TODO add logic to validate
             var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -198,13 +187,6 @@ export const useLogin =  () => {
                 console.log('valida email on ws');
                 return authLogin();
             }
-
-            // if(usuario.email.trim() === '' || usuario.password.trim()=== '' ){
-            //     Toast.show({type: 'ko',props: { mensaje: 'Ingrese sus credenciales' }});
-            //     return ;
-            // }
-           
-
         }
 
         const resetContrasena = async() =>{

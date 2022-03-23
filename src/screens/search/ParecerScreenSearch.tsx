@@ -23,12 +23,12 @@ export const ParecerScreenSearch = () => {
                     }}}>
     
                     <View style={{ flexDirection:'column', margin:6, justifyContent:'flex-start',  alignItems:'flex-start'}}>
-                        <TextOportunidadIcono icono='gridicons_user' label='Responsable: ' valor={item.responsable} size={15} ></TextOportunidadIcono>
-                        <TextOportunidadIcono icono='ic_round-pin' label='Tipo: ' valor={item.tipo} size={15} ></TextOportunidadIcono>
+                        <TextOportunidadIcono icono='gridicons_user' label='Responsable:  ' valor={item.responsable} size={15} ></TextOportunidadIcono>
+                        <TextOportunidadIcono icono='ic_round-pin' label='Tipo:  ' valor={item.tipo} size={15} ></TextOportunidadIcono>
                         <View style={{flexDirection:'row', width:'100%', justifyContent:'space-between' }}>
-                            <TextOportunidadIcono icono='icomoon-free_hammer2' label='Parecer' valor={item.parecer} size={15} ></TextOportunidadIcono>
+                            <TextOportunidadIcono icono='icomoon-free_hammer2' label='Parecer:  ' valor={item.parecer} size={15} ></TextOportunidadIcono>
                             <View style={{width:3,}}></View>
-                            <TextOportunidadIcono icono='bi_calendar-week' label='Date' valor={item.fecha} size={15} ></TextOportunidadIcono>
+                            <TextOportunidadIcono icono='bi_calendar-week' label='Date:  ' valor={item.fecha} size={15} ></TextOportunidadIcono>
                             <View style={{width:3,}}></View>
                         </View>
                     </View>

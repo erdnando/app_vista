@@ -42,10 +42,10 @@ export const useSearch =  () => {
                   getPendenciasTab();
                   //floading(false)
 
-                  const payload1 = ids;
-                  payload1.codigoBusqueda='';
-                  setIds(payload1);
-                 // floading(false)
+                //   const payload1 = ids;
+                //   payload1.codigoBusqueda='';
+                //   setIds(payload1);
+                
 
         }
 

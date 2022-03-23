@@ -23,14 +23,14 @@ export const ListOportunidades = ( ) => {
                 <View style={{width:'11%',backgroundColor:'#BCC1CB'}}>
                     {/* label hoy/ayer */}
                     <View  style={{left:-6,elevation:0, backgroundColor:'#BCC1CB',justifyContent:'center',alignContent:'center',alignItems:'center'}}>
-                    <Text style={{fontFamily:'Roboto-Bold'}}>{updateItem.horaVisible ? updateItem.hora : ''}</Text>
+                       <Text style={{fontFamily:'Roboto-Bold'}}>{updateItem.horaVisible ? updateItem.hora : ''}</Text>
                     </View>
                 {/* linea */}
                     <View style={{backgroundColor:'#838892',left:11, width:3,opacity:0.2,top:0, height:103,position:'absolute',}}></View>
                 </View>
 
             {/* alerta */}
-                <View style={{height:88, flexDirection:'row', width:'88%',   
+                <View style={{height:88, flexDirection:'row', width:'87%',   
                         borderWidth: 0,backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,
                         shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                         height: 1, width: 1

@@ -13,15 +13,19 @@ interface Props{
 
 export const HeaderResultados = ( { iconClose,color, label }: Props ) => {
 
-  const { flags,setFlags } = useContext(GeneralContext);
+  const { flags,setFlags,ids,setIds } = useContext(GeneralContext);
 
-    return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0}}> 
+    return  <View style={{ flexDirection:'row', justifyContent:'flex-start',alignItems:'center', top:0,height:32}}> 
 
               <TouchableOpacity style={{marginLeft:15, padding:5}} onPress={() =>{ 
                 
                 const payload= flags;
                 payload.resultadosBusquedaVisible =false;
                 setFlags(payload)
+
+                  const payload1 = ids;
+                  payload1.codigoBusqueda='';
+                  setIds(payload1);
                 }}>
                   <Text>
                       <CustomIcon  name={iconClose} size={26} color={color} ></CustomIcon>
