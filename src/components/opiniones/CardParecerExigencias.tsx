@@ -25,7 +25,7 @@ export const CardParecerExigencias = ( ) => {
                       </View>
                     <Spacer height={10}></Spacer>
                     {/* Incrementar */}
-                    <View style={{flex:1, flexDirection:'row',}}>
+                    <View style={{flex:1, flexDirection:'row'}}>
                         {/* ------------------Incrementar---------------------------------------------------- */}
                         <SelectorTabParecerExigencias visible={true} validItem={false} label='Salvar' index={6} selected={false}
                         onPress={()=>{ 
@@ -108,7 +108,7 @@ export const CardParecerExigencias = ( ) => {
                     </View>
                   
                     {/* boton salvar*/}
-                    <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',  justifyContent:'flex-start', alignContent:'center', marginBottom:20,marginTop:30}}>
+                    <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',  justifyContent:'flex-start', alignContent:'center',bottom:5, }}>
                           <TouchableOpacity 
                             disabled={ !opiniones.exigenciasAllValid ? true : false} //true deshabilita
                             style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
@@ -117,22 +117,11 @@ export const CardParecerExigencias = ( ) => {
                               onPress= {()=>{
                                 //TODO add logic to add nova exigencia
                                 saveExigencias();
-
-                                //clear arrExigencias
-                                // const payload = opiniones;
-                                // for(let i = 0; i<5;i++){
-                                //   opiniones.exigencias[i].descripcion='';
-                                //   opiniones.exigencias[i].oportunidad='';
-                                //   opiniones.exigencias[i].qtededias='';
-                                //   opiniones.exigencias[i].tipoUsuario='';
-                                //   opiniones.exigencias[i].observaciones='';
-                                // }
-                                // setOpiniones(payload);
-
                               }}>
                               <Text style={{ fontFamily:'Roboto-Regular', textAlign:'center',color: opiniones.exigenciasAllValid  ? 'black' : 'white'}}>SALVAR</Text>
                           </TouchableOpacity>
                     </View>
+                    <Spacer height={15}></Spacer>
                {/* </> */}
             </View>
           

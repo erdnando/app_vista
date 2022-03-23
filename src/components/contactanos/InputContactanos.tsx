@@ -20,12 +20,24 @@ export const InputContactanos = ( { label, iconLeft, campo,multiline}: Props ) =
       <View style={{ flexDirection: 'row',left:-24 }}>
 
               <View style={{flexDirection:'column',position:'absolute' }}>
-                  <Text style={{ left:95,top:-3, color:campo===''?'transparent':colorIcono,  }}>{label}</Text>
+                  <Text style={{ left:92,top:-3, color:campo===''?'transparent':colorIcono,  }}>{label}</Text>
                   <CustomIcon  name={iconLeft} size={33} color='#838892'   style={{left:48, top:-9,}} ></CustomIcon>
               </View>
               
               <View style={{width:'100%', left:30}}>
-              <TextInput
+                <Text style={{textAlign:'justify',
+                      fontFamily:'Roboto-Regular',
+                      height: multiline ? 50 : 37,
+                      width:'88%',
+                      margin: 8,
+                      paddingTop:9,
+                      paddingLeft:55,
+                      borderWidth: 1,
+                      borderLeftWidth:0,
+                      borderRightWidth:0,
+                      borderTopWidth:0,
+                      borderColor:'transparent'}}>{campo}</Text>
+              {/* <TextInput
                   style={{
                     textAlign:'justify',
                       fontFamily:'Roboto-Regular',
@@ -48,7 +60,7 @@ export const InputContactanos = ( { label, iconLeft, campo,multiline}: Props ) =
                   multiline= {multiline}
                   maxLength={127}
                   value={campo}
-              />
+              /> */}
               </View>
       </View>
     )

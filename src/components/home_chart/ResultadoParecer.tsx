@@ -4,6 +4,7 @@ import { BarChart } from 'react-native-gifted-charts';
 import { HeaderTitle } from '../HeaderTitle';
 import { useHome } from '../../hooks/useHome';
 import { GraphMotiveGoNoGo } from '../../models/response/GraphMotiveGoNoGo';
+import { Spacer } from '../Spacer';
 
 
 interface Props{
@@ -35,11 +36,11 @@ export const ResultadoParecer = ( ) => {
      
       ];
 
-    return  <View style={{flex:1, flexDirection:'column',backgroundColor:'#BCC1CB', position:'absolute', bottom:0, 
-                        width:'100%', height:Platform.OS=='ios' ? '73%': '78%',  alignItems:'center',}}>
-                    <HeaderTitle label='Resultado do parecer' top={95+30} fontSize={17}></HeaderTitle>
-
-                    <View style={{height:Platform.OS=='ios' ? '58%': '72%',bottom: -115, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', 
+    return  <View style={{flex:1, flexDirection:'column',backgroundColor:'transparent', 
+                        width:'100%',  alignItems:'center',}}>
+                    <HeaderTitle label='Resultado do parecer' top={10} fontSize={17}></HeaderTitle>
+                    <Spacer height={10}></Spacer>
+                    <View style={{flex:1, marginBottom:0, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', 
                         alignItems:'flex-start', borderWidth: 0,backgroundColor:'white', borderRadius:7,padding:5,elevation:6,
                         shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                         height: 1,
@@ -62,6 +63,6 @@ export const ResultadoParecer = ( ) => {
                               data={barData}
                               isAnimated/>
                     </View>
-                    <HeaderTitle label={`Total de Pareceres: ${totalPareceres}`} top={95+30} fontSize={17}></HeaderTitle>
+                    <HeaderTitle label={`Total de Pareceres: ${totalPareceres}`} top={5} fontSize={17}></HeaderTitle>
             </View>
 }

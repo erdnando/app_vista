@@ -239,7 +239,7 @@ export const Calendario = ( {  }: Props ) => {
                                         </TouchableOpacity>
                                   </View>}
                                   
-                                  {flags.isLoadingMonthAgenda && <Loading color='orange' backgroundColor='transparent' height={30} imageSize={0}></Loading>}
+                                  {flags.isLoadingMonthAgenda && <Loading loadingSize={30} color='orange' backgroundColor='transparent' height={30} imageSize={0}></Loading>}
 
                                    {/* filtros agenda */}
                                   {!flags.isLoadingMonthAgenda && <TouchableOpacity style={{left:0, top:-4}} onPress={() =>{ 

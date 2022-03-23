@@ -36,7 +36,7 @@ export const AgendaScreen = () => {
     }
 
     if(flags.isLoadingAgenda){
-        return <Loading color='orange'></Loading>
+        return <Loading loadingSize={40} color='orange'></Loading>
     }
    
         return(

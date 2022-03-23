@@ -34,7 +34,7 @@ export const CardParecerValores = () => {
                                     {/* vista colapsada */}
                                     <View style={{flex:0,flexDirection:'row', justifyContent:'flex-end',alignContent:'center', 
                                                   width:'100%',marginVertical:16,marginTop:0,alignItems:'flex-end',height:40}}>
-                                        <Text style={{marginVertical:3,fontFamily:'Roboto-Bold',color:'#838892', fontSize:20}}>
+                                        <Text style={{marginVertical:3,fontFamily:'Roboto-Bold',color:'#838892', fontSize:18}}>
                                        { opiniones.valores[item.id].go ? 'GO' : 'NO GO'}
 
                                         </Text>
@@ -74,7 +74,7 @@ export const CardParecerValores = () => {
                                     <View style={{flex:1,width:'100%'}}>
                                     <Collapsible collapsed={item.colapsado}  style={{justifyContent:'flex-start',alignContent:'flex-start',
                                                                                      alignItems:'flex-start'}} >
-                                        <View style={{flex:0,width:'100%', height:340, }} >
+                                        <View style={{flex:0,width:'100%', height:350, }} >
                                        
                                             {/* cbo motivo */}
                                             <View  style={{flex:0,width:'90%',height:50,left:4,top:0,}}>
@@ -91,7 +91,7 @@ export const CardParecerValores = () => {
                                            
 
                                              {/* lotes, item and qtde */}
-                                             <View style={{flex:0,width:'90%',height:55,flexDirection:'row',left:16,top:-8}}>
+                                             <View style={{flex:0,width:'90%',height:50,flexDirection:'row',left:16,top:-8}}>
 
                                                   <InputMensajeSimpleCol placeholder='Lote' width='90%' campo={item.lote}
                                                   onChangeMensaje={(msg:string)=>{
@@ -120,7 +120,7 @@ export const CardParecerValores = () => {
 
                                             </View>
 
-                                              <Spacer height={0}></Spacer>
+                                              <Spacer height={10}></Spacer>
 
                                             {/* familia */}
                                             <View style={{flex:0,width:'90%',height:40,left:4,top:-10}}>
@@ -136,7 +136,7 @@ export const CardParecerValores = () => {
                                                 }} />
                                               </View>
 
-                                            <Spacer height={14}></Spacer>
+                                            <Spacer height={10}></Spacer>
                        
                                              {/*  producto servicio */}
                                             <View style={{flex:0,width:'90%',height:50,left:4,top:-18}}>
@@ -172,10 +172,10 @@ export const CardParecerValores = () => {
                                                   isFormValoresValid()
                                                 }}></InputMensajeSimpleCol>
                                             </View>
-                                            <Spacer height={2}></Spacer>
+                                            <Spacer height={20}></Spacer>
 
                                             {/* justificativa */}
-                                            <View style={{flex:0,width:'90%',left:16,height:50,top:-25}}>
+                                            <View style={{flex:0,width:'90%',left:16,height:30,top:-20}}>
                                                 <InputMensajeSimpleCol placeholder='Justificativa' width='96%' campo={item.justificativa} maxLength={50}
                                                 onChangeMensaje={(msg:string)=>{
                                                   const payload= opiniones;
@@ -193,7 +193,7 @@ export const CardParecerValores = () => {
 
 
                                     {/* colapsador */}
-                                   <View style={{justifyContent:'flex-end',alignItems:'center',height:35,top:-20,width:'100%', }}>
+                                   <View style={{justifyContent:'flex-end',alignItems:'center',height:35,top:-10,width:'100%', }}>
                                         <TouchableOpacity  style={{ borderRadius: 100,  }} 
                                           onPress={() =>{ 
                                             const payload= opiniones;
@@ -237,7 +237,7 @@ return (
             <Spacer height={5}></Spacer>
              {/* boton salvar*/}
              <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',
-                                justifyContent:'flex-start', alignContent:'center', bottom:-5}}>
+                                justifyContent:'flex-start', alignContent:'center', bottom:5}}>
                       <TouchableOpacity 
                         disabled={ isAllParecerOK() ? false : true} 
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',

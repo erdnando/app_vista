@@ -27,7 +27,7 @@ export const HomeScreen = () => {
         return  <ListNotificaciones></ListNotificaciones>
     }
     if(isLoading){
-        return <Loading color='orange'></Loading>
+        return <Loading loadingSize={40} color='orange'></Loading>
     }
     //render view after getting data
     if(usuario.tipo === 1){//terciario
@@ -41,18 +41,18 @@ export const HomeScreen = () => {
                     <Search label='Cod oportunidade' iconClose='ic_round-close' iconSearch='gg_search'></Search>
                     <Spacer height={8}></Spacer>
                     
+                     {/* Resumen de oportunidades */}
+                     <View style={{ flexDirection:'column', width:'100%',  justifyContent:'center', alignItems:'center',}}>
+                       <View style={{backgroundColor:'#BCC1CB',height:100,width:'100%',position:'absolute',bottom:-60}}></View>
+                       <ResumenOportunidades></ResumenOportunidades>
+                    </View>
                     {/* Charts https://gifted-charts.web.app/barchart*/}
                     <ResultadoParecer></ResultadoParecer>
-                    
-                    {/* Resumen de oportunidades */}
-                    <ResumenOportunidades></ResumenOportunidades>
-
                 </View>
             </ImageBackground>
         </View>
             )
      }else if(usuario.tipo === 2) {//colaborador
-
         return(
         <View style={ {  flex:1,}}>
                 <ImageBackground style={styles.background}  resizeMode='cover' source={require('../../assets/Background.png')}>
@@ -63,16 +63,17 @@ export const HomeScreen = () => {
                     <Search   label='Cod oportunidade' iconClose='ic_round-close' iconSearch='gg_search'></Search>
                     <Spacer height={8}></Spacer>
                     
-                    {/* ultimas actualizaciones */}
-                    <UltimasActualizaciones></UltimasActualizaciones>
-                    
                     {/* Resumen de oportunidades */}
-                    <ResumenOportunidades></ResumenOportunidades>
+                    <View style={{ flexDirection:'column', width:'100%',  justifyContent:'center', alignItems:'center',}}>
+                       <View style={{backgroundColor:'#BCC1CB',height:150,width:'100%',position:'absolute',bottom:-60}}></View>
+                       <ResumenOportunidades></ResumenOportunidades>
+                    </View>
+                     {/* ultimas actualizaciones */}
+                     <UltimasActualizaciones></UltimasActualizaciones>
 
                 </View>
             </ImageBackground>
         </View>
-            
              )
      }else{
          return (

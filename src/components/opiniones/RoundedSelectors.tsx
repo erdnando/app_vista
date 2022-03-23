@@ -51,7 +51,7 @@ if(opiniones.parecer.estatusGO===2){
 }
 
 
-    return    <View style={{backgroundColor:'transparent',width:width, paddingBottom:16, paddingTop:28}}>
+    return    <View style={{backgroundColor:'transparent',width:width, paddingBottom:16, paddingTop:25}}>
                       <View style={{ flex:1,flexDirection:'row', alignItems:'center',  justifyContent:'center', alignContent:'center', }}>
                       
                         <TouchableOpacity  

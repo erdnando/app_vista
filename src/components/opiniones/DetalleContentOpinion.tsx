@@ -17,7 +17,7 @@ export const DetalleContentOpinion = ( ) => {
   const { ids,flags,usuario } = useContext(GeneralContext);
                      
   if(flags.isLoadingParecer){
-    return <Loading  color='orange'></Loading>
+    return <Loading loadingSize={30}  color='orange'></Loading>
 }
 
 if(usuario.tipo===TipoUsuario.COLABORADOR){

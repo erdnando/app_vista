@@ -143,7 +143,7 @@ android {
         applicationId "br.com.sejavista.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode 4
         versionName "1.0"
         //inccrement or change every new upload to the googleplay store
     }

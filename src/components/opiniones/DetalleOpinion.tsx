@@ -27,12 +27,9 @@ export const DetalleOpinion = ( { tipoUsuario}: Props ) => {
 
 
           <View style={{flex:1, width:'100%', backgroundColor:'#838892',justifyContent:'center',alignContent:'center',
-                        alignItems:'center', paddingTop:15,paddingBottom:20}}>
+                        alignItems:'center', paddingTop:10,paddingBottom:10}}>
               
-
               {/* TODO add backgound */}
-
-
               <View style={{flex:1,width:'92%',justifyContent:'center',  backgroundColor:'transparent',
                             alignContent:'center',alignItems:'center' }}>
                   <DetalleContentOpinion></DetalleContentOpinion>

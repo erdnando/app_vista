@@ -31,7 +31,7 @@ export const ParecerScreen = () => {
     }
 
     if(flags.isLoadingParecer){
-        return <Loading color='orange'></Loading>
+        return <Loading loadingSize={40} color='orange'></Loading>
     }
 
     //vista detalle d euna opinion

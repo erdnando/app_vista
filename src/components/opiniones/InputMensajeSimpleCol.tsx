@@ -18,7 +18,7 @@ export const InputMensajeSimpleCol = ( { placeholder,campo,width='90%',maxLength
 
   let colorIcono = colores.primary;
   
-    return (<View style={{flex:1,width:'100%',}}>
+    return (<View style={{flex:1,width:'100%',backgroundColor:'transparent',height:30}}>
               <View style={{marginLeft:15}}>
                  <LabelTexto  fontSize={12} color='#838892' label='' value={placeholder}></LabelTexto>
               </View>
@@ -30,10 +30,11 @@ export const InputMensajeSimpleCol = ( { placeholder,campo,width='90%',maxLength
                       maxHeight:50,
                       width:width,
                       paddingLeft:14,
+                      marginTop:0,
                       left:0,
                       margin: 2,
                       borderWidth: 1,
-                      paddingBottom:5,
+                      paddingBottom:0,
                       borderLeftWidth:0,
                       borderRightWidth:0,
                       borderTopWidth:0,
@@ -49,12 +50,6 @@ export const InputMensajeSimpleCol = ( { placeholder,campo,width='90%',maxLength
                   maxLength={maxLength}
                   value={campo}
               />
-
-             
-
               </View>
-              
-              
-
     )
 }

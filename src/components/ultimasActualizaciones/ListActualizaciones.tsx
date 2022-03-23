@@ -21,15 +21,15 @@ const renderUpdateItem = (updateItem:Notificaciones) =>{
         <View style={{flexDirection:'row',justifyContent:'flex-end',backgroundColor:'#BCC1CB'}}>
             <View style={{width:'18%',backgroundColor:'#BCC1CB'}}>
                 {/* label hoy/ayer */}
-                <View  style={{left:-10,width:60,elevation:0, backgroundColor:'#BCC1CB',justifyContent:'center',alignContent:'center',alignItems:'center'}}>
+                <View  style={{left:4,top:8,width:60,elevation:0, backgroundColor:'#BCC1CB',justifyContent:'center',alignContent:'center',alignItems:'center'}}>
                    <Text style={{fontFamily:'Roboto-Bold'}}>{updateItem.diaVisible ? updateItem.dia : ''}</Text>
                 </View>
                {/* linea */}
-                <View style={{backgroundColor:'#838892',left:13, width:3,opacity:0.2,top:0, height:103,position:'absolute',}}></View>
+                <View style={{backgroundColor:'#838892',left:28, width:3,opacity:0.2,top:0, height:103,position:'absolute',}}></View>
             </View>
 
            {/* alerta */}
-            <View style={{height:88, flexDirection:'row', width:'80%',   
+            <View style={{height:88, flexDirection:'row', width:'77%',   
                     borderWidth: 0,backgroundColor:updateItem.color=='#838892' ? 'white':updateItem.color ,opacity:1, borderRadius:7,padding:5,elevation:6,
                     shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                     height: 1, width: 1
@@ -68,18 +68,20 @@ if(flags.isLoadingNotificaciones){
 
     if(ultimasActualizaciones.length>0)
    { return (
-      <View style={{flexGrow:1,backgroundColor:'#BCC1CB', justifyContent:'center',alignItems:'flex-start',alignContent:'flex-end', top:95+30, width:'90%',}}>
+      <View style={{flexGrow:1,backgroundColor:'#BCC1CB', justifyContent:'center',alignItems:'flex-start',alignContent:'flex-end', 
+      top:10, width:'100%',}}>
         
         <FlatList data={ultimasActualizaciones} 
         renderItem={ ({ item,index }) =>renderUpdateItem(item) } 
         keyExtractor={(item,index) => item.id + index} 
         ItemSeparatorComponent={ () => renderSeparator()}
         />
+       
     </View>
     )}
     else{
         return (
-            <View style={{ flexGrow:1, justifyContent:'center',alignContent:'center',backgroundColor:'transparent',top:80, }}>
+            <View style={{ flexGrow:1, justifyContent:'center',alignContent:'center',backgroundColor:'transparent',top:10, }}>
 
             <View  style={gstyles.avatarContainer} >
               <Image style={{justifyContent:'center', alignItems:'center', width:100,height:100}} source={require('../../assets/vertical-logo.png')} ></Image>

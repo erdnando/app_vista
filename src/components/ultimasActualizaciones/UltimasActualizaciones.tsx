@@ -16,14 +16,13 @@ export const UltimasActualizaciones = ( ) => {
 
 
 
-    return  (<View style={{flex:1, flexDirection:'column',backgroundColor:'#BCC1CB', position:'absolute', bottom:0, 
-                        width:'100%', height:Platform.OS=='ios' ? '73%': '73%',  alignItems:'center',}}>
-                    <HeaderTitle label='Ultimas atualizações' top={120} fontSize={18}></HeaderTitle>
+    return  (<View style={{flex:1, flexDirection:'column',backgroundColor:'transparent',  margin:0, 
+                        width:'100%',   alignItems:'center',}}>
+                    <HeaderTitle label='Ultimas atualizações' top={10} fontSize={18}></HeaderTitle>
 
-                   
-
-                    <View style={{height:Platform.OS=='ios' ? '68%': '66%' }}>
+                    <View style={{flex:1,marginBottom:20,justifyContent:'center',alignItems:'flex-start',alignContent:'flex-end',top:0, width:'100%' }}>
                         <ListActualizaciones></ListActualizaciones>
+                       
                     </View>
                     </View>
            )

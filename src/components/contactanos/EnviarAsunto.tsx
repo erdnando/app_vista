@@ -25,8 +25,8 @@ export const EnviarAsunto = () => {
               ];
  
   return (
-    <View style={{height:280, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', borderWidth: 0,
-            backgroundColor:'white', borderRadius:7,padding:5,elevation:6,
+    <View style={{height:280, flexDirection:'column', width:'90%', left:-1, justifyContent:'space-between', borderWidth: 0,
+            backgroundColor:'white', borderRadius:7,padding:5,elevation:6,alignContent:'space-between',alignItems:'flex-start',
             shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: { height: 1, width: 1 }}}>
 
               <Spacer height={10}></Spacer>
@@ -40,14 +40,17 @@ export const EnviarAsunto = () => {
                     setMensaje(payload) 
                 }} 
               />
-              <Spacer height={10}></Spacer>
+             
+              <Spacer height={0}></Spacer>
               <InputMensaje placeholder='Mensagem' longitud={mensaje.mensaje.length}></InputMensaje>
-              <Spacer height={30}></Spacer>
+           
+              <View style={{flex:1,width:'100%'}}></View>
               <ButtonRounded label={'ENVIAR'} onPress={function (): void {
                   // console.log(mensaje.asunto)
                   // console.log(mensaje.mensaje)
                   sendMessage();
                 } } ></ButtonRounded>
+                <Spacer height={10}></Spacer>
        
 
         </View>

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DatosContacto } from '../../components/contactanos/DatosContacto';
 import { EnviarAsunto } from '../../components/contactanos/EnviarAsunto';
@@ -10,7 +10,7 @@ import { ResumenOportunidades } from '../../components/resumen/ResumenOportunida
 import { Search } from '../../components/search/Search';
 import { Spacer } from '../../components/Spacer';
 import { GeneralContext } from '../../state/GeneralProvider';
-import { gstyles } from '../../theme/appTheme';
+
 
 export const ContactoScreen = () => {
     const { top } = useSafeAreaInsets();
@@ -22,24 +22,29 @@ export const ContactoScreen = () => {
     }
 
     if(flags.isLoadingContacto){
-        return <Loading color='orange'></Loading>
+        return <Loading loadingSize={40} color='orange'></Loading>
     }
     
     return (
           <View style={ {  flex:1,}}>
+             
                 <ImageBackground style={styles.background}  resizeMode='cover' source={require('../../assets/Background.png')}>
                 <View style={{flex:1, alignItems:'center',marginTop: top}}>
                     
                     <Spacer height={25}></Spacer>
+                    
                      {/* datos contacto */}
                      <DatosContacto></DatosContacto>
+                 
                     
                     <Spacer height={20}></Spacer>
                    {/* asunto envio */}
                    <EnviarAsunto></EnviarAsunto>
+                   <Spacer height={20}></Spacer>
 
                 </View>
             </ImageBackground>
+          
         </View>
         
     
