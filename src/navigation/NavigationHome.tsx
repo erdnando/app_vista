@@ -109,12 +109,12 @@ export const NavigationHome = ( { navigation }:Props) => {
                                          
                                             {/* dot notification */}
                                             <View style={{flex:1, flexDirection:'row',height:30}}>
-                                            <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
-                                                source={require('../assets/clarity_notification-solid-badged.png')}  >
-                                            </Image>
-                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:  'orange',marginTop:-61,  right:11}}>.</Text>
-                                            : <Text style={{ fontSize:75,color:  'white',marginTop:-61,  right:11}}>.</Text>}
-                                          </View>
+                                                <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
+                                                    source={require('../assets/clarity_notification-solid-badged.png')}  >
+                                                </Image>
+                                                { flags.existsNotification ? <Text style={{ fontSize:75,color:  'orange',marginTop:Platform.OS=='ios' ? -61 : -78,right:11}}>.</Text>
+                                                : <Text style={{ fontSize:75,color:  'white',marginTop:-61,  right:11}}>.</Text>}
+                                            </View>
 
                                       </TouchableOpacity>
 
@@ -129,33 +129,24 @@ export const NavigationHome = ( { navigation }:Props) => {
                                       {/* search just on agenda detail */}
                                       {  ids.idOpinionSeleccionado !='' ?   
                                          <TouchableOpacity style={{ marginEnd:16 }} 
-                                         onPress={() =>{ 
-                                              console.log('searching...3')
-                                              const payload1= ids;
-                                              payload1.codigoBusqueda='1';
-                                              setIds(payload1);
+                                          onPress={() =>{ 
+                                                console.log('searching...3')
+                                                const payload1= ids;
+                                                payload1.codigoBusqueda='1';
+                                                setIds(payload1);
 
-                                                  //call search engine api
-                                              const payload= flags;
-                                              payload.isLoading=true;
-                                              payload.resultadosBusquedaVisible=true;//openModal
-                                              setFlags(payload);
+                                                    //call search engine api
+                                                const payload= flags;
+                                                payload.isLoading=true;
+                                                payload.resultadosBusquedaVisible=true;//openModal
+                                                setFlags(payload);
 
-                                              console.log('searching...4')
-                                              
-                                              // setTimeout(
-                                              //   () => { 
-                                              //     getResultadoBusqueda(true);//consume api
-                                              //   },
-                                              //   3000
-                                              // )   
-                                              getResultadoBusqueda();//consume api
-
-
-                                          }}>
-                                           <Text>
-                                               <CustomIcon name='gg_search' size={30} color='white' style={{padding:150}} ></CustomIcon>
-                                           </Text>
+                                                console.log('searching...4')
+                                                getResultadoBusqueda();//consume api
+                                            }}>
+                                            <Text>
+                                                <CustomIcon name='gg_search' size={30} color='white' style={{padding:150}} ></CustomIcon>
+                                            </Text>
                                                                                     
                                          </TouchableOpacity> 
                                          : <View></View>
@@ -307,9 +298,9 @@ export const NavigationHome = ( { navigation }:Props) => {
                                           }} /> : 
                                         <View style={{marginTop:Platform.OS==='ios' ? 0 : 3, }}>
                                           <OpcionHeader iconName='ic_baseline-menu' color={colores.primary}  //menu hamburguesa
-                                            onPress={() =>{ 
-                                              navigation.toggleDrawer(); 
-                                            }} />
+                                                onPress={() =>{ 
+                                                  navigation.toggleDrawer(); 
+                                                }} />
                                          </View>
                                    }
 

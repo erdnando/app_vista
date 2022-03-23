@@ -40,7 +40,7 @@ export const ContactoScreen = () => {
                     <Spacer height={20}></Spacer>
                    {/* asunto envio */}
                    <EnviarAsunto></EnviarAsunto>
-                   <Spacer height={20}></Spacer>
+                  
 
                 </View>
             </ImageBackground>
