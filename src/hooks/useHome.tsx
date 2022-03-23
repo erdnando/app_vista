@@ -86,7 +86,9 @@ export const useHome =  () => {
         const graphParticipaciones = async () =>{
 
             try {
-                const resp = await vistaApi.get<GraphParticipaciones[]>('/services/graphStatusOpportunityClient?charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId,{
+                let urlString ='/services/graphStatusOpportunityClient?charter='+sesion.charter+'&colaboradorId='+sesion.colaboradorId;
+                console.log(urlString)
+                const resp = await vistaApi.get<GraphParticipaciones[]>(urlString,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -96,7 +98,7 @@ export const useHome =  () => {
                 }, 
                 );
 
-                console.log('op graphMotiveGoNoGo:::::::::::::::::::::');
+                console.log('op graphStatusOpportunityClient:::::::::::::::::::::');
                 console.log(resp.data);
                 if(resp.data.length>0){
 

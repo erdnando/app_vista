@@ -338,7 +338,7 @@ export const NavigationHome = ( { navigation }:Props) => {
                                             <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
                                                 source={require('../assets/clarity_notification-solid-badged.png')}  >
                                             </Image>
-                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:'orange',marginTop:Platform.OS=='ios' ? -64 : -70,  right:11}}>.</Text>
+                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:'orange',marginTop:Platform.OS=='ios' ? -64 : -78,  right:11}}>.</Text>
                                             : <Text style={{ fontSize:75,color:  'white',marginTop:Platform.OS=='ios' ? -61 : -70,  right:11}}>.</Text>}
                                           </View>
                                         </TouchableOpacity>
