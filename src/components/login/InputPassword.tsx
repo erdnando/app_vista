@@ -58,7 +58,7 @@ export const InputPassword = ( { modo, label,placeHolder, iconLeft ,iconRight, i
           />
           <TouchableOpacity style={{right:45, top:20}} onPress={() =>{ if(campo!='')setPasswordVisible(!passwordVisible)  }}>
               <Text>
-                  <CustomIcon  name={campo==='' ? iconRight : (passwordVisible ? IconHide : iconSee) } size={24} color= {campo===''? colorIcono : 'black' }  ></CustomIcon>
+                  <CustomIcon  name={campo==='' ? iconRight : (passwordVisible ? IconHide : iconSee) } size={24} color= {campo===''? 'black' : 'black' }  ></CustomIcon>
               </Text>
           </TouchableOpacity>
      

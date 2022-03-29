@@ -50,7 +50,7 @@ export const ResetContrasenaScreen = () => {
                     <Text style={{fontSize:23, fontWeight:'bold',fontFamily:'Roboto-Regular',}}>Verifique a sua caixa de e-mail</Text>
                     <Spacer height={20} ></Spacer>
                     <Text style={{fontSize:17,fontFamily:'Roboto-Regular', }}>Um email foi enviado com instruções para</Text>
-                    <Text style={{fontSize:17,fontFamily:'Roboto-Regular', }}>fazero seu reset de senha. Por favor,</Text>
+                    <Text style={{fontSize:17,fontFamily:'Roboto-Regular', }}>fazer o seu reset de senha. Por favor,</Text>
                     <Text style={{fontSize:17,fontFamily:'Roboto-Regular', }}>verifique a sua caixa de e-mail</Text>
                 </View>
                <Spacer height={20} ></Spacer>

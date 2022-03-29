@@ -40,7 +40,7 @@ export const InputEmail = ( { modo, label, iconLeft ,iconRight}: Props ) => {
                   borderLeftWidth:0,
                   borderRightWidth:0,
                   borderTopWidth:0,
-                  borderColor:usuario.email===''?'black':colorIcono
+                  borderColor:usuario.email===''?'black':colorIcono,
               }}
               onChangeText={ onChangeEmail }
               placeholder={label}

@@ -81,14 +81,18 @@ if(flags.isLoadingNotificaciones){
     )}
     else{
         return (
-            <View style={{ flexGrow:1, justifyContent:'center',alignContent:'center',backgroundColor:'transparent',top:10, }}>
+            <View style={{ flexGrow:0,marginHorizontal:20,height:250, width:'90%',padding:20, justifyContent:'center'
+            ,alignContent:'center',backgroundColor:'white',top:10, alignItems:'center',
+            shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
+                height: 1, width: 1
+                 }}}>
 
-            <View  style={gstyles.avatarContainer} >
+            {/* <View  style={{flex:1,marginHorizontal:50, justifyContent:'center',width:'100%',alignContent:'center',alignItems:'center' }} > */}
               <Image style={{justifyContent:'center', alignItems:'center', width:100,height:100}} source={require('../../assets/vertical-logo.png')} ></Image>
               <Spacer height={40}></Spacer>
               <Text style={{fontFamily:'Roboto-Regular', fontSize:22,marginTop:8,width:'100%',textAlign:'center', color:'#838892'}}>Nenhuma actualizacoe</Text>
               
-            </View>
+            {/* </View> */}
            
         </View>    
         )
