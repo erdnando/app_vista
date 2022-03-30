@@ -36,11 +36,11 @@ export const ResultadoParecer = ( ) => {
      
       ];
 
-    return  <View style={{flex:1, flexDirection:'column',backgroundColor:'transparent', 
+    return  <View style={{flex:1,  flexDirection:'column',backgroundColor:'#BCC1CB', 
                         width:'100%',  alignItems:'center',}}>
-                    <HeaderTitle label='Resultado do parecer' top={10} fontSize={17}></HeaderTitle>
-                    <Spacer height={10}></Spacer>
-                    <View style={{flex:1, marginBottom:0, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', 
+                    <HeaderTitle label='Resultado do parecer' top={20} fontSize={17}></HeaderTitle>
+                    <Spacer height={20}></Spacer>
+                    <View style={{flex:1, marginBottom:5, flexDirection:'column', width:'90%', left:-1, justifyContent:'center', 
                         alignItems:'flex-start', borderWidth: 0,backgroundColor:'white', borderRadius:7,padding:5,elevation:6,
                         shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                         height: 1,
@@ -48,12 +48,12 @@ export const ResultadoParecer = ( ) => {
                               <BarChart
                               barWidth={70}
                               barBorderRadius={4}
-                              verticalLinesThickness={1}
-                              cappedBars={true}
+                              verticalLinesThickness={0}
+                              cappedBars={false}
                               capThickness={3}
                               capColor={'black'}
                               showFractionalValues={true}
-                              showLine={true}
+                              showLine={false}
                               showXAxisIndices={true}
                               showReferenceLine1={true}
                               showVerticalLines={true}
@@ -63,6 +63,9 @@ export const ResultadoParecer = ( ) => {
                               data={barData}
                               isAnimated/>
                     </View>
+                    <View style={{height:90,alignContent:'flex-start',justifyContent:'flex-start',alignItems:'flex-start'}}>
                     <HeaderTitle label={`Total de Pareceres: ${totalPareceres}`} top={5} fontSize={17}></HeaderTitle>
+                    </View>
+                    
             </View>
 }

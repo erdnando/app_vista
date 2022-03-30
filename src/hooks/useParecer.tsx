@@ -58,8 +58,18 @@ export const useParecer =  () => {
 
                     let arrAux=parecer.listaParecer;//get reference
                     arrAux=[];
+                   
+
 
                       resp.data.forEach(function(item,index){
+                        let estatusx = 1;
+                          if(item.realizado===null){
+                            estatusx=2;
+                          }else if(item.realizado==='PARCIAL'){
+                            estatusx=2;
+                          }
+                         //1 realizado, 2 no realizado
+                          //let estatus = item.realizado==='PARCIAL' ? 2 : 1;  //1 realizado, 2 no realizado
                         arrAux.push({
                                     id:index,
                                     opinion:item.nomeCliente,
@@ -69,7 +79,7 @@ export const useParecer =  () => {
                                     oragao: item.nomeOrgao.length>29 ? item.nomeOrgao.toString().substring(0,29)+'...': item.nomeOrgao,
                                     fechaOpinion:item.dataCertame+' '+ item.horaCertame.substring(0,2)+':'+item.horaCertame.substring(2),
                                     ubicacion: (item.localidade.length>11? item.localidade.substring(0,11)+'...' :item.localidade) +' '+ item.estado,
-                                    estatus:item.realizado==='PARCIAL' ? 2 : 1,  //1 realizado, 2 no realizado
+                                    estatus:estatusx,  //1 realizado, 2 no realizado
                                     clienteId:item.clienteId,
                                     modalidade:item.descricaoModalidade,
                                     plataforma:'NA',

@@ -21,15 +21,15 @@ const renderUpdateItem = (updateItem:Notificaciones) =>{
         <View style={{flexDirection:'row',justifyContent:'flex-end',backgroundColor:'#BCC1CB'}}>
             <View style={{width:'18%',backgroundColor:'#BCC1CB'}}>
                 {/* label hoy/ayer */}
-                <View  style={{left:4,top:8,width:60,elevation:0, backgroundColor:'#BCC1CB',justifyContent:'center',alignContent:'center',alignItems:'center'}}>
+                <View  style={{left:3,top:8,width:60,elevation:0, backgroundColor:'#BCC1CB',justifyContent:'center',alignContent:'center',alignItems:'center'}}>
                    <Text style={{fontFamily:'Roboto-Bold'}}>{updateItem.diaVisible ? updateItem.dia : ''}</Text>
                 </View>
                {/* linea */}
                 <View style={{backgroundColor:'#838892',left:28, width:3,opacity:0.2,top:0, height:103,position:'absolute',}}></View>
             </View>
 
-           {/* alerta */}
-            <View style={{height:88, flexDirection:'row', width:'77%',   
+           {/* alerta88 */}
+            <View style={{height:updateItem.height, flexDirection:'row', width:'77%',   
                     borderWidth: 0,backgroundColor:updateItem.color=='#838892' ? 'white':updateItem.color ,opacity:1, borderRadius:7,padding:5,elevation:6,
                     shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {
                     height: 1, width: 1

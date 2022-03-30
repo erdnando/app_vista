@@ -76,8 +76,8 @@ class GeneralProvider extends React.Component{
         mensaje:{asunto:'', mensaje:''},
         usuario:{ 
                 tipo: TipoUsuario.NONE,
-                email:'livia.paula@sejavista.com.br',
-                password:'11111',
+                email:'',
+                password:'',
                 nuevoPassword1:'',
                 nuevoPassword2:'',
                 whatsapp:'(34) 99830-0082',
@@ -476,7 +476,8 @@ class GeneralProvider extends React.Component{
                 "color": "red",
                 "background": "#F8BBBB",
                 "icon": "bx_bxs-message-alt-error",
-                "diaVisible": true   
+                "diaVisible": true,
+                "height":88   
             }
         ],
         ultimasActualizaciones:[

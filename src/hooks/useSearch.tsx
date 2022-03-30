@@ -12,6 +12,7 @@ import { OpportunityListitem } from '../models/response/OpportunityListitem';
 import { OpportunityListitemAux } from '../models/response/OpportunityListitemAux';
 import { OpportunityCustomListOpinionsByIdAux } from '../models/response/OpportunityCustomListOpinionsByIdAux';
 import Toast from 'react-native-toast-message';
+import { ParecerSearch } from '../models/response/ParecerSearch';
 
 
 
@@ -83,7 +84,7 @@ export const useSearch =  () => {
         const getParecerTab = async () =>{
             try {
                 floading(true)
-                const resp = await vistaApi.get<OpportunityCustomListOpinionsByIdAux[]>('/services/opportunityCustom/listOpinionsById/'+ids.codigoBusqueda,{
+                const resp = await vistaApi.get<ParecerSearch[]>('/services/opportunityCustom/listOpinionsById/'+ids.codigoBusqueda,{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -95,7 +96,7 @@ export const useSearch =  () => {
                 }, 
                 );
 
-                console.log('op parecer:::::::::::::::::::::');
+                console.log('op parecer:::::::::::::::::::::x');
                 console.log(resp.data);
 
                
@@ -108,12 +109,21 @@ export const useSearch =  () => {
 
                     resp.data.forEach(function(item,index){
                      //console.log('parecer adding...')
+
+                     ///var timestamp = 1293683278;
+                     var dataParecer = new Date(item.dataParecer);
+                     var dd = String(dataParecer.getDate()).padStart(2, '0');
+                     var dia = parseInt(dd) < 10 ? '0'+dd : dd;
+                     var mes = dataParecer.getMonth() + 1;
+                     var mm = mes < 10 ? '0'+mes.toString() : mes.toString(); //January is 0!
+                     var yyyy = dataParecer.getFullYear();
+
                         arrParecerTabAux.push({
-                            id:index,
-                            responsable:item.responsable,
-                            tipo:item.tipo,
-                            parecer:item.parecer,
-                            fecha:item.fecha
+                            id: index,
+                            responsable: item.nomeUsuario,
+                            tipo: item.descricaoMotivoParecer,
+                            parecer: item.parecer,
+                            fecha: dia+'/'+mm+'/'+yyyy
                         });
                         
                       })
@@ -370,11 +380,15 @@ export const useSearch =  () => {
         }
 
         const onChangeSearch = async (codigoBusqueda:string) =>{
+            console.log('entrando al hook...');
+            console.log(codigoBusqueda)
             const payload= ids;
             payload.codigoBusqueda= codigoBusqueda;
             setIds(payload);
         }
 
+
+      
 
         // useEffect(() => {
         //     //console.log('recargando getResultadoBusqueda');

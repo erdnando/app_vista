@@ -18,7 +18,10 @@ export const Comandos = () => {
                       const payload= relatorio;
                       payload.filtroFechaInicial='';
                       payload.filtroFechaFinal='';
+                      payload.filtroCliente='';
                       setRelatorio(payload);
+
+                    
 
                       }}>
                       <Text  style={{ fontFamily:'Roboto-Regular',fontSize:15,fontWeight:'600', textAlign:'center',color:colores.primary }}>LIMPIAR</Text>

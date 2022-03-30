@@ -42,7 +42,7 @@ export const ResultadoScreen = () => {
 
                                 <View style={{flexDirection:'row'}}>
                                     <TextOportunidad  label='Lote: ' valor={item.lote} size={ 15 } ></TextOportunidad>
-                                    <TextOportunidad  label='Items: ' valor={item.item} size={ 15 } ></TextOportunidad>
+                                    <TextOportunidad  label='Item: ' valor={item.item} size={ 15 } ></TextOportunidad>
                                 </View>
                                 <TextOportunidad  label='Valor fechado: ' valor={item.valorFechado} size={ 15 } ></TextOportunidad>
                                 <TextOportunidad  label='Valor total: ' valor={item.valorTotal} size={ 15 } ></TextOportunidad>

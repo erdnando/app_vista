@@ -123,7 +123,7 @@ export const ListNotificaciones = ( ) => {
             <Animated.View style={{flex:1,flexDirection:'row', height:70, alignItems:'center',borderBottomWidth:1,backgroundColor:'white'}}>
             <View style={{flex:1, flexDirection:'row',justifyContent:'flex-end'}}>
             {/* alerta */}
-                <View style={{height:88, flexDirection:'row', width:'100%',paddingHorizontal:0, justifyContent:'center',
+                <View style={{height:updateItem.height, flexDirection:'row', width:'100%',paddingHorizontal:0, justifyContent:'center',
                 alignContent:'space-between',  
                         borderWidth: 0,backgroundColor: 'white', borderRadius:1,padding:5,elevation:6,
                         shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: {

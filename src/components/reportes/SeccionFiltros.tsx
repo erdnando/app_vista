@@ -17,13 +17,13 @@ export const SeccionFiltros = () => {
  const {  relatorio } = useContext( GeneralContext )
 
 
-    return   <View style={{flex:1, width:'100%',justifyContent:'flex-start', backgroundColor:'white'}}>
+    return   <View style={{flex:0, width:'100%',justifyContent:'flex-start', backgroundColor:'white'}}>
                  {/* colapsar filtro */}
                  <TopFilter></TopFilter>
 
                 {/* https://github.com/oblador/react-native-collapsible */}
                 <Collapsible collapsed={relatorio.isFilterCollapsed} >
-                    <View style={{ width:'100%',height:150, backgroundColor:'white', paddingHorizontal:18,}} >
+                    <View style={{ width:'100%',height:150, backgroundColor:'transparent', paddingHorizontal:18,}} >
                             {/* filtro cliente */}
                             <Filtros></Filtros>
                             {/* commands to clean and filter */}

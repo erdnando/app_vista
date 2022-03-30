@@ -29,13 +29,13 @@ export const PendienteScreen = () => {
                         <View style={{width:'85%', justifyContent:'space-evenly', marginBottom:10}}>
                             <Text style={{fontFamily:'Roboto-Bold', fontSize:15, textAlign:'justify'}}>Descripcion: <Text style={{textAlign:'justify',fontFamily:'Roboto-Regular'}}>{item.descripcion}</Text> </Text>
                         </View>
-                        
+                        <Spacer height={8}></Spacer>
                         <TextOportunidadIcono icono='ic_round-pin' label='Tipo:  ' valor={item.tipo} size={15} ></TextOportunidadIcono>
-                        <TextOportunidadIcono icono='ic_round-pin' label='Tipo de usuario:  ' valor={item.tipoUsuario} size={15} ></TextOportunidadIcono>
+                        <TextOportunidadIcono icono='gridicons_user' label='Tipo de usuario:  ' valor={item.tipoUsuario} size={15} ></TextOportunidadIcono>
                         <View style={{flexDirection:'row', width:'100%', justifyContent:'space-between' }}>
-                            <TextOportunidadIcono icono='icomoon-free_hammer2' label='Dias' valor={'  :  ' +item.dias} size={15} ></TextOportunidadIcono>
+                            <TextOportunidadIcono icono='ic_round-date-range' label='Dias' valor={'  :  ' +item.dias} size={15} ></TextOportunidadIcono>
                             <View style={{width:3,}}></View>
-                            <TextOportunidadIcono icono='ic_outline-check' colorValor={item.acepto==='Sim' ? 'green': 'red'} label='Atende' valor={'     '+item.acepto} size={15} ></TextOportunidadIcono>
+                            <TextOportunidadIcono icono='ic_outline-check' colorValor={item.acepto==='S' ? 'green': 'red'} label='Atende' valor={'     '+item.acepto} size={15} ></TextOportunidadIcono>
                             <View style={{width:3,}}></View>
                         </View>
                     </View>

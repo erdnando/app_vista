@@ -16,7 +16,6 @@ import { ContactoScreen } from '../screens/home/ContactoScreen';
 import { TitleApp } from '../components/TitleApp';
 import { useSearch } from '../hooks/useSearch';
 import { useNotificaciones } from '../hooks/useNotificaciones';
-//import Elevations from 'react-native-elevation';
 import { useParecer } from '../hooks/useParecer';
 import { useAgenda } from '../hooks/useAgenda';
 
@@ -87,7 +86,8 @@ export const NavigationHome = ( { navigation }:Props) => {
                                {/* iconos right side */}
                                 <View style={{ flexDirection:'row',alignSelf:'flex-end', top:-20   }} >  
                                       {/* notificaciones */}
-                                      <TouchableOpacity onPress={() =>{  
+                                      <TouchableOpacity 
+                                      onPress={() =>{  
                                             notificationListByLogin();
                                             ids.idOpinionSeleccionado!='' ? setTabSelectedOld('Parecer'):setTabSelectedOld(tabSelected);
                                            
@@ -105,16 +105,14 @@ export const NavigationHome = ( { navigation }:Props) => {
                                             flags.isNotificaciones ? setTabSelected('Notificaciones'): setTabSelected(tabSelectedOld);
                                             
                                       }}>
-                                        
-                                         
-                                            {/* dot notification */}
-                                            <View style={{flex:1, flexDirection:'row',height:30}}>
-                                                <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
-                                                    source={require('../assets/clarity_notification-solid-badged.png')}  >
-                                                </Image>
-                                                { flags.existsNotification ? <Text style={{ fontSize:75,color:  'orange',marginTop:Platform.OS=='ios' ? -61 : -78,right:11}}>.</Text>
-                                                : <Text style={{ fontSize:75,color:  'white',marginTop:-61,  right:11}}>.</Text>}
-                                            </View>
+                                        {/* dot notification */}
+                                        <View style={{flex:1, flexDirection:'row',height:30}}>
+                                            <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
+                                                source={require('../assets/clarity_notification-solid-badged.png')}  >
+                                            </Image>
+                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:  'orange',marginTop:Platform.OS=='ios' ? -61 : -78,right:11}}>.</Text>
+                                            : <Text style={{ fontSize:75,color:'black',marginTop:Platform.OS=='ios' ? -61 : -77,  right:12}}>.</Text>}
+                                        </View>
 
                                       </TouchableOpacity>
 
@@ -334,12 +332,12 @@ export const NavigationHome = ( { navigation }:Props) => {
                                         }}>
                                           
                                          {/* dot notification */}
-                                          <View style={{flex:1, flexDirection:'row',height:30}}>
+                                          <View style={{flex:1, flexDirection:'row',height:30,backgroundColor:'transparent',width:25}}>
                                             <Image style={{...gstyles.avatar,height:28,width:25, top:3,tintColor:'white'}} 
                                                 source={require('../assets/clarity_notification-solid-badged.png')}  >
                                             </Image>
-                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:'orange',marginTop:Platform.OS=='ios' ? -64 : -78,  right:11}}>.</Text>
-                                            : <Text style={{ fontSize:75,color:  'white',marginTop:Platform.OS=='ios' ? -61 : -70,  right:11}}>.</Text>}
+                                            { flags.existsNotification ? <Text style={{ fontSize:75,color:'orange',marginTop:Platform.OS=='ios' ? -61 : -75,  right:12}}>.</Text>
+                                            : <Text style={{ fontSize:75,color:'black',marginTop:Platform.OS=='ios' ? -61 : -77,  right:12}}>.</Text>}
                                           </View>
                                         </TouchableOpacity>
 

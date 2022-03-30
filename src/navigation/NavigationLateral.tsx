@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import { Image, useWindowDimensions, View } from 'react-native';
+import { Image, Text, useWindowDimensions, View } from 'react-native';
 import { gstyles } from '../theme/appTheme';
 import { NavigationHome } from './NavigationHome';
 import { ChangePasswordScreen } from '../screens/home/ChangePasswordScreen';
@@ -10,6 +10,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 import RNRestart from 'react-native-restart';
 import { Loading } from '../components/Loading';
 import { useAgenda } from '../hooks/useAgenda';
+import CustomIcon from '../theme/CustomIcon';
 
 const Drawer = createDrawerNavigator();
 
@@ -87,6 +88,13 @@ const MenuInterno = ({navigation}: DrawerContentComponentProps ) =>{
 
         {/* Opciones del menu */}
         <View style={gstyles.menuContainer}>
+
+        <View style={{flexDirection:'row'}}>
+          <Text>
+          <CustomIcon name={'gridicons_user'} size={25} color={'black'} ></CustomIcon>
+          </Text>
+          <Text style={{...gstyles.menuTexto,marginTop:2, paddingLeft:8, fontFamily:'Roboto-Bold', fontSize:16}}>{usuario.email}</Text>
+          </View>
           
           <OpcionMenuLateral iconName='fe_home' color='black' label='Home'  onPress={() =>{
             setTabSelected('Logo')

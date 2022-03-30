@@ -10,4 +10,5 @@ export interface NotificacionByLoginAux {
     background:  string;
     icon:        string;
     diaVisible:  boolean;
+    height:  number;
 }

@@ -11,6 +11,7 @@ import { ResultadoParecer } from '../../components/home_chart/ResultadoParecer';
 import { UltimasActualizaciones } from '../../components/ultimasActualizaciones/UltimasActualizaciones';
 import { ListNotificaciones } from '../../components/notificaciones/ListNotificaciones';
 import { useHome } from '../../hooks/useHome';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export const HomeScreen = () => {
@@ -33,22 +34,25 @@ export const HomeScreen = () => {
     if(usuario.tipo === 1){//terciario
        return ( 
         <View style={ {  flex:1,}}>
-                <ImageBackground style={styles.background}  resizeMode='cover' source={require('../../assets/Background.png')}>
-                <View style={{flex:1, alignItems:'center',marginTop: top}}>
-                    
-                    <Spacer height={15}></Spacer>
-                    {/* buscador */}
-                    <Search label='Cod oportunidade' iconClose='ic_round-close' iconSearch='gg_search'></Search>
-                    <Spacer height={8}></Spacer>
-                    
-                     {/* Resumen de oportunidades */}
-                     <View style={{ flexDirection:'column', width:'100%',  justifyContent:'center', alignItems:'center',}}>
-                       <View style={{backgroundColor:'#BCC1CB',height:100,width:'100%',position:'absolute',bottom:-60}}></View>
-                       <ResumenOportunidades></ResumenOportunidades>
+            <ImageBackground style={styles.background}  resizeMode='cover' source={require('../../assets/Background.png')}>
+               <ScrollView >
+                    <View style={{flex:1, alignItems:'center',marginTop: top,}}>
+                        
+                        <Spacer height={15}></Spacer>
+                        {/* buscador */}
+                        <Search label='Cod oportunidade' iconClose='ic_round-close' iconSearch='gg_search'></Search>
+                        <Spacer height={18}></Spacer>
+                        
+                        {/* Resumen de oportunidades */}
+                        <View style={{ flexDirection:'column', width:'100%', justifyContent:'center', alignItems:'center',}}>
+                            <View style={{backgroundColor:'#BCC1CB',height:100,width:'100%',position:'absolute',bottom:-60}}></View>
+                            <ResumenOportunidades></ResumenOportunidades>
+                        </View>
+                        {/* Charts https://gifted-charts.web.app/barchart*/}
+                        <ResultadoParecer></ResultadoParecer>
+                       
                     </View>
-                    {/* Charts https://gifted-charts.web.app/barchart*/}
-                    <ResultadoParecer></ResultadoParecer>
-                </View>
+                </ScrollView>
             </ImageBackground>
         </View>
             )
@@ -56,12 +60,13 @@ export const HomeScreen = () => {
         return(
         <View style={ {  flex:1,}}>
                 <ImageBackground style={styles.background}  resizeMode='cover' source={require('../../assets/Background.png')}>
+               <ScrollView>
                 <View style={{flex:1, alignItems:'center',marginTop: top}}>
                     
                     <Spacer height={15}></Spacer>
                     {/* buscador */}
                     <Search   label='Cod oportunidade' iconClose='ic_round-close' iconSearch='gg_search'></Search>
-                    <Spacer height={8}></Spacer>
+                    <Spacer height={18}></Spacer>
                     
                     {/* Resumen de oportunidades */}
                     <View style={{ flexDirection:'column', width:'100%',  justifyContent:'center', alignItems:'center',}}>
@@ -72,6 +77,7 @@ export const HomeScreen = () => {
                      <UltimasActualizaciones></UltimasActualizaciones>
 
                 </View>
+                </ScrollView>
             </ImageBackground>
         </View>
              )

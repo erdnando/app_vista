@@ -22,7 +22,7 @@ export const useNotificaciones =  () => {
 
             try {
                
-                const resp = await vistaApi.get<any>('/notification/existsNotification?login=eder.goncalves@gmail.com&charter=2',{
+                const resp = await vistaApi.get<any>('/notification/existsNotification?login='+usuario.email+'&charter=2',{
                     headers:{
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
@@ -31,7 +31,7 @@ export const useNotificaciones =  () => {
                 }, 
                 );
 
-                console.log('op notification/existsNotification:::::::::::::::::::::');
+                console.log('op notification/existsNotification::::::::::::::::::::: '+usuario.email);
                 console.log(resp.data);
 
                 if(resp.data===true){
@@ -118,11 +118,12 @@ export const useNotificaciones =  () => {
                             tipo:notif.importante != ""?'SIMPLE' : 'EVENT',
                             dia: fechaEvento,//hoje or anterior
                             hora:'Fecha: '+notif.dataCadastro,
-                            descripcion: notif.mensagem.length>65 ? notif.mensagem.toString().substring(0,57)+'...': notif.mensagem,
+                            descripcion: notif.mensagem,//.length,>65 ? notif.mensagem.toString().substring(0,57)+'...': notif.mensagem,
                             color: notif.tipoMensagem.id == 1 ? 'red' : '#838892',
                             background:notif.tipoMensagem.id == 1 ?'black' : '#83AE69',
                             icon:notif.tipoMensagem.id == 1 ? 'icomoon-free_hammer2' : 'bx_bxs-message-alt-error',
-                            diaVisible:diaVisible
+                            diaVisible:diaVisible,
+                            height:(notif.mensagem.length/25)*20
                         });
                         
                         
@@ -145,7 +146,8 @@ export const useNotificaciones =  () => {
                         color: 'black',
                         background:'white',
                         icon:'icomoon-free_hammer2',
-                        diaVisible:true
+                        diaVisible:true,
+                        height:88
                     });
 
                     setNotificaciones(arrNotificacionesAux);

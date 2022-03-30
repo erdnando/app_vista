@@ -51,23 +51,23 @@ const barDataParticipaciones = [
 
  
 
-    return    <View style={{  width:'90%',flexGrow:1, height: !relatorio.isFilterCollapsed ? '20%' : '68%', justifyContent:'center',
+    return    <View style={{  width:'90%',marginHorizontal:17, flexGrow:1, height: !relatorio.isFilterCollapsed ? '20%' : '68%', justifyContent:'center',
                     alignItems:'flex-start', borderWidth: 0,backgroundColor:'white', borderRadius:7,padding:5,elevation:6,
                     shadowColor: "#000000", shadowOpacity: 0.4,shadowOffset: { height: 1, width: 1}}}>   
 
                          <TituloGrafico></TituloGrafico>
                           
                           <BarChart barWidth={relatorio.isSelectorParecer ? 85 : 50}
-                                    height={!relatorio.isFilterCollapsed ? 200 : 350}
+                                    height={!relatorio.isFilterCollapsed ? 220 : 350}
                                     barBorderRadius={4}
-                                    verticalLinesThickness={1}
-                                    cappedBars={true}
+                                    verticalLinesThickness={0}
+                                    cappedBars={false}
                                     capThickness={3}
                                     capColor={'black'}
                                     spacing={1}
                                     initialSpacing={20}
                                     showFractionalValues={true}
-                                    showLine={true}
+                                    showLine={false}
                                     showXAxisIndices={true}                           
                                     showVerticalLines={true}
                                     showYAxisIndices={true}

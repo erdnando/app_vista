@@ -11,4 +11,5 @@ export interface Notificaciones{
     "background": string,
     "icon": string,
     "diaVisible": boolean   
+    "height": number   
 }

@@ -61,7 +61,7 @@ export const Navigatorsearch = () => {
       <Tab.Screen name="ParecerScreenSearch" options={ { tabBarLabel:'PARECER' , swipeEnabled:true,} } component={ ParecerScreenSearch }  />
       <Tab.Screen name="DemandaJuridicaScreen" options={ { tabBarLabel:'DEMANDA JURIDICA', swipeEnabled:true,} } component={ DemandaJuridicaScreen } />
       <Tab.Screen name="ResultadoScreen" options={ { tabBarLabel:'RESULTADO', swipeEnabled:true,} } component={ ResultadoScreen } />
-      <Tab.Screen name="PendienteScreen" options={ { tabBarLabel:'PENDENCIAS', swipeEnabled:true,} } component={ PendienteScreen } />
+      <Tab.Screen name="PendienteScreen" options={ { tabBarLabel:'EXIGENCIA', swipeEnabled:true,} } component={ PendienteScreen } />
       <Tab.Screen name="PlanAccionScreen" options={ { tabBarLabel:'PLAN DE ACCION', swipeEnabled:true,} } component={ PlanAccionScreen } />
     </Tab.Navigator>
   );

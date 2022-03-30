@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, TextInput, TouchableOpacity, View, Platform } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, Platform ,Keyboard} from 'react-native';
 import { GeneralContext } from '../../state/GeneralProvider';
 import CustomIcon from '../../theme/CustomIcon';
 import { colores } from '../../theme/appTheme';
@@ -17,7 +17,7 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
 
     //invoke global state
     const { ids,flags,setFlags } = useContext( GeneralContext )
-    const { onChangeSearch,getResultadoBusqueda, } = useSearch(); 
+    const { onChangeSearch,getResultadoBusqueda } = useSearch(); 
 
     
     return (
@@ -39,6 +39,18 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
               onChangeText={ onChangeSearch }
               placeholder={label}
               keyboardType='numeric'
+              onSubmitEditing={()=>{
+                console.log('enter or done...'+ids.codigoBusqueda);
+                onChangeSearch(ids.codigoBusqueda)
+   
+                const payload= flags;
+                payload.resultadosBusquedaVisible=true;
+                setFlags(payload);
+
+                console.log('searching...22')
+                getResultadoBusqueda();//consume api
+                console.log('enviado...');
+              }}
               autoCapitalize='none'
               autoCorrect = {false}
               maxLength={27}
@@ -48,7 +60,6 @@ export const InputSearch = ( { label, iconRight}: Props ) => {
           <TouchableOpacity style={{ right:35, top:20}} onPress={() =>{ 
                 //call search engine api
                 const payload= flags;
-                //payload.isLoading=true;
                 payload.resultadosBusquedaVisible=true;
                 setFlags(payload);
 

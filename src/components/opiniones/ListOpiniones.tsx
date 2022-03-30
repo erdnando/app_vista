@@ -50,7 +50,7 @@ const renderUpdateItem = (item:ListaParecerAux) =>{
                                   
 
                                 }}>
-                      <View style={{height:140, flexDirection:'row', width:'98%',borderLeftColor:(item.estatus==1 ? '#83AE69':'#FF9029'),borderLeftWidth:5,
+                      <View style={{height:140, flexDirection:'row', width:'98%',borderLeftColor:(item.estatus==1 ? '#FF9029':'#83AE69'),borderLeftWidth:5,
                                       backgroundColor: 'white', borderRadius:7,padding:5,elevation:6,
                                       shadowColor: "black", shadowOpacity: 0.4,shadowOffset: {
                                       height: 3, width: 3 }

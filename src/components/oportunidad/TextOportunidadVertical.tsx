@@ -15,7 +15,7 @@ interface Props{
 
 export const TextOportunidadVertical = ( { size, label,valor,width,alineacion,borderEndWidth, colorValor = 'black', valueIsBold = false }: Props ) => {
 
-    return  <View style={{ paddingVertical:2, justifyContent:'flex-start', alignContent:'flex-start', width:width , borderEndWidth:borderEndWidth, borderEndColor:'grey'}}>
+    return  <View style={{ paddingVertical:2, justifyContent:'flex-start', alignContent:'center',alignItems:'flex-start', width:width , borderEndWidth:borderEndWidth, borderEndColor:'grey'}}>
               <Text style={{ fontFamily:'Roboto-Regular', color:'black', fontSize:size,textAlign:alineacion }}> {label}</Text>
               <Text style={{ fontFamily:'Roboto-Bold',textAlign:alineacion, fontSize:size, color:colorValor, marginTop:5 }}> {valor}</Text>
             </View>  
