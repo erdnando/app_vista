@@ -14,7 +14,7 @@ import { useNotificaciones } from '../../hooks/useNotificaciones';
 
 export const ListNotificaciones = ( ) => {
 
-    const {flags,notificaciones,setNotificaciones  } = useContext( GeneralContext );
+    const {flags,notificaciones,setNotificaciones,setFlags  } = useContext( GeneralContext );
     const [checked, setchecked] = useState(false);
     const { existsNotification,deleteNotification,deleteAllNotification } = useNotificaciones(); 
 
@@ -65,7 +65,7 @@ export const ListNotificaciones = ( ) => {
         if(updateItem.tipo=='checkAll')
         return (
             <View>
-                <Animated.View style={{flex:1,flexDirection:'row', height:70, alignItems:'center',borderBottomWidth:1,backgroundColor:'white'}}>
+                <Animated.View style={{flex:1,flexDirection:'row', height:updateItem.height, alignItems:'center',borderBottomWidth:1,backgroundColor:'white'}}>
                 <View style={{flex:1, flexDirection:'row',justifyContent:'flex-end'}}>
                 {/* alerta check all*/}
                     <View style={{height:88, flexDirection:'row', width:'100%',paddingHorizontal:0, justifyContent:'center',
@@ -103,6 +103,10 @@ export const ListNotificaciones = ( ) => {
                                         payload=[]
                                         setNotificaciones(payload)
                                         existsNotification()
+
+                                        const payloadf = flags;
+                                        payloadf.existsNotification=false;
+                                        setFlags(payloadf);
                                     },
                                     1000
                                   )   
@@ -120,7 +124,7 @@ export const ListNotificaciones = ( ) => {
         else
         return (
             <Swipeable renderRightActions={swipeRight} rightThreshold={-200} onSwipeableOpen={animatedDelete}>
-            <Animated.View style={{flex:1,flexDirection:'row', height:70, alignItems:'center',borderBottomWidth:1,backgroundColor:'white'}}>
+            <Animated.View style={{flex:1,flexDirection:'row', height:updateItem.height, alignItems:'center',borderBottomWidth:1,backgroundColor:'white'}}>
             <View style={{flex:1, flexDirection:'row',justifyContent:'flex-end'}}>
             {/* alerta */}
                 <View style={{height:updateItem.height, flexDirection:'row', width:'100%',paddingHorizontal:0, justifyContent:'center',

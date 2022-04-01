@@ -114,8 +114,8 @@ export const useNotificaciones =  () => {
                         if(hoyArray.length==1 && ayerArray.length==1)diaVisible=true
                         
                         let altura=0;
-                        if(Platform.OS=='android')altura=( Math.ceil(notif.mensagem.length/30)*15)+60
-                        else altura = ( Math.ceil(notif.mensagem.length/30)*15)+50
+                        if(Platform.OS=='android')altura=( Math.ceil(notif.mensagem.length/30)*15)+65
+                        else altura = ( Math.ceil(notif.mensagem.length/30)*15)+55
 
                         arrNotificacionesAux.push({
                             id:notif.id.toString(),
@@ -146,12 +146,12 @@ export const useNotificaciones =  () => {
                         tipo: "checkAll",
                         dia:'',
                         hora:'Marcar Todos los mensajes',
-                        descripcion:'Desea marcar todos los mensajes como leidos?',
+                        descripcion:'Desea marcar todos los mensajes?',
                         color: 'black',
                         background:'white',
                         icon:'icomoon-free_hammer2',
                         diaVisible:true,
-                        height:88
+                        height:85
                     });
 
                     setNotificaciones(arrNotificacionesAux);

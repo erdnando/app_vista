@@ -7,11 +7,12 @@ import { Spacer } from '../Spacer';
 import { LabelTexto } from './LabelTexto';
 import { useParecer } from '../../hooks/useParecer';
 import { ParecerRealizadoAux } from '../../models/ParecerRealizadoAux';
+import { Loading } from '../Loading';
 
 export const CardParecerRealizados = () => {
 
   //invoke global state
-  const { parecer } = useContext( GeneralContext )
+  const { parecer,flags } = useContext( GeneralContext )
   const { isAllParecerOK,saveParecerTerciario } = useParecer()
 
   interface Opiniones{
@@ -173,6 +174,9 @@ const renderSeparator = () =>{
     )
 }
 
+if(flags.isLoadingParecer){
+  return <Loading loadingSize={40} color='orange'></Loading>
+}
 
 return (
     <View style={{...gstyles.globalTabView , width:'100%',top:-8}}>

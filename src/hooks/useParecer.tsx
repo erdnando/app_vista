@@ -914,6 +914,7 @@ export const useParecer =  () => {
                     throw BreakException;
                  
                 }
+
                 if(item.go === false && !opiniones.allDisabledforNoGo){ 
 
                      if(item.motivo === null){ bFlag = false; throw BreakException;}
@@ -921,9 +922,9 @@ export const useParecer =  () => {
                         console.log('saliendo por motivo 2  en valores...')
                           bFlag = false; throw BreakException;
                         }
-                    
-                   
                 }
+
+              
                 
 
                 if(item.lote === null) bFlag = false;
