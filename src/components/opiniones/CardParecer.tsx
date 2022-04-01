@@ -32,7 +32,7 @@ export const CardParecer = ( ) => {
 
  // let urlApi = vistaApi.getUri().toString()
   console.log('-----------------URL-----------')
-  const urlArchivo = vistaApi.defaults.baseURL+parecer.parecerSeleccionado.arquivo;
+  const urlArchivo = vistaApi.defaults.baseURL+(parecer.parecerSeleccionado.arquivo==null?'':parecer.parecerSeleccionado.arquivo);
 
   console.log(urlArchivo);
 
@@ -144,7 +144,7 @@ export const CardParecer = ( ) => {
                   <View style={{flex:0, width:'100%',  alignItems:'center',height:30,backgroundColor:'transparent',
                                 justifyContent:'flex-start', alignContent:'center',bottom:0}}>
                       <TouchableOpacity 
-                        disabled={ !isAllParecerOK() ? true : false} 
+                        disabled={ isAllParecerOK() ? false : true} 
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
                         backgroundColor: !isAllParecerOK() ? '#BCC1CB' :  colores.primary, 
                         height:48, justifyContent:'center',  }} 

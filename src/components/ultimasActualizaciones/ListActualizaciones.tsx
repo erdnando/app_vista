@@ -60,8 +60,14 @@ const renderSeparator = () =>{
     )
 }
 
-if(flags.isLoadingNotificaciones){
-    return <Loading color='orange' backgroundColor='transparent' imageSize={0}></Loading>
+
+
+
+        
+  if(flags.isLoadingNotificaciones){
+    return <View style={{flex:0,width:'100%', justifyContent:'center',alignContent:'center',alignItems:'center'}}>
+        <Loading color='orange' backgroundColor='transparent' imageSize={0}></Loading>
+        </View>
              
   }
 

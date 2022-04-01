@@ -59,10 +59,11 @@ export const HomeScreen = () => {
      }else if(usuario.tipo === 2) {//colaborador
         return(
         <View style={ {  flex:1,}}>
+           
                 <ImageBackground style={styles.background}  resizeMode='cover' source={require('../../assets/Background.png')}>
-               <ScrollView>
+               {/* <ScrollView> */}
                 <View style={{flex:1, alignItems:'center',marginTop: top}}>
-                    
+                
                     <Spacer height={15}></Spacer>
                     {/* buscador */}
                     <Search   label='Cod oportunidade' iconClose='ic_round-close' iconSearch='gg_search'></Search>
@@ -73,12 +74,14 @@ export const HomeScreen = () => {
                        <View style={{backgroundColor:'#BCC1CB',height:150,width:'100%',position:'absolute',bottom:-60}}></View>
                        <ResumenOportunidades></ResumenOportunidades>
                     </View>
+                  
                      {/* ultimas actualizaciones */}
                      <UltimasActualizaciones></UltimasActualizaciones>
-
+                    
                 </View>
-                </ScrollView>
+                {/* </ScrollView> */}
             </ImageBackground>
+           
         </View>
              )
      }else{

@@ -239,7 +239,7 @@ return (
              <View style={{flex:0, width:'100%',  alignItems:'center',height:40,backgroundColor:'transparent',
                                 justifyContent:'flex-start', alignContent:'center', bottom:5}}>
                       <TouchableOpacity 
-                        disabled={ isAllParecerOK() ? false : true} 
+                        disabled={ !isAllParecerOK() ? true : false} 
                         style={{ marginHorizontal:16, borderRadius: 100, width:'97%',
                         backgroundColor: !isAllParecerOK() ? '#BCC1CB' :  colores.primary, 
                         height:48, justifyContent:'center',  }} 

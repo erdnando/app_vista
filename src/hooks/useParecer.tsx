@@ -841,17 +841,28 @@ export const useParecer =  () => {
         const isFormParecerValid=()=>{
            
             //TODO add validation to combo opinion
-             if (opiniones.parecer.justificacion.trim() ==='') {
+            console.log('isFormParecerValid')
+            console.log(opiniones.parecer)
+
+            if (opiniones.parecer.estatusGO == 0 ) {
+                // console.log('saliendo por justificativa')   
+                 return false;
+             }else if (opiniones.parecer.estatusGO == 2 && (opiniones.parecer.motivo ==null || opiniones.parecer.motivo =="")) {
+                console.log('saliendo por estatusGO=2 y motivo =null en parecer')   
+                return false;
+        }     else if (opiniones.parecer.estatusGO == 2 && opiniones.parecer.justificacion.trim() ==='') {
                  // console.log('saliendo por justificativa')   
-                  return false;
-              }
-             if (opiniones.parecer.estatusGO == 0) {
+                  return true;
+             }else if (opiniones.parecer.estatusGO ==1) {//&& opiniones.parecer.justificacion.trim() ==='') {
+                 console.log('saliendo true por justificativa')   
+                 return true;
+             }else  if (opiniones.parecer.estatusGO == 0) {
              // console.log('saliendo por estatusGO 0')   
                 return false;
-              }
-  
-             // console.log('formulario valido')   
-             return true;
+             }else {
+                // console.log('formulario valido')   
+                return true;
+             }  
              
           }
   
@@ -860,6 +871,7 @@ export const useParecer =  () => {
                     let bFlag=true;
                     opiniones.exigenciasTerciario.forEach(function(item,index){
                         if(item.goNoGo===0){
+                            console.log('saliendo por no go...')
                             bFlag=false;
                         }
                         
@@ -871,11 +883,22 @@ export const useParecer =  () => {
 
         const isAllParecerOK=()=>{
             
-            return( isFormExigenciasTerciarioValid() &&  isFormParecerValid() &&  opiniones.valoresAllValid);
+            if(usuario.tipo===TipoUsuario.USER_TERCEIRO){
+            
+                console.log('isFormExigenciasTerciarioValid:::'+isFormExigenciasTerciarioValid());
+                console.log('isFormParecerValid:::'+isFormParecerValid());
+                console.log('opiniones.valoresAllValid:::'+opiniones.valoresAllValid);
+                return( isFormExigenciasTerciarioValid() &&  isFormParecerValid() &&  opiniones.valoresAllValid);
+            }else{
+                return true;
+            }
+
+            //return true;
         }
 
         const isFormValoresValid = ()=>{
             console.log('validando form valores...')
+           // console.log(opiniones.valores)
             var BreakException= {};
 
             let bFlag=true;
@@ -887,41 +910,63 @@ export const useParecer =  () => {
                 }else{
                     if(item.motivo === null) bFlag = false;
                     if(item.motivo != null && item.motivo.trim() ==='') bFlag = false;
-                    
+                    console.log('saliendo por motivo en valores...')
                     throw BreakException;
                  
                 }
                 if(item.go === false && !opiniones.allDisabledforNoGo){ 
 
                      if(item.motivo === null){ bFlag = false; throw BreakException;}
-                     if(item.motivo!= null && item.motivo.trim() ===''){ bFlag = false; throw BreakException;}
+                     if(item.motivo!= null && item.motivo.trim() ===''){
+                        console.log('saliendo por motivo 2  en valores...')
+                          bFlag = false; throw BreakException;
+                        }
                     
                    
                 }
                 
 
                 if(item.lote === null) bFlag = false;
-                if(item.lote != null && item.lote.trim() ==='') {bFlag = false;throw BreakException;}
+                if(item.lote != null && item.lote.trim() ==='') 
+                {
+                    console.log('saliendo por lote en valores...')
+                    bFlag = false;throw BreakException;
+                }
                
 
                 if(item.item === null) bFlag = false;
-                if(item.item != null && item.item.trim() ==='') {bFlag = false;throw BreakException;}
+                if(item.item != null && item.item.trim() ==='') {
+                    console.log('saliendo por flag en valores...')
+                    bFlag = false;throw BreakException;
+                }
                 
 
                 if(item.familia === null) bFlag = false;
-                if(item.familia != null && item.familia.trim() ==='') {bFlag = false;throw BreakException;}
+                if(item.familia != null && item.familia.trim() ==='') {
+                    console.log('saliendo por familia en valores...')
+                    bFlag = false;throw BreakException;
+                }
                 
 
                 if(item.productoServicio === null) bFlag = false;
-                if(item.productoServicio != null && item.productoServicio.trim() ==='') {bFlag = false;throw BreakException;}
+                if(item.productoServicio != null && item.productoServicio.trim() ==='') {
+                    console.log('saliendo por producto servicio en valores...')
+                    bFlag = false;throw BreakException;
+                }
                 
 
                 if(item.valorinicial === null) bFlag = false;
-                if(item.valorinicial != null && item.valorinicial.trim() ==='') {bFlag = false;throw BreakException;}
+                if(item.valorinicial != null && item.valorinicial.trim() ==='') {
+                    console.log('saliendo por valor inicial en valores...')
+                    bFlag = false;throw BreakException;
+                }
                
 
                 if(item.valorFinal === null) bFlag = false;
-                if(item.valorFinal != null && item.valorFinal.trim() ==='') {bFlag = false;throw BreakException;}
+                if(item.valorFinal != null && item.valorFinal.trim() ==='') {
+                    console.log('saliendo por valor final en valores...')
+                    bFlag = false;throw BreakException;
+                }
                 
 
                 // if(item.justificativa === null) bFlag = false;
@@ -934,6 +979,7 @@ export const useParecer =  () => {
            
            console.log(bFlag)
             const payload= opiniones;
+            console.log(bFlag + ' <--- valoresAllValid...')
             payload.valoresAllValid=bFlag;
             setOpiniones(payload);
 

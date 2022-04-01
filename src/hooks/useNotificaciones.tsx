@@ -3,6 +3,7 @@ import { GeneralContext } from '../state/GeneralProvider';
 import vistaApi from '../api/vista';
 import { NotificationListByLoginAux } from '../models/response/NotificationListByLoginaux';
 import Toast from 'react-native-toast-message';
+import { Platform } from 'react-native';
 
 
 export const useNotificaciones =  () => {
@@ -112,6 +113,9 @@ export const useNotificaciones =  () => {
                         if(hoyArray.length==0 && ayerArray.length==1)diaVisible=true
                         if(hoyArray.length==1 && ayerArray.length==1)diaVisible=true
                         
+                        let altura=0;
+                        if(Platform.OS=='android')altura=( Math.ceil(notif.mensagem.length/30)*15)+60
+                        else altura = ( Math.ceil(notif.mensagem.length/30)*15)+50
 
                         arrNotificacionesAux.push({
                             id:notif.id.toString(),
@@ -123,7 +127,7 @@ export const useNotificaciones =  () => {
                             background:notif.tipoMensagem.id == 1 ?'black' : '#83AE69',
                             icon:notif.tipoMensagem.id == 1 ? 'icomoon-free_hammer2' : 'bx_bxs-message-alt-error',
                             diaVisible:diaVisible,
-                            height:(notif.mensagem.length/25)*20
+                            height: altura
                         });
                         
                         
